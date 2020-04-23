@@ -1,0 +1,4 @@
+"name"	"age"	"smoker"
+"1"	"Bob"	50	TRUE
+"2"	"Jim"	38	TRUE
+"3"	"Joe"	14	FALSE

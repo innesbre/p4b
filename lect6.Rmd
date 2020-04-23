@@ -1,0 +1,308 @@
+---
+title: "Lecture 6"
+---
+
+Date: Friday, May 1, 2020
+
+***
+
+# TA review of assignment 2 solution  (15 minutes)
+
+***
+
+## Lecture 5 review
+
+* Factors
+    * f = factor(x)
+    * levels(f)
+* Files
+    * ASCII
+    * write.table
+    * read.table
+* Conditional statements
+    * if, if else if, if else if else
+    
+***
+
+# Exercise: conditions (10 minutes)
+
+> Write conditional statement code that evaluates an amino acid's physicochemical property and outputs the following, given a single letter amino acid code:
+
+"Charged" for R, K, D, E 
+"Polar" for Q, N, H, S, T, Y, C
+"Amphipathic" for W, Y, M
+"Hydrophobic" for A, I, L, M, F, V, P, G
+
+# Exercise solution (5 minutes)
+
+
+# Loops
+## Key Programming Concept
+
+# Loops
+
+```{r}
+vectorVariable = c(1,-2,3,-5)
+
+#Let's find all of the positive numbers
+if(vectorVariable[1]>0) {
+  print("Positive number")
+}
+if(vectorVariable[2]>0) {
+  print("Positive number")
+}
+if(vectorVariable[3]>0) {
+  print("Positive number")
+}
+if(vectorVariable[4]>0) {
+  print("Positive number")
+}
+
+#Problems with this approach:
+#1. There is a lot of repeated code
+#2. What happens if the vector is really long?
+
+```
+
+* Loops provide a way of efficiently repeating the same code
+* Two major kinds of loops: for, while
+
+# For loop e.g. find positive numbers
+
+```{r}
+#Here is the same problem, but solved using a for loop
+vectorVariable = c(1,-2,3,-5)
+for (value in vectorVariable) {
+  if (value > 0) {
+    print(value)
+  }
+}
+
+for (i in 1:10) {
+  print(i)
+}
+
+#What is happening here?  Let's "unroll" the loop
+vectorVariable = c(1,-2,3,-5)
+value = vectorVariable[1]
+if (value > 0) {
+  print(value)
+}
+value = vectorVariable[2]
+if (value > 0) {
+  print(value)
+}
+value = vectorVariable[3]
+if (value > 0) {
+  print(value)
+}
+value = vectorVariable[4]
+if (value > 0) {
+  print(value)
+}
+
+#The for loop automatically repeated the same code inside the loop, automatically updating the value variable to the next element of the vector, so it could "loop" through all the vector elements
+
+```
+
+# Exercise: Loops 1 (10 minutes)
+
+> Remember to count the amino acids in a protein sequence? Let's do it in a different way here, using loops and named vectors (could also use names in lists)
+
+> Here again the protein sequence:
+> sp|P04637|P53_HUMAN Cellular tumor antigen p53 OS=Homo sapiens
+MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDPGPDEAPRMPEAAPPVAPAPAAPTPAAPAPAPSWPLSSSVPSQKTYQGSYGFRLGFLHSGTAKSVTCTYSPALNKMFCQLAKTCPVQLWVDSTPPPGTRVRAMAIYKQSQHMTEVVRRCPHHERCSDSDGLAPPQHLIRVEGNLRVEYLDDRNTFRHSVVVPYEPPEVGSDCTTIHYNYMCNSSCMGGMNRRPILTIITLEDSSGNLLGRNSFEVRVCACPGRDRRTEEENLRKKGEPHHELPPGSTKRALPNNTSSSPQPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLKSKKGQSTSRHKKLMFKTEGPDSD
+
+> Use a for loop and the command strplit to get each amino acid of the sequence to count the occurrences.
+
+> One easy way is to first generate a vector (or list) that has named rows, named for each amino acid, such that, for instance, you keep the number of occurrences of Alanines as occ_aa["A"]. To start, you have to set all the elements of the vector to zero (R has a built in vector called "LETTERS" that contains the whole alphabet)
+
+# Exercise solution (5 minutes)
+
+
+
+# While loop
+
+* Example: find positive numbers in a vector
+
+```{r}
+vectorVariable = c(1,-2,3,-5)
+i=1
+while (i <= length(vectorVariable)) {
+  if (vectorVariable[i] > 0) {
+    print(vectorVariable[i])
+  }
+  i = i + 1
+}
+
+#What is happening here?  Let's "unroll" the loop
+vectorVariable = c(1,-2,3,-5)
+i=1  #i is an index to keep track of our position in the vector. i=1 means to start with the first element of the vector.
+if (i <= length(vectorVariable)) { #if i is smaller or equal to the vector length, then we can run our code
+  if (vectorVariable[i] > 0) {
+    print(vectorVariable[i])
+  }
+  i = i + 1  #move to the next element - i now equal to 2
+}
+if (i <= length(vectorVariable)) { #if i is smaller or equal to the vector length, then we can run our code
+  if (vectorVariable[i] > 0) {
+    print(vectorVariable[i])
+  }
+  i = i + 1  #move to the next element - i now equal to 3
+}
+if (i <= length(vectorVariable)) { #if i is smaller or equal to the vector length, then we can run our code
+  if (vectorVariable[i] > 0) {
+    print(vectorVariable[i])
+  }
+  i = i + 1  #move to the next element - i now equal to 4
+}
+if (i <= length(vectorVariable)) { #if i is smaller or equal to the vector length, then we can run our code
+  if (vectorVariable[i] > 0) {
+    print(vectorVariable[i])
+  }
+  i = i + 1  #move to the next element - i now equal to 5
+}
+if (i <= length(vectorVariable)) { #i is no longer smaller than the vector length, so don't run the code
+  if (vectorVariable[i] > 0) {
+    print(vectorVariable[i])
+  }
+  i = i + 1
+}
+
+
+#The while and for loops can do the same thing. Sometimes it is more convenient to write a loop one way or another
+
+
+
+```
+
+# Exercise: Loops 2 (10 minutes)
+
+> Read the "gene_condition_source_id.txt" file
+dataFrame = read.table("gene_condition_source_id.txt", header=TRUE, sep="\t", fill=TRUE, comment.char = "", quote = "")
+
+> Using a for loop, loop over all the rows of "gene_condition_source_id.txt" and find all diseases linked to TP53
+
+> Do the same thing, but first read in the file again, but set "stringsAsFactors=F" as an argument to read.table()
+
+# Exercise solution (5 minutes)
+
+# Vectorization
+## Key Programming Concept in R
+### (but not in many other programming languages)
+
+# Vectorization
+
+* Key feature of R that helps do powerful things with a small amount of code (high level)
+* Try to to avoid loops and use vectors
+
+```{r}
+vectorVariable = c(1,-2,3,-4)
+vectorVariable
+
+vectorVariable * 5
+vectorVariable * vectorVariable
+sum(vectorVariable)
+#similarly, you can use: prod(), mean(), sd(), min(), max()
+
+stringVariable = c("first", "last")
+stringVariable
+
+paste(stringVariable, "name")
+paste(stringVariable, c("name1", "name2"))  #note how vectorization applies the transformation to all strings in the string vector
+
+```
+
+# Logical selection from a vector
+
+```{r}
+vectorVariable>0
+vectorVariable==0
+vectorVariable<0
+vectorVariable[c(T,F,T,F)]
+vectorVariable[vectorVariable>0]
+ifelse(vectorVariable>0,"positive number", "negative number")
+```
+
+
+```{r}
+#remember: for loop to find positive numbers in a vector
+vectorVariable = c(1,-2,3,-5)
+for (value in vectorVariable) {
+  if (value > 0) {
+    print(value)
+  }
+}
+
+#the vectorization way of doing this is:
+vectorVariable[vectorVariable>0]
+
+#much easier!
+
+```
+
+# Vectorization with data frames
+
+```{r}
+name = c("patient1", "patient2", "patient3")
+name
+
+age = c(46, 49, 50)
+age
+
+smoker = c(T, F, T)
+smoker
+
+patientRecords = data.frame(name, age, smoker, stringsAsFactors=F)
+
+#What is going on here?
+patientRecords$age>48
+patientRecords[patientRecords$age>48]  #oops
+patientRecords[ , patientRecords$age>48]  #oops
+patientRecords[patientRecords$age>48 , ]
+
+```
+
+# "apply" function
+
+* applies a function to a matrix
+
+```{r}
+#Create a new matrix with number 1 to 30
+x = matrix(1:30, nrow=5, ncol=6)
+x
+
+#Sum the rows
+apply(x, MARGIN=1, FUN=sum)
+
+#or equivalently
+apply(x, 1, sum)
+
+#Sum the columns
+apply(x, 2, sum)
+
+```
+
+# lapply()
+
+* Similar to apply, but for lists
+
+```{r}
+#Compute the mean for all the columns in a data.frame (which is also a list)
+lapply(patientRecords, mean)
+
+#You may see lots of other apply functions in R code e.g. mapply, sapply, tapply, vapply
+```
+
+***
+
+# End of lecture 6
+
+Reminder:
+Complete Assignment 3 on Quercus
+Due Monday, April 1, 2019 at 9am
+
+Read The Book of R, chapter 11.1, 11.2 (functions), Glance at ?base::regex
+
+***
+

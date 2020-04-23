@@ -297,8 +297,6 @@ $(document).ready(function () {
 </div>
 
 
-<div id="lecture-3" class="section level1">
-<h1>Lecture 3</h1>
 <p>Date: Monday, April 20, 2020</p>
 <div id="lecture-2-review" class="section level2">
 <h2>Lecture 2 review</h2>
@@ -315,7 +313,6 @@ $(document).ready(function () {
 </ul></li>
 </ul>
 <hr />
-</div>
 </div>
 <div id="sample-code-numbers" class="section level1">
 <h1>Sample code: numbers</h1>
@@ -417,14 +414,15 @@ chartr(&quot;A&quot;, &quot;T&quot;, DNA)</code></pre>
 # What is the reverse complement of a DNA sequence?
 
 
-DNA = readline(&quot;Please enter a DNA sequence. I will return the reverse complement.\n\n&quot;)
+# DNA = readline(&quot;Please enter a DNA sequence. I will return the reverse complement.\n\n&quot;)
+DNA &lt;- &quot;ACGTTACCCGGT&quot;
 
 # Print the DNA onto the screen
 cat(&quot;\nHere is the starting DNA sequence:\n&quot;)</code></pre>
 <pre><code>## 
 ## Here is the starting DNA sequence:</code></pre>
 <pre class="r"><code>cat(DNA)</code></pre>
-<pre><code>## ACGT</code></pre>
+<pre><code>## ACGTTACCCGGT</code></pre>
 <pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
 <pre class="r"><code># Calculate the reverse complement
 #  Warning: this attempt will fail!
@@ -453,7 +451,7 @@ revcom = gsub(&quot;C&quot;,&quot;G&quot;, revcom)
 cat (&quot;Here is the reverse complement DNA:\n&quot;)</code></pre>
 <pre><code>## Here is the reverse complement DNA:</code></pre>
 <pre class="r"><code>cat(revcom)</code></pre>
-<pre><code>## AGGA</code></pre>
+<pre><code>## AGGGGGAAAGGA</code></pre>
 <pre class="r"><code>#
 # Oh-oh, that didn&#39;t work right!
 # Our reverse complement should have all the bases in it, since the
@@ -473,11 +471,11 @@ revcom = chartr(&quot;ACGTacgt&quot;, &quot;TGCAtgca&quot;, revcom)
 cat (&quot;Here is the original DNA:\n&quot;)</code></pre>
 <pre><code>## Here is the original DNA:</code></pre>
 <pre class="r"><code>cat(DNA)</code></pre>
-<pre><code>## ACGT</code></pre>
+<pre><code>## ACGTTACCCGGT</code></pre>
 <pre class="r"><code>cat (&quot;Here is the reverse complement DNA:\n&quot;)</code></pre>
 <pre><code>## Here is the reverse complement DNA:</code></pre>
 <pre class="r"><code>cat(revcom)</code></pre>
-<pre><code>## ACGT</code></pre>
+<pre><code>## ACCGGGTAACGT</code></pre>
 <pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
 <pre class="r"><code>cat(&quot;This time it worked!\n&quot;)</code></pre>
 <pre><code>## This time it worked!</code></pre>
@@ -500,16 +498,7 @@ cat (&quot;Here is the original DNA:\n&quot;)</code></pre>
 <blockquote>
 <p>Remember to use a code chunk in this R notebook to run your code</p>
 </blockquote>
-<pre class="r"><code>#Add your exercise code here. You can create your own code chunk by typing the text you see at the start &quot;```{r}&quot; and end &quot;```&quot; of the chunk, or by using the &#39;insert&#39; button at the top of this editor tab
-aNumber &lt;- readline(&quot;Please enter a number here:&quot;)
-is.numeric(aNumber)</code></pre>
-<pre><code>## [1] FALSE</code></pre>
-<pre class="r"><code>is(aNumber)</code></pre>
-<pre><code>## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;</code></pre>
-<pre class="r"><code>str(aNumber)</code></pre>
-<pre><code>##  chr &quot;1234&quot;</code></pre>
-<pre class="r"><code>actuallyANumberThisTime &lt;- as.numeric(aNumber)
-numbertwo &lt;- as.numeric(readline(&quot;second num&quot;))</code></pre>
+<pre class="r"><code>#Add your exercise code here. You can create your own code chunk by typing the text you see at the start &quot;```{r}&quot; and end &quot;```&quot; of the chunk, or by using the &#39;insert&#39; button at the top of this editor tab</code></pre>
 </div>
 <div id="exercise-solution-5-minutes" class="section level1">
 <h1>Exercise solution (5 minutes)</h1>
@@ -639,23 +628,23 @@ randomstuff &lt;- runif(100,min=1,max=100)
 
 # step THE BONUS
 sort(randomstuff,decreasing=F)</code></pre>
-<pre><code>##   [1]  1.617819  2.993545  3.128322  4.126307  7.238717 11.192610 11.374678 13.457647 14.374551 15.027215 16.159154 18.002346 18.238495
-##  [14] 18.484948 18.497388 19.271394 19.328306 19.611314 21.114143 22.996639 23.909634 24.221230 24.255487 25.017558 25.375487 26.150762
-##  [27] 26.854182 27.712937 28.624968 29.863520 29.909785 30.038527 30.305872 30.380686 30.637699 31.260279 34.210016 34.462160 37.124282
-##  [40] 37.560580 37.577859 38.089340 41.113106 44.138292 44.986021 45.028384 46.080850 46.399110 46.533699 47.757883 48.299515 49.364733
-##  [53] 49.714131 51.340364 54.228105 54.387410 54.619242 55.489211 55.833298 57.036553 57.434245 57.733227 58.037565 58.959079 59.118403
-##  [66] 62.391067 62.592450 63.988471 64.369012 65.011370 65.380925 67.786880 68.428575 68.640956 68.713706 68.738233 70.123110 71.066743
-##  [79] 72.023914 75.624733 75.915519 76.673857 77.538987 79.153405 79.473675 80.932795 85.224558 85.586876 85.670384 87.082015 88.677388
-##  [92] 89.013402 89.832282 92.232219 92.253521 93.023083 93.996672 95.132289 96.149977 96.494120</code></pre>
+<pre><code>##   [1]  1.634320  1.728179  1.809284  4.279670  6.377164  7.739197  7.760610  9.610855 10.056048 10.607827 11.588950 12.925402 13.273216
+##  [14] 13.514182 14.012559 15.110281 15.728417 15.729156 17.195760 18.533489 18.657056 20.400993 22.532515 23.142780 23.357907 24.335784
+##  [27] 26.192117 26.674954 26.688329 28.233911 28.756428 28.911293 29.163398 29.473682 29.693630 30.500644 31.477262 31.750923 32.292295
+##  [40] 36.495475 37.287249 37.952371 38.278778 38.352492 38.600596 41.558161 42.499638 43.624083 44.384148 46.082142 46.237279 46.618891
+##  [53] 46.716046 47.926580 49.940475 51.683425 54.701739 55.169851 56.791839 57.769432 59.047603 60.733456 62.014976 62.260536 65.878049
+##  [66] 66.681640 66.780121 67.324040 67.437248 68.676539 69.854340 73.361022 77.320926 77.758934 78.199548 79.094799 79.334751 79.456286
+##  [79] 80.101473 82.937223 84.201921 85.291677 86.554483 87.848549 88.730980 88.904425 89.002578 89.307523 89.354749 89.856962 90.301845
+##  [92] 93.409728 93.838366 94.791349 97.197914 97.552682 97.660539 97.968173 99.293861 99.417321</code></pre>
 <pre class="r"><code>randomstuff[order(randomstuff,decreasing=F)]</code></pre>
-<pre><code>##   [1]  1.617819  2.993545  3.128322  4.126307  7.238717 11.192610 11.374678 13.457647 14.374551 15.027215 16.159154 18.002346 18.238495
-##  [14] 18.484948 18.497388 19.271394 19.328306 19.611314 21.114143 22.996639 23.909634 24.221230 24.255487 25.017558 25.375487 26.150762
-##  [27] 26.854182 27.712937 28.624968 29.863520 29.909785 30.038527 30.305872 30.380686 30.637699 31.260279 34.210016 34.462160 37.124282
-##  [40] 37.560580 37.577859 38.089340 41.113106 44.138292 44.986021 45.028384 46.080850 46.399110 46.533699 47.757883 48.299515 49.364733
-##  [53] 49.714131 51.340364 54.228105 54.387410 54.619242 55.489211 55.833298 57.036553 57.434245 57.733227 58.037565 58.959079 59.118403
-##  [66] 62.391067 62.592450 63.988471 64.369012 65.011370 65.380925 67.786880 68.428575 68.640956 68.713706 68.738233 70.123110 71.066743
-##  [79] 72.023914 75.624733 75.915519 76.673857 77.538987 79.153405 79.473675 80.932795 85.224558 85.586876 85.670384 87.082015 88.677388
-##  [92] 89.013402 89.832282 92.232219 92.253521 93.023083 93.996672 95.132289 96.149977 96.494120</code></pre>
+<pre><code>##   [1]  1.634320  1.728179  1.809284  4.279670  6.377164  7.739197  7.760610  9.610855 10.056048 10.607827 11.588950 12.925402 13.273216
+##  [14] 13.514182 14.012559 15.110281 15.728417 15.729156 17.195760 18.533489 18.657056 20.400993 22.532515 23.142780 23.357907 24.335784
+##  [27] 26.192117 26.674954 26.688329 28.233911 28.756428 28.911293 29.163398 29.473682 29.693630 30.500644 31.477262 31.750923 32.292295
+##  [40] 36.495475 37.287249 37.952371 38.278778 38.352492 38.600596 41.558161 42.499638 43.624083 44.384148 46.082142 46.237279 46.618891
+##  [53] 46.716046 47.926580 49.940475 51.683425 54.701739 55.169851 56.791839 57.769432 59.047603 60.733456 62.014976 62.260536 65.878049
+##  [66] 66.681640 66.780121 67.324040 67.437248 68.676539 69.854340 73.361022 77.320926 77.758934 78.199548 79.094799 79.334751 79.456286
+##  [79] 80.101473 82.937223 84.201921 85.291677 86.554483 87.848549 88.730980 88.904425 89.002578 89.307523 89.354749 89.856962 90.301845
+##  [92] 93.409728 93.838366 94.791349 97.197914 97.552682 97.660539 97.968173 99.293861 99.417321</code></pre>
 <pre class="r"><code>identical(randomstuff[order(randomstuff,decreasing=F)],
           sort(randomstuff,decreasing=F))</code></pre>
 <pre><code>## [1] TRUE</code></pre>
@@ -708,11 +697,11 @@ firstmat[1,2]</code></pre>
 <h1>Exercise solution (5 minutes)</h1>
 <pre class="r"><code>ourrandommat &lt;- matrix(runif(30),nrow=10,ncol=3)
 mean(ourrandommat)</code></pre>
-<pre><code>## [1] 0.4997389</code></pre>
+<pre><code>## [1] 0.3574783</code></pre>
 <pre class="r"><code>rowMeans(ourrandommat)</code></pre>
-<pre><code>##  [1] 0.3774595 0.5069664 0.4643098 0.2994049 0.4645649 0.1813889 0.7713660 0.5499217 0.6638945 0.7181120</code></pre>
+<pre><code>##  [1] 0.44513313 0.46150386 0.21745856 0.27415017 0.59755443 0.17444943 0.38363783 0.73153219 0.19204816 0.09731565</code></pre>
 <pre class="r"><code>colMeans(ourrandommat)</code></pre>
-<pre><code>## [1] 0.4126411 0.5993516 0.4872238</code></pre>
+<pre><code>## [1] 0.4010049 0.3594169 0.3120133</code></pre>
 <hr />
 </div>
 <div id="end-of-lecture-3" class="section level1">

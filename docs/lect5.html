@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Lecture 5</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MMG1002H - Programming4Biologists</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Lecture 2</a>
+</li>
+<li>
+  <a href="lect3.html">Lecture 3</a>
+</li>
+<li>
+  <a href="lect4.html">Lecture 4</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Lecture 5</h1>
+
+</div>
+
+
+<p>Date: Monday, March 25, 2019</p>
+<hr />
+<div id="lecture-4-review" class="section level2">
+<h2>Lecture 4 review</h2>
+<ul>
+<li>Variable types: list, array, data frame</li>
+<li>List
+<ul>
+<li>x = listVariable = list(numericVector, stringVector, logicVector, 77)</li>
+<li>listVariable[1] #access first list element</li>
+<li>listVariable[[1]] #access content of first element</li>
+</ul></li>
+<li>Array
+<ul>
+<li>arrayVariable = array(c(vector1,vector2),dim = c(3,3,2))</li>
+<li>arrayVariable[,,1] #get matrix 1</li>
+</ul></li>
+<li>Data frame
+<ul>
+<li>patientRecords = data.frame(name, age, smoker)</li>
+<li>patientRecords[1,] #row 1</li>
+<li>patientRecords[,1] #column 1</li>
+<li>patientRecords[1,2] #element at row 1, column 2</li>
+<li>patientRecords$age</li>
+</ul></li>
+</ul>
+<hr />
+</div>
+<div id="exercise-querying-data-frames-10-minutes" class="section level1">
+<h1>Exercise: Querying data frames (10 minutes)</h1>
+<blockquote>
+<p>Using the same variable you read “gene_condition_source_id.txt” into for the previous exercise, find how many unique diseases are linked to TP53?</p>
+</blockquote>
+<blockquote>
+<p>Hint: you can access vector elements matching a specific criteria using: <code>vectorVariable$colName[vectorVariable$colName=="string"]</code></p>
+</blockquote>
+<blockquote>
+<p>Hint: ?unique</p>
+</blockquote>
+</div>
+<div id="exercise-solution-5-minutes" class="section level1">
+<h1>Exercise solution (5 minutes)</h1>
+</div>
+<div id="review-data-types-vs.-data-structures" class="section level1">
+<h1>Review: data types vs. data structures</h1>
+<ul>
+<li>Key programming concept</li>
+<li>Primitive types
+<ul>
+<li>numeric, logical, string</li>
+</ul></li>
+<li>Types
+<ul>
+<li>vector, matrix, array, list, data frame</li>
+</ul></li>
+<li>Data structure
+<ul>
+<li>A structure created using types</li>
+<li>e.g. vector, data frame, tree</li>
+</ul></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>All same data type</th>
+<th>Mixed data types</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1d</td>
+<td>Vector</td>
+<td>List</td>
+</tr>
+<tr class="even">
+<td>2d</td>
+<td>Matrix</td>
+<td>Data frame</td>
+</tr>
+<tr class="odd">
+<td>nd</td>
+<td>Array</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="one-more-variable-type-factors" class="section level1">
+<h1>One more variable type: Factors</h1>
+<ul>
+<li>Stores categorical variables</li>
+<li>A variable which can be one of a limited number of values</li>
+<li>Create a factor using the factor() function</li>
+</ul>
+<pre class="r"><code>x = c(1,2,3,3,2,1,2,3,1)
+x</code></pre>
+<pre><code>## [1] 1 2 3 3 2 1 2 3 1</code></pre>
+<pre class="r"><code>f = factor(x)
+f</code></pre>
+<pre><code>## [1] 1 2 3 3 2 1 2 3 1
+## Levels: 1 2 3</code></pre>
+<pre class="r"><code>#A factor has levels: these are the possible values
+levels(f)</code></pre>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;</code></pre>
+</div>
+<div id="factors-and-data-frames" class="section level1">
+<h1>Factors and data frames</h1>
+<pre class="r"><code>name &lt;- c(&quot;Bob&quot;,&quot;Jim&quot;,&quot;Joe&quot;)
+age &lt;- c(50,38,14)
+smoker &lt;- c(T,T,F)
+
+#By default data.frame() creates factors for string variable columns
+patientRecords = data.frame(name, age, smoker)
+patientRecords</code></pre>
+<pre><code>##   name age smoker
+## 1  Bob  50   TRUE
+## 2  Jim  38   TRUE
+## 3  Joe  14  FALSE</code></pre>
+<pre class="r"><code>str(patientRecords)   #Note: &quot;Factor w/ 3 levels&quot;</code></pre>
+<pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
+##  $ name  : Factor w/ 3 levels &quot;Bob&quot;,&quot;Jim&quot;,&quot;Joe&quot;: 1 2 3
+##  $ age   : num  50 38 14
+##  $ smoker: logi  TRUE TRUE FALSE</code></pre>
+<pre class="r"><code>#Tell data.frame() not to create factors
+patientRecords2 = data.frame(name, age, smoker, stringsAsFactors=F)
+str(patientRecords2)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
+##  $ name  : chr  &quot;Bob&quot; &quot;Jim&quot; &quot;Joe&quot;
+##  $ age   : num  50 38 14
+##  $ smoker: logi  TRUE TRUE FALSE</code></pre>
+</div>
+<div id="exercise-working-with-factors-10-minutes" class="section level1">
+<h1>Exercise: Working with Factors (10 minutes)</h1>
+<blockquote>
+<p>Convert the following protein sequence (just the amino acid sequence part) to a factor and use it to count how many amino acids of each type are in a protein</p>
+</blockquote>
+<blockquote>
+<p>Hint: ?summary</p>
+</blockquote>
+<blockquote>
+<p>sp|P04637|P53_HUMAN Cellular tumor antigen p53 OS=Homo sapiens MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDPGPDEAPRMPEAAPPVAPAPAAPTPAAPAPAPSWPLSSSVPSQKTYQGSYGFRLGFLHSGTAKSVTCTYSPALNKMFCQLAKTCPVQLWVDSTPPPGTRVRAMAIYKQSQHMTEVVRRCPHHERCSDSDGLAPPQHLIRVEGNLRVEYLDDRNTFRHSVVVPYEPPEVGSDCTTIHYNYMCNSSCMGGMNRRPILTIITLEDSSGNLLGRNSFEVRVCACPGRDRRTEEENLRKKGEPHHELPPGSTKRALPNNTSSSPQPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLKSKKGQSTSRHKKLMFKTEGPDSD</p>
+</blockquote>
+</div>
+<div id="exercise-solution-5-minutes-1" class="section level1">
+<h1>Exercise solution (5 minutes)</h1>
+<pre class="r"><code>#add your exercise code here</code></pre>
+</div>
+<div id="files" class="section level1">
+<h1>Files</h1>
+<div id="key-programming-concept" class="section level2">
+<h2>Key Programming Concept</h2>
+</div>
+</div>
+<div id="reminder-redirect-output-and-input" class="section level1">
+<h1>Reminder: Redirect output and input</h1>
+<div class="figure">
+<img src="fileOutput.png" alt="Redirect output to a file" />
+<p class="caption">Redirect output to a file</p>
+</div>
+<blockquote>
+<p>$ grep cancer genes2phenotype.txt &gt; myfile.txt</p>
+</blockquote>
+<blockquote>
+<p>Will print all lines in “genes2phenotype.txt” that contain “cancer” to the file “myfile.txt” (no output to screen). Use “cat” or “more” to view the contents of myfile.txt</p>
+</blockquote>
+</div>
+<div id="what-is-a-file" class="section level1">
+<h1>What is a file</h1>
+<p><em>A file is a set of data stored somewhere and given a name </em>Every file is a series of binary numbers, usually thought of as a series of bytes *A bit is the smallest unit of data a computer can store: either 0 or 1 (a switch is off or on)</p>
+<table>
+<thead>
+<tr class="header">
+<th>Binary (base 2)</th>
+<th>Number (base 10)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>00</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>01</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p><em>A byte is 8 bits and can represent up to 2^8 = 256 values </em>As a more compact representation, computers often display binary values in hexadecimal (base 16). Two hexademical digits = 16^2 = 256 values = 8 binary digits</p>
+<table>
+<thead>
+<tr class="header">
+<th>Hexademical (base 16)</th>
+<th>Number (base 10)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>a</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>f</td>
+<td>15</td>
+</tr>
+</tbody>
+</table>
+<p><em>So a file can be thought of as a series of pairs of hexadecimal digits </em>UNIX commands are available to view a file as this raw data e.g.</p>
+<pre class="bash"><code>xxd fileOutput.png | head</code></pre>
+<pre><code>## 00000000: 8950 4e47 0d0a 1a0a 0000 000d 4948 4452  .PNG........IHDR
+## 00000010: 0000 0307 0000 01da 0806 0000 0055 6735  .............Ug5
+## 00000020: 9700 0000 0173 5247 4200 aece 1ce9 0000  .....sRGB.......
+## 00000030: 0009 7048 5973 0000 1712 0000 1712 0167  ..pHYs.........g
+## 00000040: 9fd2 5200 0040 0049 4441 5478 01ec dd07  ..R..@.IDATx....
+## 00000050: b874 5579 f6f1 ad22 a002 4aef f0d2 11e9  .tUy...&quot;..J.....
+## 00000060: bd57 c150 c4cf 8a8a 251a a351 5193 8f8b  .W.P....%..QQ...
+## 00000070: 688c 628d 5882 31d1 98cf 2488 05a2 4004  h.b.X.1...$...@.
+## 00000080: 312a 5de9 1d01 69d2 5fa4 f75e 6ddf fb5b  1*]...i._..^m..[
+## 00000090: ba4e e61d e69c 33a7 cf99 b9d7 75ed b3e7  .N....3.....u...</code></pre>
+<ul>
+<li>This is how a PNG image file is stored on disk (the first 80 bytes):</li>
+</ul>
+<pre class="bash"><code>00000000: 8950 4e47 0d0a 1a0a 0000 000d 4948 4452  .PNG........IHDR
+00000010: 0000 0307 0000 01da 0806 0000 0055 6735  .............Ug5
+00000020: 9700 0000 0173 5247 4200 aece 1ce9 0000  .....sRGB.......
+00000030: 0009 7048 5973 0000 1712 0000 1712 0167  ..pHYs.........g
+00000040: 9fd2 5200 0040 0049 4441 5478 01ec dd07  ..R..@.IDATx....</code></pre>
+<ul>
+<li>The data in a file can be represented in different ways</li>
+<li>A common way for text to be represented is in ASCII format</li>
+</ul>
+<div class="figure">
+<img src="ASCII-Table-wide.svg" alt="ASCII table from https://simple.wikipedia.org/wiki/ASCII" />
+<p class="caption">ASCII table from <a href="https://simple.wikipedia.org/wiki/ASCII" class="uri">https://simple.wikipedia.org/wiki/ASCII</a></p>
+</div>
+<ul>
+<li><p>Numbers 32 to 126 define printable characters e.g. decimal 32 = space</p></li>
+<li><p>Note that there are two different ways to say “next line”</p>
+<ul>
+<li>number 10 (hex: 0A) = line feed</li>
+<li>number 13 (hex: 0D) = carriage return</li>
+</ul></li>
+<li><p>Different operating systems unfortunately use different ways (encodings) to represent “next line”.</p></li>
+<li><p>macOS and UNIX use line feed (hex: 0A). Windows uses a combination of carriage return and line feed (hex: 0D 0A).</p></li>
+<li><p>See more details at <a href="https://en.wikipedia.org/wiki/Newline" class="uri">https://en.wikipedia.org/wiki/Newline</a></p></li>
+<li><p>Exercise on your own: Use the UNIX xxd command to view a text file and see how the text (and a line break) is represented as ASCII codes.</p></li>
+<li><p>Why did we learn this? There are different types of hidden or unexpected characters possible in a file and you sometimes need to be aware of them when reading and writing files. If in doubt, examine your file in a text editor, or use <code>head</code> on the command line to view a file and make sure it is the format you are expecting.</p></li>
+<li><p>Tip: on UNIX, you can use the file command to see what type of format a file is.</p></li>
+</ul>
+<pre class="bash"><code>file mydata.txt
+file fileOutput.png</code></pre>
+<pre><code>## mydata.txt: ASCII text, with CRLF line terminators
+## fileOutput.png: PNG image data, 775 x 474, 8-bit/color RGBA, non-interlaced</code></pre>
+<ul>
+<li>A common type of file in data science is a table (like a spreadsheet worksheet, or data frame), usually represented as a tab-delimited format. This type of file should be explored in a spreadsheet application before you try to read it in R</li>
+</ul>
+</div>
+<div id="working-with-files-in-r" class="section level1">
+<h1>Working with files in R</h1>
+<pre class="r"><code>#Remember to set the working directory
+getwd()</code></pre>
+<pre><code>## [1] &quot;D:/Dropbox/TA_MMG1002H/p4b&quot;</code></pre>
+<pre class="r"><code>#setwd(&quot;path&quot;)
+#setwd(&quot;C:/MyDoc&quot;)
+
+list.files()</code></pre>
+<pre><code>##  [1] &quot;_site.yml&quot;            &quot;ASCII-Table-wide.svg&quot; &quot;docs&quot;                 &quot;fileOutput.png&quot;       &quot;index.html&quot;           &quot;index.Rmd&quot;           
+##  [7] &quot;lect3.html&quot;           &quot;lect3.Rmd&quot;            &quot;lect4.html&quot;           &quot;lect4.Rmd&quot;            &quot;lect5.Rmd&quot;            &quot;lect6.Rmd&quot;           
+## [13] &quot;mydata.txt&quot;           &quot;p4b.Rproj&quot;            &quot;README.md&quot;            &quot;site_libs&quot;</code></pre>
+<pre class="r"><code>dir()  #this does the same thing</code></pre>
+<pre><code>##  [1] &quot;_site.yml&quot;            &quot;ASCII-Table-wide.svg&quot; &quot;docs&quot;                 &quot;fileOutput.png&quot;       &quot;index.html&quot;           &quot;index.Rmd&quot;           
+##  [7] &quot;lect3.html&quot;           &quot;lect3.Rmd&quot;            &quot;lect4.html&quot;           &quot;lect4.Rmd&quot;            &quot;lect5.Rmd&quot;            &quot;lect6.Rmd&quot;           
+## [13] &quot;mydata.txt&quot;           &quot;p4b.Rproj&quot;            &quot;README.md&quot;            &quot;site_libs&quot;</code></pre>
+<pre class="r"><code>#file.create(), file.rename() and many more</code></pre>
+</div>
+<div id="data-import-and-export" class="section level1">
+<h1>Data import and export</h1>
+<ul>
+<li>We usually work with files using read and write functions</li>
+</ul>
+<pre class="r"><code>write.table(patientRecords, &quot;mydata.txt&quot;, sep=&quot;\t&quot;)
+
+mydata = read.table(&quot;mydata.txt&quot;)
+mydata</code></pre>
+<pre><code>##   name age smoker
+## 1  Bob  50   TRUE
+## 2  Jim  38   TRUE
+## 3  Joe  14  FALSE</code></pre>
+</div>
+<div id="continue-here-for-lecture-6" class="section level1">
+<h1>continue here for lecture 6</h1>
+</div>
+<div id="exercise-practice-reading-and-writing-files-10-minutes" class="section level1">
+<h1>Exercise: Practice reading and writing files (10 minutes)</h1>
+<blockquote>
+<p>Read the “gene_condition_source_id.txt” file dataFrame = read.table(“gene_condition_source_id.txt”, header=TRUE, sep=“, fill=TRUE, comment.char =”“, quote =”")</p>
+</blockquote>
+<blockquote>
+<p>count the number of columns and rows</p>
+</blockquote>
+<blockquote>
+<p>write one column to a file “column.txt” and write one row to a file “row.txt”</p>
+</blockquote>
+<blockquote>
+<p>examine original and resulting files in a spreadsheet - did you get the correct answer?</p>
+</blockquote>
+</div>
+<div id="exercise-solution-5-minutes-2" class="section level1">
+<h1>Exercise solution (5 minutes)</h1>
+<pre class="r"><code>#Add your solution here</code></pre>
+</div>
+<div id="conditional-statements" class="section level1">
+<h1>Conditional statements</h1>
+<div id="key-programming-concept-1" class="section level2">
+<h2>Key Programming Concept</h2>
+</div>
+</div>
+<div id="conditional-statements-1" class="section level1">
+<h1>Conditional statements</h1>
+<ul>
+<li>if condition is true, then run these commands</li>
+<li>The “if statement”</li>
+</ul>
+<pre class="r"><code>if (test_expression) {
+  statement
+}
+
+#Note: indenting is optional, but is good style because indented code is easier to read</code></pre>
+<ul>
+<li>Example</li>
+</ul>
+<pre class="r"><code>x = 5
+if (x &gt; 0) {
+  print(&quot;Positive number&quot;)
+}</code></pre>
+<pre><code>## [1] &quot;Positive number&quot;</code></pre>
+<pre class="r"><code>x = -5
+if (x &gt;0) {
+  print(&quot;Negative number&quot;)
+}</code></pre>
+</div>
+<div id="if..else-statement" class="section level1">
+<h1>if..else statement</h1>
+<pre class="r"><code>if (test_expression) {
+  statement1 
+} else {
+  statement2
+}</code></pre>
+<ul>
+<li>Example</li>
+</ul>
+<pre class="r"><code>x = 5
+if (x &gt; 0) {
+  print(&quot;Positive number&quot;)
+} else {
+  print(&quot;Negative number&quot;)
+}</code></pre>
+<pre><code>## [1] &quot;Positive number&quot;</code></pre>
+</div>
+<div id="if..else-if-statement" class="section level1">
+<h1>if..else if statement</h1>
+<pre class="r"><code>if (test_expression1) {
+    statement1
+} else if (test_expression2) {
+    statement2
+} else {
+    statement3
+}</code></pre>
+<ul>
+<li>Example</li>
+</ul>
+<pre class="r"><code>x = 5
+if (x &gt; 0) {
+  print(&quot;Positive number&quot;)
+} else if (x==0) {
+  print(&quot;Zero&quot;)
+} else {
+  print(&quot;Negative number&quot;)
+}</code></pre>
+<pre><code>## [1] &quot;Positive number&quot;</code></pre>
+<pre class="r"><code>x = 0
+if (x &gt; 0) {
+  print(&quot;Positive number&quot;)
+} else if (x==0) {
+  print(&quot;Zero&quot;)
+} else {
+  print(&quot;Negative number&quot;)
+}</code></pre>
+<pre><code>## [1] &quot;Zero&quot;</code></pre>
+<pre class="r"><code>x = -4
+if (x &gt; 0) {
+  print(&quot;Positive number&quot;)
+} else if (x==0) {
+  print(&quot;Zero&quot;)
+} else {
+  print(&quot;Negative number&quot;)
+}</code></pre>
+<pre><code>## [1] &quot;Negative number&quot;</code></pre>
+</div>
+<div id="comparison-operators" class="section level1">
+<h1>Comparison operators</h1>
+<p><code>&lt;</code> less than <code>&lt;=</code> less than or equal to <code>&gt;</code> greater than <code>&gt;=</code> greater than or equal to <code>==</code> exactly equal to <code>!=</code> not equal to <code>!x</code> not x <code>x | y</code> x OR y <code>x &amp; y</code> x AND y e.g. if( (x != 3) &amp; (x &gt; 0) )</p>
+<p>Note: <code>identical()</code> function is more generic than <code>==</code></p>
+<hr />
+</div>
+<div id="end-of-lecture-5" class="section level1">
+<h1>End of lecture 5</h1>
+<p>Complete Assignment 3 on Quercus Due Monday, April 1, 2019 at 9am</p>
+<p>Read The Book of R, chapter 10.2 and 10.3 (loops), 10.2.3 (apply functions)</p>
+<hr />
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

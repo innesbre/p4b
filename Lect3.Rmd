@@ -111,7 +111,8 @@ chartr("ACGT", "AAAA", DNA)# how is this different from substitution?
 # What is the reverse complement of a DNA sequence?
 
 
-DNA = readline("Please enter a DNA sequence. I will return the reverse complement.\n\n")
+# DNA = readline("Please enter a DNA sequence. I will return the reverse complement.\n\n")
+DNA <- "ACGTTACCCGGT"
 
 # Print the DNA onto the screen
 cat("\nHere is the starting DNA sequence:\n")
@@ -190,13 +191,6 @@ cat("This time it worked!\n")
 
 ```{r}
 #Add your exercise code here. You can create your own code chunk by typing the text you see at the start "```{r}" and end "```" of the chunk, or by using the 'insert' button at the top of this editor tab
-aNumber <- readline("Please enter a number here:")
-is.numeric(aNumber)
-is(aNumber)
-str(aNumber)
-
-actuallyANumberThisTime <- as.numeric(aNumber)
-numbertwo <- as.numeric(readline("second num"))
 
 
 ```
