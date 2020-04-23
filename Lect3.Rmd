@@ -1,0 +1,393 @@
+---
+title: "A practical course in programming for biologists - Lecture 3"
+output:
+  html_document:
+    df_print: paged
+---
+
+***
+
+# Lecture 3
+Date: Monday, April 20, 2020
+
+## Lecture 2 review
+
+* Introduction to the R statistical programming environment
+* Commands/functions e.g. c(1, 2, 3)
+* Variables
+    * Name syntax (special characters), declaring, assigning
+* Variable types
+    * numeric, string, logical
+
+*** 
+
+# Sample code: numbers
+
+```{r}
+#Lots of things you can do with numeric variables
+x = 2
+x
+
+y = 2*x-3
+y
+
+paste("x=",x," 2*x-3=",y)
+
+x = x+1
+x
+
+x = x-1
+x
+
+x = x*1.5
+x = x^2
+x
+
+y = x**2
+y
+
+x = y**(1/2)
+x
+
+z = exp(1)
+z
+
+x = z/2
+x
+
+paste("exp(1)/2 =", x)
+```
+
+# Operators
+
+* Operators operate on variables
+* = is the assignment operator
+* Arithmetic operators
+    * \+		addition
+    * \- 		subtraction
+    * \*		multiplication
+    * /		division
+    * ^ or **	exponentiation
+* Comparison operators
+    * <		less than
+    * <=	less than or equal to
+* And many more. See e.g. https://stat.ethz.ch/R-manual/R-devel/library/base/html/Arithmetic.html
+
+# Sample code: strings
+
+```{r}
+# this is a string...
+DNA = "ACGGGAGGACGGGAAAATTACTACGGCATTAGC"
+
+#single vs. double quotes
+s = "string123"
+#s2 = "string\"123"  #what's happening here?  Fix the code. (uncomment the line to see the error)
+s3 = 'string123'
+#s4 = 'string"123'  #what's happening here?  Fix the code. (uncomment the line to see the error)
+
+# concatenate (join) strings
+s = paste(s, s)
+
+s = cat(s,s) # what is s?
+
+# nchar() finds string length
+n = nchar(DNA)
+
+# substrings give you part of a string. Start counting at 1
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+substr(alphabet,1,5)
+
+#Substitution demo
+sub("A", "T", DNA)
+gsub("A", "T", DNA)
+
+# what does the g mean?
+sub("GA", "CT", DNA) # what happens if I include multiple characters in the pattern?
+
+#Translation demo
+chartr("A", "T", DNA)
+
+chartr("ACGT", "AAAA", DNA)# how is this different from substitution?
+```
+
+# Example code: reverse_complement.r
+
+```{r}
+# Using string operations to answer a biological question
+# What is the reverse complement of a DNA sequence?
+
+
+DNA = readline("Please enter a DNA sequence. I will return the reverse complement.\n\n")
+
+# Print the DNA onto the screen
+cat("\nHere is the starting DNA sequence:\n")
+cat(DNA)
+cat("\n\n")
+
+# Calculate the reverse complement
+#  Warning: this attempt will fail!
+#
+# First, copy the DNA into new variable revcom
+# (short for REVerse COMplement)
+# It doesn't matter if we first reverse the string and then
+# do the complementation; or if we first do the complementation
+# and then reverse the string.  We'll get the same result each time.
+# So when we make the copy we'll do the reverse in the same statement.
+#
+
+revcom = paste(rev(strsplit(DNA, NULL)[[1]]), collapse="")
+
+#
+# Next substitute all bases by their complements,
+# A->T, T->A, G->C, C->G
+#
+
+revcom = gsub("A","T", revcom)
+revcom = gsub("T","A", revcom)
+revcom = gsub("G","C", revcom)
+revcom = gsub("C","G", revcom)
+
+# Print the reverse complement DNA onto the screen
+cat ("Here is the reverse complement DNA:\n")
+cat(revcom)
+
+#
+# Oh-oh, that didn't work right!
+# Our reverse complement should have all the bases in it, since the
+# original DNA had all the bases-but ours only has A and G!
+#
+# Do you see why?
+
+
+```
+
+
+```{r}
+cat("\n\nThat was a bad algorithm, and the reverse complement was wrong!\n")
+
+# Make a new copy of the DNA (see why we saved the original?)
+revcom = paste(rev(strsplit(DNA, NULL)[[1]]), collapse="")
+
+revcom = chartr("ACGTacgt", "TGCAtgca", revcom)
+
+#Print the reverse complement DNA onto the screen
+cat ("Here is the original DNA:\n")
+cat(DNA)
+
+cat ("Here is the reverse complement DNA:\n")
+cat(revcom)
+cat("\n\n")
+cat("This time it worked!\n")
+```
+
+# Exercise: Reading in data from the console (10 minutes)
+
+>Write a program that does the following:
+
+* Prompt the user to input a number (number 1)
+    * Hint: use the readline function
+    * n = readline("What is the first number?\n")
+    * Also, as.numeric(n) to convert to a number
+* Prompt the user to input another number (number 2)
+* Output the sum, product and ratio of these numbers
+
+> Remember to use a code chunk in this R notebook to run your code
+
+
+```{r}
+#Add your exercise code here. You can create your own code chunk by typing the text you see at the start "```{r}" and end "```" of the chunk, or by using the 'insert' button at the top of this editor tab
+aNumber <- readline("Please enter a number here:")
+is.numeric(aNumber)
+is(aNumber)
+str(aNumber)
+
+actuallyANumberThisTime <- as.numeric(aNumber)
+numbertwo <- as.numeric(readline("second num"))
+
+
+```
+
+# Exercise solution (5 minutes)
+
+# More variable types
+
+## Vectors and Matrices
+
+# Vectors: creating
+
+* One of the variable types in R
+* A vector is a sequence of data of the same type (e.g. numbers, strings)
+* Create a vector with the `c()` function
+```{r}
+vector = c(1,2,3,4)
+vector
+
+x = c(1.2,2,54,6)
+x
+
+y = c(10,23.4,2,3)
+y
+```
+
+# Vectors: math
+
+```{r}
+# We can multiply two vectors element by element
+print(x*y)
+
+
+# Can also do a dot product of two vectors
+print(x %*% y)
+
+#Note: In the console, you don't need to use print()
+```
+
+# Vectors: types
+
+* We can also create text or LOGICAL vectors
+
+```{r}
+textvec=c("Patient1","Patient2","Patient3")
+textvec
+```
+
+```{r}
+#Not compatible with arithmetic
+try({
+  print(textvec * 2)
+},silent=T)#gives an error
+```
+
+
+```{r}
+
+logicvec=c(TRUE,FALSE,TRUE,FALSE)
+logicvec
+
+#Can also write:
+c(T,F,T,F)
+```
+
+# Vectors: indexing
+
+* Indexing is for accessing subsets of vectors
+* For indexing, we always use the square brackets [ ]
+
+```{r}
+
+textvec[1]
+textvec[3]
+
+#We can also simultaneously access multiple elements
+textvec[1:3]
+textvec[c(1,1,3,3)]
+
+#The length command
+length(textvec)
+
+```
+
+# Vectors: names
+
+```{r}
+#R allows named elements
+namedvec=c(firstcol=3, B=245, C=1212, lastelement=29.3)
+namedvec
+
+#We can then access the elements using the names
+namedvec["firstcol"] * 10
+
+#If we access an element with the wrong name we get NA
+namedvec["asdf"]
+
+#names() returns the vector of names
+names(namedvec)
+```
+
+# Exercise: Vectors and indexing (10 minutes)
+>Create a vector “radii” of length three containing the numbers 5, 10 and 20. Use “*” and the built-in constant “pi” to compute the areas of the three circles. Then subtract 2.1 and recompute the areas
+
+>Use the “seq” and “sum” functions for this exercise - remember, you can always look up help using help(function): Generate a vector “counter” with a sequence of numbers from 1 to 100. Compute the sum of these numbers
+
+>Generate a vector “randomdata” of length 100 with random numbers using the command “runif”
+
+>Bonus: Make a vector sorter that will sort the random numbers using the “order” function and return the sorted random data in “sortedrandom”
+
+# Exercise solution (5 minutes)
+
+```{r}
+# step 1
+radii <- c(5,10,20)
+pi * radii * radii
+pi * radii^2
+
+# step 2
+counter <- seq(1,100)
+sum(counter)
+sum(seq(1,100))
+
+# step 3
+randomstuff <- runif(100,min=1,max=100)
+
+# step THE BONUS
+sort(randomstuff,decreasing=F)
+randomstuff[order(randomstuff,decreasing=F)]
+
+identical(randomstuff[order(randomstuff,decreasing=F)],
+          sort(randomstuff,decreasing=F))
+```
+
+
+
+# Matrices
+
+>A matrix is like a 2D vector (i.e. a square or rectangle). Like a spreadsheet table with rows, columns
+
+```{r}
+
+#Create with the matrix command
+firstmat = matrix(c(1,2.3,3,4,5.3,6.4),nrow=2,ncol=3,dimnames = list(c("row1","row2"),c("col1","col2","col3")))
+firstmat
+
+#Values are given in the first argument, the dimensions in the 2nd/3rd argument, dimension names in the last argument
+
+#We can extract whole rows and columns like this
+firstmat[,1]  #first column. firstmat[,2] – second column
+firstmat[1,]  #first row
+
+#We can also access rows and columns by name
+firstmat[,"col2"]
+
+#We can access single elements or subsets of the matrix like this
+firstmat[1,2]
+firstmat[1:2,2:3]
+
+```
+
+# Exercise: Matrices (10 minutes)
+
+>Create a matrix with 3 columns and 10 rows
+
+>Fill it with random numbers using the runif() command
+
+>Calculate the average value in the matrix using the mean() command
+
+# Exercise solution (5 minutes)
+```{r}
+ourrandommat <- matrix(runif(30),nrow=10,ncol=3)
+mean(ourrandommat)
+rowMeans(ourrandommat)
+colMeans(ourrandommat)
+```
+
+***
+
+# End of lecture 3
+
+Reminder:
+Complete Assignment 2 on Quercus
+Due Monday, April 27, 2020 at 9am
+
+Read The Book of R, chapter 3.4 (arrays), 5.1 (lists), 5.2 (data frames)
+
+***

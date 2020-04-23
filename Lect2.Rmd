@@ -1,0 +1,206 @@
+---
+title: "A practical course in programming for biologists - Lecture 2"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+***
+
+Lecture 2
+Date: Friday, March 17, 2020
+
+*** 
+
+# Commands (or functions)
+## Key Programming Concept
+
+***
+
+## Commands in R
+
+>print("hello")
+
+* **print** is the command
+* **()** tells R that **print** is a command
+* **"hello"** is the **argument** to the command
+* These are also called **"functions”**
+
+```{r}
+print("Hello")
+```
+
+```{r}
+cat("hello", "world")
+```
+
+***
+
+# Commands in R
+
+* **Arguments** can be passed flexibly  
+Here's three different ways to find help:
+
+```{r eval=FALSE, include=TRUE}
+help(seq)
+?seq
+??seq
+```
+
+* Either follow the prescribed order (ok to omit ones at the end)
+
+```{r}
+seq(1,3,0.2)
+```
+
+* Specify arguments with "="
+
+```{r}
+seq(1,4,length.out=3)
+```
+
+* The order is not important if you specify with =
+* `seq(to=5, from=10)` is the same as `seq(from=10, to=5)`
+```{r}
+seq(to=5, from=10)
+seq(from=10, to=5)
+```
+
+
+***
+
+# Variables
+## Key Programming Concept
+
+***
+
+#Variables
+
+* Variables are named places to store values
+
+```{r}
+x = 5
+x
+```
+
+* Variable names
+    * Syntax is key (as in most programming languages)
+    * Letters, numbers, and the dot and underscore characters, and starts with either a letter or a dot not followed by a number.
+    * Reserved words (e.g. TRUE, FALSE, NA, Inf, NaN) are not syntactic names
+    * Some constants are already defined variables e.g. pi
+* We **declare** variables in R by creating a new variable name
+* You can use any name you want, as long as you follow the syntax rules
+
+> Which of these are valid R variable names?  
+name= "Tom"  
+myname# = "Alice"  
+_str="test"  
+DNA="ATTTCA"  
+sequence1="ATTTCA"  
+.seq = "ATTTCA"  
+1seq="ATTTCA"  
+year@2008 = 2008  
+gen2str = 1
+
+# Variable assignment and types
+* We assign a value to a variable using the assignment operator
+
+```{r}
+number = 5
+number
+
+number <- 5
+number
+
+string = "five"
+string
+
+number = number +1
+number
+
+try({
+  string = string + 1
+},
+silent=T)
+string
+```
+
+* All programming languages distinguish different variable types.
+    * Numbers (integers, various non-integers)
+    * Strings (=text, zero or more text characters)
+    * Various others (e.g. vectors, matrices – later)
+
+# Variable types
+
+* Strictly speaking
+    * Arithmetic operations are only defined for numbers
+    * String operations are only defined for strings
+* In practice, R is lenient and converts variables if possible
+
+# Special characters
+
+* Special characters have special meaning in the language
+    * `~!@#$%^&*(){}_+:"<>?,./;'[]-=`
+* " **starts** and **ends** a string
+* \\ **escapes** a special character e.g. \\"
+* Within a string:
+    * \\n = newline
+    * \\t = tab
+* \# - starts a **comment** line and is ignored by R
+    * `#my comment`
+    * Best practice: Use these a lot to document your code
+
+# Printing to the console/screen
+
+```{r}
+x
+print(x) #equivalent to above
+cat(x)   #similar to print, but less autoconversion
+
+#Mixing variables within strings:
+paste("Number", number, "String", string)
+
+#Here is another way to do the same thing
+sprintf("Number %s String %s", number, string)
+
+#How do you print a quote?
+string = "gene \"ABC\""
+
+#Note:
+print(string) #outputs `"gene \"ABC\""
+
+cat(string)  #outputs gene "ABC"
+
+#Here is a way to use print to get a similar result to cat in this case
+print(string, quote=FALSE)
+
+#You can use the \t string to denote a tab
+cat("Separated\tby\ttabs")
+```
+
+
+# Exercise: Using variables (10 minutes)
+
+* Use the R text editor to write a program that does the following:
+    * Create a variable number1 and set it to a value
+    * Do the same for number2
+    * Compute the sum, product and ratio of these numbers
+    * Print these to the screen
+* Save your work as sum.r
+* Run it in the R console
+
+# Exercise solution (5 minutes)
+
+
+***
+
+# End of lecture 2
+
+Reminder:
+Complete Assignment 1 on Quercus
+Due Monday, March 18, 2019 at 9am
+
+Read The Book of R, section 2.3 (vectors), chapter 3 (matrices), 4.1 (logicals), 4.2 (characters/strings)
+
+***
