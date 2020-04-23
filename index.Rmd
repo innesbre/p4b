@@ -1,16 +1,7 @@
 ---
-title: "A practical course in programming for biologists - Lecture 2"
-knit: (function(input_file, encoding) {
-  out_dir <- 'docs';
-  rmarkdown::render(input_file,
- encoding=encoding,
- output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
-output: html_document
+title: "Lecture 2"
 ---
 
-***
-
-Lecture 2
 Date: Friday, April 17, 2020
 
 *** 

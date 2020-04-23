@@ -1,0 +1,13 @@
+name: "MMG1002H - Programming4Biologists"
+output_dir: "docs"
+navbar:
+  title: "MMG1002H - Programming4Biologists"
+  left:
+  - text: "Lecture 2"
+    href: index.html
+  - text: "Lecture 3"
+    href: lect3.html
+  - text: "Lecture 4"
+    href: lect4.html
+output:
+  html_document

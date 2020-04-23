@@ -1,13 +1,7 @@
 ---
-title: "A practical course in programming for biologists - Lecture 3"
-output:
-  html_document:
-    df_print: paged
+title: "Lecture 3"
 ---
 
-***
-
-# Lecture 3
 Date: Monday, April 20, 2020
 
 ## Lecture 2 review
