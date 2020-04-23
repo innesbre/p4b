@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Lecture 6</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MMG1002H</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Lecture 2</a>
+</li>
+<li>
+  <a href="lect3.html">Lecture 3</a>
+</li>
+<li>
+  <a href="lect4.html">Lecture 4</a>
+</li>
+<li>
+  <a href="lect5.html">Lecture 5</a>
+</li>
+<li>
+  <a href="lect6.html">Lecture 6</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Lecture 6</h1>
+
+</div>
+
+
+<p>Date: Friday, May 1, 2020</p>
+<hr />
+<div id="ta-review-of-assignment-2-solution-15-minutes" class="section level1">
+<h1>TA review of assignment 2 solution (15 minutes)</h1>
+<hr />
+<div id="lecture-5-review" class="section level2">
+<h2>Lecture 5 review</h2>
+<ul>
+<li>Factors
+<ul>
+<li>f = factor(x)</li>
+<li>levels(f)</li>
+</ul></li>
+<li>Files
+<ul>
+<li>ASCII</li>
+<li>write.table</li>
+<li>read.table</li>
+</ul></li>
+<li>Conditional statements
+<ul>
+<li>if, if else if, if else if else</li>
+</ul></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="exercise-conditions-10-minutes" class="section level1">
+<h1>Exercise: conditions (10 minutes)</h1>
+<blockquote>
+<p>Write conditional statement code that evaluates an amino acid’s physicochemical property and outputs the following, given a single letter amino acid code:</p>
+</blockquote>
+<p>“Charged” for R, K, D, E “Polar” for Q, N, H, S, T, Y, C “Amphipathic” for W, Y, M “Hydrophobic” for A, I, L, M, F, V, P, G</p>
+</div>
+<div id="exercise-solution-5-minutes" class="section level1">
+<h1>Exercise solution (5 minutes)</h1>
+</div>
+<div id="loops" class="section level1">
+<h1>Loops</h1>
+<div id="key-programming-concept" class="section level2">
+<h2>Key Programming Concept</h2>
+</div>
+</div>
+<div id="loops-1" class="section level1">
+<h1>Loops</h1>
+<pre class="r"><code>vectorVariable = c(1,-2,3,-5)
+
+#Let&#39;s find all of the positive numbers
+if(vectorVariable[1]&gt;0) {
+  print(&quot;Positive number&quot;)
+}</code></pre>
+<pre><code>## [1] &quot;Positive number&quot;</code></pre>
+<pre class="r"><code>if(vectorVariable[2]&gt;0) {
+  print(&quot;Positive number&quot;)
+}
+if(vectorVariable[3]&gt;0) {
+  print(&quot;Positive number&quot;)
+}</code></pre>
+<pre><code>## [1] &quot;Positive number&quot;</code></pre>
+<pre class="r"><code>if(vectorVariable[4]&gt;0) {
+  print(&quot;Positive number&quot;)
+}
+
+#Problems with this approach:
+#1. There is a lot of repeated code
+#2. What happens if the vector is really long?</code></pre>
+<ul>
+<li>Loops provide a way of efficiently repeating the same code</li>
+<li>Two major kinds of loops: for, while</li>
+</ul>
+</div>
+<div id="for-loop-e.g.-find-positive-numbers" class="section level1">
+<h1>For loop e.g. find positive numbers</h1>
+<pre class="r"><code>#Here is the same problem, but solved using a for loop
+vectorVariable = c(1,-2,3,-5)
+for (value in vectorVariable) {
+  if (value &gt; 0) {
+    print(value)
+  }
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 3</code></pre>
+<pre class="r"><code>for (i in 1:10) {
+  print(i)
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+<pre class="r"><code>#What is happening here?  Let&#39;s &quot;unroll&quot; the loop
+vectorVariable = c(1,-2,3,-5)
+value = vectorVariable[1]
+if (value &gt; 0) {
+  print(value)
+}</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>value = vectorVariable[2]
+if (value &gt; 0) {
+  print(value)
+}
+value = vectorVariable[3]
+if (value &gt; 0) {
+  print(value)
+}</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>value = vectorVariable[4]
+if (value &gt; 0) {
+  print(value)
+}
+
+#The for loop automatically repeated the same code inside the loop, automatically updating the value variable to the next element of the vector, so it could &quot;loop&quot; through all the vector elements</code></pre>
+</div>
+<div id="exercise-loops-1-10-minutes" class="section level1">
+<h1>Exercise: Loops 1 (10 minutes)</h1>
+<blockquote>
+<p>Remember to count the amino acids in a protein sequence? Let’s do it in a different way here, using loops and named vectors (could also use names in lists)</p>
+</blockquote>
+<blockquote>
+<p>Here again the protein sequence:</p>
+</blockquote>
+<pre><code>&gt; sp|P04637|P53_HUMAN Cellular tumor antigen p53 OS=Homo sapiens
+MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDPGPDEAPRMPEAAPPVAPAPAA
+PTPAAPAPAPSWPLSSSVPSQKTYQGSYGFRLGFLHSGTAKSVTCTYSPALNKMFCQLAKTCPVQLWVDSTPPPGTRVR
+AMAIYKQSQHMTEVVRRCPHHERCSDSDGLAPPQHLIRVEGNLRVEYLDDRNTFRHSVVVPYEPPEVGSDCTTIHYNYM
+CNSSCMGGMNRRPILTIITLEDSSGNLLGRNSFEVRVCACPGRDRRTEEENLRKKGEPHHELPPGSTKRALPNNTSSSP
+QPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLKSKKGQSTSRHKKLMFKTEGPDSD</code></pre>
+<blockquote>
+<p>Use a for loop and the command strplit to get each amino acid of the sequence to count the occurrences.</p>
+</blockquote>
+<blockquote>
+<p>One easy way is to first generate a vector (or list) that has named rows, named for each amino acid, such that, for instance, you keep the number of occurrences of Alanines as occ_aa[“A”]. To start, you have to set all the elements of the vector to zero (R has a built in vector called “LETTERS” that contains the whole alphabet)</p>
+</blockquote>
+</div>
+<div id="exercise-solution-5-minutes-1" class="section level1">
+<h1>Exercise solution (5 minutes)</h1>
+</div>
+<div id="while-loop" class="section level1">
+<h1>While loop</h1>
+<ul>
+<li>Example: find positive numbers in a vector</li>
+</ul>
+<pre class="r"><code>vectorVariable = c(1,-2,3,-5)
+i=1
+while (i &lt;= length(vectorVariable)) {
+  if (vectorVariable[i] &gt; 0) {
+    print(vectorVariable[i])
+  }
+  i = i + 1
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 3</code></pre>
+<pre class="r"><code>#What is happening here?  Let&#39;s &quot;unroll&quot; the loop
+vectorVariable = c(1,-2,3,-5)
+i=1  #i is an index to keep track of our position in the vector. i=1 means to start with the first element of the vector.
+if (i &lt;= length(vectorVariable)) { #if i is smaller or equal to the vector length, then we can run our code
+  if (vectorVariable[i] &gt; 0) {
+    print(vectorVariable[i])
+  }
+  i = i + 1  #move to the next element - i now equal to 2
+}</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>if (i &lt;= length(vectorVariable)) { #if i is smaller or equal to the vector length, then we can run our code
+  if (vectorVariable[i] &gt; 0) {
+    print(vectorVariable[i])
+  }
+  i = i + 1  #move to the next element - i now equal to 3
+}
+if (i &lt;= length(vectorVariable)) { #if i is smaller or equal to the vector length, then we can run our code
+  if (vectorVariable[i] &gt; 0) {
+    print(vectorVariable[i])
+  }
+  i = i + 1  #move to the next element - i now equal to 4
+}</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>if (i &lt;= length(vectorVariable)) { #if i is smaller or equal to the vector length, then we can run our code
+  if (vectorVariable[i] &gt; 0) {
+    print(vectorVariable[i])
+  }
+  i = i + 1  #move to the next element - i now equal to 5
+}
+if (i &lt;= length(vectorVariable)) { #i is no longer smaller than the vector length, so don&#39;t run the code
+  if (vectorVariable[i] &gt; 0) {
+    print(vectorVariable[i])
+  }
+  i = i + 1
+}
+
+
+#The while and for loops can do the same thing. Sometimes it is more convenient to write a loop one way or another</code></pre>
+</div>
+<div id="exercise-loops-2-10-minutes" class="section level1">
+<h1>Exercise: Loops 2 (10 minutes)</h1>
+<blockquote>
+<p>Read the “gene_condition_source_id.txt” file dataFrame = read.table(“gene_condition_source_id.txt”, header=TRUE, sep=“, fill=TRUE, comment.char =”“, quote =”")</p>
+</blockquote>
+<blockquote>
+<p>Using a for loop, loop over all the rows of “gene_condition_source_id.txt” and find all diseases linked to TP53</p>
+</blockquote>
+<blockquote>
+<p>Do the same thing, but first read in the file again, but set “stringsAsFactors=F” as an argument to read.table()</p>
+</blockquote>
+</div>
+<div id="exercise-solution-5-minutes-2" class="section level1">
+<h1>Exercise solution (5 minutes)</h1>
+</div>
+<div id="vectorization" class="section level1">
+<h1>Vectorization</h1>
+<div id="key-programming-concept-in-r" class="section level2">
+<h2>Key Programming Concept in R</h2>
+<div id="but-not-in-many-other-programming-languages" class="section level3">
+<h3>(but not in many other programming languages)</h3>
+</div>
+</div>
+</div>
+<div id="vectorization-1" class="section level1">
+<h1>Vectorization</h1>
+<ul>
+<li>Key feature of R that helps do powerful things with a small amount of code (high level)</li>
+<li>Try to to avoid loops and use vectors</li>
+</ul>
+<pre class="r"><code>vectorVariable = c(1,-2,3,-4)
+vectorVariable</code></pre>
+<pre><code>## [1]  1 -2  3 -4</code></pre>
+<pre class="r"><code>vectorVariable * 5</code></pre>
+<pre><code>## [1]   5 -10  15 -20</code></pre>
+<pre class="r"><code>vectorVariable * vectorVariable</code></pre>
+<pre><code>## [1]  1  4  9 16</code></pre>
+<pre class="r"><code>sum(vectorVariable)</code></pre>
+<pre><code>## [1] -2</code></pre>
+<pre class="r"><code>#similarly, you can use: prod(), mean(), sd(), min(), max()
+
+stringVariable = c(&quot;first&quot;, &quot;last&quot;)
+stringVariable</code></pre>
+<pre><code>## [1] &quot;first&quot; &quot;last&quot;</code></pre>
+<pre class="r"><code>paste(stringVariable, &quot;name&quot;)</code></pre>
+<pre><code>## [1] &quot;first name&quot; &quot;last name&quot;</code></pre>
+<pre class="r"><code>paste(stringVariable, c(&quot;name1&quot;, &quot;name2&quot;))  #note how vectorization applies the transformation to all strings in the string vector</code></pre>
+<pre><code>## [1] &quot;first name1&quot; &quot;last name2&quot;</code></pre>
+</div>
+<div id="logical-selection-from-a-vector" class="section level1">
+<h1>Logical selection from a vector</h1>
+<pre class="r"><code>vectorVariable&gt;0</code></pre>
+<pre><code>## [1]  TRUE FALSE  TRUE FALSE</code></pre>
+<pre class="r"><code>vectorVariable==0</code></pre>
+<pre><code>## [1] FALSE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code>vectorVariable&lt;0</code></pre>
+<pre><code>## [1] FALSE  TRUE FALSE  TRUE</code></pre>
+<pre class="r"><code>vectorVariable[c(T,F,T,F)]</code></pre>
+<pre><code>## [1] 1 3</code></pre>
+<pre class="r"><code>vectorVariable[vectorVariable&gt;0]</code></pre>
+<pre><code>## [1] 1 3</code></pre>
+<pre class="r"><code>ifelse(vectorVariable&gt;0,&quot;positive number&quot;, &quot;negative number&quot;)</code></pre>
+<pre><code>## [1] &quot;positive number&quot; &quot;negative number&quot; &quot;positive number&quot; &quot;negative number&quot;</code></pre>
+<pre class="r"><code>#remember: for loop to find positive numbers in a vector
+vectorVariable = c(1,-2,3,-5)
+for (value in vectorVariable) {
+  if (value &gt; 0) {
+    print(value)
+  }
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 3</code></pre>
+<pre class="r"><code>#the vectorization way of doing this is:
+vectorVariable[vectorVariable&gt;0]</code></pre>
+<pre><code>## [1] 1 3</code></pre>
+<pre class="r"><code>#much easier!</code></pre>
+</div>
+<div id="vectorization-with-data-frames" class="section level1">
+<h1>Vectorization with data frames</h1>
+<pre class="r"><code>name = c(&quot;patient1&quot;, &quot;patient2&quot;, &quot;patient3&quot;)
+name</code></pre>
+<pre><code>## [1] &quot;patient1&quot; &quot;patient2&quot; &quot;patient3&quot;</code></pre>
+<pre class="r"><code>age = c(46, 49, 50)
+age</code></pre>
+<pre><code>## [1] 46 49 50</code></pre>
+<pre class="r"><code>smoker = c(T, F, T)
+smoker</code></pre>
+<pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
+<pre class="r"><code>patientRecords = data.frame(name, age, smoker, stringsAsFactors=F)
+
+#What is going on here?
+patientRecords$age&gt;48</code></pre>
+<pre><code>## [1] FALSE  TRUE  TRUE</code></pre>
+<pre class="r"><code>patientRecords[patientRecords$age&gt;48]  #oops</code></pre>
+<pre><code>##   age smoker
+## 1  46   TRUE
+## 2  49  FALSE
+## 3  50   TRUE</code></pre>
+<pre class="r"><code>patientRecords[ , patientRecords$age&gt;48]  #oops</code></pre>
+<pre><code>##   age smoker
+## 1  46   TRUE
+## 2  49  FALSE
+## 3  50   TRUE</code></pre>
+<pre class="r"><code>patientRecords[patientRecords$age&gt;48 , ]</code></pre>
+<pre><code>##       name age smoker
+## 2 patient2  49  FALSE
+## 3 patient3  50   TRUE</code></pre>
+</div>
+<div id="apply-function" class="section level1">
+<h1>“apply” function</h1>
+<ul>
+<li>applies a function to a matrix</li>
+</ul>
+<pre class="r"><code>#Create a new matrix with number 1 to 30
+x = matrix(1:30, nrow=5, ncol=6)
+x</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6]
+## [1,]    1    6   11   16   21   26
+## [2,]    2    7   12   17   22   27
+## [3,]    3    8   13   18   23   28
+## [4,]    4    9   14   19   24   29
+## [5,]    5   10   15   20   25   30</code></pre>
+<pre class="r"><code>#Sum the rows
+apply(x, MARGIN=1, FUN=sum)</code></pre>
+<pre><code>## [1]  81  87  93  99 105</code></pre>
+<pre class="r"><code>#or equivalently
+apply(x, 1, sum)</code></pre>
+<pre><code>## [1]  81  87  93  99 105</code></pre>
+<pre class="r"><code>#Sum the columns
+apply(x, 2, sum)</code></pre>
+<pre><code>## [1]  15  40  65  90 115 140</code></pre>
+</div>
+<div id="lapply" class="section level1">
+<h1>lapply()</h1>
+<ul>
+<li>Similar to apply, but for lists</li>
+</ul>
+<pre class="r"><code>#Compute the mean for all the columns in a data.frame (which is also a list)
+lapply(patientRecords, mean)</code></pre>
+<pre><code>## Warning in mean.default(X[[i]], ...): argument is not numeric or logical: returning NA</code></pre>
+<pre><code>## $name
+## [1] NA
+## 
+## $age
+## [1] 48.33333
+## 
+## $smoker
+## [1] 0.6666667</code></pre>
+<pre class="r"><code>#You may see lots of other apply functions in R code e.g. mapply, sapply, tapply, vapply</code></pre>
+<hr />
+</div>
+<div id="end-of-lecture-6" class="section level1">
+<h1>End of lecture 6</h1>
+<p>Reminder: Complete Assignment 3 on Quercus Due Monday, April 1, 2019 at 9am</p>
+<p>Read The Book of R, chapter 11.1, 11.2 (functions), Glance at ?base::regex</p>
+<hr />
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
