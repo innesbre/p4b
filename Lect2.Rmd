@@ -1,15 +1,17 @@
 ---
 title: "A practical course in programming for biologists - Lecture 2"
-output:
-  pdf_document: default
-  html_document:
-    df_print: paged
+knit: (function(input_file, encoding) {
+  out_dir <- 'docs';
+  rmarkdown::render(input_file,
+ encoding=encoding,
+ output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
+output: html_document
 ---
 
 ***
 
 Lecture 2
-Date: Friday, March 17, 2020
+Date: Friday, April 17, 2020
 
 *** 
 
@@ -199,7 +201,7 @@ cat("Separated\tby\ttabs")
 
 Reminder:
 Complete Assignment 1 on Quercus
-Due Monday, March 18, 2019 at 9am
+Due Monday, April 20, 2020 at 9am
 
 Read The Book of R, section 2.3 (vectors), chapter 3 (matrices), 4.1 (logicals), 4.2 (characters/strings)
 
