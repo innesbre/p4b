@@ -1,7 +1,7 @@
 name: "MMG1002H - Programming4Biologists"
 output_dir: "docs"
 navbar:
-  title: "MMG1002H - Programming4Biologists"
+  title: "MMG1002H"
   left:
   - text: "Lecture 2"
     href: index.html
