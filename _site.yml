@@ -9,5 +9,10 @@ navbar:
     href: lect3.html
   - text: "Lecture 4"
     href: lect4.html
+  - text: "Lecture 5"
+    href: lect5.html
+  - text: "Lecture 6"
+    href: lect6.html
 output:
-  html_document
+  html_document:
+    theme: cosmo
