@@ -1,10 +1,11 @@
 ---
-title: "Lecture 3"
+title: "Module 2"
 ---
 
-Date: Monday, April 20, 2020
 
-## Lecture 2 review
+The Book of R: section 2.3 (vectors), chapter 3 (matrices), 4.1 (logicals), 4.2 (characters/strings)
+
+## Module 1 review
 
 * Introduction to the R statistical programming environment
 * Commands/functions e.g. c(1, 2, 3)
@@ -34,7 +35,6 @@ x = x-1
 x
 
 x = x*1.5
-x = x^2
 x
 
 y = x**2
@@ -75,21 +75,23 @@ DNA = "ACGGGAGGACGGGAAAATTACTACGGCATTAGC"
 
 #single vs. double quotes
 s = "string123"
-#s2 = "string\"123"  #what's happening here?  Fix the code. (uncomment the line to see the error)
+#s2 = "string"123"  #what's happening here?  Fix the code. (uncomment the line to see the error)
 s3 = 'string123'
-#s4 = 'string"123'  #what's happening here?  Fix the code. (uncomment the line to see the error)
+s4 = 'string"123'  #what's happening here?  Fix the code. (uncomment the line to see the error)
 
 # concatenate (join) strings
-s = paste(s, s)
+s = paste(s, s4)
+s = cat(s, s) # what is s?
 
-s = cat(s,s) # what is s?
+#Note: cat and paste have different return values. You can see what a command returns in the help page.
+cat(s,s)  #same thing as above cat command, but we don't need the return value, so we don't catch it in a variable. This would be the normal way to use the cat command.
 
 # nchar() finds string length
 n = nchar(DNA)
 
 # substrings give you part of a string. Start counting at 1
 alphabet = "abcdefghijklmnopqrstuvwxyz"
-substr(alphabet,1,5)
+substr(alphabet,3,5)
 
 #Substitution demo
 sub("A", "T", DNA)
@@ -98,10 +100,12 @@ gsub("A", "T", DNA)
 # what does the g mean?
 sub("GA", "CT", DNA) # what happens if I include multiple characters in the pattern?
 
+# If I want to save the output
+DNA2=gsub("A", "T",DNA)
+
 #Translation demo
 chartr("A", "T", DNA)
-
-chartr("ACGT", "AAAA", DNA)# how is this different from substitution?
+chartr("ACGT", "AAAA", DNA) # how is this different from substitution?
 ```
 
 # Example code: reverse_complement.r
@@ -110,9 +114,7 @@ chartr("ACGT", "AAAA", DNA)# how is this different from substitution?
 # Using string operations to answer a biological question
 # What is the reverse complement of a DNA sequence?
 
-
-# DNA = readline("Please enter a DNA sequence. I will return the reverse complement.\n\n")
-DNA <- "ACGTTACCCGGT"
+DNA = readline("Please enter a DNA sequence. I will return the reverse complement.\n\n")
 
 # Print the DNA onto the screen
 cat("\nHere is the starting DNA sequence:\n")
@@ -154,11 +156,8 @@ cat(revcom)
 # Do you see why?
 
 
-```
-
-
-```{r}
 cat("\n\nThat was a bad algorithm, and the reverse complement was wrong!\n")
+readline("Press enter to try again\n\n")
 
 # Make a new copy of the DNA (see why we saved the original?)
 revcom = paste(rev(strsplit(DNA, NULL)[[1]]), collapse="")
@@ -166,9 +165,6 @@ revcom = paste(rev(strsplit(DNA, NULL)[[1]]), collapse="")
 revcom = chartr("ACGTacgt", "TGCAtgca", revcom)
 
 #Print the reverse complement DNA onto the screen
-cat ("Here is the original DNA:\n")
-cat(DNA)
-
 cat ("Here is the reverse complement DNA:\n")
 cat(revcom)
 cat("\n\n")
@@ -188,14 +184,24 @@ cat("This time it worked!\n")
 
 > Remember to use a code chunk in this R notebook to run your code
 
+### Exercise solution (5 minutes)
 
 ```{r}
 #Add your exercise code here. You can create your own code chunk by typing the text you see at the start "```{r}" and end "```" of the chunk, or by using the 'insert' button at the top of this editor tab
 
+n1 <- readline("What is the first number?\n")
+is(n1) #can we do math on this?
+n1 <- as.numeric(n1) #coerce to numeric type
+
+n2 <- as.numeric(readline("What is the second number?\n"))
+# nesting functions works too.
+
+print(n1 + n2)
+print(n1 * n2)
+print(n1 / n2)
 
 ```
 
-# Exercise solution (5 minutes)
 
 # More variable types
 
@@ -223,9 +229,8 @@ y
 # We can multiply two vectors element by element
 print(x*y)
 
-
 # Can also do a dot product of two vectors
-print(x %*% y)
+x %*% y
 
 #Note: In the console, you don't need to use print()
 ```
@@ -241,9 +246,7 @@ textvec
 
 ```{r}
 #Not compatible with arithmetic
-try({
-  print(textvec * 2)
-},silent=T)#gives an error
+#print(textvec * 2)  #gives an error
 ```
 
 
@@ -267,7 +270,7 @@ textvec[1]
 textvec[3]
 
 #We can also simultaneously access multiple elements
-textvec[1:3]
+textvec[1:2]
 textvec[c(1,1,3,3)]
 
 #The length command
@@ -293,6 +296,7 @@ names(namedvec)
 ```
 
 # Exercise: Vectors and indexing (10 minutes)
+
 >Create a vector “radii” of length three containing the numbers 5, 10 and 20. Use “*” and the built-in constant “pi” to compute the areas of the three circles. Then subtract 2.1 and recompute the areas
 
 >Use the “seq” and “sum” functions for this exercise - remember, you can always look up help using help(function): Generate a vector “counter” with a sequence of numbers from 1 to 100. Compute the sum of these numbers
@@ -301,9 +305,9 @@ names(namedvec)
 
 >Bonus: Make a vector sorter that will sort the random numbers using the “order” function and return the sorted random data in “sortedrandom”
 
-# Exercise solution (5 minutes)
+### Exercise solution (5 minutes)
 
-```{r}
+```{r,fig.width=8,fig.height=3,fig.show="hold"}
 # step 1
 radii <- c(5,10,20)
 pi * radii * radii
@@ -316,6 +320,10 @@ sum(seq(1,100))
 
 # step 3
 randomstuff <- runif(100,min=1,max=100)
+par(mfrow=c(1,2),mar=c(3,3,2,1),mgp=2:0)
+hist(randomstuff) #runif randomly samples from the uniform distribution
+hist(rnorm(100)) #rnorm randomly samples from the normal distribution
+
 
 # step THE BONUS
 sort(randomstuff,decreasing=F)
@@ -323,9 +331,8 @@ randomstuff[order(randomstuff,decreasing=F)]
 
 identical(randomstuff[order(randomstuff,decreasing=F)],
           sort(randomstuff,decreasing=F))
+
 ```
-
-
 
 # Matrices
 
@@ -360,7 +367,8 @@ firstmat[1:2,2:3]
 
 >Calculate the average value in the matrix using the mean() command
 
-# Exercise solution (5 minutes)
+### Exercise solution (5 minutes)
+
 ```{r}
 ourrandommat <- matrix(runif(30),nrow=10,ncol=3)
 mean(ourrandommat)
@@ -368,14 +376,5 @@ rowMeans(ourrandommat)
 colMeans(ourrandommat)
 ```
 
-***
-
-# End of lecture 3
-
-Reminder:
-Complete Assignment 2 on Quercus
-Due Monday, April 27, 2020 at 9am
-
-Read The Book of R, chapter 3.4 (arrays), 5.1 (lists), 5.2 (data frames)
 
 ***

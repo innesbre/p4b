@@ -1,13 +1,15 @@
 ---
-title: "Lecture 2"
+title: "Module 1"
 ---
 
-Date: Friday, April 17, 2020
+
+The Book of R: Chapter 1, Appendix B, chapter 2.1, 2.2
 
 *** 
 
 # Commands (or functions)
-## Key Programming Concept
+
+### Key Programming Concept
 
 ***
 
@@ -32,13 +34,10 @@ cat("hello", "world")
 
 # Commands in R
 
-* **Arguments** can be passed flexibly  
-Here's three different ways to find help:
+* **Arguments** can be passed flexibly
 
-```{r eval=FALSE, include=TRUE}
+```{r,eval=FALSE,include=TRUE}
 help(seq)
-?seq
-??seq
 ```
 
 * Either follow the prescribed order (ok to omit ones at the end)
@@ -64,17 +63,20 @@ seq(from=10, to=5)
 ***
 
 # Variables
-## Key Programming Concept
+
+### Key Programming Concept
 
 ***
 
-#Variables
+# Variables
 
 * Variables are named places to store values
 
 ```{r}
 x = 5
 x
+
+
 ```
 
 * Variable names
@@ -84,6 +86,7 @@ x
     * Some constants are already defined variables e.g. pi
 * We **declare** variables in R by creating a new variable name
 * You can use any name you want, as long as you follow the syntax rules
+* Best practice is to use human readable names to help document your code e.g. use a variable name 'patients' instead of 'x'
 
 > Which of these are valid R variable names?  
 name= "Tom"  
@@ -97,13 +100,18 @@ year@2008 = 2008
 gen2str = 1
 
 # Variable assignment and types
+
 * We assign a value to a variable using the assignment operator
 
 ```{r}
 number = 5
 number
 
-number <- 5
+#note: the variable value specifies its type, not its name, 'x' can also be a number
+x = 5
+x
+
+number <- 5  #<- is the same as =
 number
 
 string = "five"
@@ -112,10 +120,27 @@ string
 number = number +1
 number
 
+logical = TRUE
+logical
+
+logical2 = T  #note: T and TRUE are equivalent (they are both TRUE)
+logical2
+
+logical3 = FALSE
+logical3
+
+logical4 = F  #same with F and FALSE
+logical4
+
+#Reminder: the variable names do not tell you anything about the variable type
+
+number = "string"
+number
+
 try({
   string = string + 1
-},
-silent=T)
+},silent=F)
+#why is there an error when you try to run this code? Note: R only figures this out when you try to run the code, not when you're writing it, so you need to be aware of the variable types you're using when you're writing code
 string
 ```
 
@@ -147,11 +172,15 @@ string
 # Printing to the console/screen
 
 ```{r}
+
+x = 5
 x
 print(x) #equivalent to above
 cat(x)   #similar to print, but less autoconversion
 
 #Mixing variables within strings:
+number = 5
+string = "hello"
 paste("Number", number, "String", string)
 
 #Here is another way to do the same thing
@@ -183,17 +212,17 @@ cat("Separated\tby\ttabs")
 * Save your work as sum.r
 * Run it in the R console
 
-# Exercise solution (5 minutes)
+### Exercise solution (5 minutes)
 
+```{r}
+number1 <- 5
+number2 <- 12
+
+print(number1 + number2)
+print(number1 * number2)
+print(number1 / number2)
+
+```
 
 ***
 
-# End of lecture 2
-
-Reminder:
-Complete Assignment 1 on Quercus
-Due Monday, April 20, 2020 at 9am
-
-Read The Book of R, section 2.3 (vectors), chapter 3 (matrices), 4.1 (logicals), 4.2 (characters/strings)
-
-***

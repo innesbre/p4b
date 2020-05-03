@@ -3,16 +3,24 @@ output_dir: "docs"
 navbar:
   title: "MMG1002H"
   left:
-  - text: "Lecture 2"
+  - text: "Module 1"
     href: index.html
-  - text: "Lecture 3"
-    href: lect3.html
-  - text: "Lecture 4"
-    href: lect4.html
-  - text: "Lecture 5"
-    href: lect5.html
-  - text: "Lecture 6"
-    href: lect6.html
+  - text: "Module 2"
+    href: mod2.html
+  - text: "Module 3"
+    href: mod3.html
+  - text: "Module 4"
+    href: mod4.html
+  - text: "Module 5"
+    href: mod5.html
+  - text: "Module 6"
+    href: mod6.html
+  - text: "Module 7"
+    href: mod7.html
 output:
   html_document:
     theme: cosmo
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    df_print: paged

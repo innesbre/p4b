@@ -1,16 +1,12 @@
 ---
-title: "Lecture 6"
+title: "Module 5"
 ---
 
-Date: Friday, May 1, 2020
+The Book of R: chapter 10.2 and 10.3 (loops), 10.2.3 (apply functions)
 
 ***
 
-# TA review of assignment 2 solution  (15 minutes)
-
-***
-
-## Lecture 5 review
+## Module 4 review
 
 * Factors
     * f = factor(x)
@@ -23,20 +19,54 @@ Date: Friday, May 1, 2020
     * if, if else if, if else if else
     
 ***
-
 # Exercise: conditions (10 minutes)
 
-> Write conditional statement code that evaluates an amino acid's physicochemical property and outputs the following, given a single letter amino acid code:
+>Write conditional statement code that evaluates an amino acid's physicochemical property and outputs the following, given a single letter amino acid code:
 
+```
 "Charged" for R, K, D, E 
 "Polar" for Q, N, H, S, T, Y, C
 "Amphipathic" for W, Y, M
 "Hydrophobic" for A, I, L, M, F, V, P, G
+```
 
-# Exercise solution (5 minutes)
+### Exercise solution (5 minutes)
+```{r}
+AAmap <- list(
+  Charged=c("R","K","D","E"),
+  Polar=c("Q","N","H","S","T","Y","C"),
+  Amphipathic=c("W","Y","M"),
+  Hydrophobic=c("A","I","L","M","F","V","P","G")
+)
+inputAA <- "Y"
+outputAA <- c()
+if (inputAA %in% c("R","K","D","E")) {
+  outputAA <- append(outputAA,"Charged")
+}
+if (inputAA %in% AAmap[["Polar"]]) {
+  outputAA <- append(outputAA,"Polar")
+} 
+if (inputAA %in% AAmap$Amphipathic) {
+  outputAA <- append(outputAA,"Amphiiii")
+} 
+print(outputAA)
+
+1 == c(1,2,3)
+1 %in% c(1,2,3)
+1 == NA
+1 %in% NA
+
+switch("Y",
+       R="Charged",
+       K="Charged",
+       Y="Polar",
+       Y="Amphi")
+
+```
 
 
 # Loops
+
 ## Key Programming Concept
 
 # Loops
@@ -78,10 +108,6 @@ for (value in vectorVariable) {
   }
 }
 
-for (i in 1:10) {
-  print(i)
-}
-
 #What is happening here?  Let's "unroll" the loop
 vectorVariable = c(1,-2,3,-5)
 value = vectorVariable[1]
@@ -101,32 +127,20 @@ if (value > 0) {
   print(value)
 }
 
+#Note: 'value' is just a variable, so can have any name of a variable
+
 #The for loop automatically repeated the same code inside the loop, automatically updating the value variable to the next element of the vector, so it could "loop" through all the vector elements
 
+#here is an idiomatic way to write a for loop that executes a specific number of times:
+sum=0
+for (i in 1:100) {
+  sum = sum + i;   #note: ; indicates the end of a statement, but it is optional in R
+}
+print (sum)
+
+#this is the same as sum(1:100) - in this case, R has a 'high level' command that does the same thing. Internally, sum() uses a loop to do its job.
+
 ```
-
-# Exercise: Loops 1 (10 minutes)
-
-> Remember to count the amino acids in a protein sequence? Let's do it in a different way here, using loops and named vectors (could also use names in lists)
-
-> Here again the protein sequence:  
-
-```
-> sp|P04637|P53_HUMAN Cellular tumor antigen p53 OS=Homo sapiens
-MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDPGPDEAPRMPEAAPPVAPAPAA
-PTPAAPAPAPSWPLSSSVPSQKTYQGSYGFRLGFLHSGTAKSVTCTYSPALNKMFCQLAKTCPVQLWVDSTPPPGTRVR
-AMAIYKQSQHMTEVVRRCPHHERCSDSDGLAPPQHLIRVEGNLRVEYLDDRNTFRHSVVVPYEPPEVGSDCTTIHYNYM
-CNSSCMGGMNRRPILTIITLEDSSGNLLGRNSFEVRVCACPGRDRRTEEENLRKKGEPHHELPPGSTKRALPNNTSSSP
-QPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLKSKKGQSTSRHKKLMFKTEGPDSD
-```
-
-> Use a for loop and the command strplit to get each amino acid of the sequence to count the occurrences.
-
-> One easy way is to first generate a vector (or list) that has named rows, named for each amino acid, such that, for instance, you keep the number of occurrences of Alanines as occ_aa["A"]. To start, you have to set all the elements of the vector to zero (R has a built in vector called "LETTERS" that contains the whole alphabet)
-
-# Exercise solution (5 minutes)
-
-
 
 # While loop
 
@@ -183,6 +197,101 @@ if (i <= length(vectorVariable)) { #i is no longer smaller than the vector lengt
 
 ```
 
+# Reasons to write loops
+
+* You want to loop over all elements of a vector (the most common case in R)
+
+```{r}
+for (i in vectorVariable) {
+  if (i > 0) {
+    print(i)
+  }
+}
+```
+
+* You want to run a certain number of operations
+
+```{r}
+sum=0
+for (i in 1:100) {
+  sum = sum + i
+}
+print (sum)
+
+#same as
+i=1
+sum=0
+while (i <= 100) {
+  sum = sum + i
+  i = i + 1
+}
+print (sum)
+
+```
+
+* You want to run code until a certain condition occurs e.g. find the first instance of "cancer" in the genes2phenotype file
+
+```{r}
+vectorVariable = c(1,-2,3,-5)
+i=1
+while (vectorVariable[i] != 3) {
+  print(vectorVariable[i])
+  i = i + 1
+}
+```
+
+
+# Infinite loops
+
+* Be careful that the loops don't go on forever
+* If this happens, you need to stop or interrupt the R code. In RStudio, you interrupt the code from the Session menu
+
+```{r,eval=FALSE,include=TRUE}
+vectorVariable = c(1,-2,3,-5)
+i=1
+while (i <= length(vectorVariable)) {
+  if (vectorVariable[i] > 0) {
+    print(vectorVariable[i])
+  }
+  #i = i + 1  #We never update the loop index, so i will never be greater than the vector length, so the loop will never end
+}
+
+# Not actually going to run this one, or the code would never knit!
+```
+
+# Exercise: Loops 1 (10 minutes)
+
+> Remember to count the amino acids in a protein sequence? Let's do it in a different way here, using loops and named vectors (could also use names in lists)
+
+> Here again the protein sequence:  
+
+```
+> sp|P04637|P53_HUMAN Cellular tumor antigen p53 OS=Homo sapiens
+MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDPGPDEAPRMPEAAPPVAPAPAA
+PTPAAPAPAPSWPLSSSVPSQKTYQGSYGFRLGFLHSGTAKSVTCTYSPALNKMFCQLAKTCPVQLWVDSTPPPGTRVR
+AMAIYKQSQHMTEVVRRCPHHERCSDSDGLAPPQHLIRVEGNLRVEYLDDRNTFRHSVVVPYEPPEVGSDCTTIHYNYM
+CNSSCMGGMNRRPILTIITLEDSSGNLLGRNSFEVRVCACPGRDRRTEEENLRKKGEPHHELPPGSTKRALPNNTSSSP
+QPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLKSKKGQSTSRHKKLMFKTEGPDSD
+```
+
+> Use a for loop and the command strplit to get each amino acid of the sequence to count the occurrences.
+
+> One easy way is to first generate a vector (or list) that has named rows, named for each amino acid, such that, for instance, you keep the number of occurrences of Alanines as occ_aa["A"]. To start, you have to set all the elements of the vector to zero (R has a built in vector called "LETTERS" that contains the whole alphabet)
+
+### Exercise solution (5 minutes)
+```{r}
+inputSeq <- "MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDPGPDEAPRMPEAAPPVAPAPAAPTPAAPAPAPSWPLSSSVPSQKTYQGSYGFRLGFLHSGTAKSVTCTYSPALNKMFCQLAKTCPVQLWVDSTPPPGTRVRAMAIYKQSQHMTEVVRRCPHHERCSDSDGLAPPQHLIRVEGNLRVEYLDDRNTFRHSVVVPYEPPEVGSDCTTIHYNYMCNSSCMGGMNRRPILTIITLEDSSGNLLGRNSFEVRVCACPGRDRRTEEENLRKKGEPHHELPPGSTKRALPNNTSSSPQPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLKSKKGQSTSRHKKLMFKTEGPDSD"
+
+inputSeq <- strsplit(inputSeq,"")[[1]]
+count_list <- c()
+for (AA in unique(inputSeq)) {
+  count_list[AA] <- sum(inputSeq == AA)
+}
+count_list
+```
+
+
+
 # Exercise: Loops 2 (10 minutes)
 
 > Read the "gene_condition_source_id.txt" file
@@ -192,16 +301,43 @@ dataFrame = read.table("gene_condition_source_id.txt", header=TRUE, sep="\t", fi
 
 > Do the same thing, but first read in the file again, but set "stringsAsFactors=F" as an argument to read.table()
 
-# Exercise solution (5 minutes)
+### Exercise solution (5 minutes)
+
+```{r}
+gcs <- read.table("../data/gene_condition_source_id.txt",
+           header=TRUE, sep="\t", fill=TRUE,
+           comment.char = "", quote = "",
+           as.is=T,stringsAsFactors=F)
+
+# the vectorized way (easier, faster, just plain better)
+unique(gcs$DiseaseName[gcs$AssociatedGenes == "TP53"])
+
+
+diseases <- c()
+for (ROW in 1:nrow(gcs)) {
+  if (gcs[ROW,"AssociatedGenes"] == "TP53") {
+    if (!gcs[ROW,"DiseaseName"] %in% diseases) {
+      diseases <- append(diseases,
+                         gcs[ROW,"DiseaseName"])
+    }
+  }
+}
+diseases
+
+
+```
+
 
 # Vectorization
+
 ## Key Programming Concept in R
+
 ### (but not in many other programming languages)
 
 # Vectorization
 
 * Key feature of R that helps do powerful things with a small amount of code (high level)
-* Try to to avoid loops and use vectors
+* Try to to avoid loops and use vectors because loops tend to be slower than vectors in R
 
 ```{r}
 vectorVariable = c(1,-2,3,-4)
@@ -301,15 +437,5 @@ lapply(patientRecords, mean)
 #You may see lots of other apply functions in R code e.g. mapply, sapply, tapply, vapply
 ```
 
-***
-
-# End of lecture 6
-
-Reminder:
-Complete Assignment 3 on Quercus
-Due Monday, April 1, 2019 at 9am
-
-Read The Book of R, chapter 11.1, 11.2 (functions), Glance at ?base::regex
 
 ***
-

@@ -11,7 +11,7 @@
 
 
 
-<title>Lecture 2</title>
+<title>Module 1</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,9 +19,14 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -248,6 +253,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -255,6 +323,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -272,19 +350,25 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Lecture 2</a>
+  <a href="index.html">Module 1</a>
 </li>
 <li>
-  <a href="lect3.html">Lecture 3</a>
+  <a href="mod2.html">Module 2</a>
 </li>
 <li>
-  <a href="lect4.html">Lecture 4</a>
+  <a href="mod3.html">Module 3</a>
 </li>
 <li>
-  <a href="lect5.html">Lecture 5</a>
+  <a href="mod4.html">Module 4</a>
 </li>
 <li>
-  <a href="lect6.html">Lecture 6</a>
+  <a href="mod5.html">Module 5</a>
+</li>
+<li>
+  <a href="mod6.html">Module 6</a>
+</li>
+<li>
+  <a href="mod7.html">Module 7</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -298,17 +382,17 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Lecture 2</h1>
+<h1 class="title toc-ignore">Module 1</h1>
 
 </div>
 
 
-<p>Date: Friday, April 17, 2020</p>
+<p>The Book of R: Chapter 1, Appendix B, chapter 2.1, 2.2</p>
 <hr />
 <div id="commands-or-functions" class="section level1">
 <h1>Commands (or functions)</h1>
-<div id="key-programming-concept" class="section level2">
-<h2>Key Programming Concept</h2>
+<div id="key-programming-concept" class="section level3">
+<h3>Key Programming Concept</h3>
 <hr />
 </div>
 <div id="commands-in-r" class="section level2">
@@ -332,12 +416,9 @@ $(document).ready(function () {
 <div id="commands-in-r-1" class="section level1">
 <h1>Commands in R</h1>
 <ul>
-<li><strong>Arguments</strong> can be passed flexibly<br />
-Here’s three different ways to find help:</li>
+<li><strong>Arguments</strong> can be passed flexibly</li>
 </ul>
-<pre class="r"><code>help(seq)
-?seq
-??seq</code></pre>
+<pre class="r"><code>help(seq)</code></pre>
 <ul>
 <li>Either follow the prescribed order (ok to omit ones at the end)</li>
 </ul>
@@ -360,10 +441,13 @@ Here’s three different ways to find help:</li>
 </div>
 <div id="variables" class="section level1">
 <h1>Variables</h1>
-<div id="key-programming-concept-1" class="section level2">
-<h2>Key Programming Concept</h2>
+<div id="key-programming-concept-1" class="section level3">
+<h3>Key Programming Concept</h3>
 <hr />
-<p>#Variables</p>
+</div>
+</div>
+<div id="variables-1" class="section level1">
+<h1>Variables</h1>
 <ul>
 <li>Variables are named places to store values</li>
 </ul>
@@ -380,6 +464,7 @@ x</code></pre>
 </ul></li>
 <li>We <strong>declare</strong> variables in R by creating a new variable name</li>
 <li>You can use any name you want, as long as you follow the syntax rules</li>
+<li>Best practice is to use human readable names to help document your code e.g. use a variable name ‘patients’ instead of ‘x’</li>
 </ul>
 <blockquote>
 <p>Which of these are valid R variable names?<br />
@@ -394,7 +479,6 @@ sequence1=“ATTTCA”<br />
 gen2str = 1</p>
 </blockquote>
 </div>
-</div>
 <div id="variable-assignment-and-types" class="section level1">
 <h1>Variable assignment and types</h1>
 <ul>
@@ -403,7 +487,11 @@ gen2str = 1</p>
 <pre class="r"><code>number = 5
 number</code></pre>
 <pre><code>## [1] 5</code></pre>
-<pre class="r"><code>number &lt;- 5
+<pre class="r"><code>#note: the variable value specifies its type, not its name, &#39;x&#39; can also be a number
+x = 5
+x</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>number &lt;- 5  #&lt;- is the same as =
 number</code></pre>
 <pre><code>## [1] 5</code></pre>
 <pre class="r"><code>string = &quot;five&quot;
@@ -412,10 +500,28 @@ string</code></pre>
 <pre class="r"><code>number = number +1
 number</code></pre>
 <pre><code>## [1] 6</code></pre>
+<pre class="r"><code>logical = TRUE
+logical</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>logical2 = T  #note: T and TRUE are equivalent (they are both TRUE)
+logical2</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>logical3 = FALSE
+logical3</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>logical4 = F  #same with F and FALSE
+logical4</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>#Reminder: the variable names do not tell you anything about the variable type
+
+number = &quot;string&quot;
+number</code></pre>
+<pre><code>## [1] &quot;string&quot;</code></pre>
 <pre class="r"><code>try({
   string = string + 1
-},
-silent=T)
+},silent=F)</code></pre>
+<pre><code>## Error in string + 1 : non-numeric argument to binary operator</code></pre>
+<pre class="r"><code>#why is there an error when you try to run this code? Note: R only figures this out when you try to run the code, not when you&#39;re writing it, so you need to be aware of the variable types you&#39;re using when you&#39;re writing code
 string</code></pre>
 <pre><code>## [1] &quot;five&quot;</code></pre>
 <ul>
@@ -461,18 +567,21 @@ string</code></pre>
 </div>
 <div id="printing-to-the-consolescreen" class="section level1">
 <h1>Printing to the console/screen</h1>
-<pre class="r"><code>x</code></pre>
+<pre class="r"><code>x = 5
+x</code></pre>
 <pre><code>## [1] 5</code></pre>
 <pre class="r"><code>print(x) #equivalent to above</code></pre>
 <pre><code>## [1] 5</code></pre>
 <pre class="r"><code>cat(x)   #similar to print, but less autoconversion</code></pre>
 <pre><code>## 5</code></pre>
 <pre class="r"><code>#Mixing variables within strings:
+number = 5
+string = &quot;hello&quot;
 paste(&quot;Number&quot;, number, &quot;String&quot;, string)</code></pre>
-<pre><code>## [1] &quot;Number 6 String five&quot;</code></pre>
+<pre><code>## [1] &quot;Number 5 String hello&quot;</code></pre>
 <pre class="r"><code>#Here is another way to do the same thing
 sprintf(&quot;Number %s String %s&quot;, number, string)</code></pre>
-<pre><code>## [1] &quot;Number 6 String five&quot;</code></pre>
+<pre><code>## [1] &quot;Number 5 String hello&quot;</code></pre>
 <pre class="r"><code>#How do you print a quote?
 string = &quot;gene \&quot;ABC\&quot;&quot;
 
@@ -501,20 +610,25 @@ cat(&quot;Separated\tby\ttabs&quot;)</code></pre>
 <li>Save your work as sum.r</li>
 <li>Run it in the R console</li>
 </ul>
-</div>
-<div id="exercise-solution-5-minutes" class="section level1">
-<h1>Exercise solution (5 minutes)</h1>
+<div id="exercise-solution-5-minutes" class="section level3">
+<h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>number1 &lt;- 5
+number2 &lt;- 12
+
+print(number1 + number2)</code></pre>
+<pre><code>## [1] 17</code></pre>
+<pre class="r"><code>print(number1 * number2)</code></pre>
+<pre><code>## [1] 60</code></pre>
+<pre class="r"><code>print(number1 / number2)</code></pre>
+<pre><code>## [1] 0.4166667</code></pre>
 <hr />
 </div>
-<div id="end-of-lecture-2" class="section level1">
-<h1>End of lecture 2</h1>
-<p>Reminder: Complete Assignment 1 on Quercus Due Monday, April 20, 2020 at 9am</p>
-<p>Read The Book of R, section 2.3 (vectors), chapter 3 (matrices), 4.1 (logicals), 4.2 (characters/strings)</p>
-<hr />
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -547,6 +661,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

@@ -11,7 +11,7 @@
 
 
 
-<title>Lecture 3</title>
+<title>Module 2</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,9 +19,14 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -248,6 +253,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -255,6 +323,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -272,19 +350,25 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Lecture 2</a>
+  <a href="index.html">Module 1</a>
 </li>
 <li>
-  <a href="lect3.html">Lecture 3</a>
+  <a href="mod2.html">Module 2</a>
 </li>
 <li>
-  <a href="lect4.html">Lecture 4</a>
+  <a href="mod3.html">Module 3</a>
 </li>
 <li>
-  <a href="lect5.html">Lecture 5</a>
+  <a href="mod4.html">Module 4</a>
 </li>
 <li>
-  <a href="lect6.html">Lecture 6</a>
+  <a href="mod5.html">Module 5</a>
+</li>
+<li>
+  <a href="mod6.html">Module 6</a>
+</li>
+<li>
+  <a href="mod7.html">Module 7</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -298,14 +382,14 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Lecture 3</h1>
+<h1 class="title toc-ignore">Module 2</h1>
 
 </div>
 
 
-<p>Date: Monday, April 20, 2020</p>
-<div id="lecture-2-review" class="section level2">
-<h2>Lecture 2 review</h2>
+<p>The Book of R: section 2.3 (vectors), chapter 3 (matrices), 4.1 (logicals), 4.2 (characters/strings)</p>
+<div id="module-1-review" class="section level2">
+<h2>Module 1 review</h2>
 <ul>
 <li>Introduction to the R statistical programming environment</li>
 <li>Commands/functions e.g. c(1, 2, 3)</li>
@@ -338,15 +422,14 @@ x</code></pre>
 x</code></pre>
 <pre><code>## [1] 2</code></pre>
 <pre class="r"><code>x = x*1.5
-x = x^2
 x</code></pre>
-<pre><code>## [1] 9</code></pre>
+<pre><code>## [1] 3</code></pre>
 <pre class="r"><code>y = x**2
 y</code></pre>
-<pre><code>## [1] 81</code></pre>
+<pre><code>## [1] 9</code></pre>
 <pre class="r"><code>x = y**(1/2)
 x</code></pre>
-<pre><code>## [1] 9</code></pre>
+<pre><code>## [1] 3</code></pre>
 <pre class="r"><code>z = exp(1)
 z</code></pre>
 <pre><code>## [1] 2.718282</code></pre>
@@ -384,22 +467,24 @@ DNA = &quot;ACGGGAGGACGGGAAAATTACTACGGCATTAGC&quot;
 
 #single vs. double quotes
 s = &quot;string123&quot;
-#s2 = &quot;string\&quot;123&quot;  #what&#39;s happening here?  Fix the code. (uncomment the line to see the error)
+#s2 = &quot;string&quot;123&quot;  #what&#39;s happening here?  Fix the code. (uncomment the line to see the error)
 s3 = &#39;string123&#39;
-#s4 = &#39;string&quot;123&#39;  #what&#39;s happening here?  Fix the code. (uncomment the line to see the error)
+s4 = &#39;string&quot;123&#39;  #what&#39;s happening here?  Fix the code. (uncomment the line to see the error)
 
 # concatenate (join) strings
-s = paste(s, s)
+s = paste(s, s4)
+s = cat(s, s) # what is s?</code></pre>
+<pre><code>## string123 string&quot;123 string123 string&quot;123</code></pre>
+<pre class="r"><code>#Note: cat and paste have different return values. You can see what a command returns in the help page.
+cat(s,s)  #same thing as above cat command, but we don&#39;t need the return value, so we don&#39;t catch it in a variable. This would be the normal way to use the cat command.
 
-s = cat(s,s) # what is s?</code></pre>
-<pre><code>## string123 string123 string123 string123</code></pre>
-<pre class="r"><code># nchar() finds string length
+# nchar() finds string length
 n = nchar(DNA)
 
 # substrings give you part of a string. Start counting at 1
 alphabet = &quot;abcdefghijklmnopqrstuvwxyz&quot;
-substr(alphabet,1,5)</code></pre>
-<pre><code>## [1] &quot;abcde&quot;</code></pre>
+substr(alphabet,3,5)</code></pre>
+<pre><code>## [1] &quot;cde&quot;</code></pre>
 <pre class="r"><code>#Substitution demo
 sub(&quot;A&quot;, &quot;T&quot;, DNA)</code></pre>
 <pre><code>## [1] &quot;TCGGGAGGACGGGAAAATTACTACGGCATTAGC&quot;</code></pre>
@@ -408,10 +493,13 @@ sub(&quot;A&quot;, &quot;T&quot;, DNA)</code></pre>
 <pre class="r"><code># what does the g mean?
 sub(&quot;GA&quot;, &quot;CT&quot;, DNA) # what happens if I include multiple characters in the pattern?</code></pre>
 <pre><code>## [1] &quot;ACGGCTGGACGGGAAAATTACTACGGCATTAGC&quot;</code></pre>
-<pre class="r"><code>#Translation demo
+<pre class="r"><code># If I want to save the output
+DNA2=gsub(&quot;A&quot;, &quot;T&quot;,DNA)
+
+#Translation demo
 chartr(&quot;A&quot;, &quot;T&quot;, DNA)</code></pre>
 <pre><code>## [1] &quot;TCGGGTGGTCGGGTTTTTTTCTTCGGCTTTTGC&quot;</code></pre>
-<pre class="r"><code>chartr(&quot;ACGT&quot;, &quot;AAAA&quot;, DNA)# how is this different from substitution?</code></pre>
+<pre class="r"><code>chartr(&quot;ACGT&quot;, &quot;AAAA&quot;, DNA) # how is this different from substitution?</code></pre>
 <pre><code>## [1] &quot;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&quot;</code></pre>
 </div>
 <div id="example-code-reverse_complement.r" class="section level1">
@@ -419,16 +507,14 @@ chartr(&quot;A&quot;, &quot;T&quot;, DNA)</code></pre>
 <pre class="r"><code># Using string operations to answer a biological question
 # What is the reverse complement of a DNA sequence?
 
-
-# DNA = readline(&quot;Please enter a DNA sequence. I will return the reverse complement.\n\n&quot;)
-DNA &lt;- &quot;ACGTTACCCGGT&quot;
+DNA = readline(&quot;Please enter a DNA sequence. I will return the reverse complement.\n\n&quot;)
 
 # Print the DNA onto the screen
 cat(&quot;\nHere is the starting DNA sequence:\n&quot;)</code></pre>
 <pre><code>## 
 ## Here is the starting DNA sequence:</code></pre>
 <pre class="r"><code>cat(DNA)</code></pre>
-<pre><code>## ACGTTACCCGGT</code></pre>
+<pre><code>## GATTCAA</code></pre>
 <pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
 <pre class="r"><code># Calculate the reverse complement
 #  Warning: this attempt will fail!
@@ -457,31 +543,31 @@ revcom = gsub(&quot;C&quot;,&quot;G&quot;, revcom)
 cat (&quot;Here is the reverse complement DNA:\n&quot;)</code></pre>
 <pre><code>## Here is the reverse complement DNA:</code></pre>
 <pre class="r"><code>cat(revcom)</code></pre>
-<pre><code>## AGGGGGAAAGGA</code></pre>
+<pre><code>## AAGAAAG</code></pre>
 <pre class="r"><code>#
 # Oh-oh, that didn&#39;t work right!
 # Our reverse complement should have all the bases in it, since the
 # original DNA had all the bases-but ours only has A and G!
 #
-# Do you see why?</code></pre>
-<pre class="r"><code>cat(&quot;\n\nThat was a bad algorithm, and the reverse complement was wrong!\n&quot;)</code></pre>
+# Do you see why?
+
+
+cat(&quot;\n\nThat was a bad algorithm, and the reverse complement was wrong!\n&quot;)</code></pre>
 <pre><code>## 
 ## 
 ## That was a bad algorithm, and the reverse complement was wrong!</code></pre>
+<pre class="r"><code>readline(&quot;Press enter to try again\n\n&quot;)</code></pre>
+<pre><code>## [1] &quot;&quot;</code></pre>
 <pre class="r"><code># Make a new copy of the DNA (see why we saved the original?)
 revcom = paste(rev(strsplit(DNA, NULL)[[1]]), collapse=&quot;&quot;)
 
 revcom = chartr(&quot;ACGTacgt&quot;, &quot;TGCAtgca&quot;, revcom)
 
 #Print the reverse complement DNA onto the screen
-cat (&quot;Here is the original DNA:\n&quot;)</code></pre>
-<pre><code>## Here is the original DNA:</code></pre>
-<pre class="r"><code>cat(DNA)</code></pre>
-<pre><code>## ACGTTACCCGGT</code></pre>
-<pre class="r"><code>cat (&quot;Here is the reverse complement DNA:\n&quot;)</code></pre>
+cat (&quot;Here is the reverse complement DNA:\n&quot;)</code></pre>
 <pre><code>## Here is the reverse complement DNA:</code></pre>
 <pre class="r"><code>cat(revcom)</code></pre>
-<pre><code>## ACCGGGTAACGT</code></pre>
+<pre><code>## TTGAATC</code></pre>
 <pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
 <pre class="r"><code>cat(&quot;This time it worked!\n&quot;)</code></pre>
 <pre><code>## This time it worked!</code></pre>
@@ -504,10 +590,25 @@ cat (&quot;Here is the original DNA:\n&quot;)</code></pre>
 <blockquote>
 <p>Remember to use a code chunk in this R notebook to run your code</p>
 </blockquote>
-<pre class="r"><code>#Add your exercise code here. You can create your own code chunk by typing the text you see at the start &quot;```{r}&quot; and end &quot;```&quot; of the chunk, or by using the &#39;insert&#39; button at the top of this editor tab</code></pre>
+<div id="exercise-solution-5-minutes" class="section level3">
+<h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>#Add your exercise code here. You can create your own code chunk by typing the text you see at the start &quot;```{r}&quot; and end &quot;```&quot; of the chunk, or by using the &#39;insert&#39; button at the top of this editor tab
+
+n1 &lt;- readline(&quot;What is the first number?\n&quot;)
+is(n1) #can we do math on this?</code></pre>
+<pre><code>## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;</code></pre>
+<pre class="r"><code>n1 &lt;- as.numeric(n1) #coerce to numeric type
+
+n2 &lt;- as.numeric(readline(&quot;What is the second number?\n&quot;))
+# nesting functions works too.
+
+print(n1 + n2)</code></pre>
+<pre><code>## [1] 22.5</code></pre>
+<pre class="r"><code>print(n1 * n2)</code></pre>
+<pre><code>## [1] 112.5</code></pre>
+<pre class="r"><code>print(n1 / n2)</code></pre>
+<pre><code>## [1] 2</code></pre>
 </div>
-<div id="exercise-solution-5-minutes" class="section level1">
-<h1>Exercise solution (5 minutes)</h1>
 </div>
 <div id="more-variable-types" class="section level1">
 <h1>More variable types</h1>
@@ -538,7 +639,7 @@ y</code></pre>
 print(x*y)</code></pre>
 <pre><code>## [1]  12.0  46.8 108.0  18.0</code></pre>
 <pre class="r"><code># Can also do a dot product of two vectors
-print(x %*% y)</code></pre>
+x %*% y</code></pre>
 <pre><code>##       [,1]
 ## [1,] 184.8</code></pre>
 <pre class="r"><code>#Note: In the console, you don&#39;t need to use print()</code></pre>
@@ -552,9 +653,7 @@ print(x %*% y)</code></pre>
 textvec</code></pre>
 <pre><code>## [1] &quot;Patient1&quot; &quot;Patient2&quot; &quot;Patient3&quot;</code></pre>
 <pre class="r"><code>#Not compatible with arithmetic
-try({
-  print(textvec * 2)
-},silent=T)#gives an error</code></pre>
+#print(textvec * 2)  #gives an error</code></pre>
 <pre class="r"><code>logicvec=c(TRUE,FALSE,TRUE,FALSE)
 logicvec</code></pre>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE</code></pre>
@@ -573,8 +672,8 @@ c(T,F,T,F)</code></pre>
 <pre class="r"><code>textvec[3]</code></pre>
 <pre><code>## [1] &quot;Patient3&quot;</code></pre>
 <pre class="r"><code>#We can also simultaneously access multiple elements
-textvec[1:3]</code></pre>
-<pre><code>## [1] &quot;Patient1&quot; &quot;Patient2&quot; &quot;Patient3&quot;</code></pre>
+textvec[1:2]</code></pre>
+<pre><code>## [1] &quot;Patient1&quot; &quot;Patient2&quot;</code></pre>
 <pre class="r"><code>textvec[c(1,1,3,3)]</code></pre>
 <pre><code>## [1] &quot;Patient1&quot; &quot;Patient1&quot; &quot;Patient3&quot; &quot;Patient3&quot;</code></pre>
 <pre class="r"><code>#The length command
@@ -614,9 +713,8 @@ names(namedvec)</code></pre>
 <blockquote>
 <p>Bonus: Make a vector sorter that will sort the random numbers using the “order” function and return the sorted random data in “sortedrandom”</p>
 </blockquote>
-</div>
-<div id="exercise-solution-5-minutes-1" class="section level1">
-<h1>Exercise solution (5 minutes)</h1>
+<div id="exercise-solution-5-minutes-1" class="section level3">
+<h3>Exercise solution (5 minutes)</h3>
 <pre class="r"><code># step 1
 radii &lt;- c(5,10,20)
 pi * radii * radii</code></pre>
@@ -631,29 +729,35 @@ sum(counter)</code></pre>
 <pre><code>## [1] 5050</code></pre>
 <pre class="r"><code># step 3
 randomstuff &lt;- runif(100,min=1,max=100)
+par(mfrow=c(1,2),mar=c(3,3,2,1),mgp=2:0)
+hist(randomstuff) #runif randomly samples from the uniform distribution
+hist(rnorm(100)) #rnorm randomly samples from the normal distribution
+
 
 # step THE BONUS
 sort(randomstuff,decreasing=F)</code></pre>
-<pre><code>##   [1]  2.150574  5.118291  5.936858  6.282746  9.426400  9.933992 10.836769 11.500377 12.191627 13.793941 15.596489 16.849325 17.468577
-##  [14] 18.661678 19.682576 19.745012 20.070212 20.428369 20.492579 20.847946 20.962749 21.006958 21.234324 21.531292 24.130334 24.290195
-##  [27] 24.476506 25.030094 25.358212 26.181965 26.367072 26.903455 27.033954 27.056751 28.114186 29.401481 30.242827 31.159098 31.288373
-##  [40] 31.946946 32.616985 35.393223 35.967783 39.967040 40.671092 42.018209 42.018966 42.199698 42.943058 45.754076 49.018004 49.297244
-##  [53] 49.748437 51.309279 51.607389 51.745438 55.149186 57.370348 58.080154 58.215906 59.933424 62.566732 64.622469 64.788039 65.391777
-##  [66] 67.861050 71.958475 72.521695 72.928865 73.256245 75.041906 75.228986 75.547947 75.977959 76.460934 78.125539 78.393257 83.675084
-##  [79] 83.732770 84.708782 86.223475 87.428415 88.323754 88.915314 90.140914 90.889167 91.270854 91.434068 93.045564 93.611973 93.845499
-##  [92] 94.014712 95.945868 95.970088 96.636044 96.821087 97.077217 97.221734 98.994074 99.026444</code></pre>
+<pre><code>##   [1]  1.028387  1.782439  2.516395  2.701038  3.264318  4.012037  8.080356 10.489854 11.963383 13.010543 13.328811 15.771802 16.167454
+##  [14] 16.996884 17.428665 17.955162 18.554484 20.075136 20.165968 21.952771 22.958099 25.101534 25.441325 26.027724 26.912876 29.480775
+##  [27] 30.405462 30.589747 32.682552 32.858588 34.023958 35.941223 36.543347 37.493067 38.225167 39.404918 39.752382 40.171169 40.604086
+##  [40] 44.106823 45.329515 47.665787 48.270303 48.565004 49.638819 50.130490 51.463990 51.813144 52.320190 53.044281 53.461040 55.255085
+##  [53] 55.948110 56.012189 56.606291 57.023794 57.244614 57.747724 59.190910 59.791040 59.884809 61.131891 61.410135 62.212787 63.071854
+##  [66] 65.696802 66.281870 67.695696 68.108616 69.907184 70.320210 74.767535 74.957206 75.133589 77.063782 77.782413 77.823907 78.706498
+##  [79] 78.707322 78.734751 79.214222 79.303455 79.507639 79.957363 81.112484 81.157888 82.002407 82.132224 84.243838 84.940904 88.772201
+##  [92] 89.226216 90.752247 91.804771 93.641663 93.920498 94.394077 96.936970 98.627537 99.978165</code></pre>
 <pre class="r"><code>randomstuff[order(randomstuff,decreasing=F)]</code></pre>
-<pre><code>##   [1]  2.150574  5.118291  5.936858  6.282746  9.426400  9.933992 10.836769 11.500377 12.191627 13.793941 15.596489 16.849325 17.468577
-##  [14] 18.661678 19.682576 19.745012 20.070212 20.428369 20.492579 20.847946 20.962749 21.006958 21.234324 21.531292 24.130334 24.290195
-##  [27] 24.476506 25.030094 25.358212 26.181965 26.367072 26.903455 27.033954 27.056751 28.114186 29.401481 30.242827 31.159098 31.288373
-##  [40] 31.946946 32.616985 35.393223 35.967783 39.967040 40.671092 42.018209 42.018966 42.199698 42.943058 45.754076 49.018004 49.297244
-##  [53] 49.748437 51.309279 51.607389 51.745438 55.149186 57.370348 58.080154 58.215906 59.933424 62.566732 64.622469 64.788039 65.391777
-##  [66] 67.861050 71.958475 72.521695 72.928865 73.256245 75.041906 75.228986 75.547947 75.977959 76.460934 78.125539 78.393257 83.675084
-##  [79] 83.732770 84.708782 86.223475 87.428415 88.323754 88.915314 90.140914 90.889167 91.270854 91.434068 93.045564 93.611973 93.845499
-##  [92] 94.014712 95.945868 95.970088 96.636044 96.821087 97.077217 97.221734 98.994074 99.026444</code></pre>
+<pre><code>##   [1]  1.028387  1.782439  2.516395  2.701038  3.264318  4.012037  8.080356 10.489854 11.963383 13.010543 13.328811 15.771802 16.167454
+##  [14] 16.996884 17.428665 17.955162 18.554484 20.075136 20.165968 21.952771 22.958099 25.101534 25.441325 26.027724 26.912876 29.480775
+##  [27] 30.405462 30.589747 32.682552 32.858588 34.023958 35.941223 36.543347 37.493067 38.225167 39.404918 39.752382 40.171169 40.604086
+##  [40] 44.106823 45.329515 47.665787 48.270303 48.565004 49.638819 50.130490 51.463990 51.813144 52.320190 53.044281 53.461040 55.255085
+##  [53] 55.948110 56.012189 56.606291 57.023794 57.244614 57.747724 59.190910 59.791040 59.884809 61.131891 61.410135 62.212787 63.071854
+##  [66] 65.696802 66.281870 67.695696 68.108616 69.907184 70.320210 74.767535 74.957206 75.133589 77.063782 77.782413 77.823907 78.706498
+##  [79] 78.707322 78.734751 79.214222 79.303455 79.507639 79.957363 81.112484 81.157888 82.002407 82.132224 84.243838 84.940904 88.772201
+##  [92] 89.226216 90.752247 91.804771 93.641663 93.920498 94.394077 96.936970 98.627537 99.978165</code></pre>
 <pre class="r"><code>identical(randomstuff[order(randomstuff,decreasing=F)],
           sort(randomstuff,decreasing=F))</code></pre>
 <pre><code>## [1] TRUE</code></pre>
+<p><img src="mod2_files/figure-html/unnamed-chunk-12-1.png" width="768" /></p>
+</div>
 </div>
 <div id="matrices" class="section level1">
 <h1>Matrices</h1>
@@ -698,27 +802,23 @@ firstmat[1,2]</code></pre>
 <blockquote>
 <p>Calculate the average value in the matrix using the mean() command</p>
 </blockquote>
-</div>
-<div id="exercise-solution-5-minutes-2" class="section level1">
-<h1>Exercise solution (5 minutes)</h1>
+<div id="exercise-solution-5-minutes-2" class="section level3">
+<h3>Exercise solution (5 minutes)</h3>
 <pre class="r"><code>ourrandommat &lt;- matrix(runif(30),nrow=10,ncol=3)
 mean(ourrandommat)</code></pre>
-<pre><code>## [1] 0.5063992</code></pre>
+<pre><code>## [1] 0.4691951</code></pre>
 <pre class="r"><code>rowMeans(ourrandommat)</code></pre>
-<pre><code>##  [1] 0.6238600 0.5446295 0.4277630 0.3008311 0.5380249 0.3071294 0.6202603 0.7670815 0.6276705 0.3067415</code></pre>
+<pre><code>##  [1] 0.4534134 0.6122072 0.4593677 0.2271312 0.2238217 0.5014019 0.8747123 0.3475932 0.4219931 0.5703088</code></pre>
 <pre class="r"><code>colMeans(ourrandommat)</code></pre>
-<pre><code>## [1] 0.4398568 0.5432151 0.5361256</code></pre>
+<pre><code>## [1] 0.5740773 0.3697315 0.4637764</code></pre>
 <hr />
 </div>
-<div id="end-of-lecture-3" class="section level1">
-<h1>End of lecture 3</h1>
-<p>Reminder: Complete Assignment 2 on Quercus Due Monday, April 27, 2020 at 9am</p>
-<p>Read The Book of R, chapter 3.4 (arrays), 5.1 (lists), 5.2 (data frames)</p>
-<hr />
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -751,6 +851,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

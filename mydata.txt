@@ -1,4 +1,4 @@
 "name"	"age"	"smoker"
-"1"	"Bob"	50	TRUE
-"2"	"Jim"	38	TRUE
-"3"	"Joe"	14	FALSE
+"1"	"patient1"	46	TRUE
+"2"	"patient2"	49	FALSE
+"3"	"patient3"	50	TRUE

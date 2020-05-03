@@ -1,16 +1,12 @@
 ---
-title: "Lecture 4"
+title: "Module 3"
 ---
 
-Date: Friday, April 24, 2020
+The Book of R: chapter 3.4 (arrays), 5.1 (lists), 5.2 (data frames)
 
 ***
 
-# TA review of assignment 1 solution  (15 minutes)
-
-***
-
-## Lecture 3 review
+## Module 2 review
 
 * Variable types: vector, matrix
 * Vector
@@ -26,15 +22,31 @@ Date: Friday, April 24, 2020
 
 > We used this code to reverse a string
 
-> `paste(rev(strsplit(DNA, NULL)[[1]]), collapse="")`
+>`paste(rev(strsplit(DNA, NULL)[[1]]), collapse="")`
 
-> Figure out how this works by trying each of the nested functions, starting from `strsplit(DNA, NULL)`
+>Figure out how this works by trying each of the nested functions, starting from `strsplit(DNA, NULL)`
 
-> Note: `[[1]]` extracts elements within a list (which is a type of vector that can contain other lists)
+>Note: `[[1]]` extracts elements within a list (which is a type of vector that can contain other lists)
 
-# Exercise solution (5 minutes)
+### Exercise solution (5 minutes)
+
+```{r}
+DNA <- "ACGGGAGGACGGGAAAATTACTACGGCATTAGC"
+
+str(strsplit(DNA,"")) # a list
+str(strsplit(DNA,"")[1]) # still a list
+str(strsplit(DNA,"")[[1]]) # a character vector (the first element of the list)
+
+strsplit(DNA,"")[[1]]
+rev(strsplit(DNA,"")[[1]]) #backwards!
+
+paste(rev(strsplit(DNA,"")[[1]]),collapse="") # "collapsed" into a string
+
+```
+
 
 # Variables (continued)
+
 ## Lists, arrays, data frames
 
 # Lists: creating
@@ -45,6 +57,7 @@ Date: Friday, April 24, 2020
 ```{r}
 numericVector = c(1, 3, 5)
 numericVector
+#Note: numericVector is just a variable name - we call it numericVector because we define it here to contain numbers, but it could be called any variable name that is allowed.
 
 stringVector = c("abc", "def", "ghi")
 stringVector
@@ -62,12 +75,15 @@ listVariable
 listVariable
 listVariable[1]  #access first list element
 listVariable[[1]] #access content of first element
+listVariable[[1]][2] 
+
 listVariable[[2]][1] = "ACGT"
 listVariable[[2]]
 listVariable[c(2, 4)]
 ```
 
 # Lists: named elements
+
 ```{r}
 listVariable = list(numbers=numericVector, strings=stringVector, logic=logicVector, myNum=77)
 listVariable
@@ -88,9 +104,28 @@ listVariable$numbers  #easiest access method
     * Hint: you can use the seq() command
 * Calculate the sum of this list
     * Hint: use the sum() command
-* Repeat this, but name the vector and access its values using its name
+* Repeat this, but name the vector and access its values from the list using its name
 
-# Exercise solution (5 minutes)
+### Exercise solution (5 minutes)
+
+```{r}
+ourlist <- list(odds=seq(1,101,2),
+                "evens"=seq(2,100,2),
+                "some dumb words"=c("my","name","is"))
+str(ourlist)
+str(ourlist[1])
+str(ourlist[[1]])
+
+sum(ourlist[[1]])
+sum(ourlist$evens)
+sum(ourlist[["evens"]])
+
+identical(ourlist$evens,ourlist["evens"])
+
+attributes(ourlist)
+names(ourlist)
+
+```
 
 # Arrays: creating
 
@@ -186,24 +221,37 @@ patientRecords$age
 
 # Exercise: Data frames (10 minutes)
 
-> Read the "gene_condition_source_id.txt" file used in Assignment 1 into a data frame variable (see assignment 1 for the command)
+>Read the "gene_condition_source_id.txt" file used in Assignment 1 into a data frame variable (see assignment 1 for the command)
 
-> Look at the top few rows using the head() command
+>Look at the top few rows using the head() command
 
-> How many rows and columns does the file have? Try the str() command. Also try nrow() and ncol()
+>How many rows and columns does the file have? Try the str() command. Also try nrow() and ncol()
 
-> Use names() to find the column names 
+>Use names() to find the column names 
 
-# Exercise solution (5 minutes)
+### Exercise solution (5 minutes)
 
-***
+```{r}
+ourdf <- read.table("../data/gene_condition_source_id.txt",
+                    sep="\t",header=T,quote="",comment.char="",
+                    as.is=T)
+str(ourdf)
+head(ourdf)
+nrow(ourdf)
+ncol(ourdf)
+names(ourdf)
+colnames(ourdf)
+names(ourlist)
+rownames(ourdf)[1:5]
 
-# End of lecture 4
+sapply(ourdf,is)
+ourdf$X.GeneID[1:5]
+is(ourdf$AssociatedGenes[1:5])
 
-Reminder:
-Complete Assignment 2 on Quercus
-Due Monday, April 27, 2020 at 9am
 
-Read The Book of R, chapter 4.3 (factors), 8 (files)
+seq(1,10)[-(1:5)]
+
+```
+
 
 ***

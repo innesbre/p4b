@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Module 6</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MMG1002H</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Module 1</a>
+</li>
+<li>
+  <a href="mod2.html">Module 2</a>
+</li>
+<li>
+  <a href="mod3.html">Module 3</a>
+</li>
+<li>
+  <a href="mod4.html">Module 4</a>
+</li>
+<li>
+  <a href="mod5.html">Module 5</a>
+</li>
+<li>
+  <a href="mod6.html">Module 6</a>
+</li>
+<li>
+  <a href="mod7.html">Module 7</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Module 6</h1>
+
+</div>
+
+
+<p>The Book of R: chapter 11.1, 11.2 (functions), Glance at ?base::regex</p>
+<hr />
+<div id="module-5-review" class="section level2">
+<h2>Module 5 review</h2>
+<ul>
+<li>Loops</li>
+</ul>
+<pre><code>for (value in vectorVariable) {
+  if (value &gt; 0) {
+    print(value)
+  }
+}</code></pre>
+<ul>
+<li>Vectorization
+<ul>
+<li>e.g. vectorVariable[vectorVariable&gt;0]</li>
+</ul></li>
+</ul>
+<hr />
+</div>
+<div id="exercise-vectorization-10-minutes" class="section level1">
+<h1>Exercise: Vectorization (10 minutes)</h1>
+<blockquote>
+<p>Create a vector of consecutive numbers from 1 to 100.</p>
+</blockquote>
+<blockquote>
+<p>Note: from:to is the same as seq(from, to)</p>
+</blockquote>
+<blockquote>
+<p>Compute the sum, product and mean</p>
+</blockquote>
+<blockquote>
+<p>Sum just the numbers greater than 50</p>
+</blockquote>
+<div id="exercise-solution-5-minutes" class="section level3">
+<h3>Exercise solution (5 minutes)</h3>
+</div>
+</div>
+<div id="functions" class="section level1">
+<h1>Functions</h1>
+<div id="key-programming-concept" class="section level2">
+<h2>Key Programming Concept</h2>
+</div>
+</div>
+<div id="writing-your-own-functions" class="section level1">
+<h1>Writing your own functions</h1>
+<pre class="r"><code>#syntax
+#Note: myfunction can be any name
+myfunction = function(arg1, arg2, ... ) {
+  statements
+  return(object)
+}
+
+#Note: objects inside the function are local to the function i.e. not defined outside. This is called variable scope
+#The concept of scope is very important in other languages, but in R, you just need to understand it with functions</code></pre>
+</div>
+<div id="function-example" class="section level1">
+<h1>Function example</h1>
+<pre class="r"><code>patientRecords = data.frame(name=c(&quot;patient1&quot;, &quot;patient2&quot;, &quot;patient3&quot;),
+                            age=c(46, 49, 50), 
+                            smoker=c(T, F, T),
+                            stringsAsFactors=F)
+
+
+printRecordRow = function(patientDatabase) {
+    #prints a row in a patient database
+    v = paste(patientDatabase[1],
+    patientDatabase[2], patientDatabase[3])
+    return(v)
+}
+
+#apply to one row
+printRecordRow(patientRecords[1,])</code></pre>
+<pre><code>## [1] &quot;patient1 46 TRUE&quot;</code></pre>
+<pre class="r"><code>#apply the printRecordRow function to all the rows of the patientRecords matrix
+apply(patientRecords, 1, printRecordRow)</code></pre>
+<pre><code>## [1] &quot;patient1 46 TRUE&quot;  &quot;patient2 49 FALSE&quot; &quot;patient3 50 TRUE&quot;</code></pre>
+</div>
+<div id="why-create-functions" class="section level1">
+<h1>Why create functions?</h1>
+<ul>
+<li>Organize your code – useful for larger scripts</li>
+<li>Easy to reuse code because it is more modular
+<ul>
+<li>Collect your own library of useful functions for easy scripting later (can be stored in a separate file and included in all your scripts)</li>
+<li>More easily share code with others</li>
+</ul></li>
+<li>Maintain a central place to keep code in case you need to modify/fix something</li>
+<li>Easily repeat code from different places in a single script</li>
+</ul>
+</div>
+<div id="built-in-functions" class="section level1">
+<h1>Built in functions</h1>
+<ul>
+<li>R has hundreds of built in functions</li>
+</ul>
+<pre class="r"><code>#e.g. statistical functions
+t.test(runif(50), runif(50))</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  runif(50) and runif(50)
+## t = -0.55797, df = 98, p-value = 0.5781
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.14413328  0.08086995
+## sample estimates:
+## mean of x mean of y 
+## 0.4769327 0.5085644</code></pre>
+<pre class="r"><code>cor.test(runif(50), runif(50),method=&quot;pearson&quot;)</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  runif(50) and runif(50)
+## t = 1.1256, df = 48, p-value = 0.2659
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.1234989  0.4199635
+## sample estimates:
+##       cor 
+## 0.1603614</code></pre>
+</div>
+<div id="exercise-functions-10-minutes" class="section level1">
+<h1>Exercise: Functions (10 minutes)</h1>
+<blockquote>
+<p>Practice creating a function</p>
+</blockquote>
+<blockquote>
+<p>Create a function called mysum that sums up all the elements of a vector</p>
+</blockquote>
+<blockquote>
+<p>Check that it gives the same results at the sum() function</p>
+</blockquote>
+<div id="exercise-solution-5-minutes-1" class="section level3">
+<h3>Exercise solution (5 minutes)</h3>
+</div>
+</div>
+<div id="regular-expressions" class="section level1">
+<h1>Regular expressions</h1>
+<div id="useful-tool-to-find-patterns-in-strings" class="section level2">
+<h2>Useful tool to find patterns in strings</h2>
+<ul>
+<li>Regular expressions (regex) = very powerful pattern matching in strings</li>
+</ul>
+<pre class="r"><code>string = &quot;aaabbbccc&quot;
+#&quot;aaa&quot; matches
+#&quot;abb&quot; matches
+#&quot;abbbb&quot; does it match?
+
+#You’ve already been using regular expressions e.g.
+DNA = &quot;ACGTGA&quot;
+sub(&quot;A&quot;, &quot;T&quot;, DNA)</code></pre>
+<pre><code>## [1] &quot;TCGTGA&quot;</code></pre>
+<pre class="r"><code>sub(&quot;GA&quot;, &quot;CT&quot;, DNA)</code></pre>
+<pre><code>## [1] &quot;ACGTCT&quot;</code></pre>
+<pre class="r"><code>gsub(&quot;A&quot;, &quot;T&quot;, DNA)</code></pre>
+<pre><code>## [1] &quot;TCGTGT&quot;</code></pre>
+<ul>
+<li>There are lots of ways to specify a pattern – it’s a mini language within a language</li>
+</ul>
+<p>string = “aaabbbccc” “a.a” matches “aaa” . means any one character</p>
+<p>"a<em>b" matches </em> means zero or more of the previous character</p>
+<p>Example: [+-]?[0-9]+.[0-9]+ matches a number like -43.221</p>
+</div>
+</div>
+<div id="regular-expression-quick-reference" class="section level1">
+<h1>Regular expression quick reference</h1>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="82%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>aaa</th>
+<th>exact pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>.</td>
+<td>any character</td>
+</tr>
+<tr class="even">
+<td>aa|bb</td>
+<td>aa or bb</td>
+</tr>
+<tr class="odd">
+<td>()</td>
+<td>group a pattern e.g. (y|n)o matches yo and no</td>
+</tr>
+<tr class="even">
+<td>[]</td>
+<td>character set e.g. [abc] matches a single character, either a, b or c; a-z</td>
+</tr>
+<tr class="odd">
+<td>[^]</td>
+<td>not character set e.g. [^abc] matches any single character except a, b or c</td>
+</tr>
+<tr class="even">
+<td>[:digit:] or \d</td>
+<td>a range of standard character classes are available</td>
+</tr>
+<tr class="odd">
+<td>[:alpha:]</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>*</td>
+<td>0 or more of the previous character or group</td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>1 or more</td>
+</tr>
+<tr class="even">
+<td>?</td>
+<td>0 or 1</td>
+</tr>
+<tr class="odd">
+<td>{n,m}</td>
+<td>a specific number of repeats (e.g. 2 to 5).</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Also {n,} = n to infinity and {n} = exactly n</td>
+</tr>
+<tr class="odd">
+<td>^</td>
+<td>start of string</td>
+</tr>
+<tr class="even">
+<td>$</td>
+<td>end of string or before a \n</td>
+</tr>
+<tr class="odd">
+<td>\\b</td>
+<td>word boundary e.g. \bword\b (\B matches non word boundaries)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Also \&lt; and \&gt; match start and end of a word</td>
+</tr>
+<tr class="odd">
+<td>\\N</td>
+<td>After the regular expression is run:</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>backreference the Nth pattern matched in a () (up to 9 patterns)</td>
+</tr>
+<tr class="odd">
+<td>ignore.case=T</td>
+<td>case insensitive match</td>
+</tr>
+<tr class="even">
+<td>\\+ \\^ \\</td>
+<td>‘escape’ a metacharacter – use a special character like + or ^ in your pattern</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="regular-expression-examples" class="section level1">
+<h1>Regular expression examples</h1>
+<pre class="r"><code>a = &quot;sdfsabcdefghba0dsgggfe0haaabbbccc&quot;
+#grep returns the vector index of the match
+#grepl returns TRUE if there is a match
+#regexpr returns a list, including match index and length; gregexpr returns all matches
+grep(&quot;b.d&quot;, a)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>grepl(&quot;b.d&quot;, a)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>regexpr(&quot;b.d&quot;, a)</code></pre>
+<pre><code>## [1] 6
+## attr(,&quot;match.length&quot;)
+## [1] 3
+## attr(,&quot;index.type&quot;)
+## [1] &quot;chars&quot;
+## attr(,&quot;useBytes&quot;)
+## [1] TRUE</code></pre>
+<pre class="r"><code>regexpr(&quot;b.d&quot;, a)[1]</code></pre>
+<pre><code>## [1] 6</code></pre>
+<pre class="r"><code>gregexpr(&quot;b.d&quot;, a)</code></pre>
+<pre><code>## [[1]]
+## [1] 6
+## attr(,&quot;match.length&quot;)
+## [1] 3
+## attr(,&quot;index.type&quot;)
+## [1] &quot;chars&quot;
+## attr(,&quot;useBytes&quot;)
+## [1] TRUE</code></pre>
+<pre class="r"><code># b.d             #The dot will match any character
+# b[ce]d        #the [ce] matches a single &#39;c&#39; or a single &#39;e&#39;.
+# b[ce]+d     #the [ce]+ matches any number of c&#39;s &amp; e&#39;s (at least one)
+# b[ce]*d       #the [ce]* also can match the empty string.
+# b\\sd       #the \s matches blank or tab (so-called   &#39;whitespace&#39;)
+# b\\s+d        #the \s+ matches any number of whitespaces (at least one) 
+# a|b+        #what will this match?
+# (a|b)+        #and this?
+
+#Note: to run these yourself, add them to e.g. gregexpr(&quot;b.d&quot;, a), where &quot;b.d&quot; is the regular expression above and “a” is the string variable to search.
+
+gregexpr(&quot;b.d&quot;, a)</code></pre>
+<pre><code>## [[1]]
+## [1] 6
+## attr(,&quot;match.length&quot;)
+## [1] 3
+## attr(,&quot;index.type&quot;)
+## [1] &quot;chars&quot;
+## attr(,&quot;useBytes&quot;)
+## [1] TRUE</code></pre>
+<ul>
+<li>string = “Kevin Bacon”</li>
+<li>(K|k)evin (B|b)acon</li>
+<li>Start (^) and end (<span class="math inline">\() of a string  * ^(Kevin|Bacon|Portman|Roberts)  * (Kevin|Bacon|Portman|Roberts)\)</span>
+<ul>
+<li>^(Bacon|Portman|Roberts)</li>
+</ul></li>
+<li>Find all vowels
+<ul>
+<li>(A|E|I|O|U|Y|a|e|i|o|u|y)</li>
+<li>[AEIOUYaeiouy]</li>
+</ul></li>
+<li>How many matches?</li>
+</ul>
+<pre class="r"><code>length(gregexpr(&quot;g&quot;, a)[[1]])</code></pre>
+<pre><code>## [1] 4</code></pre>
+</div>
+<div id="exercise-regular-expressions-10-minutes" class="section level1">
+<h1>Exercise: regular expressions (10 minutes)</h1>
+<blockquote>
+<p>DNA = “ACGATGATACTGATGACGGGC”</p>
+</blockquote>
+<blockquote>
+<p>Match the regular expression “G..A” and use the results to identify the actual match in the original string</p>
+</blockquote>
+<blockquote>
+<p>Use gregexpr</p>
+</blockquote>
+<blockquote>
+<p>attr(x, “match.length”) can be used to find the match length in the vector returned from gregexpr</p>
+</blockquote>
+<blockquote>
+<p>?substr</p>
+</blockquote>
+<div id="exercise-solution-5-minutes-2" class="section level3">
+<h3>Exercise solution (5 minutes)</h3>
+<hr />
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

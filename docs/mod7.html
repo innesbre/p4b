@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Module 7</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MMG1002H</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Module 1</a>
+</li>
+<li>
+  <a href="mod2.html">Module 2</a>
+</li>
+<li>
+  <a href="mod3.html">Module 3</a>
+</li>
+<li>
+  <a href="mod4.html">Module 4</a>
+</li>
+<li>
+  <a href="mod5.html">Module 5</a>
+</li>
+<li>
+  <a href="mod6.html">Module 6</a>
+</li>
+<li>
+  <a href="mod7.html">Module 7</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Module 7</h1>
+
+</div>
+
+
+<p>The Book of R: chapter 7.1, 7.2 (plots), ?system2</p>
+<hr />
+<div id="module-6-review" class="section level2">
+<h2>Module 6 review</h2>
+<ul>
+<li><p>Built in functions</p>
+<ul>
+<li><pre><code>mysum = function(arg1) {
+return (sum(arg1))
+}</code></pre></li>
+</ul></li>
+<li><p>Regular expressions</p>
+<ul>
+<li>b[ce]+d</li>
+<li>b[ce]*d</li>
+</ul></li>
+</ul>
+<hr />
+</div>
+<div id="exercise-a-useful-function-10-minutes" class="section level1">
+<h1>Exercise: A useful function (10 minutes)</h1>
+<blockquote>
+<p>Following on from the previous exercise where you found a string matching a regular expression…</p>
+</blockquote>
+<blockquote>
+<p>Write a function that returns all the matches of a regular expression in a string</p>
+</blockquote>
+<blockquote>
+<p>Hint: use substring (not substr) – why?</p>
+</blockquote>
+<blockquote>
+<p>Test that the function works in the same way as in the previous exercise (by searching DNA for G..A)</p>
+</blockquote>
+<div id="exercise-solution-5-minutes" class="section level3">
+<h3>Exercise solution (5 minutes)</h3>
+</div>
+</div>
+<div id="interfacing-with-external-programs" class="section level1">
+<h1>Interfacing with external programs</h1>
+<ul>
+<li>You can call/execute an external program from within your script</li>
+<li>Helps you automate certain tasks that would be difficult for you to do within R e.g. useful programs that are not available in R</li>
+</ul>
+<pre class="r"><code># system2() #calls an external command
+system2(&quot;ls&quot;)  #unix/mac
+system2(&quot;cmd.exe&quot;, input=&quot;dir&quot;)  #windows</code></pre>
+</div>
+<div id="system2-function" class="section level1">
+<h1>system2 function</h1>
+<pre class="r"><code>#returns stdout in variable v
+v = system2(&quot;ls&quot;, stdout=T)
+v</code></pre>
+<pre><code>##  [1] &quot;ASCII-Table-wide.svg&quot; &quot;README.md&quot;            &quot;_site.yml&quot;            &quot;docs&quot;                 &quot;fileOutput.png&quot;       &quot;index.Rmd&quot;           
+##  [7] &quot;index.html&quot;           &quot;mod2.Rmd&quot;             &quot;mod2.html&quot;            &quot;mod2_files&quot;           &quot;mod3.Rmd&quot;             &quot;mod3.html&quot;           
+## [13] &quot;mod4.Rmd&quot;             &quot;mod4.html&quot;            &quot;mod5.Rmd&quot;             &quot;mod5.html&quot;            &quot;mod6.Rmd&quot;             &quot;mod6.html&quot;           
+## [19] &quot;mod7.Rmd&quot;             &quot;mydata.txt&quot;           &quot;p4b.Rproj&quot;            &quot;recipebookTOC.png&quot;    &quot;site_libs&quot;</code></pre>
+<pre class="r"><code>#passes arguments to the command (ls)
+v = system2(&quot;ls&quot;, args=&quot;-la&quot;, stdout=T)
+v</code></pre>
+<pre><code>##  [1] &quot;total 1489&quot;                                                        &quot;drwxr-xr-x 1 binne binne      0 May  3 12:50 .&quot;                   
+##  [3] &quot;drwxr-xr-x 1 binne binne      0 Apr 27 13:43 ..&quot;                   &quot;-rw-r--r-- 1 binne binne    903 Apr 23 12:56 .Rhistory&quot;           
+##  [5] &quot;drwxr-xr-x 1 binne binne      0 Apr 23 09:49 .Rproj.user&quot;          &quot;drwxr-xr-x 1 binne binne      0 May  3 12:50 .git&quot;                
+##  [7] &quot;-rw-r--r-- 1 binne binne     44 Apr 23 09:49 .gitignore&quot;           &quot;-rw-r--r-- 1 binne binne 653001 Mar  3  2019 ASCII-Table-wide.svg&quot;
+##  [9] &quot;-rw-r--r-- 1 binne binne    184 Apr 23 10:52 README.md&quot;            &quot;-rw-r--r-- 1 binne binne    524 May  3 12:46 _site.yml&quot;           
+## [11] &quot;drwxr-xr-x 1 binne binne      0 May  3 12:48 docs&quot;                 &quot;-rw-r--r-- 1 binne binne  66773 Mar  3  2019 fileOutput.png&quot;      
+## [13] &quot;-rw-r--r-- 1 binne binne   4819 May  3 12:24 index.Rmd&quot;            &quot;-rw-r--r-- 1 binne binne  18511 May  3 12:49 index.html&quot;          
+## [15] &quot;-rw-r--r-- 1 binne binne   9190 May  3 12:24 mod2.Rmd&quot;             &quot;-rw-r--r-- 1 binne binne  29364 May  3 12:49 mod2.html&quot;           
+## [17] &quot;drwxr-xr-x 1 binne binne      0 May  3 12:49 mod2_files&quot;           &quot;-rw-r--r-- 1 binne binne   5291 May  3 12:46 mod3.Rmd&quot;            
+## [19] &quot;-rw-r--r-- 1 binne binne  31796 May  3 12:49 mod3.html&quot;            &quot;-rw-r--r-- 1 binne binne  11352 May  3 12:46 mod4.Rmd&quot;            
+## [21] &quot;-rw-r--r-- 1 binne binne  35994 May  3 12:49 mod4.html&quot;            &quot;-rw-r--r-- 1 binne binne  11140 May  3 12:47 mod5.Rmd&quot;            
+## [23] &quot;-rw-r--r-- 1 binne binne  30554 May  3 12:49 mod5.html&quot;            &quot;-rw-r--r-- 1 binne binne   7200 May  3 12:48 mod6.Rmd&quot;            
+## [25] &quot;-rw-r--r-- 1 binne binne  20829 May  3 12:50 mod6.html&quot;            &quot;-rw-r--r-- 1 binne binne   3498 May  3 12:48 mod7.Rmd&quot;            
+## [27] &quot;-rw-r--r-- 1 binne binne     96 May  3 12:49 mydata.txt&quot;           &quot;-rw-r--r-- 1 binne binne    240 May  3 12:48 p4b.Rproj&quot;           
+## [29] &quot;-rw-r--r-- 1 binne binne 522169 Mar  3  2019 recipebookTOC.png&quot;    &quot;drwxr-xr-x 1 binne binne      0 May  3 12:50 site_libs&quot;</code></pre>
+<ul>
+<li>What’s wrong with system()?
+<ul>
+<li>It works, but is older and not recommended</li>
+</ul></li>
+</ul>
+</div>
+<div id="exercise-external-programs-10-minutes" class="section level1">
+<h1>Exercise: external programs (10 minutes)</h1>
+<blockquote>
+<p>Write a script to call a system command</p>
+</blockquote>
+<ul>
+<li>Mac/unix users
+<ul>
+<li>Run the “df –h” UNIX command from the shell – what does it do?</li>
+<li>Call “df -h” from R to see how much space is left on your hard drive</li>
+<li>Check your results against the “df -h” command you ran</li>
+</ul></li>
+<li>Windows users
+<ul>
+<li>Try to run windows “time” or “dir” commands</li>
+<li>E.g. system2(“cmd.exe”, input=“dir”)</li>
+<li>Can also try shell(“dir”)</li>
+</ul></li>
+</ul>
+<div id="exercise-solution-5-minutes-1" class="section level3">
+<h3>Exercise solution (5 minutes)</h3>
+</div>
+</div>
+<div id="recipes" class="section level1">
+<h1>Recipes</h1>
+<div id="code-examples-and-templates" class="section level2">
+<h2>Code examples and templates</h2>
+<ul>
+<li>Recipes are standard way to do things
+<ul>
+<li>Look up the recipes in a cookbook</li>
+</ul></li>
+</ul>
+<div class="figure">
+<img src="recipebookTOC.png" alt="R recipe book" />
+<p class="caption">R recipe book</p>
+</div>
+</div>
+</div>
+<div id="example-recipes" class="section level1">
+<h1>Example recipes</h1>
+<pre class="r"><code>#Sorting a data frame
+data_frame = data_frame[order(data_frame$key) , ]
+#data_frame$key is the column to sort by
+#Note: the sort() function only works for vectors, not data frames
+
+#Sorting by two columns
+data_frame = data_frame[order(data_frame$key1,data_frame$key2) , ] 
+#The second key is used to break ties in the first
+
+#Removing elements from a list
+#Set the value to be NULL</code></pre>
+</div>
+<div id="stack-overflow" class="section level1">
+<h1>Stack Overflow</h1>
+<ul>
+<li>User-contributed question and answer website – good free source of recipes</li>
+<li>e.g. How to delete multiple values from a vector?
+<ul>
+<li><a href="https://stackoverflow.com/questions/9665984/how-to-delete-multiple-values-from-a-vector" class="uri">https://stackoverflow.com/questions/9665984/how-to-delete-multiple-values-from-a-vector</a></li>
+<li><a href="https://stackoverflow.com/" class="uri">https://stackoverflow.com/</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="plots" class="section level1">
+<h1>Plots</h1>
+<div id="graphically-plottingcharting-data" class="section level2">
+<h2>Graphically plotting/charting data</h2>
+</div>
+</div>
+<div id="introduction-to-plots" class="section level1">
+<h1>Introduction to plots</h1>
+<pre class="r"><code>#R has powerful data plotting abilities
+hist(runif(50))</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>plot(runif(50))</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<pre class="r"><code>plot(runif(50), runif(50)) #x,y scatter plot</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-4-3.png" width="672" /></p>
+<pre class="r"><code>boxplot(runif(50))</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-4-4.png" width="672" /></p>
+<pre class="r"><code>demo(graphics)</code></pre>
+<pre><code>## 
+## 
+##  demo(graphics)
+##  ---- ~~~~~~~~
+## 
+## &gt; #  Copyright (C) 1997-2009 The R Core Team
+## &gt; 
+## &gt; require(datasets)
+## 
+## &gt; require(grDevices); require(graphics)
+## 
+## &gt; ## Here is some code which illustrates some of the differences between
+## &gt; ## R and S graphics capabilities.  Note that colors are generally specified
+## &gt; ## by a character string name (taken from the X11 rgb.txt file) and that line
+## &gt; ## textures are given similarly.  The parameter &quot;bg&quot; sets the background
+## &gt; ## parameter for the plot and there is also an &quot;fg&quot; parameter which sets
+## &gt; ## the foreground color.
+## &gt; 
+## &gt; 
+## &gt; x &lt;- stats::rnorm(50)
+## 
+## &gt; opar &lt;- par(bg = &quot;white&quot;)
+## 
+## &gt; plot(x, ann = FALSE, type = &quot;n&quot;)</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-4-5.png" width="672" /></p>
+<pre><code>## 
+## &gt; abline(h = 0, col = gray(.90))
+## 
+## &gt; lines(x, col = &quot;green4&quot;, lty = &quot;dotted&quot;)
+## 
+## &gt; points(x, bg = &quot;limegreen&quot;, pch = 21)
+## 
+## &gt; title(main = &quot;Simple Use of Color In a Plot&quot;,
+## +       xlab = &quot;Just a Whisper of a Label&quot;,
+## +       col.main = &quot;blue&quot;, col.lab = gray(.8),
+## +       cex.main = 1.2, cex.lab = 1.0, font.main = 4, font.lab = 3)
+## 
+## &gt; ## A little color wheel.    This code just plots equally spaced hues in
+## &gt; ## a pie chart.    If you have a cheap SVGA monitor (like me) you will
+## &gt; ## probably find that numerically equispaced does not mean visually
+## &gt; ## equispaced.  On my display at home, these colors tend to cluster at
+## &gt; ## the RGB primaries.  On the other hand on the SGI Indy at work the
+## &gt; ## effect is near perfect.
+## &gt; 
+## &gt; par(bg = &quot;gray&quot;)
+## 
+## &gt; pie(rep(1,24), col = rainbow(24), radius = 0.9)</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-4-6.png" width="672" /></p>
+<pre><code>## 
+## &gt; title(main = &quot;A Sample Color Wheel&quot;, cex.main = 1.4, font.main = 3)
+## 
+## &gt; title(xlab = &quot;(Use this as a test of monitor linearity)&quot;,
+## +       cex.lab = 0.8, font.lab = 3)
+## 
+## &gt; ## We have already confessed to having these.  This is just showing off X11
+## &gt; ## color names (and the example (from the postscript manual) is pretty &quot;cute&quot;.
+## &gt; 
+## &gt; pie.sales &lt;- c(0.12, 0.3, 0.26, 0.16, 0.04, 0.12)
+## 
+## &gt; names(pie.sales) &lt;- c(&quot;Blueberry&quot;, &quot;Cherry&quot;,
+## +              &quot;Apple&quot;, &quot;Boston Cream&quot;, &quot;Other&quot;, &quot;Vanilla Cream&quot;)
+## 
+## &gt; pie(pie.sales,
+## +     col = c(&quot;purple&quot;,&quot;violetred1&quot;,&quot;green3&quot;,&quot;cornsilk&quot;,&quot;cyan&quot;,&quot;white&quot;))</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-4-7.png" width="672" /></p>
+<pre><code>## 
+## &gt; title(main = &quot;January Pie Sales&quot;, cex.main = 1.8, font.main = 1)
+## 
+## &gt; title(xlab = &quot;(Don&#39;t try this at home kids)&quot;, cex.lab = 0.8, font.lab = 3)
+## 
+## &gt; ## Boxplots:  I couldn&#39;t resist the capability for filling the &quot;box&quot;.
+## &gt; ## The use of color seems like a useful addition, it focuses attention
+## &gt; ## on the central bulk of the data.
+## &gt; 
+## &gt; par(bg=&quot;cornsilk&quot;)
+## 
+## &gt; n &lt;- 10
+## 
+## &gt; g &lt;- gl(n, 100, n*100)
+## 
+## &gt; x &lt;- rnorm(n*100) + sqrt(as.numeric(g))
+## 
+## &gt; boxplot(split(x,g), col=&quot;lavender&quot;, notch=TRUE)</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-4-8.png" width="672" /></p>
+<pre><code>## 
+## &gt; title(main=&quot;Notched Boxplots&quot;, xlab=&quot;Group&quot;, font.main=4, font.lab=1)
+## 
+## &gt; ## An example showing how to fill between curves.
+## &gt; 
+## &gt; par(bg=&quot;white&quot;)
+## 
+## &gt; n &lt;- 100
+## 
+## &gt; x &lt;- c(0,cumsum(rnorm(n)))
+## 
+## &gt; y &lt;- c(0,cumsum(rnorm(n)))
+## 
+## &gt; xx &lt;- c(0:n, n:0)
+## 
+## &gt; yy &lt;- c(x, rev(y))
+## 
+## &gt; plot(xx, yy, type=&quot;n&quot;, xlab=&quot;Time&quot;, ylab=&quot;Distance&quot;)</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-4-9.png" width="672" /></p>
+<pre><code>## 
+## &gt; polygon(xx, yy, col=&quot;gray&quot;)
+## 
+## &gt; title(&quot;Distance Between Brownian Motions&quot;)
+## 
+## &gt; ## Colored plot margins, axis labels and titles.    You do need to be
+## &gt; ## careful with these kinds of effects.    It&#39;s easy to go completely
+## &gt; ## over the top and you can end up with your lunch all over the keyboard.
+## &gt; ## On the other hand, my market research clients love it.
+## &gt; 
+## &gt; x &lt;- c(0.00, 0.40, 0.86, 0.85, 0.69, 0.48, 0.54, 1.09, 1.11, 1.73, 2.05, 2.02)
+## 
+## &gt; par(bg=&quot;lightgray&quot;)
+## 
+## &gt; plot(x, type=&quot;n&quot;, axes=FALSE, ann=FALSE)</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-4-10.png" width="672" /></p>
+<pre><code>## 
+## &gt; usr &lt;- par(&quot;usr&quot;)
+## 
+## &gt; rect(usr[1], usr[3], usr[2], usr[4], col=&quot;cornsilk&quot;, border=&quot;black&quot;)
+## 
+## &gt; lines(x, col=&quot;blue&quot;)
+## 
+## &gt; points(x, pch=21, bg=&quot;lightcyan&quot;, cex=1.25)
+## 
+## &gt; axis(2, col.axis=&quot;blue&quot;, las=1)
+## 
+## &gt; axis(1, at=1:12, lab=month.abb, col.axis=&quot;blue&quot;)
+## 
+## &gt; box()
+## 
+## &gt; title(main= &quot;The Level of Interest in R&quot;, font.main=4, col.main=&quot;red&quot;)
+## 
+## &gt; title(xlab= &quot;1996&quot;, col.lab=&quot;red&quot;)
+## 
+## &gt; ## A filled histogram, showing how to change the font used for the
+## &gt; ## main title without changing the other annotation.
+## &gt; 
+## &gt; par(bg=&quot;cornsilk&quot;)
+## 
+## &gt; x &lt;- rnorm(1000)
+## 
+## &gt; hist(x, xlim=range(-4, 4, x), col=&quot;lavender&quot;, main=&quot;&quot;)</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-4-11.png" width="672" /></p>
+<pre><code>## 
+## &gt; title(main=&quot;1000 Normal Random Variates&quot;, font.main=3)
+## 
+## &gt; ## A scatterplot matrix
+## &gt; ## The good old Iris data (yet again)
+## &gt; 
+## &gt; pairs(iris[1:4], main=&quot;Edgar Anderson&#39;s Iris Data&quot;, font.main=4, pch=19)</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-4-12.png" width="672" /></p>
+<pre><code>## 
+## &gt; pairs(iris[1:4], main=&quot;Edgar Anderson&#39;s Iris Data&quot;, pch=21,
+## +       bg = c(&quot;red&quot;, &quot;green3&quot;, &quot;blue&quot;)[unclass(iris$Species)])</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-4-13.png" width="672" /></p>
+<pre><code>## 
+## &gt; ## Contour plotting
+## &gt; ## This produces a topographic map of one of Auckland&#39;s many volcanic &quot;peaks&quot;.
+## &gt; 
+## &gt; x &lt;- 10*1:nrow(volcano)
+## 
+## &gt; y &lt;- 10*1:ncol(volcano)
+## 
+## &gt; lev &lt;- pretty(range(volcano), 10)
+## 
+## &gt; par(bg = &quot;lightcyan&quot;)
+## 
+## &gt; pin &lt;- par(&quot;pin&quot;)
+## 
+## &gt; xdelta &lt;- diff(range(x))
+## 
+## &gt; ydelta &lt;- diff(range(y))
+## 
+## &gt; xscale &lt;- pin[1]/xdelta
+## 
+## &gt; yscale &lt;- pin[2]/ydelta
+## 
+## &gt; scale &lt;- min(xscale, yscale)
+## 
+## &gt; xadd &lt;- 0.5*(pin[1]/scale - xdelta)
+## 
+## &gt; yadd &lt;- 0.5*(pin[2]/scale - ydelta)
+## 
+## &gt; plot(numeric(0), numeric(0),
+## +      xlim = range(x)+c(-1,1)*xadd, ylim = range(y)+c(-1,1)*yadd,
+## +      type = &quot;n&quot;, ann = FALSE)</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-4-14.png" width="672" /></p>
+<pre><code>## 
+## &gt; usr &lt;- par(&quot;usr&quot;)
+## 
+## &gt; rect(usr[1], usr[3], usr[2], usr[4], col=&quot;green3&quot;)
+## 
+## &gt; contour(x, y, volcano, levels = lev, col=&quot;yellow&quot;, lty=&quot;solid&quot;, add=TRUE)
+## 
+## &gt; box()
+## 
+## &gt; title(&quot;A Topographic Map of Maunga Whau&quot;, font= 4)
+## 
+## &gt; title(xlab = &quot;Meters North&quot;, ylab = &quot;Meters West&quot;, font= 3)
+## 
+## &gt; mtext(&quot;10 Meter Contour Spacing&quot;, side=3, line=0.35, outer=FALSE,
+## +       at = mean(par(&quot;usr&quot;)[1:2]), cex=0.7, font=3)
+## 
+## &gt; ## Conditioning plots
+## &gt; 
+## &gt; par(bg=&quot;cornsilk&quot;)
+## 
+## &gt; coplot(lat ~ long | depth, data = quakes, pch = 21, bg = &quot;green3&quot;)</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-4-15.png" width="672" /></p>
+<pre><code>## 
+## &gt; par(opar)</code></pre>
+</div>
+<div id="exercise-plots-10-minutes" class="section level1">
+<h1>Exercise: plots (10 minutes)</h1>
+<blockquote>
+<p>Create a matrix “randomdata” with 50 rows and 10 columns using “replicate(10,rnorm(50))”</p>
+</blockquote>
+<blockquote>
+<p>Plot the first and second columns of the matrix in a scatter plot</p>
+</blockquote>
+<blockquote>
+<p>Generate a vector “randommeans” with the means of all columns of randomdata. Also generate a vector “randomsds” with the standard deviations of all columns of randomdata</p>
+</blockquote>
+<blockquote>
+<p>Generate a boxplot of the first and second columns of randomdata</p>
+</blockquote>
+<div id="exercise-solution-5-minutes-2" class="section level3">
+<h3>Exercise solution (5 minutes)</h3>
+<hr />
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

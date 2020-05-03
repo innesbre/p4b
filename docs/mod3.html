@@ -11,7 +11,7 @@
 
 
 
-<title>Lecture 4</title>
+<title>Module 3</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,9 +19,14 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -248,6 +253,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -255,6 +323,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -272,19 +350,25 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Lecture 2</a>
+  <a href="index.html">Module 1</a>
 </li>
 <li>
-  <a href="lect3.html">Lecture 3</a>
+  <a href="mod2.html">Module 2</a>
 </li>
 <li>
-  <a href="lect4.html">Lecture 4</a>
+  <a href="mod3.html">Module 3</a>
 </li>
 <li>
-  <a href="lect5.html">Lecture 5</a>
+  <a href="mod4.html">Module 4</a>
 </li>
 <li>
-  <a href="lect6.html">Lecture 6</a>
+  <a href="mod5.html">Module 5</a>
+</li>
+<li>
+  <a href="mod6.html">Module 6</a>
+</li>
+<li>
+  <a href="mod7.html">Module 7</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -298,18 +382,15 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Lecture 4</h1>
+<h1 class="title toc-ignore">Module 3</h1>
 
 </div>
 
 
-<p>Date: Friday, April 24, 2020</p>
+<p>The Book of R: chapter 3.4 (arrays), 5.1 (lists), 5.2 (data frames)</p>
 <hr />
-<div id="ta-review-of-assignment-1-solution-15-minutes" class="section level1">
-<h1>TA review of assignment 1 solution (15 minutes)</h1>
-<hr />
-<div id="lecture-3-review" class="section level2">
-<h2>Lecture 3 review</h2>
+<div id="module-2-review" class="section level2">
+<h2>Module 2 review</h2>
 <ul>
 <li>Variable types: vector, matrix</li>
 <li>Vector
@@ -325,7 +406,6 @@ $(document).ready(function () {
 </ul>
 <hr />
 </div>
-</div>
 <div id="exercise-string-commands-10-minutes" class="section level1">
 <h1>Exercise: String commands (10 minutes)</h1>
 <blockquote>
@@ -340,9 +420,25 @@ $(document).ready(function () {
 <blockquote>
 <p>Note: <code>[[1]]</code> extracts elements within a list (which is a type of vector that can contain other lists)</p>
 </blockquote>
+<div id="exercise-solution-5-minutes" class="section level3">
+<h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>DNA &lt;- &quot;ACGGGAGGACGGGAAAATTACTACGGCATTAGC&quot;
+
+str(strsplit(DNA,&quot;&quot;)) # a list</code></pre>
+<pre><code>## List of 1
+##  $ : chr [1:33] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; ...</code></pre>
+<pre class="r"><code>str(strsplit(DNA,&quot;&quot;)[1]) # still a list</code></pre>
+<pre><code>## List of 1
+##  $ : chr [1:33] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; ...</code></pre>
+<pre class="r"><code>str(strsplit(DNA,&quot;&quot;)[[1]]) # a character vector (the first element of the list)</code></pre>
+<pre><code>##  chr [1:33] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; ...</code></pre>
+<pre class="r"><code>strsplit(DNA,&quot;&quot;)[[1]]</code></pre>
+<pre><code>##  [1] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;G&quot; &quot;C&quot;</code></pre>
+<pre class="r"><code>rev(strsplit(DNA,&quot;&quot;)[[1]]) #backwards!</code></pre>
+<pre><code>##  [1] &quot;C&quot; &quot;G&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot;</code></pre>
+<pre class="r"><code>paste(rev(strsplit(DNA,&quot;&quot;)[[1]]),collapse=&quot;&quot;) # &quot;collapsed&quot; into a string</code></pre>
+<pre><code>## [1] &quot;CGATTACGGCATCATTAAAAGGGCAGGAGGGCA&quot;</code></pre>
 </div>
-<div id="exercise-solution-5-minutes" class="section level1">
-<h1>Exercise solution (5 minutes)</h1>
 </div>
 <div id="variables-continued" class="section level1">
 <h1>Variables (continued)</h1>
@@ -359,7 +455,9 @@ $(document).ready(function () {
 <pre class="r"><code>numericVector = c(1, 3, 5)
 numericVector</code></pre>
 <pre><code>## [1] 1 3 5</code></pre>
-<pre class="r"><code>stringVector = c(&quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;)
+<pre class="r"><code>#Note: numericVector is just a variable name - we call it numericVector because we define it here to contain numbers, but it could be called any variable name that is allowed.
+
+stringVector = c(&quot;abc&quot;, &quot;def&quot;, &quot;ghi&quot;)
 stringVector</code></pre>
 <pre><code>## [1] &quot;abc&quot; &quot;def&quot; &quot;ghi&quot;</code></pre>
 <pre class="r"><code>logicVector = c(T, F, T, F)
@@ -398,6 +496,8 @@ listVariable</code></pre>
 ## [1] 1 3 5</code></pre>
 <pre class="r"><code>listVariable[[1]] #access content of first element</code></pre>
 <pre><code>## [1] 1 3 5</code></pre>
+<pre class="r"><code>listVariable[[1]][2] </code></pre>
+<pre><code>## [1] 3</code></pre>
 <pre class="r"><code>listVariable[[2]][1] = &quot;ACGT&quot;
 listVariable[[2]]</code></pre>
 <pre><code>## [1] &quot;ACGT&quot; &quot;def&quot;  &quot;ghi&quot;</code></pre>
@@ -448,11 +548,37 @@ listVariable[[1]]</code></pre>
 <ul>
 <li>Hint: use the sum() command</li>
 </ul></li>
-<li>Repeat this, but name the vector and access its values using its name</li>
+<li>Repeat this, but name the vector and access its values from the list using its name</li>
 </ul>
+<div id="exercise-solution-5-minutes-1" class="section level3">
+<h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>ourlist &lt;- list(odds=seq(1,101,2),
+                &quot;evens&quot;=seq(2,100,2),
+                &quot;some dumb words&quot;=c(&quot;my&quot;,&quot;name&quot;,&quot;is&quot;))
+str(ourlist)</code></pre>
+<pre><code>## List of 3
+##  $ odds           : num [1:51] 1 3 5 7 9 11 13 15 17 19 ...
+##  $ evens          : num [1:50] 2 4 6 8 10 12 14 16 18 20 ...
+##  $ some dumb words: chr [1:3] &quot;my&quot; &quot;name&quot; &quot;is&quot;</code></pre>
+<pre class="r"><code>str(ourlist[1])</code></pre>
+<pre><code>## List of 1
+##  $ odds: num [1:51] 1 3 5 7 9 11 13 15 17 19 ...</code></pre>
+<pre class="r"><code>str(ourlist[[1]])</code></pre>
+<pre><code>##  num [1:51] 1 3 5 7 9 11 13 15 17 19 ...</code></pre>
+<pre class="r"><code>sum(ourlist[[1]])</code></pre>
+<pre><code>## [1] 2601</code></pre>
+<pre class="r"><code>sum(ourlist$evens)</code></pre>
+<pre><code>## [1] 2550</code></pre>
+<pre class="r"><code>sum(ourlist[[&quot;evens&quot;]])</code></pre>
+<pre><code>## [1] 2550</code></pre>
+<pre class="r"><code>identical(ourlist$evens,ourlist[&quot;evens&quot;])</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>attributes(ourlist)</code></pre>
+<pre><code>## $names
+## [1] &quot;odds&quot;            &quot;evens&quot;           &quot;some dumb words&quot;</code></pre>
+<pre class="r"><code>names(ourlist)</code></pre>
+<pre><code>## [1] &quot;odds&quot;            &quot;evens&quot;           &quot;some dumb words&quot;</code></pre>
 </div>
-<div id="exercise-solution-5-minutes-1" class="section level1">
-<h1>Exercise solution (5 minutes)</h1>
 </div>
 <div id="arrays-creating" class="section level1">
 <h1>Arrays: creating</h1>
@@ -573,22 +699,27 @@ smoker</code></pre>
 <pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
 <pre class="r"><code>patientRecords = data.frame(name, age, smoker)
 patientRecords</code></pre>
-<pre><code>##       name age smoker
-## 1 patient1  46   TRUE
-## 2 patient2  49  FALSE
-## 3 patient3  50   TRUE</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["smoker"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"patient1","2":"46","3":"TRUE"},{"1":"patient2","2":"49","3":"FALSE"},{"1":"patient3","2":"50","3":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 </div>
 <div id="data-frames-accessing" class="section level1">
 <h1>Data frames: accessing</h1>
 <pre class="r"><code>patientRecords</code></pre>
-<pre><code>##       name age smoker
-## 1 patient1  46   TRUE
-## 2 patient2  49  FALSE
-## 3 patient3  50   TRUE</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["smoker"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"patient1","2":"46","3":"TRUE"},{"1":"patient2","2":"49","3":"FALSE"},{"1":"patient3","2":"50","3":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <pre class="r"><code>#Just like matrices
 patientRecords[1,] #row 1</code></pre>
-<pre><code>##       name age smoker
-## 1 patient1  46   TRUE</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["name"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["smoker"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"patient1","2":"46","3":"TRUE","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <pre class="r"><code>patientRecords[,1] #column 1</code></pre>
 <pre><code>## [1] patient1 patient2 patient3
 ## Levels: patient1 patient2 patient3</code></pre>
@@ -611,20 +742,83 @@ patientRecords[1,] #row 1</code></pre>
 <blockquote>
 <p>Use names() to find the column names</p>
 </blockquote>
+<div id="exercise-solution-5-minutes-2" class="section level3">
+<h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>ourdf &lt;- read.table(&quot;../data/gene_condition_source_id.txt&quot;,
+                    sep=&quot;\t&quot;,header=T,quote=&quot;&quot;,comment.char=&quot;&quot;,
+                    as.is=T)
+str(ourdf)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    11124 obs. of  9 variables:
+##  $ X.GeneID       : int  2 2 144568 53947 8086 79719 15 16 16 16 ...
+##  $ AssociatedGenes: chr  &quot;A2M&quot; &quot;A2M&quot; &quot;A2ML1&quot; &quot;A4GALT&quot; ...
+##  $ RelatedGenes   : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ ConceptID      : chr  &quot;C0002395&quot; &quot;C3279661&quot; &quot;C1833692&quot; &quot;C0599990&quot; ...
+##  $ DiseaseName    : chr  &quot;Alzheimer&#39;s disease&quot; &quot;Alpha-2-macroglobulin deficiency&quot; &quot;Otitis media, susceptibility to&quot; &quot;p phenotype&quot; ...
+##  $ SourceName     : chr  &quot;SNOMED CT&quot; &quot;NCBI curation&quot; &quot;NCBI curation&quot; &quot;SNOMED CT&quot; ...
+##  $ SourceID       : chr  &quot;26929004&quot; &quot;&quot; &quot;&quot; &quot;24403008&quot; ...
+##  $ DiseaseMIM     : int  104300 614036 166760 111400 231550 148600 614163 613287 616339 NA ...
+##  $ LastUpdated    : chr  &quot;16 Feb 2016&quot; &quot;16 Feb 2016&quot; &quot;16 Feb 2016&quot; &quot;16 Feb 2016&quot; ...</code></pre>
+<pre class="r"><code>head(ourdf)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X.GeneID"],"name":[1],"type":["int"],"align":["right"]},{"label":["AssociatedGenes"],"name":[2],"type":["chr"],"align":["left"]},{"label":["RelatedGenes"],"name":[3],"type":["chr"],"align":["left"]},{"label":["ConceptID"],"name":[4],"type":["chr"],"align":["left"]},{"label":["DiseaseName"],"name":[5],"type":["chr"],"align":["left"]},{"label":["SourceName"],"name":[6],"type":["chr"],"align":["left"]},{"label":["SourceID"],"name":[7],"type":["chr"],"align":["left"]},{"label":["DiseaseMIM"],"name":[8],"type":["int"],"align":["right"]},{"label":["LastUpdated"],"name":[9],"type":["chr"],"align":["left"]}],"data":[{"1":"2","2":"A2M","3":"","4":"C0002395","5":"Alzheimer's disease","6":"SNOMED CT","7":"26929004","8":"104300","9":"16 Feb 2016","_rn_":"1"},{"1":"2","2":"A2M","3":"","4":"C3279661","5":"Alpha-2-macroglobulin deficiency","6":"NCBI curation","7":"","8":"614036","9":"16 Feb 2016","_rn_":"2"},{"1":"144568","2":"A2ML1","3":"","4":"C1833692","5":"Otitis media, susceptibility to","6":"NCBI curation","7":"","8":"166760","9":"16 Feb 2016","_rn_":"3"},{"1":"53947","2":"A4GALT","3":"","4":"C0599990","5":"p phenotype","6":"SNOMED CT","7":"24403008","8":"111400","9":"16 Feb 2016","_rn_":"4"},{"1":"8086","2":"AAAS","3":"","4":"C0271742","5":"Glucocorticoid deficiency with achalasia","6":"SNOMED CT","7":"45414006","8":"231550","9":"16 Feb 2016","_rn_":"5"},{"1":"79719","2":"AAGAB","3":"","4":"C1835662","5":"Keratosis palmoplantaris papulosa","6":"Office of Rare Diseases","7":"3103","8":"148600","9":"16 Feb 2016","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
 </div>
-<div id="exercise-solution-5-minutes-2" class="section level1">
-<h1>Exercise solution (5 minutes)</h1>
+<pre class="r"><code>nrow(ourdf)</code></pre>
+<pre><code>## [1] 11124</code></pre>
+<pre class="r"><code>ncol(ourdf)</code></pre>
+<pre><code>## [1] 9</code></pre>
+<pre class="r"><code>names(ourdf)</code></pre>
+<pre><code>## [1] &quot;X.GeneID&quot;        &quot;AssociatedGenes&quot; &quot;RelatedGenes&quot;    &quot;ConceptID&quot;       &quot;DiseaseName&quot;     &quot;SourceName&quot;      &quot;SourceID&quot;       
+## [8] &quot;DiseaseMIM&quot;      &quot;LastUpdated&quot;</code></pre>
+<pre class="r"><code>colnames(ourdf)</code></pre>
+<pre><code>## [1] &quot;X.GeneID&quot;        &quot;AssociatedGenes&quot; &quot;RelatedGenes&quot;    &quot;ConceptID&quot;       &quot;DiseaseName&quot;     &quot;SourceName&quot;      &quot;SourceID&quot;       
+## [8] &quot;DiseaseMIM&quot;      &quot;LastUpdated&quot;</code></pre>
+<pre class="r"><code>names(ourlist)</code></pre>
+<pre><code>## [1] &quot;odds&quot;            &quot;evens&quot;           &quot;some dumb words&quot;</code></pre>
+<pre class="r"><code>rownames(ourdf)[1:5]</code></pre>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot;</code></pre>
+<pre class="r"><code>sapply(ourdf,is)</code></pre>
+<pre><code>## $X.GeneID
+## [1] &quot;integer&quot;             &quot;double&quot;              &quot;numeric&quot;             &quot;vector&quot;              &quot;data.frameRowLabels&quot;
+## 
+## $AssociatedGenes
+## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;   
+## 
+## $RelatedGenes
+## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;   
+## 
+## $ConceptID
+## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;   
+## 
+## $DiseaseName
+## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;   
+## 
+## $SourceName
+## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;   
+## 
+## $SourceID
+## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;   
+## 
+## $DiseaseMIM
+## [1] &quot;integer&quot;             &quot;double&quot;              &quot;numeric&quot;             &quot;vector&quot;              &quot;data.frameRowLabels&quot;
+## 
+## $LastUpdated
+## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;</code></pre>
+<pre class="r"><code>ourdf$X.GeneID[1:5]</code></pre>
+<pre><code>## [1]      2      2 144568  53947   8086</code></pre>
+<pre class="r"><code>is(ourdf$AssociatedGenes[1:5])</code></pre>
+<pre><code>## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;</code></pre>
+<pre class="r"><code>seq(1,10)[-(1:5)]</code></pre>
+<pre><code>## [1]  6  7  8  9 10</code></pre>
 <hr />
 </div>
-<div id="end-of-lecture-4" class="section level1">
-<h1>End of lecture 4</h1>
-<p>Reminder: Complete Assignment 2 on Quercus Due Monday, April 27, 2020 at 9am</p>
-<p>Read The Book of R, chapter 4.3 (factors), 8 (files)</p>
-<hr />
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -657,6 +851,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

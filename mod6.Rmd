@@ -1,0 +1,225 @@
+---
+title: "Module 6"
+---
+
+The Book of R: chapter 11.1, 11.2 (functions), Glance at ?base::regex
+
+***
+
+## Module 5 review
+
+* Loops
+
+```
+for (value in vectorVariable) {
+  if (value > 0) {
+    print(value)
+  }
+}
+```
+
+* Vectorization
+    * e.g. vectorVariable[vectorVariable>0]
+    
+***
+
+# Exercise: Vectorization (10 minutes)
+
+>Create a vector of consecutive numbers from 1 to 100.
+
+>Note: from:to is the same as seq(from, to)
+
+>Compute the sum, product and mean
+
+>Sum just the numbers greater than 50
+
+### Exercise solution (5 minutes)
+
+# Functions
+
+## Key Programming Concept
+
+# Writing your own functions
+
+```{r}
+#syntax
+#Note: myfunction can be any name
+myfunction = function(arg1, arg2, ... ) {
+  statements
+  return(object)
+}
+
+#Note: objects inside the function are local to the function i.e. not defined outside. This is called variable scope
+#The concept of scope is very important in other languages, but in R, you just need to understand it with functions
+```
+
+# Function example
+
+```{r}
+patientRecords = data.frame(name=c("patient1", "patient2", "patient3"),
+                            age=c(46, 49, 50), 
+                            smoker=c(T, F, T),
+                            stringsAsFactors=F)
+
+
+printRecordRow = function(patientDatabase) {
+	#prints a row in a patient database
+	v = paste(patientDatabase[1],
+	patientDatabase[2], patientDatabase[3])
+	return(v)
+}
+
+#apply to one row
+printRecordRow(patientRecords[1,])
+#apply the printRecordRow function to all the rows of the patientRecords matrix
+apply(patientRecords, 1, printRecordRow)
+
+
+```
+
+# Why create functions?
+
+* Organize your code – useful for larger scripts
+* Easy to reuse code because it is more modular
+    * Collect your own library of useful functions for easy scripting later (can be stored in a separate file and included in all your scripts)
+    * More easily share code with others
+* Maintain a central place to keep code in case you need to modify/fix something
+* Easily repeat code from different places in a single script
+
+# Built in functions
+
+* R has hundreds of built in functions
+
+```{r}
+#e.g. statistical functions
+t.test(runif(50), runif(50))
+cor.test(runif(50), runif(50),method="pearson")
+```
+
+# Exercise: Functions (10 minutes)
+
+>Practice creating a function
+
+>Create a function called mysum that sums up all the elements of a vector
+
+>Check that it gives the same results at the sum() function
+
+### Exercise solution (5 minutes)
+
+# Regular expressions
+
+## Useful tool to find patterns in strings
+
+* Regular expressions (regex) = very powerful pattern matching in strings
+
+```{r}
+string = "aaabbbccc"
+#"aaa" matches
+#"abb" matches
+#"abbbb" does it match?
+
+#You’ve already been using regular expressions e.g.
+DNA = "ACGTGA"
+sub("A", "T", DNA)
+sub("GA", "CT", DNA)
+gsub("A", "T", DNA)
+
+```
+
+* There are lots of ways to specify a pattern – it’s a mini language within a language
+
+string = "aaabbbccc"
+"a.a" matches "aaa"
+. means any one character
+
+"a*b" matches
+* means zero or more of the previous character
+
+Example: [+-]?[0-9]+\.[0-9]+
+matches a number like -43.221
+
+
+# Regular expression quick reference
+
+| aaa             | exact pattern                                                                  |
+|-----------------|--------------------------------------------------------------------------------|
+| .               | any character                                                                  |
+| aa\|bb           | aa or bb                                                                       |
+| ()              | group a pattern e.g. (y\|n)o matches yo and no                                  |
+| []              | character set e.g. [abc] matches a single character, either a, b or c; a-z     |
+| [^]             | not character set e.g. [^abc] matches any single character except a, b or c    |
+| [:digit:] or \\d | a range of standard character classes are available                            |
+| [:alpha:]       |                                                                                |
+| *               | 0 or more of the previous character or group                                   |
+| +               | 1 or more                                                                      |
+| ?               | 0 or 1                                                                         |
+| {n,m}           | a specific number of repeats (e.g. 2 to 5).                                    |
+|                 | Also {n,} = n to infinity and {n} = exactly n                                  |
+| ^               | start of string                                                                |
+| $               | end of string or before a \\n                                                   |
+| \\\\b             | word boundary e.g. \\bword\\b (\\B matches non word boundaries)                   |
+|                 | Also \\< and \\> match start and end of a word                                   |
+| \\\\N             | After the regular expression is run:                                           |
+|                 | backreference the Nth pattern matched in a ()  (up to 9 patterns)              |
+| ignore.case=T   | case insensitive match                                                         |
+| \\\\+ \\\\^ \\\\      | ‘escape’ a metacharacter – use a special character like + or ^ in your pattern |
+
+# Regular expression examples
+
+```{r}
+a = "sdfsabcdefghba0dsgggfe0haaabbbccc"
+#grep returns the vector index of the match
+#grepl returns TRUE if there is a match
+#regexpr returns a list, including match index and length; gregexpr returns all matches
+grep("b.d", a)
+grepl("b.d", a)
+regexpr("b.d", a)
+regexpr("b.d", a)[1]
+gregexpr("b.d", a)
+
+# b.d			  #The dot will match any character
+# b[ce]d		#the [ce] matches a single 'c' or a single 'e'.
+# b[ce]+d	  #the [ce]+ matches any number of c's & e's (at least one)
+# b[ce]*d		#the [ce]* also can match the empty string.
+# b\\sd		  #the \s matches blank or tab (so-called	'whitespace')
+# b\\s+d		#the \s+ matches any number of whitespaces (at least one) 
+# a|b+		  #what will this match?
+# (a|b)+		#and this?
+
+#Note: to run these yourself, add them to e.g. gregexpr("b.d", a), where "b.d" is the regular expression above and “a” is the string variable to search.
+
+gregexpr("b.d", a)
+
+```
+
+* string = "Kevin Bacon"
+* (K|k)evin (B|b)acon
+* Start (^) and end ($) of a string
+    * ^(Kevin|Bacon|Portman|Roberts)
+    * (Kevin|Bacon|Portman|Roberts)$
+    * ^(Bacon|Portman|Roberts)
+* Find all vowels
+    * (A|E|I|O|U|Y|a|e|i|o|u|y)
+    * [AEIOUYaeiouy]
+* How many matches?
+
+```{r}
+length(gregexpr("g", a)[[1]])
+```
+
+# Exercise: regular expressions (10 minutes)
+
+>DNA = "ACGATGATACTGATGACGGGC"
+
+>Match the regular expression "G..A" and use the results to identify the actual match in the original string
+
+>Use gregexpr
+
+>attr(x, "match.length") can be used to find the match length in the vector returned from gregexpr
+
+>?substr
+
+### Exercise solution (5 minutes)
+
+
+***
