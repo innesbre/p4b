@@ -35,6 +35,20 @@ for (value in vectorVariable) {
 
 ### Exercise solution (5 minutes)
 
+```{r}
+myvec <- 1:100 #seq(1,100)
+
+sum(myvec)
+Reduce("+",myvec)
+
+try(sapply(myvec,"*"))
+prod(myvec)
+
+mean(myvec)
+
+sum(myvec[myvec > 50])
+```
+
 # Functions
 
 ## Key Programming Concept
@@ -105,6 +119,19 @@ cor.test(runif(50), runif(50),method="pearson")
 >Check that it gives the same results at the sum() function
 
 ### Exercise solution (5 minutes)
+
+```{r}
+mysum <- function(X) {
+  runningsum <- 0
+  for (i in seq_along(X)) {
+    runningsum <- runningsum + X[i]
+  }
+  return(runningsum)
+}
+
+mysum(X=1:100)
+```
+
 
 # Regular expressions
 
@@ -220,6 +247,21 @@ length(gregexpr("g", a)[[1]])
 >?substr
 
 ### Exercise solution (5 minutes)
+
+```{r}
+DNA <- c("ACGATGATACTGATGACGGGC","asldkfj")
+foundit <- gregexpr("G..A",DNA)
+substr(DNA[[1]],
+       start=foundit[[1]][1],
+       stop=foundit[[1]][1] +
+         attr(foundit[[1]],"match.length") - 1)
+
+
+DNA <- c("ACGATGATACTGATGACGGGC")
+gregexpr("[A-Ga-g].T",DNA)
+
+
+```
 
 
 ***
