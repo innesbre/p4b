@@ -17,6 +17,8 @@ navbar:
     href: mod6.html
   - text: "Module 7"
     href: mod7.html
+  - text: "Module 8"
+    href: mod8.html
 output:
   html_document:
     theme: cosmo

@@ -370,6 +370,9 @@ div.tocify {
 <li>
   <a href="mod7.html">Module 7</a>
 </li>
+<li>
+  <a href="mod8.html">Module 8</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -422,6 +425,26 @@ return (sum(arg1))
 </blockquote>
 <div id="exercise-solution-5-minutes" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>DNA &lt;- c(&quot;ACGATGATACTGATGACGGGC&quot;)
+regex &lt;- &quot;G..A&quot;
+
+regexMatcher &lt;- function(STRING,REGEX) {
+  temp_matches &lt;- gregexpr(REGEX,STRING)
+  return(
+    substring(
+      STRING,
+      temp_matches[[1]][1],
+      temp_matches[[1]][1] +
+        attr(temp_matches[[1]],&quot;match.length&quot;) - 1
+    )
+  )
+}
+
+regexMatcher(STRING=DNA,REGEX=&quot;G.T&quot;)</code></pre>
+<pre><code>## [1] &quot;GAT&quot; &quot;GAT&quot; &quot;GAT&quot;</code></pre>
+<pre class="r"><code>regmatches(DNA,gregexpr(&quot;G.T&quot;,DNA))</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;GAT&quot; &quot;GAT&quot; &quot;GAT&quot;</code></pre>
 </div>
 </div>
 <div id="interfacing-with-external-programs" class="section level1">
@@ -442,25 +465,29 @@ v</code></pre>
 <pre><code>##  [1] &quot;ASCII-Table-wide.svg&quot; &quot;README.md&quot;            &quot;_site.yml&quot;            &quot;docs&quot;                 &quot;fileOutput.png&quot;       &quot;index.Rmd&quot;           
 ##  [7] &quot;index.html&quot;           &quot;mod2.Rmd&quot;             &quot;mod2.html&quot;            &quot;mod2_files&quot;           &quot;mod3.Rmd&quot;             &quot;mod3.html&quot;           
 ## [13] &quot;mod4.Rmd&quot;             &quot;mod4.html&quot;            &quot;mod5.Rmd&quot;             &quot;mod5.html&quot;            &quot;mod6.Rmd&quot;             &quot;mod6.html&quot;           
-## [19] &quot;mod7.Rmd&quot;             &quot;mydata.txt&quot;           &quot;p4b.Rproj&quot;            &quot;recipebookTOC.png&quot;    &quot;site_libs&quot;</code></pre>
+## [19] &quot;mod7.Rmd&quot;             &quot;mod7.html&quot;            &quot;mod7_files&quot;           &quot;mod8.Rmd&quot;             &quot;mod8_files&quot;           &quot;mydata.txt&quot;          
+## [25] &quot;mypackagedirectory&quot;   &quot;p4b.Rproj&quot;            &quot;recipebookTOC.png&quot;    &quot;site_libs&quot;</code></pre>
 <pre class="r"><code>#passes arguments to the command (ls)
 v = system2(&quot;ls&quot;, args=&quot;-la&quot;, stdout=T)
 v</code></pre>
-<pre><code>##  [1] &quot;total 1489&quot;                                                        &quot;drwxr-xr-x 1 binne binne      0 May  3 12:50 .&quot;                   
-##  [3] &quot;drwxr-xr-x 1 binne binne      0 Apr 27 13:43 ..&quot;                   &quot;-rw-r--r-- 1 binne binne    903 Apr 23 12:56 .Rhistory&quot;           
-##  [5] &quot;drwxr-xr-x 1 binne binne      0 Apr 23 09:49 .Rproj.user&quot;          &quot;drwxr-xr-x 1 binne binne      0 May  3 12:50 .git&quot;                
+<pre><code>##  [1] &quot;total 1556&quot;                                                        &quot;drwxr-xr-x 1 binne binne      0 May 11 14:39 .&quot;                   
+##  [3] &quot;drwxr-xr-x 1 binne binne      0 May 11 09:56 ..&quot;                   &quot;-rw-r--r-- 1 binne binne  12664 May  8 14:42 .Rhistory&quot;           
+##  [5] &quot;drwxr-xr-x 1 binne binne      0 Apr 23 09:49 .Rproj.user&quot;          &quot;drwxr-xr-x 1 binne binne      0 May 11 14:39 .git&quot;                
 ##  [7] &quot;-rw-r--r-- 1 binne binne     44 Apr 23 09:49 .gitignore&quot;           &quot;-rw-r--r-- 1 binne binne 653001 Mar  3  2019 ASCII-Table-wide.svg&quot;
-##  [9] &quot;-rw-r--r-- 1 binne binne    184 Apr 23 10:52 README.md&quot;            &quot;-rw-r--r-- 1 binne binne    524 May  3 12:46 _site.yml&quot;           
-## [11] &quot;drwxr-xr-x 1 binne binne      0 May  3 12:48 docs&quot;                 &quot;-rw-r--r-- 1 binne binne  66773 Mar  3  2019 fileOutput.png&quot;      
-## [13] &quot;-rw-r--r-- 1 binne binne   4819 May  3 12:24 index.Rmd&quot;            &quot;-rw-r--r-- 1 binne binne  18511 May  3 12:49 index.html&quot;          
-## [15] &quot;-rw-r--r-- 1 binne binne   9190 May  3 12:24 mod2.Rmd&quot;             &quot;-rw-r--r-- 1 binne binne  29364 May  3 12:49 mod2.html&quot;           
-## [17] &quot;drwxr-xr-x 1 binne binne      0 May  3 12:49 mod2_files&quot;           &quot;-rw-r--r-- 1 binne binne   5291 May  3 12:46 mod3.Rmd&quot;            
-## [19] &quot;-rw-r--r-- 1 binne binne  31796 May  3 12:49 mod3.html&quot;            &quot;-rw-r--r-- 1 binne binne  11352 May  3 12:46 mod4.Rmd&quot;            
-## [21] &quot;-rw-r--r-- 1 binne binne  35994 May  3 12:49 mod4.html&quot;            &quot;-rw-r--r-- 1 binne binne  11140 May  3 12:47 mod5.Rmd&quot;            
-## [23] &quot;-rw-r--r-- 1 binne binne  30554 May  3 12:49 mod5.html&quot;            &quot;-rw-r--r-- 1 binne binne   7200 May  3 12:48 mod6.Rmd&quot;            
-## [25] &quot;-rw-r--r-- 1 binne binne  20829 May  3 12:50 mod6.html&quot;            &quot;-rw-r--r-- 1 binne binne   3498 May  3 12:48 mod7.Rmd&quot;            
-## [27] &quot;-rw-r--r-- 1 binne binne     96 May  3 12:49 mydata.txt&quot;           &quot;-rw-r--r-- 1 binne binne    240 May  3 12:48 p4b.Rproj&quot;           
-## [29] &quot;-rw-r--r-- 1 binne binne 522169 Mar  3  2019 recipebookTOC.png&quot;    &quot;drwxr-xr-x 1 binne binne      0 May  3 12:50 site_libs&quot;</code></pre>
+##  [9] &quot;-rw-r--r-- 1 binne binne    184 Apr 23 10:52 README.md&quot;            &quot;-rw-r--r-- 1 binne binne    567 May 11 12:26 _site.yml&quot;           
+## [11] &quot;drwxr-xr-x 1 binne binne      0 May 11 14:37 docs&quot;                 &quot;-rw-r--r-- 1 binne binne  66773 Mar  3  2019 fileOutput.png&quot;      
+## [13] &quot;-rw-r--r-- 1 binne binne   4819 May  3 12:24 index.Rmd&quot;            &quot;-rw-r--r-- 1 binne binne  18560 May 11 14:37 index.html&quot;          
+## [15] &quot;-rw-r--r-- 1 binne binne   9190 May  3 12:24 mod2.Rmd&quot;             &quot;-rw-r--r-- 1 binne binne  29415 May 11 14:38 mod2.html&quot;           
+## [17] &quot;drwxr-xr-x 1 binne binne      0 May 11 14:31 mod2_files&quot;           &quot;-rw-r--r-- 1 binne binne   5291 May  3 12:46 mod3.Rmd&quot;            
+## [19] &quot;-rw-r--r-- 1 binne binne  31845 May 11 14:39 mod3.html&quot;            &quot;-rw-r--r-- 1 binne binne  11352 May  3 12:46 mod4.Rmd&quot;            
+## [21] &quot;-rw-r--r-- 1 binne binne  36589 May 11 14:39 mod4.html&quot;            &quot;-rw-r--r-- 1 binne binne  11140 May  3 12:47 mod5.Rmd&quot;            
+## [23] &quot;-rw-r--r-- 1 binne binne  30603 May 11 14:39 mod5.html&quot;            &quot;-rw-r--r-- 1 binne binne   7823 May  4 14:15 mod6.Rmd&quot;            
+## [25] &quot;-rw-r--r-- 1 binne binne  22427 May 11 14:39 mod6.html&quot;            &quot;-rw-r--r-- 1 binne binne   4720 May  8 14:04 mod7.Rmd&quot;            
+## [27] &quot;-rw-r--r-- 1 binne binne  33300 May 11 14:32 mod7.html&quot;            &quot;drwxr-xr-x 1 binne binne      0 May 11 14:32 mod7_files&quot;          
+## [29] &quot;-rw-r--r-- 1 binne binne   9589 May 11 14:37 mod8.Rmd&quot;             &quot;drwxr-xr-x 1 binne binne      0 May 11 14:32 mod8_files&quot;          
+## [31] &quot;-rw-r--r-- 1 binne binne     96 May 11 14:39 mydata.txt&quot;           &quot;drwxr-xr-x 1 binne binne      0 May 11 12:56 mypackagedirectory&quot;  
+## [33] &quot;-rw-r--r-- 1 binne binne    240 May 11 14:37 p4b.Rproj&quot;            &quot;-rw-r--r-- 1 binne binne 522169 Mar  3  2019 recipebookTOC.png&quot;   
+## [35] &quot;drwxr-xr-x 1 binne binne      0 May 11 14:39 site_libs&quot;</code></pre>
 <ul>
 <li>What’s wrong with system()?
 <ul>
@@ -489,6 +516,31 @@ v</code></pre>
 </ul>
 <div id="exercise-solution-5-minutes-1" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>shell(&quot;df -h&quot;,shell=&quot;bash&quot;)
+system2(command=&quot;cmd.exe&quot;,input=&quot;dir&quot;,stdout=T)</code></pre>
+<pre><code>##  [1] &quot;Microsoft Windows [Version 10.0.18362.778]&quot;                  &quot;(c) 2019 Microsoft Corporation. All rights reserved.&quot;       
+##  [3] &quot;&quot;                                                            &quot;D:\\Dropbox\\TA_MMG1002H\\p4b&gt;dir&quot;                          
+##  [5] &quot; Volume in drive D is DATA&quot;                                  &quot; Volume Serial Number is 36E0-89E7&quot;                         
+##  [7] &quot;&quot;                                                            &quot; Directory of D:\\Dropbox\\TA_MMG1002H\\p4b&quot;                
+##  [9] &quot;&quot;                                                            &quot;2020-05-11  02:39 PM    &lt;DIR&gt;          .&quot;                   
+## [11] &quot;2020-05-11  02:39 PM    &lt;DIR&gt;          ..&quot;                   &quot;2020-04-23  09:49 AM                44 .gitignore&quot;          
+## [13] &quot;2020-05-08  02:42 PM            12,664 .Rhistory&quot;            &quot;2019-03-04  12:05 AM           653,001 ASCII-Table-wide.svg&quot;
+## [15] &quot;2020-05-11  02:37 PM    &lt;DIR&gt;          docs&quot;                 &quot;2019-03-03  11:44 PM            66,773 fileOutput.png&quot;      
+## [17] &quot;2020-05-11  02:37 PM            18,560 index.html&quot;           &quot;2020-05-03  12:24 PM             4,819 index.Rmd&quot;           
+## [19] &quot;2020-05-11  02:38 PM            29,415 mod2.html&quot;            &quot;2020-05-03  12:24 PM             9,190 mod2.Rmd&quot;            
+## [21] &quot;2020-05-11  02:31 PM    &lt;DIR&gt;          mod2_files&quot;           &quot;2020-05-11  02:39 PM            31,845 mod3.html&quot;           
+## [23] &quot;2020-05-03  12:46 PM             5,291 mod3.Rmd&quot;             &quot;2020-05-11  02:39 PM            36,589 mod4.html&quot;           
+## [25] &quot;2020-05-03  12:46 PM            11,352 mod4.Rmd&quot;             &quot;2020-05-11  02:39 PM            30,603 mod5.html&quot;           
+## [27] &quot;2020-05-03  12:47 PM            11,140 mod5.Rmd&quot;             &quot;2020-05-11  02:39 PM            22,427 mod6.html&quot;           
+## [29] &quot;2020-05-04  02:15 PM             7,823 mod6.Rmd&quot;             &quot;2020-05-11  02:32 PM            33,300 mod7.html&quot;           
+## [31] &quot;2020-05-08  02:04 PM             4,720 mod7.Rmd&quot;             &quot;2020-05-11  02:32 PM    &lt;DIR&gt;          mod7_files&quot;          
+## [33] &quot;2020-05-11  02:37 PM             9,589 mod8.Rmd&quot;             &quot;2020-05-11  02:32 PM    &lt;DIR&gt;          mod8_files&quot;          
+## [35] &quot;2020-05-11  02:39 PM                96 mydata.txt&quot;           &quot;2020-05-11  12:56 PM    &lt;DIR&gt;          mypackagedirectory&quot;  
+## [37] &quot;2020-05-11  02:37 PM               240 p4b.Rproj&quot;            &quot;2020-04-23  10:52 AM               184 README.md&quot;           
+## [39] &quot;2019-03-03  10:12 PM           522,169 recipebookTOC.png&quot;    &quot;2020-05-11  02:39 PM    &lt;DIR&gt;          site_libs&quot;           
+## [41] &quot;2020-05-11  12:26 PM               567 _site.yml&quot;            &quot;              24 File(s)      1,522,401 bytes&quot;              
+## [43] &quot;               8 Dir(s)  1,079,113,965,568 bytes free&quot;       &quot;&quot;                                                           
+## [45] &quot;D:\\Dropbox\\TA_MMG1002H\\p4b&gt;&quot;</code></pre>
 </div>
 </div>
 <div id="recipes" class="section level1">
@@ -542,13 +594,13 @@ data_frame = data_frame[order(data_frame$key1,data_frame$key2) , ]
 <h1>Introduction to plots</h1>
 <pre class="r"><code>#R has powerful data plotting abilities
 hist(runif(50))</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="mod7_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre class="r"><code>plot(runif(50))</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<p><img src="mod7_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
 <pre class="r"><code>plot(runif(50), runif(50)) #x,y scatter plot</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-4-3.png" width="672" /></p>
+<p><img src="mod7_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
 <pre class="r"><code>boxplot(runif(50))</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-4-4.png" width="672" /></p>
+<p><img src="mod7_files/figure-html/unnamed-chunk-6-4.png" width="672" /></p>
 <pre class="r"><code>demo(graphics)</code></pre>
 <pre><code>## 
 ## 
@@ -574,7 +626,7 @@ hist(runif(50))</code></pre>
 ## &gt; opar &lt;- par(bg = &quot;white&quot;)
 ## 
 ## &gt; plot(x, ann = FALSE, type = &quot;n&quot;)</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-4-5.png" width="672" /></p>
+<p><img src="mod7_files/figure-html/unnamed-chunk-6-5.png" width="672" /></p>
 <pre><code>## 
 ## &gt; abline(h = 0, col = gray(.90))
 ## 
@@ -597,7 +649,7 @@ hist(runif(50))</code></pre>
 ## &gt; par(bg = &quot;gray&quot;)
 ## 
 ## &gt; pie(rep(1,24), col = rainbow(24), radius = 0.9)</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-4-6.png" width="672" /></p>
+<p><img src="mod7_files/figure-html/unnamed-chunk-6-6.png" width="672" /></p>
 <pre><code>## 
 ## &gt; title(main = &quot;A Sample Color Wheel&quot;, cex.main = 1.4, font.main = 3)
 ## 
@@ -614,7 +666,7 @@ hist(runif(50))</code></pre>
 ## 
 ## &gt; pie(pie.sales,
 ## +     col = c(&quot;purple&quot;,&quot;violetred1&quot;,&quot;green3&quot;,&quot;cornsilk&quot;,&quot;cyan&quot;,&quot;white&quot;))</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-4-7.png" width="672" /></p>
+<p><img src="mod7_files/figure-html/unnamed-chunk-6-7.png" width="672" /></p>
 <pre><code>## 
 ## &gt; title(main = &quot;January Pie Sales&quot;, cex.main = 1.8, font.main = 1)
 ## 
@@ -633,7 +685,7 @@ hist(runif(50))</code></pre>
 ## &gt; x &lt;- rnorm(n*100) + sqrt(as.numeric(g))
 ## 
 ## &gt; boxplot(split(x,g), col=&quot;lavender&quot;, notch=TRUE)</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-4-8.png" width="672" /></p>
+<p><img src="mod7_files/figure-html/unnamed-chunk-6-8.png" width="672" /></p>
 <pre><code>## 
 ## &gt; title(main=&quot;Notched Boxplots&quot;, xlab=&quot;Group&quot;, font.main=4, font.lab=1)
 ## 
@@ -652,7 +704,7 @@ hist(runif(50))</code></pre>
 ## &gt; yy &lt;- c(x, rev(y))
 ## 
 ## &gt; plot(xx, yy, type=&quot;n&quot;, xlab=&quot;Time&quot;, ylab=&quot;Distance&quot;)</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-4-9.png" width="672" /></p>
+<p><img src="mod7_files/figure-html/unnamed-chunk-6-9.png" width="672" /></p>
 <pre><code>## 
 ## &gt; polygon(xx, yy, col=&quot;gray&quot;)
 ## 
@@ -668,7 +720,7 @@ hist(runif(50))</code></pre>
 ## &gt; par(bg=&quot;lightgray&quot;)
 ## 
 ## &gt; plot(x, type=&quot;n&quot;, axes=FALSE, ann=FALSE)</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-4-10.png" width="672" /></p>
+<p><img src="mod7_files/figure-html/unnamed-chunk-6-10.png" width="672" /></p>
 <pre><code>## 
 ## &gt; usr &lt;- par(&quot;usr&quot;)
 ## 
@@ -696,7 +748,7 @@ hist(runif(50))</code></pre>
 ## &gt; x &lt;- rnorm(1000)
 ## 
 ## &gt; hist(x, xlim=range(-4, 4, x), col=&quot;lavender&quot;, main=&quot;&quot;)</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-4-11.png" width="672" /></p>
+<p><img src="mod7_files/figure-html/unnamed-chunk-6-11.png" width="672" /></p>
 <pre><code>## 
 ## &gt; title(main=&quot;1000 Normal Random Variates&quot;, font.main=3)
 ## 
@@ -704,11 +756,11 @@ hist(runif(50))</code></pre>
 ## &gt; ## The good old Iris data (yet again)
 ## &gt; 
 ## &gt; pairs(iris[1:4], main=&quot;Edgar Anderson&#39;s Iris Data&quot;, font.main=4, pch=19)</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-4-12.png" width="672" /></p>
+<p><img src="mod7_files/figure-html/unnamed-chunk-6-12.png" width="672" /></p>
 <pre><code>## 
 ## &gt; pairs(iris[1:4], main=&quot;Edgar Anderson&#39;s Iris Data&quot;, pch=21,
 ## +       bg = c(&quot;red&quot;, &quot;green3&quot;, &quot;blue&quot;)[unclass(iris$Species)])</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-4-13.png" width="672" /></p>
+<p><img src="mod7_files/figure-html/unnamed-chunk-6-13.png" width="672" /></p>
 <pre><code>## 
 ## &gt; ## Contour plotting
 ## &gt; ## This produces a topographic map of one of Auckland&#39;s many volcanic &quot;peaks&quot;.
@@ -740,7 +792,7 @@ hist(runif(50))</code></pre>
 ## &gt; plot(numeric(0), numeric(0),
 ## +      xlim = range(x)+c(-1,1)*xadd, ylim = range(y)+c(-1,1)*yadd,
 ## +      type = &quot;n&quot;, ann = FALSE)</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-4-14.png" width="672" /></p>
+<p><img src="mod7_files/figure-html/unnamed-chunk-6-14.png" width="672" /></p>
 <pre><code>## 
 ## &gt; usr &lt;- par(&quot;usr&quot;)
 ## 
@@ -762,7 +814,7 @@ hist(runif(50))</code></pre>
 ## &gt; par(bg=&quot;cornsilk&quot;)
 ## 
 ## &gt; coplot(lat ~ long | depth, data = quakes, pch = 21, bg = &quot;green3&quot;)</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-4-15.png" width="672" /></p>
+<p><img src="mod7_files/figure-html/unnamed-chunk-6-15.png" width="672" /></p>
 <pre><code>## 
 ## &gt; par(opar)</code></pre>
 </div>
@@ -782,6 +834,45 @@ hist(runif(50))</code></pre>
 </blockquote>
 <div id="exercise-solution-5-minutes-2" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code># step 1 ----
+randomdata1 &lt;- matrix(rnorm(500),nrow=50,ncol=10)
+randomdata2 &lt;- replicate(10,rnorm(50))
+
+temp &lt;- list()
+for(i in 1:10) {
+  temp[[i]] &lt;- rnorm(50)
+}
+randomdata3 &lt;- do.call(&quot;rbind&quot;,temp)
+
+dim(randomdata1)</code></pre>
+<pre><code>## [1] 50 10</code></pre>
+<pre class="r"><code>str(randomdata2)</code></pre>
+<pre><code>##  num [1:50, 1:10] -0.877 -1.121 0.671 -0.869 -0.755 ...</code></pre>
+<pre class="r"><code>str(randomdata3)</code></pre>
+<pre><code>##  num [1:10, 1:50] 0.23 1.164 0.323 -0.04 -0.421 ...</code></pre>
+<pre class="r"><code># step 2 ----
+default_par &lt;- par(no.readonly=T)
+par(mfrow=c(1,3))
+plot(randomdata1[,1:2])
+plot(x=randomdata1[,1],y=randomdata1[,2])
+rd4 &lt;- as.data.frame(randomdata1)
+plot(V2~V1,data=rd4)</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>par(default_par)
+
+
+# step 3 ----
+col_mean &lt;- colMeans(randomdata1)
+col_sd &lt;- apply(randomdata1,2,sd)
+
+# step 4 ----
+boxplot(randomdata1[,1:2])</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<pre class="r"><code>boxplot(list(first=randomdata1[,1],
+             second=randomdata1[,2]))</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-7-3.png" width="672" /></p>
+<pre class="r"><code>hist(randomdata1[,1])</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-7-4.png" width="672" /></p>
 <hr />
 </div>
 </div>

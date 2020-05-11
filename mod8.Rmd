@@ -1,0 +1,356 @@
+---
+title: "Module 8"
+---
+
+# Module 8
+
+The Book of R: Appendix A (packages)
+
+***
+
+## Module 7 review
+
+* External programs
+    * system2
+* Introduction to plots
+    * plot(runif(50), runif(50)) #x,y scatter plot
+    * boxplot(runif(50))
+    
+***
+
+# Packages
+## Key R concept
+
+* A place to store a set of functions
+* Can create a library of functions
+* Easily import the functions (and data) into R by installing the * package
+* Packages are available online in package repositories
+    * The Comprehensive R Archive Network (CRAN) - https://cran.r-project.org/
+    * Bioconductor - https://www.bioconductor.org/
+
+# Installing packages
+
+```{r,eval=F}
+
+# This downloads the package to your computer
+# Permanent download – you only need to do this once
+# select a mirror – choose someplace close (faster internet connection), or just the first one
+install.packages("ggplot2")
+```
+
+```{r}
+# This loads the package so you can use it
+# Need to do this each time you restart R
+# Sometimes other packages that this package needs will automatically be downloaded – could take time.
+library(ggplot2)
+
+#now we can use the functions in the package
+ggplot(iris, aes(x = Sepal.Length, fill = Species)) + geom_density(alpha = .3)
+
+```
+
+# Package management
+
+```{r}
+#List all installed packages
+installed.packages()
+
+#uninstall a package
+#e.g. remove.packages(ggplot2)
+#remove.packages(pkgs, lib)
+
+#Lists packages that could be updated
+old.packages()
+
+#Update all old packages
+#R will likely ask you questions about which versions to install
+```
+
+```{r,eval=F}
+update.packages()
+```
+
+# Package documentation
+
+* Website
+    * https://cran.r-project.org/web/packages/kinship2/index.html
+* Vignette
+    * PDF file taking you through an example of the package functionality that you can follow
+    * The first documentation you should review for any package
+
+# Example: kinship2 package
+
+```{r,eval=F}
+install.packages("kinship2")
+```
+
+```{r}
+library(kinship2)
+data(sample.ped) #load sample data
+head(sample.ped)
+pedAll = pedigree(id=sample.ped$id, dadid=sample.ped$father, momid=sample.ped$mother, sex=sample.ped$sex, famid=sample.ped$ped)
+ped2basic <- pedAll['2']
+plot(ped2basic)
+df2 <- sample.ped[sample.ped$ped==2,]
+id2 <- paste(df2$id, c("John", "Linda", "Jack", "Rachel", "Joe", "Deb", "Lucy", "Ken", "Barb", "Mike", "Matt", "Mindy", "Mark", "George"), sep="\n")
+plot(ped2basic, col=ifelse(df2$avail, 2, 1), id=id2)
+```
+
+# Bioconductor
+
+* Over 1000 bioinformatics packages
+
+* Gene expression
+    * Import Affymetrix, Illumina, Nimblegen, Agilent, and other platforms. Perform quality assessment, normalization, differential expression, clustering, classification, gene set enrichment, genetical genomics and other workflows for expression, exon, copy number, SNP, methylation and other assays. Access GEO, ArrayExpress, Biomart, UCSC, and other community resources.
+* High Throughput Assays
+    * Import, transform, edit, analyze and visualize flow cytometric, mass spec, HTqPCR, cell-based, and other assays.
+* Sequence Data
+    * Import fasta, fastq, ELAND, MAQ, BWA, Bowtie, BAM, gff, bed, wig, and other sequence formats. Trim, transform, align, and manipulate sequences. Perform quality assessment, ChIP-seq, differential expression, RNA-seq, and other workflows. Access the Sequence Read Archive.
+* Annotation
+    * Use microarray probe, gene, pathway, gene ontology, homology and other annotations. Access GO, KEGG, NCBI, Biomart, UCSC, vendor, and other sources.
+
+# Creating your own package
+
+```{r,eval=F}
+#Install needed packages
+install.packages("devtools")
+library("devtools")
+install.packages("roxygen2")
+library(roxygen2)
+```
+
+```{r,eval=F}
+#Create a directory for your package
+setwd("parent_directory")
+#Create the directory 'mypackage' inside of 'parent_directory'
+create("mypackage")
+
+```
+
+* Save functions in a file in:
+    * parent_directory/mypackage/R
+    * Example – copy the following files into this folder
+        * lengthfunction.r
+        * regexfunction.r
+    * Can also save each function as a separate file for organizational purposes
+* Write documentation
+    * Edit DESCRIPTION text file
+    * Write documentation for each function using
+        * https://cran.r-project.org/web/packages/roxygen2/
+
+```{r,eval=F}
+#Function documentation example
+#' The length of a string (in characters).
+#'
+#' @param string input character vector
+#' @return numeric vector giving number of characters in each element of the
+#'   character vector.  Missing strings have missing length.
+#' @seealso \code{\link{nchar}} which this function wraps
+#' @export
+#' @examples
+#' str_length(letters)
+#' str_length(c("i", "like", "programming", NA))
+str_length <- function(string) {
+  string <- check_string(string)
+  nc <- nchar(string, allowNA = TRUE)
+  is.na(nc) <- is.na(string)
+  nc
+}
+
+```
+
+```{r,eval=F}
+#note: setwd resets if you run it just one line at a time. You need to run the whole chunk all at once.
+
+#Generate the documentation files
+setwd("./mypackage")  #(your package directory)
+document()
+#Install your package
+setwd("..")   #(go to parent directory)
+install("mypackage")
+#R copies your package to an internal directory
+#Load (or activate) your package
+library(mypackage)
+
+```
+
+```{r,eval=F}
+#Check that your package is working
+help(package=mypackage)
+ls("package:mypackage")
+DNA = "ACACGTACTGATCGGGATATTAG"
+allMatchingStrings("A.A", DNA)
+str_length(DNA)
+
+```
+
+# Exercise: Bioconductor package (10 minutes)
+
+> Gene expression analysis example
+
+> Go to: http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE13924
+
+>Download cel files (2.2MB)  (2 arrays)
+
+>cel files are gene expression microarray scanned image files
+
+>From "Global transcriptional response of Saccharomyces cerevisiae following the deletion of succinate dehydrogenase" (selected because it is small)
+
+>Identified using the following search of GEO: http://www.ncbi.nlm.nih.gov/gds with “GPL90[ACCN] AND gse[ETYP] AND cel[suppFile]” – sort from smallest to largest, download the smallest experiment (2 arrays)
+
+>Install the affy package
+
+```{r,eval=F}
+#Review the following code and run it, command by command
+
+#install the affy package
+# source("http://www.bioconductor.org/biocLite.R")
+# biocLite("affy")
+# ^ deprecated method
+install.packages("BiocManager")
+BiocManager::install("affy")
+```
+
+```{r}
+#The package contains functions for exploratory oligonucleotide array analysis
+library(affy)
+
+#loads all .cel files in a directory
+Data <- ReadAffy("../data/GSE13924_RAW/GSM350771.CEL.gz",
+                 "../data/GSE13924_RAW/GSM350772.CEL.gz")
+Data
+```
+
+````{r}
+#what do the data distributions look like?
+boxplot(Data)
+
+hist(Data[,1:2])
+```
+
+```{r}
+#Check out what the cel images look like
+par(mfrow=c(1,2),mar=c(1,1,1,1))
+image(Data)
+```
+
+```{r}
+#perform probe quality analysis
+deg=AffyRNAdeg(Data)
+names(deg)
+str(deg)
+summaryAffyRNAdeg(deg)
+plotAffyRNAdeg(deg)
+```
+
+```{r}
+#Correct background and normalize, log2 values result
+eset <- rma(Data)
+eset
+```
+
+```{r}
+#save the results - normalized expression data
+write.exprs(eset, file="mydata.txt")
+```
+
+```{r}
+#view the expression data in different ways
+par(mfrow=c(1,1))
+dim(exprs(eset))
+boxplot(exprs(eset))
+hist(exprs(eset))
+# featureNames(eset)
+exprs(eset[1,c(1,2)])
+```
+
+```{r}
+#compute the log fold change
+logFoldChange = exprs(eset[,1])-exprs(eset[,2])
+
+#explore the fold change distributions
+hist(logFoldChange)
+plot(logFoldChange,pch=".")
+
+str(logFoldChange)
+
+plot(sort(logFoldChange))
+```
+
+
+```{r}
+#plot heatmap of first 100 probes
+heatmap(exprs(eset[1:100,]))
+```
+
+
+```{r}
+#find the most differentially expressed probes
+rownames(logFoldChange)[logFoldChange>4 | logFoldChange < -2]
+length(rownames(logFoldChange)[logFoldChange>3])
+
+#save the results be loaded into another program e.g. a spreadsheet
+write.table(logFoldChange, file="test.txt", sep="\t")
+
+```
+
+# Exercise solution (5 minutes)
+
+# Exercise: Gene expression and R practice (10 minutes)
+
+>Based on the gene expression array data explored in the previous exercise:
+
+>Plot normalized expression values from both arrays against each other
+
+>Compare the boxplots of both arrays
+
+>Compare the histograms of both arrays
+
+>What percentage of probe sets are under-expressed in the fold change table?
+
+# Exercise solution (5 minutes)
+
+```{r}
+dim(exprs(eset))
+
+plot(exprs(eset))
+par(mar=c(3,3,2,1),mgp=2:0)
+plot(exprs(eset)[,1],exprs(eset)[,2],
+     xlab="Sample1",ylab="Sample2",
+     main="Gene expression comparison",
+     pch=".",
+     xlim=range(exprs(eset)),
+     ylim=range(exprs(eset)))
+range(exprs(eset))
+
+boxplot(exprs(eset),log="y")
+
+par(mfrow=c(2,1),mar=c(3,3,1,1))
+hist(exprs(eset)[,1],
+     xlab=colnames(exprs(eset))[1],
+     main=NA,
+     xlim=range(exprs(eset)))
+hist(exprs(eset)[,2],
+     xlab=colnames(exprs(eset))[2],
+     main=NA,
+     xlim=range(exprs(eset)))
+
+par(mfrow=c(1,1),mar=c(3,3,2,1))
+hist(exprs(eset)[,1],
+     xlim=range(exprs(eset)),
+     ylim=c(0,2000),
+     col=scales::alpha("red",0.5),
+     main="Gene expression comparison",
+     xlab="Normalized gene expression")
+hist(exprs(eset)[,2],
+     xlim=range(exprs(eset)),
+     ylim=c(0,2000),
+     col=scales::alpha("blue",0.5),
+     add=T)
+legend("topright",bty="n",
+       legend=colnames(exprs(eset)),
+       fill=c("red","blue"))
+
+```
+
+***

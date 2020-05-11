@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Module 8</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MMG1002H</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Module 1</a>
+</li>
+<li>
+  <a href="mod2.html">Module 2</a>
+</li>
+<li>
+  <a href="mod3.html">Module 3</a>
+</li>
+<li>
+  <a href="mod4.html">Module 4</a>
+</li>
+<li>
+  <a href="mod5.html">Module 5</a>
+</li>
+<li>
+  <a href="mod6.html">Module 6</a>
+</li>
+<li>
+  <a href="mod7.html">Module 7</a>
+</li>
+<li>
+  <a href="mod8.html">Module 8</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Module 8</h1>
+
+</div>
+
+
+<div id="module-8" class="section level1">
+<h1>Module 8</h1>
+<p>The Book of R: Appendix A (packages)</p>
+<hr />
+<div id="module-7-review" class="section level2">
+<h2>Module 7 review</h2>
+<ul>
+<li>External programs
+<ul>
+<li>system2</li>
+</ul></li>
+<li>Introduction to plots
+<ul>
+<li>plot(runif(50), runif(50)) #x,y scatter plot</li>
+<li>boxplot(runif(50))</li>
+</ul></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="packages" class="section level1">
+<h1>Packages</h1>
+<div id="key-r-concept" class="section level2">
+<h2>Key R concept</h2>
+<ul>
+<li>A place to store a set of functions</li>
+<li>Can create a library of functions</li>
+<li>Easily import the functions (and data) into R by installing the * package</li>
+<li>Packages are available online in package repositories
+<ul>
+<li>The Comprehensive R Archive Network (CRAN) - <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></li>
+<li>Bioconductor - <a href="https://www.bioconductor.org/" class="uri">https://www.bioconductor.org/</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="installing-packages" class="section level1">
+<h1>Installing packages</h1>
+<pre class="r"><code># This downloads the package to your computer
+# Permanent download – you only need to do this once
+# select a mirror – choose someplace close (faster internet connection), or just the first one
+install.packages(&quot;ggplot2&quot;)</code></pre>
+<pre class="r"><code># This loads the package so you can use it
+# Need to do this each time you restart R
+# Sometimes other packages that this package needs will automatically be downloaded – could take time.
+library(ggplot2)
+
+#now we can use the functions in the package
+ggplot(iris, aes(x = Sepal.Length, fill = Species)) + geom_density(alpha = .3)</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="package-management" class="section level1">
+<h1>Package management</h1>
+<pre class="r"><code>#List all installed packages
+installed.packages()</code></pre>
+<pre><code>##                      Package                LibPath                              Version       Priority     
+## acepack              &quot;acepack&quot;              &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.4.1&quot;       NA           
+## affy                 &quot;affy&quot;                 &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.64.0&quot;      NA           
+## affyio               &quot;affyio&quot;               &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.56.0&quot;      NA           
+## annotate             &quot;annotate&quot;             &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.64.0&quot;      NA           
+## AnnotationDbi        &quot;AnnotationDbi&quot;        &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.48.0&quot;      NA           
+## AnnotationFilter     &quot;AnnotationFilter&quot;     &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.10.0&quot;      NA           
+## ape                  &quot;ape&quot;                  &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;5.3&quot;         NA           
+## askpass              &quot;askpass&quot;              &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.1&quot;         NA           
+## assertthat           &quot;assertthat&quot;           &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;0.2.1&quot;       NA           
+## backports            &quot;backports&quot;            &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.1.6&quot;       NA           
+## base                 &quot;base&quot;                 &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;3.6.3&quot;       &quot;base&quot;       
+## base64enc            &quot;base64enc&quot;            &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;0.1-3&quot;       NA           
+## beachmat             &quot;beachmat&quot;             &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;2.2.1&quot;       NA           
+## beeswarm             &quot;beeswarm&quot;             &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;0.2.3&quot;       NA           
+## BH                   &quot;BH&quot;                   &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.72.0-3&quot;    NA           
+## bibtex               &quot;bibtex&quot;               &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;0.4.2.2&quot;     NA           
+## Biobase              &quot;Biobase&quot;              &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;2.46.0&quot;      NA           
+## BiocFileCache        &quot;BiocFileCache&quot;        &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.10.2&quot;      NA           
+## BiocGenerics         &quot;BiocGenerics&quot;         &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;0.32.0&quot;      NA           
+## BiocManager          &quot;BiocManager&quot;          &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.30.10&quot;     NA           
+## BiocNeighbors        &quot;BiocNeighbors&quot;        &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.4.2&quot;       NA           
+## BiocParallel         &quot;BiocParallel&quot;         &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.20.1&quot;      NA           
+## BiocSingular         &quot;BiocSingular&quot;         &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.2.2&quot;       NA           
+## BiocVersion          &quot;BiocVersion&quot;          &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;3.10.1&quot;      NA           
+## biomaRt              &quot;biomaRt&quot;              &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;2.42.1&quot;      NA           
+## Biostrings           &quot;Biostrings&quot;           &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;2.54.0&quot;      NA           
+## bit                  &quot;bit&quot;                  &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.1-15.2&quot;    NA           
+## bit64                &quot;bit64&quot;                &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;0.9-7&quot;       NA           
+## bitops               &quot;bitops&quot;               &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.0-6&quot;       NA           
+## blob                 &quot;blob&quot;                 &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.2.1&quot;       NA           
+## boot                 &quot;boot&quot;                 &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.3-25&quot;      &quot;recommended&quot;
+## brew                 &quot;brew&quot;                 &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.0-6&quot;       NA           
+## callr                &quot;callr&quot;                &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;3.4.3&quot;       NA           
+## caTools              &quot;caTools&quot;              &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.18.0&quot;      NA           
+## CCInx                &quot;CCInx&quot;                &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;0.5.1&quot;       NA           
+## checkmate            &quot;checkmate&quot;            &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;2.0.0&quot;       NA           
+## class                &quot;class&quot;                &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;7.3-17&quot;      &quot;recommended&quot;
+## cli                  &quot;cli&quot;                  &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;2.0.2&quot;       NA           
+## clipr                &quot;clipr&quot;                &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;0.7.0&quot;       NA           
+## clisymbols           &quot;clisymbols&quot;           &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.2.0&quot;       NA           
+## cluster              &quot;cluster&quot;              &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;2.1.0&quot;       &quot;recommended&quot;
+## codetools            &quot;codetools&quot;            &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;0.2-16&quot;      &quot;recommended&quot;
+## colorspace           &quot;colorspace&quot;           &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.4-1&quot;       NA           
+## commonmark           &quot;commonmark&quot;           &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.7&quot;         NA           
+## compiler             &quot;compiler&quot;             &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;3.6.3&quot;       &quot;base&quot;       
+## covr                 &quot;covr&quot;                 &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;3.5.0&quot;       NA           
+## cowplot              &quot;cowplot&quot;              &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.0.0&quot;       NA           
+## crayon               &quot;crayon&quot;               &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.3.4&quot;       NA           
+## crosstalk            &quot;crosstalk&quot;            &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.1.0.1&quot;     NA           
+## curl                 &quot;curl&quot;                 &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;4.3&quot;         NA           
+## data.table           &quot;data.table&quot;           &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.12.8&quot;      NA           
+## datasets             &quot;datasets&quot;             &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;3.6.3&quot;       &quot;base&quot;       
+## DBI                  &quot;DBI&quot;                  &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.1.0&quot;       NA           
+## dbplyr               &quot;dbplyr&quot;               &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.4.3&quot;       NA           
+## DelayedArray         &quot;DelayedArray&quot;         &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;0.12.3&quot;      NA           
+## DelayedMatrixStats   &quot;DelayedMatrixStats&quot;   &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.8.0&quot;       NA           
+## desc                 &quot;desc&quot;                 &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.2.0&quot;       NA           
+## DESeq2               &quot;DESeq2&quot;               &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.26.0&quot;      NA           
+## devtools             &quot;devtools&quot;             &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;2.3.0&quot;       NA           
+## digest               &quot;digest&quot;               &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;0.6.25&quot;      NA           
+## dplyr                &quot;dplyr&quot;                &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;0.8.5&quot;       NA           
+## dqrng                &quot;dqrng&quot;                &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;0.2.1&quot;       NA           
+##                      Depends                                                                                                                                                                                                                                 
+## acepack              NA                                                                                                                                                                                                                                      
+## affy                 &quot;R (&gt;= 2.8.0), BiocGenerics (&gt;= 0.1.12), Biobase (&gt;= 2.5.5)&quot;                                                                                                                                                                            
+## affyio               &quot;R (&gt;= 2.6.0)&quot;                                                                                                                                                                                                                          
+## annotate             &quot;R (&gt;= 2.10), AnnotationDbi (&gt;= 1.27.5), XML&quot;                                                                                                                                                                                           
+## AnnotationDbi        &quot;R (&gt;= 2.7.0), methods, utils, stats4, BiocGenerics (&gt;=\n0.29.2), Biobase (&gt;= 1.17.0), IRanges&quot;                                                                                                                                         
+## AnnotationFilter     &quot;R (&gt;= 3.4.0)&quot;                                                                                                                                                                                                                          
+## ape                  &quot;R (&gt;= 3.2.0)&quot;                                                                                                                                                                                                                          
+## askpass              NA                                                                                                                                                                                                                                      
+## assertthat           NA                                                                                                                                                                                                                                      
+## backports            &quot;R (&gt;= 3.0.0)&quot;                                                                                                                                                                                                                          
+## base                 NA                                                                                                                                                                                                                                      
+## base64enc            &quot;R (&gt;= 2.9.0)&quot;                                                                                                                                                                                                                          
+## beachmat             NA                                                                                                                                                                                                                                      
+## beeswarm             NA                                                                                                                                                                                                                                      
+## BH                   NA                                                                                                                                                                                                                                      
+## bibtex               &quot;R (&gt;= 3.0.2)&quot;                                                                                                                                                                                                                          
+## Biobase              &quot;R (&gt;= 2.10), BiocGenerics (&gt;= 0.27.1), utils&quot;                                                                                                                                                                                          
+## BiocFileCache        &quot;R (&gt;= 3.4.0), dbplyr (&gt;= 1.0.0)&quot;                                                                                                                                                                                                       
+## BiocGenerics         &quot;R (&gt;= 3.6.0), methods, utils, graphics, stats, parallel&quot;                                                                                                                                                                               
+## BiocManager          NA                                                                                                                                                                                                                                      
+## BiocNeighbors        NA                                                                                                                                                                                                                                      
+## BiocParallel         &quot;methods&quot;                                                                                                                                                                                                                               
+## BiocSingular         NA                                                                                                                                                                                                                                      
+## BiocVersion          &quot;R (&gt;= 3.6.0)&quot;                                                                                                                                                                                                                          
+## biomaRt              &quot;methods&quot;                                                                                                                                                                                                                               
+## Biostrings           &quot;R (&gt;= 3.5.0), methods, BiocGenerics (&gt;= 0.31.5), S4Vectors (&gt;=\n0.21.13), IRanges, XVector (&gt;= 0.23.2)&quot;                                                                                                                                
+## bit                  &quot;R (&gt;= 2.9.2)&quot;                                                                                                                                                                                                                          
+## bit64                &quot;R (&gt;= 3.0.1), bit (&gt;= 1.1-12), utils, methods, stats&quot;                                                                                                                                                                                  
+## bitops               NA                                                                                                                                                                                                                                      
+## blob                 NA                                                                                                                                                                                                                                      
+## boot                 &quot;R (&gt;= 3.0.0), graphics, stats&quot;                                                                                                                                                                                                         
+## brew                 NA                                                                                                                                                                                                                                      
+## callr                NA                                                                                                                                                                                                                                      
+## caTools              &quot;R (&gt;= 3.6.0)&quot;                                                                                                                                                                                                                          
+## CCInx                &quot;shiny (&gt;= 1.1.0)&quot;                                                                                                                                                                                                                      
+## checkmate            &quot;R (&gt;= 3.0.0)&quot;                                                                                                                                                                                                                          
+## class                &quot;R (&gt;= 3.0.0), stats, utils&quot;                                                                                                                                                                                                            
+## cli                  &quot;R (&gt;= 2.10)&quot;                                                                                                                                                                                                                           
+## clipr                NA                                                                                                                                                                                                                                      
+## clisymbols           NA                                                                                                                                                                                                                                      
+## cluster              &quot;R (&gt;= 3.3.0)&quot;                                                                                                                                                                                                                          
+## codetools            &quot;R (&gt;= 2.1)&quot;                                                                                                                                                                                                                            
+## colorspace           &quot;R (&gt;= 3.0.0), methods&quot;                                                                                                                                                                                                                 
+## commonmark           NA                                                                                                                                                                                                                                      
+## compiler             NA                                                                                                                                                                                                                                      
+## covr                 &quot;R (&gt;= 3.1.0), methods&quot;                                                                                                                                                                                                                 
+## cowplot              &quot;R (&gt;= 3.5.0)&quot;                                                                                                                                                                                                                          
+## crayon               NA                                                                                                                                                                                                                                      
+## crosstalk            NA                                                                                                                                                                                                                                      
+## curl                 &quot;R (&gt;= 3.0.0)&quot;                                                                                                                                                                                                                          
+## data.table           &quot;R (&gt;= 3.1.0)&quot;                                                                                                                                                                                                                          
+## datasets             NA                                                                                                                                                                                                                                      
+## DBI                  &quot;methods, R (&gt;= 3.0.0)&quot;                                                                                                                                                                                                                 
+## dbplyr               &quot;R (&gt;= 3.1)&quot;                                                                                                                                                                                                                            
+## DelayedArray         &quot;R (&gt;= 3.4), methods, stats4, matrixStats, BiocGenerics (&gt;=\n0.31.5), S4Vectors (&gt;= 0.24.4), IRanges (&gt;= 2.17.3),\nBiocParallel&quot;                                                                                                        
+## DelayedMatrixStats   &quot;DelayedArray (&gt;= 0.11.1)&quot;                                                                                                                                                                                                              
+## desc                 &quot;R (&gt;= 3.1.0)&quot;                                                                                                                                                                                                                          
+## DESeq2               &quot;S4Vectors (&gt;= 0.23.18), IRanges, GenomicRanges,\nSummarizedExperiment (&gt;= 1.1.6)&quot;                                                                                                                                                      
+## devtools             &quot;R (&gt;= 3.0.2), usethis (&gt;= 1.6.0)&quot;                                                                                                                                                                                                      
+## digest               &quot;R (&gt;= 3.1.0)&quot;                                                                                                                                                                                                                          
+## dplyr                &quot;R (&gt;= 3.2.0)&quot;                                                                                                                                                                                                                          
+## dqrng                &quot;R (&gt;= 3.1.0)&quot;                                                                                                                                                                                                                          
+##                      Imports                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+## acepack              NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## affy                 &quot;affyio (&gt;= 1.13.3), BiocManager, graphics, grDevices, methods,\npreprocessCore, stats, utils, zlibbioc&quot;                                                                                                                                                                                                                                                                                                                                                                                                     
+## affyio               &quot;zlibbioc, methods&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+## annotate             &quot;Biobase, DBI, xtable, graphics, utils, stats, methods,\nBiocGenerics (&gt;= 0.13.8), RCurl&quot;                                                                                                                                                                                                                                                                                                                                                                                                                    
+## AnnotationDbi        &quot;DBI, RSQLite, S4Vectors (&gt;= 0.9.25)&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+## AnnotationFilter     &quot;utils, methods, GenomicRanges, lazyeval&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+## ape                  &quot;nlme, lattice, graphics, methods, stats, tools, utils,\nparallel, Rcpp (&gt;= 0.12.0)&quot;                                                                                                                                                                                                                                                                                                                                                                                                                         
+## askpass              &quot;sys (&gt;= 2.1)&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+## assertthat           &quot;tools&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+## backports            &quot;utils&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+## base                 NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## base64enc            NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## beachmat             &quot;methods, DelayedArray, BiocGenerics, Matrix&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+## beeswarm             &quot;stats, graphics, grDevices, utils&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+## BH                   NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## bibtex               &quot;stringr, utils&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+## Biobase              &quot;methods&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+## BiocFileCache        &quot;methods, stats, utils, dplyr, RSQLite, DBI, rappdirs, curl,\nhttr&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                          
+## BiocGenerics         &quot;methods, utils, graphics, stats, parallel&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+## BiocManager          &quot;utils&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+## BiocNeighbors        &quot;Rcpp, S4Vectors, BiocParallel, stats, methods, Matrix&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+## BiocParallel         &quot;stats, utils, futile.logger, parallel, snow&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+## BiocSingular         &quot;BiocGenerics, S4Vectors, Matrix, methods, utils, DelayedArray,\nBiocParallel, irlba, rsvd, Rcpp&quot;                                                                                                                                                                                                                                                                                                                                                                                                            
+## BiocVersion          NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## biomaRt              &quot;utils, XML, AnnotationDbi, progress, stringr, httr, openssl,\nBiocFileCache, rappdirs&quot;                                                                                                                                                                                                                                                                                                                                                                                                                      
+## Biostrings           &quot;graphics, methods, stats, utils&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+## bit                  NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## bit64                NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## bitops               NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## blob                 &quot;methods, rlang, vctrs (&gt;= 0.2.1)&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## boot                 NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## brew                 NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## callr                &quot;processx (&gt;= 3.4.0), R6, utils&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+## caTools              &quot;bitops&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+## CCInx                &quot;scales (&gt;= 1.0.0),\nRColorBrewer (&gt;= 1.1-2),\npbapply (&gt;= 1.3.4),\ngrDevices(&gt;= 3.5.1)&quot;                                                                                                                                                                                                                                                                                                                                                                                                                     
+## checkmate            &quot;backports (&gt;= 1.1.0), utils&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+## class                &quot;MASS&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+## cli                  &quot;assertthat, crayon (&gt;= 1.3.4), glue, methods, utils, fansi&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+## clipr                &quot;utils&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+## clisymbols           NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## cluster              &quot;graphics, grDevices, stats, utils&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+## codetools            NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## colorspace           &quot;graphics, grDevices, stats&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+## commonmark           NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## compiler             NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## covr                 &quot;digest, stats, utils, jsonlite, rex, httr, crayon, withr (&gt;=\n1.0.2), yaml&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                 
+## cowplot              &quot;ggplot2 (&gt; 2.2.1), grid, gtable, grDevices, methods, rlang,\nscales, utils&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                 
+## crayon               &quot;grDevices, methods, utils&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+## crosstalk            &quot;htmltools (&gt;= 0.3.6), jsonlite, lazyeval, R6&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+## curl                 NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## data.table           &quot;methods&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+## datasets             NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## DBI                  NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## dbplyr               &quot;assertthat (&gt;= 0.2.0), DBI (&gt;= 1.0.0), dplyr (&gt;= 0.8.0), glue\n(&gt;= 1.2.0), lifecycle, methods, purrr (&gt;= 0.2.5), R6 (&gt;=\n2.2.2), rlang (&gt;= 0.2.0), tibble (&gt;= 1.4.2), tidyselect (&gt;=\n0.2.4), utils&quot;                                                                                                                                                                                                                                                                                                        
+## DelayedArray         &quot;stats, Matrix&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## DelayedMatrixStats   &quot;methods, matrixStats (&gt;= 0.55.0), Matrix, S4Vectors (&gt;=\n0.17.5), IRanges, HDF5Array (&gt;= 1.7.10), BiocParallel&quot;                                                                                                                                                                                                                                                                                                                                                                                             
+## desc                 &quot;assertthat, utils, R6, crayon, rprojroot&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+## DESeq2               &quot;BiocGenerics (&gt;= 0.7.5), Biobase, BiocParallel, genefilter,\nmethods, stats4, locfit, geneplotter, ggplot2, Hmisc, Rcpp (&gt;=\n0.11.0)&quot;                                                                                                                                                                                                                                                                                                                                                                       
+## devtools             &quot;callr (&gt;= 3.4.3), cli (&gt;= 2.0.2), covr (&gt;= 3.5.0), crayon (&gt;=\n1.3.4), desc (&gt;= 1.2.0), digest (&gt;= 0.6.25), DT (&gt;= 0.13),\nellipsis (&gt;= 0.3.0), glue (&gt;= 1.4.0), git2r (&gt;= 0.26.1), httr\n(&gt;= 1.4.1), jsonlite (&gt;= 1.6.1), memoise (&gt;= 1.1.0), pkgbuild\n(&gt;= 1.0.6), pkgload (&gt;= 1.0.2), rcmdcheck (&gt;= 1.3.3), remotes\n(&gt;= 2.1.1), rlang (&gt;= 0.4.5), roxygen2 (&gt;= 7.1.0), rstudioapi\n(&gt;= 0.11), rversions (&gt;= 2.0.1), sessioninfo (&gt;= 1.1.1), stats,\ntestthat (&gt;= 2.3.2), tools, utils, withr (&gt;= 2.1.2)&quot;
+## digest               &quot;utils&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+## dplyr                &quot;ellipsis, assertthat (&gt;= 0.2.0), glue (&gt;= 1.3.0), magrittr (&gt;=\n1.5), methods, pkgconfig, R6, Rcpp (&gt;= 1.0.1), rlang (&gt;=\n0.4.0), tibble (&gt;= 2.0.0), tidyselect (&gt;= 0.2.5), utils&quot;                                                                                                                                                                                                                                                                                                                          
+## dqrng                &quot;Rcpp (&gt;= 0.12.16)&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+##                      LinkingTo                                                     
+## acepack              NA                                                            
+## affy                 &quot;preprocessCore&quot;                                              
+## affyio               NA                                                            
+## annotate             NA                                                            
+## AnnotationDbi        NA                                                            
+## AnnotationFilter     NA                                                            
+## ape                  &quot;Rcpp&quot;                                                        
+## askpass              NA                                                            
+## assertthat           NA                                                            
+## backports            NA                                                            
+## base                 NA                                                            
+## base64enc            NA                                                            
+## beachmat             NA                                                            
+## beeswarm             NA                                                            
+## BH                   NA                                                            
+## bibtex               NA                                                            
+## Biobase              NA                                                            
+## BiocFileCache        NA                                                            
+## BiocGenerics         NA                                                            
+## BiocManager          NA                                                            
+## BiocNeighbors        &quot;Rcpp, RcppAnnoy, RcppHNSW&quot;                                   
+## BiocParallel         &quot;BH&quot;                                                          
+## BiocSingular         &quot;Rcpp, beachmat&quot;                                              
+## BiocVersion          NA                                                            
+## biomaRt              NA                                                            
+## Biostrings           &quot;S4Vectors, IRanges, XVector&quot;                                 
+## bit                  NA                                                            
+## bit64                NA                                                            
+## bitops               NA                                                            
+## blob                 NA                                                            
+## boot                 NA                                                            
+## brew                 NA                                                            
+## callr                NA                                                            
+## caTools              NA                                                            
+## CCInx                NA                                                            
+## checkmate            NA                                                            
+## class                NA                                                            
+## cli                  NA                                                            
+## clipr                NA                                                            
+## clisymbols           NA                                                            
+## cluster              NA                                                            
+## codetools            NA                                                            
+## colorspace           NA                                                            
+## commonmark           NA                                                            
+## compiler             NA                                                            
+## covr                 NA                                                            
+## cowplot              NA                                                            
+## crayon               NA                                                            
+## crosstalk            NA                                                            
+## curl                 NA                                                            
+## data.table           NA                                                            
+## datasets             NA                                                            
+## DBI                  NA                                                            
+## dbplyr               NA                                                            
+## DelayedArray         &quot;S4Vectors&quot;                                                   
+## DelayedMatrixStats   NA                                                            
+## desc                 NA                                                            
+## DESeq2               &quot;Rcpp, RcppArmadillo&quot;                                         
+## devtools             NA                                                            
+## digest               NA                                                            
+## dplyr                &quot;BH, plogr (&gt;= 0.2.0), Rcpp (&gt;= 1.0.1)&quot;                       
+## dqrng                &quot;Rcpp, BH (&gt;= 1.64.0-1), sitmo (&gt;= 2.0.0)&quot;                    
+##                      Suggests                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+## acepack              &quot;testthat&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+## affy                 &quot;tkWidgets (&gt;= 1.19.0), affydata, widgetTools&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+## affyio               NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## annotate             &quot;hgu95av2.db, genefilter, Biostrings (&gt;= 2.25.10), IRanges,\nrae230a.db, rae230aprobe, tkWidgets, GO.db, org.Hs.eg.db,\norg.Mm.eg.db, hom.Hs.inp.db, humanCHRLOC, Rgraphviz, RUnit,&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+## AnnotationDbi        &quot;hgu95av2.db, GO.db, org.Sc.sgd.db, org.At.tair.db, KEGG.db,\nRUnit, TxDb.Hsapiens.UCSC.hg19.knownGene, hom.Hs.inp.db,\norg.Hs.eg.db, reactome.db, AnnotationForge, graph,\nEnsDb.Hsapiens.v75, BiocStyle, knitr&quot;                                                                                                                                                                                                                                                                                                                                                                                                                               
+## AnnotationFilter     &quot;BiocStyle, knitr, testthat, RSQLite, org.Hs.eg.db&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+## ape                  &quot;gee, expm, igraph&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+## askpass              &quot;testthat&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+## assertthat           &quot;testthat, covr&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+## backports            NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## base                 &quot;methods&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+## base64enc            NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## beachmat             &quot;testthat, BiocStyle, knitr, rmarkdown, devtools&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+## beeswarm             NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## BH                   NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## bibtex               &quot;testthat&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+## Biobase              &quot;tools, tkWidgets, ALL, RUnit, golubEsets&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+## BiocFileCache        &quot;testthat, knitr, BiocStyle, rmarkdown, rtracklayer&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+## BiocGenerics         &quot;Biobase, S4Vectors, IRanges, GenomicRanges, DelayedArray,\nBiostrings, Rsamtools, AnnotationDbi, oligoClasses, oligo,\naffyPLM, flowClust, affy, DESeq2, MSnbase, annotate, RUnit&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+## BiocManager          &quot;BiocStyle, BiocVersion, remotes, testthat, withr, curl, knitr&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+## BiocNeighbors        &quot;testthat, BiocStyle, knitr, rmarkdown, FNN, RcppAnnoy,\nRcppHNSW&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## BiocParallel         &quot;BiocGenerics, tools, foreach, BatchJobs, BBmisc, doParallel,\nRmpi, GenomicRanges, RNAseqData.HNRNPC.bam.chr14,\nTxDb.Hsapiens.UCSC.hg19.knownGene, VariantAnnotation,\nRsamtools, GenomicAlignments, ShortRead, codetools, RUnit,\nBiocStyle, knitr, batchtools, data.table&quot;                                                                                                                                                                                                                                                                                                                                                                  
+## BiocSingular         &quot;testthat, BiocStyle, knitr, rmarkdown, beachmat&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+## BiocVersion          NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## biomaRt              &quot;annotate, BiocStyle, knitr, rmarkdown, testthat&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+## Biostrings           &quot;BSgenome (&gt;= 1.13.14), BSgenome.Celegans.UCSC.ce2 (&gt;=\n1.3.11), BSgenome.Dmelanogaster.UCSC.dm3 (&gt;= 1.3.11),\nBSgenome.Hsapiens.UCSC.hg18, drosophila2probe, hgu95av2probe,\nhgu133aprobe, GenomicFeatures (&gt;= 1.3.14), hgu95av2cdf, affy\n(&gt;= 1.41.3), affydata (&gt;= 1.11.5), RUnit&quot;                                                                                                                                                                                                                                                                                                                                                           
+## bit                  NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## bit64                NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## bitops               NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## blob                 &quot;covr, crayon, pillar (&gt;= 1.2.1), testthat&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+## boot                 &quot;MASS, survival&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+## brew                 NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## callr                &quot;cliapp, covr, crayon, fansi, pingr, ps, rprojroot, spelling,\ntestthat, tibble, withr&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+## caTools              &quot;MASS, rpart&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+## CCInx                &quot;knitr (&gt;= 1.22),\nrmarkdown,\nscClustViz (&gt;= 1.0.0)&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## checkmate            &quot;R6, fastmatch, data.table (&gt;= 1.9.8), devtools, ggplot2,\nknitr, magrittr, microbenchmark, rmarkdown, testthat (&gt;=\n0.11.0), tinytest (&gt;= 1.1.0), tibble&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+## class                NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## cli                  &quot;callr, covr, htmlwidgets, knitr, mockery, rmarkdown,\nrstudioapi, prettycode (&gt;= 1.1.0), testthat, withr&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+## clipr                &quot;covr, knitr, rmarkdown, rstudioapi (&gt;= 0.5), testthat (&gt;=\n2.0.0)&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+## clisymbols           &quot;testthat&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+## cluster              &quot;MASS, Matrix&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+## codetools            NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## colorspace           &quot;datasets, utils, KernSmooth, MASS, kernlab, mvtnorm, vcd,\ntcltk, shiny, shinyjs, ggplot2, dplyr, scales, grid, png, jpeg,\nknitr, rmarkdown, RColorBrewer, rcartocolor, scico, viridis,\nwesanderson&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                         
+## commonmark           &quot;curl, testthat, xml2&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+## compiler             NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## covr                 &quot;R6, knitr, rmarkdown, htmltools, DT (&gt;= 0.2), testthat,\nrlang, rstudioapi (&gt;= 0.2), xml2 (&gt;= 1.0.0), parallel, memoise,\nmockery&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+## cowplot              &quot;Cairo, covr, dplyr, forcats, gridGraphics (&gt;= 0.4-0), knitr,\nlattice, magick, maps, PASWR, rmarkdown, testthat (&gt;= 1.0.0),\ntidyr, vdiffr (&gt;= 0.3.0), VennDiagram&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+## crayon               &quot;mockery, rstudioapi, testthat, withr&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+## crosstalk            &quot;shiny, ggplot2, testthat (&gt;= 2.1.0)&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+## curl                 &quot;spelling, testthat (&gt;= 1.0.0), knitr, jsonlite, rmarkdown,\nmagrittr, httpuv (&gt;= 1.4.4), webutils&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+## data.table           &quot;bit64, curl, R.utils, knitr, xts, nanotime, zoo, yaml&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+## datasets             NA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+## DBI                  &quot;blob, covr, hms, knitr, magrittr, rmarkdown, rprojroot,\nRSQLite (&gt;= 1.1-2), testthat, xml2&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+## dbplyr               &quot;bit64, covr, knitr, Lahman, nycflights13, RMariaDB (&gt;=\n1.0.2), rmarkdown, RPostgres (&gt;= 1.1.3), RSQLite (&gt;= 2.1.0),\ntestthat (&gt;= 2.0.0)&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+## DelayedArray         &quot;HDF5Array, genefilter, SummarizedExperiment, airway, pryr,\nDelayedMatrixStats, knitr, BiocStyle, RUnit&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+## DelayedMatrixStats   &quot;testthat, knitr, rmarkdown, covr, BiocStyle, microbenchmark,\nprofmem&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+## desc                 &quot;covr, testthat, whoami, withr&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+## DESeq2               &quot;testthat, knitr, rmarkdown, vsn, pheatmap, RColorBrewer, IHW,\napeglm, ashr, tximport, tximeta, tximportData, readr, pbapply,\nairway, pasilla (&gt;= 0.2.10)&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+## devtools             &quot;BiocManager (&gt;= 1.30.10), curl (&gt;= 4.3), foghorn (&gt;= 1.1.5),\ngmailr (&gt;= 1.0.0), knitr (&gt;= 1.28), lintr (&gt;= 2.0.1), mockery\n(&gt;= 0.4.2), pingr (&gt;= 2.0.0), MASS, pkgdown (&gt;= 1.5.1), rhub\n(&gt;= 1.1.1), rmarkdown (&gt;= 2.1), spelling (&gt;= 2.1)&quot;                                                                                                                                                                                                                                                                                                                                                                                                  
+## digest               &quot;tinytest, knitr, rmarkdown&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+## dplyr                &quot;bit64, callr, covr, crayon (&gt;= 1.3.4), DBI, dbplyr, dtplyr,\nggplot2, hms, knitr, Lahman, lubridate, MASS, mgcv,\nmicrobenchmark, nycflights13, rmarkdown, RMySQL, RPostgreSQL,\nRSQLite, testthat, withr, broom, purrr, readr&quot;                                                                                                                                                                                                                                                                                                                                                                                                                
+## dqrng                &quot;testthat, knitr, rmarkdown&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+##                      Enhances                                License                                  License_is_FOSS License_restricts_use
+## acepack              NA                                      &quot;MIT + file LICENSE&quot;                     NA              NA                   
+## affy                 NA                                      &quot;LGPL (&gt;= 2.0)&quot;                          NA              NA                   
+## affyio               NA                                      &quot;LGPL (&gt;= 2)&quot;                            NA              NA                   
+## annotate             NA                                      &quot;Artistic-2.0&quot;                           NA              NA                   
+## AnnotationDbi        NA                                      &quot;Artistic-2.0&quot;                           NA              NA                   
+## AnnotationFilter     NA                                      &quot;Artistic-2.0&quot;                           NA              NA                   
+## ape                  NA                                      &quot;GPL (&gt;= 2)&quot;                             NA              NA                   
+## askpass              NA                                      &quot;MIT + file LICENSE&quot;                     NA              NA                   
+## assertthat           NA                                      &quot;GPL-3&quot;                                  NA              NA                   
+## backports            NA                                      &quot;GPL-2 | GPL-3&quot;                          NA              NA                   
+## base                 NA                                      &quot;Part of R 3.6.3&quot;                        NA              NA                   
+## base64enc            &quot;png&quot;                                   &quot;GPL-2 | GPL-3&quot;                          NA              NA                   
+## beachmat             NA                                      &quot;GPL-3&quot;                                  NA              NA                   
+## beeswarm             NA                                      &quot;Artistic-2.0&quot;                           NA              NA                   
+## BH                   NA                                      &quot;BSL-1.0&quot;                                NA              NA                   
+## bibtex               NA                                      &quot;GPL (&gt;= 2)&quot;                             NA              NA                   
+## Biobase              NA                                      &quot;Artistic-2.0&quot;                           NA              NA                   
+## BiocFileCache        NA                                      &quot;Artistic-2.0&quot;                           NA              NA                   
+## BiocGenerics         NA                                      &quot;Artistic-2.0&quot;                           NA              NA                   
+## BiocManager          NA                                      &quot;Artistic-2.0&quot;                           NA              NA                   
+## BiocNeighbors        NA                                      &quot;GPL-3&quot;                                  NA              NA                   
+## BiocParallel         NA                                      &quot;GPL-2 | GPL-3&quot;                          NA              NA                   
+## BiocSingular         NA                                      &quot;GPL-3&quot;                                  NA              NA                   
+## BiocVersion          NA                                      &quot;Artistic-2.0&quot;                           NA              NA                   
+## biomaRt              NA                                      &quot;Artistic-2.0&quot;                           NA              NA                   
+## Biostrings           &quot;Rmpi&quot;                                  &quot;Artistic-2.0&quot;                           NA              NA                   
+## bit                  NA                                      &quot;GPL-2&quot;                                  NA              NA                   
+## bit64                NA                                      &quot;GPL-2&quot;                                  NA              NA                   
+## bitops               NA                                      &quot;GPL (&gt;= 2)&quot;                             NA              NA                   
+## blob                 NA                                      &quot;GPL-3&quot;                                  NA              NA                   
+## boot                 NA                                      &quot;Unlimited&quot;                              NA              NA                   
+## brew                 NA                                      &quot;GPL-2&quot;                                  NA              NA                   
+## callr                NA                                      &quot;MIT + file LICENSE&quot;                     NA              NA                   
+## caTools              NA                                      &quot;GPL-3&quot;                                  NA              NA                   
+## CCInx                NA                                      &quot;MIT + file LICENSE&quot;                     NA              NA                   
+## checkmate            NA                                      &quot;BSD_3_clause + file LICENSE&quot;            NA              NA                   
+## class                NA                                      &quot;GPL-2 | GPL-3&quot;                          NA              NA                   
+## cli                  NA                                      &quot;MIT + file LICENSE&quot;                     NA              NA                   
+## clipr                NA                                      &quot;GPL-3&quot;                                  NA              NA                   
+## clisymbols           NA                                      &quot;MIT + file LICENSE&quot;                     NA              NA                   
+## cluster              NA                                      &quot;GPL (&gt;= 2)&quot;                             NA              NA                   
+## codetools            NA                                      &quot;GPL&quot;                                    NA              NA                   
+## colorspace           NA                                      &quot;BSD_3_clause + file LICENSE&quot;            NA              NA                   
+## commonmark           NA                                      &quot;BSD_2_clause + file LICENSE&quot;            NA              NA                   
+## compiler             NA                                      &quot;Part of R 3.6.3&quot;                        NA              NA                   
+## covr                 NA                                      &quot;GPL-3&quot;                                  NA              NA                   
+## cowplot              NA                                      &quot;GPL-2&quot;                                  NA              NA                   
+## crayon               NA                                      &quot;MIT + file LICENSE&quot;                     NA              NA                   
+## crosstalk            NA                                      &quot;MIT + file LICENSE&quot;                     NA              NA                   
+## curl                 NA                                      &quot;MIT + file LICENSE&quot;                     NA              NA                   
+## data.table           NA                                      &quot;MPL-2.0 | file LICENSE&quot;                 NA              NA                   
+## datasets             NA                                      &quot;Part of R 3.6.3&quot;                        NA              NA                   
+## DBI                  NA                                      &quot;LGPL (&gt;= 2.1)&quot;                          NA              NA                   
+## dbplyr               NA                                      &quot;MIT + file LICENSE&quot;                     NA              NA                   
+## DelayedArray         NA                                      &quot;Artistic-2.0&quot;                           NA              NA                   
+## DelayedMatrixStats   NA                                      &quot;MIT + file LICENSE&quot;                     NA              NA                   
+## desc                 NA                                      &quot;MIT + file LICENSE&quot;                     NA              NA                   
+## DESeq2               NA                                      &quot;LGPL (&gt;= 3)&quot;                            NA              NA                   
+## devtools             NA                                      &quot;GPL (&gt;= 2)&quot;                             NA              NA                   
+## digest               NA                                      &quot;GPL (&gt;= 2)&quot;                             NA              NA                   
+## dplyr                NA                                      &quot;MIT + file LICENSE&quot;                     NA              NA                   
+## dqrng                NA                                      &quot;AGPL-3 | file LICENSE&quot;                  NA              NA                   
+##                      OS_type MD5sum NeedsCompilation Built  
+## acepack              NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## affy                 NA      NA     &quot;yes&quot;            &quot;3.6.1&quot;
+## affyio               NA      NA     &quot;yes&quot;            &quot;3.6.1&quot;
+## annotate             NA      NA     &quot;no&quot;             &quot;3.6.1&quot;
+## AnnotationDbi        NA      NA     &quot;no&quot;             &quot;3.6.1&quot;
+## AnnotationFilter     NA      NA     &quot;no&quot;             &quot;3.6.1&quot;
+## ape                  NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## askpass              NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## assertthat           NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## backports            NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## base                 NA      NA     NA               &quot;3.6.3&quot;
+## base64enc            NA      NA     &quot;yes&quot;            &quot;3.6.0&quot;
+## beachmat             NA      NA     &quot;yes&quot;            &quot;3.6.1&quot;
+## beeswarm             NA      NA     &quot;no&quot;             &quot;3.6.0&quot;
+## BH                   NA      NA     &quot;no&quot;             &quot;3.6.2&quot;
+## bibtex               NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## Biobase              NA      NA     &quot;yes&quot;            &quot;3.6.1&quot;
+## BiocFileCache        NA      NA     &quot;no&quot;             &quot;3.6.1&quot;
+## BiocGenerics         NA      NA     &quot;no&quot;             &quot;3.6.1&quot;
+## BiocManager          NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## BiocNeighbors        NA      NA     &quot;yes&quot;            &quot;3.6.2&quot;
+## BiocParallel         NA      NA     &quot;yes&quot;            &quot;3.6.2&quot;
+## BiocSingular         NA      NA     &quot;yes&quot;            &quot;3.6.2&quot;
+## BiocVersion          NA      NA     &quot;no&quot;             &quot;3.6.0&quot;
+## biomaRt              NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## Biostrings           NA      NA     &quot;yes&quot;            &quot;3.6.1&quot;
+## bit                  NA      NA     &quot;yes&quot;            &quot;3.6.2&quot;
+## bit64                NA      NA     &quot;yes&quot;            &quot;3.6.2&quot;
+## bitops               NA      NA     &quot;yes&quot;            &quot;3.6.0&quot;
+## blob                 NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## boot                 NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## brew                 NA      NA     NA               &quot;3.6.0&quot;
+## callr                NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## caTools              NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## CCInx                NA      NA     NA               &quot;3.6.3&quot;
+## checkmate            NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## class                NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## cli                  NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## clipr                NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## clisymbols           NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## cluster              NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## codetools            NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## colorspace           NA      NA     &quot;yes&quot;            &quot;3.6.1&quot;
+## commonmark           NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## compiler             NA      NA     NA               &quot;3.6.3&quot;
+## covr                 NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## cowplot              NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## crayon               NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## crosstalk            NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## curl                 NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## data.table           NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## datasets             NA      NA     NA               &quot;3.6.3&quot;
+## DBI                  NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## dbplyr               NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## DelayedArray         NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## DelayedMatrixStats   NA      NA     &quot;no&quot;             &quot;3.6.1&quot;
+## desc                 NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## DESeq2               NA      NA     &quot;yes&quot;            &quot;3.6.1&quot;
+## devtools             NA      NA     &quot;no&quot;             &quot;3.6.3&quot;
+## digest               NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## dplyr                NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+## dqrng                NA      NA     &quot;yes&quot;            &quot;3.6.3&quot;
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 232 rows ]</code></pre>
+<pre class="r"><code>#uninstall a package
+#e.g. remove.packages(ggplot2)
+#remove.packages(pkgs, lib)
+
+#Lists packages that could be updated
+old.packages()</code></pre>
+<pre><code>##    Package LibPath                              Installed Built   ReposVer Repository                            
+## ps &quot;ps&quot;    &quot;D:/Program Files/R/R-3.6.3/library&quot; &quot;1.3.2&quot;   &quot;3.6.3&quot; &quot;1.3.3&quot;  &quot;https://cran.rstudio.com/src/contrib&quot;</code></pre>
+<pre class="r"><code>#Update all old packages
+#R will likely ask you questions about which versions to install</code></pre>
+<pre class="r"><code>update.packages()</code></pre>
+</div>
+<div id="package-documentation" class="section level1">
+<h1>Package documentation</h1>
+<ul>
+<li>Website
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/kinship2/index.html" class="uri">https://cran.r-project.org/web/packages/kinship2/index.html</a></li>
+</ul></li>
+<li>Vignette
+<ul>
+<li>PDF file taking you through an example of the package functionality that you can follow</li>
+<li>The first documentation you should review for any package</li>
+</ul></li>
+</ul>
+</div>
+<div id="example-kinship2-package" class="section level1">
+<h1>Example: kinship2 package</h1>
+<pre class="r"><code>install.packages(&quot;kinship2&quot;)</code></pre>
+<pre class="r"><code>library(kinship2)</code></pre>
+<pre><code>## Loading required package: Matrix</code></pre>
+<pre><code>## Loading required package: quadprog</code></pre>
+<pre class="r"><code>data(sample.ped) #load sample data
+head(sample.ped)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["ped"],"name":[1],"type":["int"],"align":["right"]},{"label":["id"],"name":[2],"type":["int"],"align":["right"]},{"label":["father"],"name":[3],"type":["int"],"align":["right"]},{"label":["mother"],"name":[4],"type":["int"],"align":["right"]},{"label":["sex"],"name":[5],"type":["int"],"align":["right"]},{"label":["affected"],"name":[6],"type":["int"],"align":["right"]},{"label":["avail"],"name":[7],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"101","3":"0","4":"0","5":"1","6":"0","7":"0","_rn_":"1"},{"1":"1","2":"102","3":"0","4":"0","5":"2","6":"1","7":"0","_rn_":"2"},{"1":"1","2":"103","3":"135","4":"136","5":"1","6":"1","7":"0","_rn_":"3"},{"1":"1","2":"104","3":"0","4":"0","5":"2","6":"0","7":"0","_rn_":"4"},{"1":"1","2":"105","3":"0","4":"0","5":"1","6":"NA","7":"0","_rn_":"5"},{"1":"1","2":"106","3":"0","4":"0","5":"2","6":"NA","7":"0","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>pedAll = pedigree(id=sample.ped$id, dadid=sample.ped$father, momid=sample.ped$mother, sex=sample.ped$sex, famid=sample.ped$ped)
+ped2basic &lt;- pedAll[&#39;2&#39;]
+plot(ped2basic)</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>df2 &lt;- sample.ped[sample.ped$ped==2,]
+id2 &lt;- paste(df2$id, c(&quot;John&quot;, &quot;Linda&quot;, &quot;Jack&quot;, &quot;Rachel&quot;, &quot;Joe&quot;, &quot;Deb&quot;, &quot;Lucy&quot;, &quot;Ken&quot;, &quot;Barb&quot;, &quot;Mike&quot;, &quot;Matt&quot;, &quot;Mindy&quot;, &quot;Mark&quot;, &quot;George&quot;), sep=&quot;\n&quot;)
+plot(ped2basic, col=ifelse(df2$avail, 2, 1), id=id2)</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+</div>
+<div id="bioconductor" class="section level1">
+<h1>Bioconductor</h1>
+<ul>
+<li><p>Over 1000 bioinformatics packages</p></li>
+<li><p>Gene expression</p>
+<ul>
+<li>Import Affymetrix, Illumina, Nimblegen, Agilent, and other platforms. Perform quality assessment, normalization, differential expression, clustering, classification, gene set enrichment, genetical genomics and other workflows for expression, exon, copy number, SNP, methylation and other assays. Access GEO, ArrayExpress, Biomart, UCSC, and other community resources.</li>
+</ul></li>
+<li><p>High Throughput Assays</p>
+<ul>
+<li>Import, transform, edit, analyze and visualize flow cytometric, mass spec, HTqPCR, cell-based, and other assays.</li>
+</ul></li>
+<li><p>Sequence Data</p>
+<ul>
+<li>Import fasta, fastq, ELAND, MAQ, BWA, Bowtie, BAM, gff, bed, wig, and other sequence formats. Trim, transform, align, and manipulate sequences. Perform quality assessment, ChIP-seq, differential expression, RNA-seq, and other workflows. Access the Sequence Read Archive.</li>
+</ul></li>
+<li><p>Annotation</p>
+<ul>
+<li>Use microarray probe, gene, pathway, gene ontology, homology and other annotations. Access GO, KEGG, NCBI, Biomart, UCSC, vendor, and other sources.</li>
+</ul></li>
+</ul>
+</div>
+<div id="creating-your-own-package" class="section level1">
+<h1>Creating your own package</h1>
+<pre class="r"><code>#Install needed packages
+install.packages(&quot;devtools&quot;)
+library(&quot;devtools&quot;)
+install.packages(&quot;roxygen2&quot;)
+library(roxygen2)</code></pre>
+<pre class="r"><code>#Create a directory for your package
+setwd(&quot;parent_directory&quot;)
+#Create the directory &#39;mypackage&#39; inside of &#39;parent_directory&#39;
+create(&quot;mypackage&quot;)</code></pre>
+<ul>
+<li>Save functions in a file in:
+<ul>
+<li>parent_directory/mypackage/R</li>
+<li>Example – copy the following files into this folder
+<ul>
+<li>lengthfunction.r</li>
+<li>regexfunction.r</li>
+</ul></li>
+<li>Can also save each function as a separate file for organizational purposes</li>
+</ul></li>
+<li>Write documentation
+<ul>
+<li>Edit DESCRIPTION text file</li>
+<li>Write documentation for each function using
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/roxygen2/" class="uri">https://cran.r-project.org/web/packages/roxygen2/</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<pre class="r"><code>#Function documentation example
+#&#39; The length of a string (in characters).
+#&#39;
+#&#39; @param string input character vector
+#&#39; @return numeric vector giving number of characters in each element of the
+#&#39;   character vector.  Missing strings have missing length.
+#&#39; @seealso \code{\link{nchar}} which this function wraps
+#&#39; @export
+#&#39; @examples
+#&#39; str_length(letters)
+#&#39; str_length(c(&quot;i&quot;, &quot;like&quot;, &quot;programming&quot;, NA))
+str_length &lt;- function(string) {
+  string &lt;- check_string(string)
+  nc &lt;- nchar(string, allowNA = TRUE)
+  is.na(nc) &lt;- is.na(string)
+  nc
+}</code></pre>
+<pre class="r"><code>#note: setwd resets if you run it just one line at a time. You need to run the whole chunk all at once.
+
+#Generate the documentation files
+setwd(&quot;./mypackage&quot;)  #(your package directory)
+document()
+#Install your package
+setwd(&quot;..&quot;)   #(go to parent directory)
+install(&quot;mypackage&quot;)
+#R copies your package to an internal directory
+#Load (or activate) your package
+library(mypackage)</code></pre>
+<pre class="r"><code>#Check that your package is working
+help(package=mypackage)
+ls(&quot;package:mypackage&quot;)
+DNA = &quot;ACACGTACTGATCGGGATATTAG&quot;
+allMatchingStrings(&quot;A.A&quot;, DNA)
+str_length(DNA)</code></pre>
+</div>
+<div id="exercise-bioconductor-package-10-minutes" class="section level1">
+<h1>Exercise: Bioconductor package (10 minutes)</h1>
+<blockquote>
+<p>Gene expression analysis example</p>
+</blockquote>
+<blockquote>
+<p>Go to: <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE13924" class="uri">http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE13924</a></p>
+</blockquote>
+<blockquote>
+<p>Download cel files (2.2MB) (2 arrays)</p>
+</blockquote>
+<blockquote>
+<p>cel files are gene expression microarray scanned image files</p>
+</blockquote>
+<blockquote>
+<p>From “Global transcriptional response of Saccharomyces cerevisiae following the deletion of succinate dehydrogenase” (selected because it is small)</p>
+</blockquote>
+<blockquote>
+<p>Identified using the following search of GEO: <a href="http://www.ncbi.nlm.nih.gov/gds" class="uri">http://www.ncbi.nlm.nih.gov/gds</a> with “GPL90[ACCN] AND gse[ETYP] AND cel[suppFile]” – sort from smallest to largest, download the smallest experiment (2 arrays)</p>
+</blockquote>
+<blockquote>
+<p>Install the affy package</p>
+</blockquote>
+<pre class="r"><code>#Review the following code and run it, command by command
+
+#install the affy package
+# source(&quot;http://www.bioconductor.org/biocLite.R&quot;)
+# biocLite(&quot;affy&quot;)
+# ^ deprecated method
+install.packages(&quot;BiocManager&quot;)
+BiocManager::install(&quot;affy&quot;)</code></pre>
+<pre class="r"><code>#The package contains functions for exploratory oligonucleotide array analysis
+library(affy)</code></pre>
+<pre><code>## Loading required package: BiocGenerics</code></pre>
+<pre><code>## Loading required package: parallel</code></pre>
+<pre><code>## 
+## Attaching package: &#39;BiocGenerics&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:parallel&#39;:
+## 
+##     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ, clusterExport, clusterMap, parApply, parCapply, parLapply,
+##     parLapplyLB, parRapply, parSapply, parSapplyLB</code></pre>
+<pre><code>## The following object is masked from &#39;package:Matrix&#39;:
+## 
+##     which</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     IQR, mad, sd, var, xtabs</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     anyDuplicated, append, as.data.frame, basename, cbind, colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,
+##     get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
+##     Position, rank, rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply, union, unique, unsplit, which, which.max,
+##     which.min</code></pre>
+<pre><code>## Loading required package: Biobase</code></pre>
+<pre><code>## Welcome to Bioconductor
+## 
+##     Vignettes contain introductory material; view with &#39;browseVignettes()&#39;. To cite Bioconductor, see &#39;citation(&quot;Biobase&quot;)&#39;,
+##     and for packages &#39;citation(&quot;pkgname&quot;)&#39;.</code></pre>
+<pre class="r"><code>#loads all .cel files in a directory
+Data &lt;- ReadAffy(&quot;../data/GSE13924_RAW/GSM350771.CEL.gz&quot;,
+                 &quot;../data/GSE13924_RAW/GSM350772.CEL.gz&quot;)
+Data</code></pre>
+<pre><code>## Warning: replacing previous import &#39;AnnotationDbi::tail&#39; by &#39;utils::tail&#39; when loading &#39;ygs98cdf&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;AnnotationDbi::head&#39; by &#39;utils::head&#39; when loading &#39;ygs98cdf&#39;</code></pre>
+<pre><code>## </code></pre>
+<pre><code>## AffyBatch object
+## size of arrays=534x534 features (18 kb)
+## cdf=YG_S98 (9335 affyids)
+## number of samples=2
+## number of genes=9335
+## annotation=ygs98
+## notes=</code></pre>
+<pre class="r"><code>#what do the data distributions look like?
+boxplot(Data)</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<pre class="r"><code>hist(Data[,1:2])</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
+<pre class="r"><code>#Check out what the cel images look like
+par(mfrow=c(1,2),mar=c(1,1,1,1))
+image(Data)</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="r"><code>#perform probe quality analysis
+deg=AffyRNAdeg(Data)
+names(deg)</code></pre>
+<pre><code>## [1] &quot;N&quot;               &quot;sample.names&quot;    &quot;means.by.number&quot; &quot;ses&quot;             &quot;slope&quot;           &quot;pvalue&quot;</code></pre>
+<pre class="r"><code>str(deg)</code></pre>
+<pre><code>## List of 6
+##  $ N              : int 7835
+##  $ sample.names   : chr [1:2] &quot;GSM350771.CEL.gz&quot; &quot;GSM350772.CEL.gz&quot;
+##  $ means.by.number: num [1:2, 1:16] 6.87 6.26 6.88 6.26 6.86 ...
+##  $ ses            : num [1:2, 1:16] 0.019 0.0174 0.0188 0.0173 0.0184 ...
+##  $ slope          : num [1:2] -0.00256 -0.06356
+##  $ pvalue         : num [1:2] 0.984 0.542</code></pre>
+<pre class="r"><code>summaryAffyRNAdeg(deg)</code></pre>
+<pre><code>##        GSM350771.CEL.gz GSM350772.CEL.gz
+## slope          -0.00256          -0.0636
+## pvalue          0.98400           0.5420</code></pre>
+<pre class="r"><code>plotAffyRNAdeg(deg)</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<pre class="r"><code>#Correct background and normalize, log2 values result
+eset &lt;- rma(Data)</code></pre>
+<pre><code>## Background correcting
+## Normalizing
+## Calculating Expression</code></pre>
+<pre class="r"><code>eset</code></pre>
+<pre><code>## ExpressionSet (storageMode: lockedEnvironment)
+## assayData: 9335 features, 2 samples 
+##   element names: exprs 
+## protocolData
+##   sampleNames: GSM350771.CEL.gz GSM350772.CEL.gz
+##   varLabels: ScanDate
+##   varMetadata: labelDescription
+## phenoData
+##   sampleNames: GSM350771.CEL.gz GSM350772.CEL.gz
+##   varLabels: sample
+##   varMetadata: labelDescription
+## featureData: none
+## experimentData: use &#39;experimentData(object)&#39;
+## Annotation: ygs98</code></pre>
+<pre class="r"><code>#save the results - normalized expression data
+write.exprs(eset, file=&quot;mydata.txt&quot;)</code></pre>
+<pre class="r"><code>#view the expression data in different ways
+par(mfrow=c(1,1))
+dim(exprs(eset))</code></pre>
+<pre><code>## [1] 9335    2</code></pre>
+<pre class="r"><code>boxplot(exprs(eset))</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<pre class="r"><code>hist(exprs(eset))</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-19-2.png" width="672" /></p>
+<pre class="r"><code># featureNames(eset)
+exprs(eset[1,c(1,2)])</code></pre>
+<pre><code>##          GSM350771.CEL.gz GSM350772.CEL.gz
+## 10000_at          1.34052         1.990771</code></pre>
+<pre class="r"><code>#compute the log fold change
+logFoldChange = exprs(eset[,1])-exprs(eset[,2])
+
+#explore the fold change distributions
+hist(logFoldChange)</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<pre class="r"><code>plot(logFoldChange,pch=&quot;.&quot;)</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-20-2.png" width="672" /></p>
+<pre class="r"><code>str(logFoldChange)</code></pre>
+<pre><code>##  num [1:9335, 1] -0.65 0.176 -0.506 0.04 -0.339 ...
+##  - attr(*, &quot;dimnames&quot;)=List of 2
+##   ..$ : chr [1:9335] &quot;10000_at&quot; &quot;10001_at&quot; &quot;10002_i_at&quot; &quot;10003_f_at&quot; ...
+##   ..$ : chr &quot;GSM350771.CEL.gz&quot;</code></pre>
+<pre class="r"><code>plot(sort(logFoldChange))</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-20-3.png" width="672" /></p>
+<pre class="r"><code>#plot heatmap of first 100 probes
+heatmap(exprs(eset[1:100,]))</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<pre class="r"><code>#find the most differentially expressed probes
+rownames(logFoldChange)[logFoldChange&gt;4 | logFoldChange &lt; -2]</code></pre>
+<pre><code>##  [1] &quot;10194_at&quot;         &quot;10294_at&quot;         &quot;10470_at&quot;         &quot;10825_at&quot;         &quot;10876_at&quot;         &quot;10997_at&quot;         &quot;11133_at&quot;        
+##  [8] &quot;11213_at&quot;         &quot;11237_at&quot;         &quot;11297_at&quot;         &quot;3096_f_at&quot;        &quot;3139_f_at&quot;        &quot;3310_s_at&quot;        &quot;3326_at&quot;         
+## [15] &quot;3451_f_at&quot;        &quot;3668_f_at&quot;        &quot;3807_s_at&quot;        &quot;3849_f_at&quot;        &quot;3853_f_at&quot;        &quot;3864_i_at&quot;        &quot;4100_at&quot;         
+## [22] &quot;4114_at&quot;          &quot;4121_at&quot;          &quot;4129_at&quot;          &quot;4274_at&quot;          &quot;4506_at&quot;          &quot;4651_at&quot;          &quot;4692_f_at&quot;       
+## [29] &quot;4778_at&quot;          &quot;4811_at&quot;          &quot;5089_at&quot;          &quot;5359_at&quot;          &quot;5603_at&quot;          &quot;5899_i_at&quot;        &quot;5934_at&quot;         
+## [36] &quot;5953_at&quot;          &quot;6556_at&quot;          &quot;6730_at&quot;          &quot;6740_at&quot;          &quot;6764_g_at&quot;        &quot;6953_at&quot;          &quot;6969_at&quot;         
+## [43] &quot;7042_at&quot;          &quot;7077_at&quot;          &quot;7381_at&quot;          &quot;7458_i_at&quot;        &quot;7513_f_at&quot;        &quot;7544_at&quot;          &quot;8192_at&quot;         
+## [50] &quot;8268_at&quot;          &quot;8388_at&quot;          &quot;8513_at&quot;          &quot;8557_at&quot;          &quot;8678_at&quot;          &quot;8752_f_at&quot;        &quot;8797_f_at&quot;       
+## [57] &quot;8843_at&quot;          &quot;8844_at&quot;          &quot;8850_at&quot;          &quot;8896_at&quot;          &quot;9124_at&quot;          &quot;9135_at&quot;          &quot;9196_s_at&quot;       
+## [64] &quot;9198_s_at&quot;        &quot;9252_at&quot;          &quot;9259_at&quot;          &quot;9262_at&quot;          &quot;9633_at&quot;          &quot;AFFX-18srRnab_at&quot;</code></pre>
+<pre class="r"><code>length(rownames(logFoldChange)[logFoldChange&gt;3])</code></pre>
+<pre><code>## [1] 54</code></pre>
+<pre class="r"><code>#save the results be loaded into another program e.g. a spreadsheet
+write.table(logFoldChange, file=&quot;test.txt&quot;, sep=&quot;\t&quot;)</code></pre>
+</div>
+<div id="exercise-solution-5-minutes" class="section level1">
+<h1>Exercise solution (5 minutes)</h1>
+</div>
+<div id="exercise-gene-expression-and-r-practice-10-minutes" class="section level1">
+<h1>Exercise: Gene expression and R practice (10 minutes)</h1>
+<blockquote>
+<p>Based on the gene expression array data explored in the previous exercise:</p>
+</blockquote>
+<blockquote>
+<p>Plot normalized expression values from both arrays against each other</p>
+</blockquote>
+<blockquote>
+<p>Compare the boxplots of both arrays</p>
+</blockquote>
+<blockquote>
+<p>Compare the histograms of both arrays</p>
+</blockquote>
+<blockquote>
+<p>What percentage of probe sets are under-expressed in the fold change table?</p>
+</blockquote>
+</div>
+<div id="exercise-solution-5-minutes-1" class="section level1">
+<h1>Exercise solution (5 minutes)</h1>
+<pre class="r"><code>dim(exprs(eset))</code></pre>
+<pre><code>## [1] 9335    2</code></pre>
+<pre class="r"><code>plot(exprs(eset))</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<pre class="r"><code>par(mar=c(3,3,2,1),mgp=2:0)
+plot(exprs(eset)[,1],exprs(eset)[,2],
+     xlab=&quot;Sample1&quot;,ylab=&quot;Sample2&quot;,
+     main=&quot;Gene expression comparison&quot;,
+     pch=&quot;.&quot;,
+     xlim=range(exprs(eset)),
+     ylim=range(exprs(eset)))</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
+<pre class="r"><code>range(exprs(eset))</code></pre>
+<pre><code>## [1]  0.6119317 13.7392865</code></pre>
+<pre class="r"><code>boxplot(exprs(eset),log=&quot;y&quot;)</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-23-3.png" width="672" /></p>
+<pre class="r"><code>par(mfrow=c(2,1),mar=c(3,3,1,1))
+hist(exprs(eset)[,1],
+     xlab=colnames(exprs(eset))[1],
+     main=NA,
+     xlim=range(exprs(eset)))
+hist(exprs(eset)[,2],
+     xlab=colnames(exprs(eset))[2],
+     main=NA,
+     xlim=range(exprs(eset)))</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-23-4.png" width="672" /></p>
+<pre class="r"><code>par(mfrow=c(1,1),mar=c(3,3,2,1))
+hist(exprs(eset)[,1],
+     xlim=range(exprs(eset)),
+     ylim=c(0,2000),
+     col=scales::alpha(&quot;red&quot;,0.5),
+     main=&quot;Gene expression comparison&quot;,
+     xlab=&quot;Normalized gene expression&quot;)
+hist(exprs(eset)[,2],
+     xlim=range(exprs(eset)),
+     ylim=c(0,2000),
+     col=scales::alpha(&quot;blue&quot;,0.5),
+     add=T)
+legend(&quot;topright&quot;,bty=&quot;n&quot;,
+       legend=colnames(exprs(eset)),
+       fill=c(&quot;red&quot;,&quot;blue&quot;))</code></pre>
+<p><img src="mod8_files/figure-html/unnamed-chunk-23-5.png" width="672" /></p>
+<hr />
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
