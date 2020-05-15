@@ -2,8 +2,6 @@
 title: "Module 8"
 ---
 
-# Module 8
-
 The Book of R: Appendix A (packages)
 
 ***
