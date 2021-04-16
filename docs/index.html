@@ -13,6 +13,7 @@
 
 <title>Module 1</title>
 
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -27,6 +28,15 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -72,6 +82,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 
 
@@ -390,16 +401,13 @@ div.tocify {
 </div>
 
 
+<blockquote>
+<p>Updated 2021/04/16</p>
+</blockquote>
 <p>The Book of R: Chapter 1, Appendix B, chapter 2.1, 2.2</p>
 <hr />
-<div id="commands-or-functions" class="section level1">
-<h1>Commands (or functions)</h1>
-<div id="key-programming-concept" class="section level3">
-<h3>Key Programming Concept</h3>
-<hr />
-</div>
-<div id="commands-in-r" class="section level2">
-<h2>Commands in R</h2>
+<div id="commands" class="section level1">
+<h1>Commands</h1>
 <blockquote>
 <p>print(“hello”)</p>
 </blockquote>
@@ -414,10 +422,8 @@ div.tocify {
 <pre class="r"><code>cat(&quot;hello&quot;, &quot;world&quot;)</code></pre>
 <pre><code>## hello world</code></pre>
 <hr />
-</div>
-</div>
-<div id="commands-in-r-1" class="section level1">
-<h1>Commands in R</h1>
+<div id="commands-in-r" class="section level2">
+<h2>Commands in R</h2>
 <ul>
 <li><strong>Arguments</strong> can be passed flexibly</li>
 </ul>
@@ -442,14 +448,8 @@ div.tocify {
 <pre><code>## [1] 10  9  8  7  6  5</code></pre>
 <hr />
 </div>
+</div>
 <div id="variables" class="section level1">
-<h1>Variables</h1>
-<div id="key-programming-concept-1" class="section level3">
-<h3>Key Programming Concept</h3>
-<hr />
-</div>
-</div>
-<div id="variables-1" class="section level1">
 <h1>Variables</h1>
 <ul>
 <li>Variables are named places to store values</li>
@@ -481,9 +481,8 @@ sequence1=“ATTTCA”<br />
 <a href="mailto:year@2008" class="email">year@2008</a> = 2008<br />
 gen2str = 1</p>
 </blockquote>
-</div>
-<div id="variable-assignment-and-types" class="section level1">
-<h1>Variable assignment and types</h1>
+<div id="variable-assignment-and-types" class="section level2">
+<h2>Variable assignment and types</h2>
 <ul>
 <li>We assign a value to a variable using the assignment operator</li>
 </ul>
@@ -520,12 +519,10 @@ logical4</code></pre>
 number = &quot;string&quot;
 number</code></pre>
 <pre><code>## [1] &quot;string&quot;</code></pre>
-<pre class="r"><code>try({
-  string = string + 1
-},silent=F)</code></pre>
-<pre><code>## Error in string + 1 : non-numeric argument to binary operator</code></pre>
-<pre class="r"><code>#why is there an error when you try to run this code? Note: R only figures this out when you try to run the code, not when you&#39;re writing it, so you need to be aware of the variable types you&#39;re using when you&#39;re writing code
-string</code></pre>
+<pre class="r"><code>string = string + 1</code></pre>
+<p>why is there an error when you try to run this code?<br />
+Note: R only figures this out when you try to run the code, not when you’re writing it, so you need to be aware of the variable types you’re using when you’re writing code</p>
+<pre class="r"><code>string</code></pre>
 <pre><code>## [1] &quot;five&quot;</code></pre>
 <ul>
 <li>All programming languages distinguish different variable types.
@@ -536,8 +533,8 @@ string</code></pre>
 </ul></li>
 </ul>
 </div>
-<div id="variable-types" class="section level1">
-<h1>Variable types</h1>
+<div id="variable-types" class="section level2">
+<h2>Variable types</h2>
 <ul>
 <li>Strictly speaking
 <ul>
@@ -546,6 +543,7 @@ string</code></pre>
 </ul></li>
 <li>In practice, R is lenient and converts variables if possible</li>
 </ul>
+</div>
 </div>
 <div id="special-characters" class="section level1">
 <h1>Special characters</h1>
@@ -613,19 +611,36 @@ cat(&quot;Separated\tby\ttabs&quot;)</code></pre>
 <li>Save your work as sum.r</li>
 <li>Run it in the R console</li>
 </ul>
-<div id="exercise-solution-5-minutes" class="section level3">
-<h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>number1 &lt;- 5
-number2 &lt;- 12
-
-print(number1 + number2)</code></pre>
-<pre><code>## [1] 17</code></pre>
-<pre class="r"><code>print(number1 * number2)</code></pre>
-<pre><code>## [1] 60</code></pre>
-<pre class="r"><code>print(number1 / number2)</code></pre>
-<pre><code>## [1] 0.4166667</code></pre>
+<div id="exercise-solution-5-minutes" class="section level2">
+<h2>Exercise solution (5 minutes)</h2>
+<blockquote>
+<p>File -&gt; New File -&gt; R script</p>
+</blockquote>
+<pre><code>number1 &lt;- 5
+number2 &lt;- 15
+print(number1 + number2)
+print(number1 * number2)
+print(number1 / number2)</code></pre>
+<blockquote>
+<p>File -&gt; Save As -&gt; Sum.R<br />
+(save in the same directory as the R notebook so that the ‘relative filepath’ below works)</p>
+</blockquote>
+<pre class="r"><code>source(&quot;sum.R&quot;)</code></pre>
+<pre><code>## [1] 20
+## [1] 75
+## [1] 0.3333333</code></pre>
 <hr />
 </div>
+</div>
+<div id="assignment-1-hints" class="section level1">
+<h1>Assignment 1 hints:</h1>
+<p>Please <strong>do not</strong> submit Word documents or any rich text files as part of your assignment submission.<br />
+Each assignment should be done in its own directory, and <em>everything</em> needed for the assignment, including input data files, should be in that directory. You will zip up the whole directory as a tarball (see the end of assignment 1 for detailed instructions) and submit that.<br />
+Test your code! I will be unzipping your directory, and running your submitted script in the directory you submitted. You should try the same (in a new R session) prior to submitting to make sure everything works. For assignment 1, I expect two text files (as well as the relevant input and output files):<br />
+- one for the first part that includes shell commands and some <em>commented out</em> <strong>short</strong> answers.<br />
+- the second is the R script for the second part.<br />
+Both can be made in RStudio! File -&gt; New File -&gt; Shell script to make a new shell script, and Tools -&gt; Terminal -&gt; New Terminal to open a bash terminal to run your shell commands. Ctrl+Enter will run the current line in the console / terminal.</p>
+<hr />
 </div>
 
 
@@ -639,7 +654,7 @@ print(number1 + number2)</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -678,7 +693,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

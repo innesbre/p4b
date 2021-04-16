@@ -2,18 +2,13 @@
 title: "Module 1"
 ---
 
+> Updated 2021/04/16
 
 The Book of R: Chapter 1, Appendix B, chapter 2.1, 2.2
 
 *** 
 
-# Commands (or functions)
-
-### Key Programming Concept
-
-***
-
-## Commands in R
+# Commands
 
 >print("hello")
 
@@ -32,11 +27,11 @@ cat("hello", "world")
 
 ***
 
-# Commands in R
+## Commands in R
 
 * **Arguments** can be passed flexibly
 
-```{r,eval=FALSE,include=TRUE}
+```{r, eval=F}
 help(seq)
 ```
 
@@ -64,19 +59,12 @@ seq(from=10, to=5)
 
 # Variables
 
-### Key Programming Concept
-
-***
-
-# Variables
 
 * Variables are named places to store values
 
 ```{r}
 x = 5
 x
-
-
 ```
 
 * Variable names
@@ -99,7 +87,7 @@ sequence1="ATTTCA"
 year@2008 = 2008  
 gen2str = 1
 
-# Variable assignment and types
+## Variable assignment and types
 
 * We assign a value to a variable using the assignment operator
 
@@ -136,20 +124,25 @@ logical4
 
 number = "string"
 number
+```
 
-try({
-  string = string + 1
-},silent=F)
-#why is there an error when you try to run this code? Note: R only figures this out when you try to run the code, not when you're writing it, so you need to be aware of the variable types you're using when you're writing code
+```{r, eval=F}
+string = string + 1
+```
+why is there an error when you try to run this code?  
+Note: R only figures this out when you try to run the code, not when you're writing it, so you need to be aware of the variable types you're using when you're writing code
+
+```{r}
 string
 ```
+
 
 * All programming languages distinguish different variable types.
     * Numbers (integers, various non-integers)
     * Strings (=text, zero or more text characters)
     * Various others (e.g. vectors, matrices – later)
 
-# Variable types
+## Variable types
 
 * Strictly speaking
     * Arithmetic operations are only defined for numbers
@@ -212,17 +205,33 @@ cat("Separated\tby\ttabs")
 * Save your work as sum.r
 * Run it in the R console
 
-### Exercise solution (5 minutes)
+## Exercise solution (5 minutes)
 
-```{r}
+> File -> New File -> R script
+
+```
 number1 <- 5
-number2 <- 12
-
+number2 <- 15
 print(number1 + number2)
 print(number1 * number2)
 print(number1 / number2)
+```
+> File -> Save As -> Sum.R  
+> (save in the same directory as the R notebook so that the 'relative filepath' below works)
 
+```{r}
+source("sum.R")
 ```
 
 ***
 
+# Assignment 1 hints:  
+Please **do not** submit Word documents or any rich text files as part of your assignment submission.  
+Each assignment should be done in its own directory, and *everything* needed for the assignment, including input data files, should be in that directory.  You will zip up the whole directory as a tarball (see the end of assignment 1 for detailed instructions) and submit that.  
+Test your code!  I will be unzipping your directory, and running your submitted script in the directory you submitted.  You should try the same (in a new R session) prior to submitting to make sure everything works.
+For assignment 1, I expect two text files (as well as the relevant input and output files):  
+- one for the first part that includes shell commands and some *commented out* **short** answers.  
+- the second is the R script for the second part.  
+Both can be made in RStudio!  File -> New File -> Shell script to make a new shell script, and Tools -> Terminal -> New Terminal to open a bash terminal to run your shell commands.  Ctrl+Enter will run the current line in the console / terminal.  
+
+***

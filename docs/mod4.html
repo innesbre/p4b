@@ -13,6 +13,7 @@
 
 <title>Module 4</title>
 
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -27,6 +28,15 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -72,6 +82,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 
 
@@ -431,26 +442,6 @@ div.tocify {
 </blockquote>
 <div id="exercise-solution-5-minutes" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>ourdf &lt;- read.table(&quot;../data/gene_condition_source_id.txt&quot;,
-                    sep=&quot;\t&quot;,header=T,quote=&quot;&quot;,comment.char=&quot;&quot;,
-                    as.is=T)
-ourdf[grep(&quot;TP53&quot;,ourdf$AssociatedGenes),]</code></pre>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X.GeneID"],"name":[1],"type":["int"],"align":["right"]},{"label":["AssociatedGenes"],"name":[2],"type":["chr"],"align":["left"]},{"label":["RelatedGenes"],"name":[3],"type":["chr"],"align":["left"]},{"label":["ConceptID"],"name":[4],"type":["chr"],"align":["left"]},{"label":["DiseaseName"],"name":[5],"type":["chr"],"align":["left"]},{"label":["SourceName"],"name":[6],"type":["chr"],"align":["left"]},{"label":["SourceID"],"name":[7],"type":["chr"],"align":["left"]},{"label":["DiseaseMIM"],"name":[8],"type":["int"],"align":["right"]},{"label":["LastUpdated"],"name":[9],"type":["chr"],"align":["left"]}],"data":[{"1":"7157","2":"TP53","3":"","4":"C0029463","5":"Osteosarcoma","6":"Human Phenotype Ontology","7":"HP:0002669","8":"259500","9":"16 Feb 2016","_rn_":"10344"},{"1":"7157","2":"TP53","3":"","4":"C0029463","5":"Osteosarcoma","6":"Office of Rare Diseases","7":"7284","8":"259500","9":"16 Feb 2016","_rn_":"10345"},{"1":"7157","2":"TP53","3":"","4":"C0029463","5":"Osteosarcoma","6":"SNOMED CT","7":"21708004","8":"259500","9":"16 Feb 2016","_rn_":"10346"},{"1":"7157","2":"TP53","3":"","4":"C0205770","5":"Choroid plexus papilloma","6":"Human Phenotype Ontology","7":"HP:0200022","8":"260500","9":"16 Feb 2016","_rn_":"10347"},{"1":"7157","2":"TP53","3":"","4":"C0205770","5":"Choroid plexus papilloma","6":"Office of Rare Diseases","7":"4214","8":"260500","9":"16 Feb 2016","_rn_":"10348"},{"1":"7157","2":"TP53","3":"","4":"C0205770","5":"Choroid plexus papilloma","6":"SNOMED CT","7":"18021007","8":"260500","9":"16 Feb 2016","_rn_":"10349"},{"1":"7157","2":"TP53","3":"","4":"C0235974","5":"Carcinoma of pancreas","6":"SNOMED CT","7":"372142002","8":"260350","9":"16 Feb 2016","_rn_":"10350"},{"1":"7157","2":"TP53","3":"","4":"C0346153","5":"Familial cancer of breast","6":"SNOMED CT","7":"254843006","8":"114480","9":"16 Feb 2016","_rn_":"10351"},{"1":"7157","2":"TP53","3":"","4":"C0699790","5":"Carcinoma of colon","6":"SNOMED CT","7":"269533000","8":"114500","9":"16 Feb 2016","_rn_":"10352"},{"1":"7157","2":"TP53","3":"","4":"C1835398","5":"Li-Fraumeni syndrome 1","6":"NCBI curation","7":"","8":"151623","9":"16 Feb 2016","_rn_":"10353"},{"1":"7157","2":"TP53","3":"","4":"C1859972","5":"Adrenocortical carcinoma, hereditary","6":"NCBI curation","7":"","8":"202300","9":"16 Feb 2016","_rn_":"10354"},{"1":"7157","2":"TP53","3":"","4":"C2239176","5":"Hepatocellular carcinoma","6":"SNOMED CT","7":"25370001","8":"114550","9":"16 Feb 2016","_rn_":"10355"},{"1":"7157","2":"TP53","3":"","4":"C2750850","5":"Glioma susceptibility 1","6":"NCBI curation","7":"","8":"137800","9":"16 Feb 2016","_rn_":"10356"},{"1":"7157","2":"TP53","3":"","4":"C2931822","5":"Nasopharyngeal carcinoma","6":"NCBI curation","7":"","8":"607107","9":"16 Feb 2016","_rn_":"10357"},{"1":"7157","2":"TP53","3":"","4":"C3553606","5":"Basal cell carcinoma, susceptibility to, 7","6":"NCBI curation","7":"","8":"614740","9":"16 Feb 2016","_rn_":"10358"},{"1":"112858","2":"TP53RK","3":"","4":"C4540270","5":"GALLOWAY-MOWAT SYNDROME 4","6":"OMIM","7":"617730","8":"617730","9":"29 Oct 2017","_rn_":"10365"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-<pre class="r"><code>unique(ourdf[ourdf$AssociatedGenes == &quot;TP53&quot;,&quot;DiseaseName&quot;])</code></pre>
-<pre><code>##  [1] &quot;Osteosarcoma&quot;                               &quot;Choroid plexus papilloma&quot;                   &quot;Carcinoma of pancreas&quot;                     
-##  [4] &quot;Familial cancer of breast&quot;                  &quot;Carcinoma of colon&quot;                         &quot;Li-Fraumeni syndrome 1&quot;                    
-##  [7] &quot;Adrenocortical carcinoma, hereditary&quot;       &quot;Hepatocellular carcinoma&quot;                   &quot;Glioma susceptibility 1&quot;                   
-## [10] &quot;Nasopharyngeal carcinoma&quot;                   &quot;Basal cell carcinoma, susceptibility to, 7&quot;</code></pre>
-<pre class="r"><code>str(grepl(&quot;TP53&quot;,ourdf$AssociatedGenes))</code></pre>
-<pre><code>##  logi [1:11124] FALSE FALSE FALSE FALSE FALSE FALSE ...</code></pre>
-<pre class="r"><code>table(ourdf$AssociatedGenes == &quot;TP53&quot;)</code></pre>
-<pre><code>## 
-## FALSE  TRUE 
-## 11109    15</code></pre>
 </div>
 </div>
 <div id="review-data-types-vs.-data-structures" class="section level1">
@@ -527,12 +518,12 @@ patientRecords = data.frame(name, age, smoker)
 patientRecords</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["name"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["smoker"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"patient1","2":"46","3":"TRUE"},{"1":"patient2","2":"49","3":"FALSE"},{"1":"patient3","2":"50","3":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["smoker"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"patient1","2":"46","3":"TRUE"},{"1":"patient2","2":"49","3":"FALSE"},{"1":"patient3","2":"50","3":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>str(patientRecords)   #Note: &quot;Factor w/ 3 levels&quot;</code></pre>
 <pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
-##  $ name  : Factor w/ 3 levels &quot;patient1&quot;,&quot;patient2&quot;,..: 1 2 3
+##  $ name  : chr  &quot;patient1&quot; &quot;patient2&quot; &quot;patient3&quot;
 ##  $ age   : num  46 49 50
 ##  $ smoker: logi  TRUE FALSE TRUE</code></pre>
 <pre class="r"><code>#Tell data.frame() not to create factors
@@ -556,20 +547,6 @@ str(patientRecords2)</code></pre>
 </blockquote>
 <div id="exercise-solution-5-minutes-1" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>#add your exercise code here
-
-aaseq &lt;- strsplit(&quot;MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDPGPDEAPRMPEAAPPVAPAPAAPTPAAPAPAPSWPLSSSVPSQKTYQGSYGFRLGFLHSGTAKSVTCTYSPALNKMFCQLAKTCPVQLWVDSTPPPGTRVRAMAIYKQSQHMTEVVRRCPHHERCSDSDGLAPPQHLIRVEGNLRVEYLDDRNTFRHSVVVPYEPPEVGSDCTTIHYNYMCNSSCMGGMNRRPILTIITLEDSSGNLLGRNSFEVRVCACPGRDRRTEEENLRKKGEPHHELPPGSTKRALPNNTSSSPQPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLKSKKGQSTSRHKKLMFKTEGPDSD&quot;,
-                  split=&quot;&quot;)[[1]]
-table(as.factor(aaseq))</code></pre>
-<pre><code>## 
-##  A  C  D  E  F  G  H  I  K  L  M  N  P  Q  R  S  T  V  W  Y 
-## 24 10 20 30 11 23 12  8 20 32 12 14 45 15 26 38 22 18  4  9</code></pre>
-<pre class="r"><code>length(levels(as.factor(aaseq)))</code></pre>
-<pre><code>## [1] 20</code></pre>
-<pre class="r"><code>table(aaseq)</code></pre>
-<pre><code>## aaseq
-##  A  C  D  E  F  G  H  I  K  L  M  N  P  Q  R  S  T  V  W  Y 
-## 24 10 20 30 11 23 12  8 20 32 12 14 45 15 26 38 22 18  4  9</code></pre>
 </div>
 </div>
 <div id="files" class="section level1">
@@ -581,7 +558,7 @@ table(as.factor(aaseq))</code></pre>
 <div id="reminder-redirect-output-and-input" class="section level1">
 <h1>Reminder: Redirect output and input</h1>
 <div class="figure">
-<img src="fileOutput.png" alt="Redirect output to a file" />
+<img src="fileOutput.png" alt="" />
 <p class="caption">Redirect output to a file</p>
 </div>
 <blockquote>
@@ -677,7 +654,7 @@ table(as.factor(aaseq))</code></pre>
 <li><p>A common way for text to be represented is in ASCII format</p></li>
 </ul>
 <div class="figure">
-<img src="ASCII-Table-wide.svg" alt="ASCII table from https://simple.wikipedia.org/wiki/ASCII" />
+<img src="ASCII-Table-wide.svg" alt="" />
 <p class="caption">ASCII table from <a href="https://simple.wikipedia.org/wiki/ASCII" class="uri">https://simple.wikipedia.org/wiki/ASCII</a></p>
 </div>
 <ul>
@@ -706,20 +683,26 @@ file fileOutput.png</code></pre>
 <h1>Working with files in R</h1>
 <pre class="r"><code>#Remember to set the working directory
 getwd()</code></pre>
-<pre><code>## [1] &quot;D:/Dropbox/TA_MMG1002H/p4b&quot;</code></pre>
+<pre><code>## [1] &quot;D:/Dropbox/TA_MMG1002H_2020/p4b&quot;</code></pre>
 <pre class="r"><code>#setwd(&quot;path&quot;)
 #setwd(&quot;C:/MyDoc&quot;)
 
 list.files()</code></pre>
-<pre><code>##  [1] &quot;_site.yml&quot;            &quot;ASCII-Table-wide.svg&quot; &quot;docs&quot;                 &quot;fileOutput.png&quot;       &quot;index.html&quot;           &quot;index.Rmd&quot;           
-##  [7] &quot;mod2.html&quot;            &quot;mod2.Rmd&quot;             &quot;mod2_files&quot;           &quot;mod3.html&quot;            &quot;mod3.Rmd&quot;             &quot;mod4.Rmd&quot;            
-## [13] &quot;mod5.Rmd&quot;             &quot;mod6.Rmd&quot;             &quot;mod7.Rmd&quot;             &quot;mod8.Rmd&quot;             &quot;mod9.Rmd&quot;             &quot;mydata.txt&quot;          
-## [19] &quot;p4b.Rproj&quot;            &quot;README.md&quot;            &quot;recipebookTOC.png&quot;    &quot;site_libs&quot;            &quot;test.txt&quot;             &quot;yeast_properties.txt&quot;</code></pre>
+<pre><code>##  [1] &quot;_site.yml&quot;            &quot;ASCII-Table-wide.svg&quot; &quot;docs&quot;                
+##  [4] &quot;fileOutput.png&quot;       &quot;index.Rmd&quot;            &quot;mod2.Rmd&quot;            
+##  [7] &quot;mod3.Rmd&quot;             &quot;mod4.Rmd&quot;             &quot;mod5.Rmd&quot;            
+## [10] &quot;mod6.Rmd&quot;             &quot;mod7.Rmd&quot;             &quot;mod8.Rmd&quot;            
+## [13] &quot;mod9.Rmd&quot;             &quot;mydata.txt&quot;           &quot;p4b.Rproj&quot;           
+## [16] &quot;README.md&quot;            &quot;recipebookTOC.png&quot;    &quot;site_libs&quot;           
+## [19] &quot;sum.R&quot;                &quot;test.txt&quot;             &quot;yeast_properties.txt&quot;</code></pre>
 <pre class="r"><code>dir()  #this does the same thing</code></pre>
-<pre><code>##  [1] &quot;_site.yml&quot;            &quot;ASCII-Table-wide.svg&quot; &quot;docs&quot;                 &quot;fileOutput.png&quot;       &quot;index.html&quot;           &quot;index.Rmd&quot;           
-##  [7] &quot;mod2.html&quot;            &quot;mod2.Rmd&quot;             &quot;mod2_files&quot;           &quot;mod3.html&quot;            &quot;mod3.Rmd&quot;             &quot;mod4.Rmd&quot;            
-## [13] &quot;mod5.Rmd&quot;             &quot;mod6.Rmd&quot;             &quot;mod7.Rmd&quot;             &quot;mod8.Rmd&quot;             &quot;mod9.Rmd&quot;             &quot;mydata.txt&quot;          
-## [19] &quot;p4b.Rproj&quot;            &quot;README.md&quot;            &quot;recipebookTOC.png&quot;    &quot;site_libs&quot;            &quot;test.txt&quot;             &quot;yeast_properties.txt&quot;</code></pre>
+<pre><code>##  [1] &quot;_site.yml&quot;            &quot;ASCII-Table-wide.svg&quot; &quot;docs&quot;                
+##  [4] &quot;fileOutput.png&quot;       &quot;index.Rmd&quot;            &quot;mod2.Rmd&quot;            
+##  [7] &quot;mod3.Rmd&quot;             &quot;mod4.Rmd&quot;             &quot;mod5.Rmd&quot;            
+## [10] &quot;mod6.Rmd&quot;             &quot;mod7.Rmd&quot;             &quot;mod8.Rmd&quot;            
+## [13] &quot;mod9.Rmd&quot;             &quot;mydata.txt&quot;           &quot;p4b.Rproj&quot;           
+## [16] &quot;README.md&quot;            &quot;recipebookTOC.png&quot;    &quot;site_libs&quot;           
+## [19] &quot;sum.R&quot;                &quot;test.txt&quot;             &quot;yeast_properties.txt&quot;</code></pre>
 <pre class="r"><code>#file.create(), file.rename() and many more</code></pre>
 </div>
 <div id="data-import-and-export" class="section level1">
@@ -733,7 +716,7 @@ mydata = read.table(&quot;mydata.txt&quot;)
 mydata</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["name"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["age"],"name":[2],"type":["int"],"align":["right"]},{"label":["smoker"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"patient1","2":"46","3":"TRUE","_rn_":"1"},{"1":"patient2","2":"49","3":"FALSE","_rn_":"2"},{"1":"patient3","2":"50","3":"TRUE","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["int"],"align":["right"]},{"label":["smoker"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"patient1","2":"46","3":"TRUE","_rn_":"1"},{"1":"patient2","2":"49","3":"FALSE","_rn_":"2"},{"1":"patient3","2":"50","3":"TRUE","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -753,45 +736,6 @@ mydata</code></pre>
 </blockquote>
 <div id="exercise-solution-5-minutes-2" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>#Add your solution here
-ourdf &lt;- read.table(&quot;../data/gene_condition_source_id.txt&quot;,
-                    sep=&quot;\t&quot;,header=T,quote=&quot;&quot;,comment.char=&quot;&quot;)
-str(ourdf)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    11124 obs. of  9 variables:
-##  $ X.GeneID       : int  2 2 144568 53947 8086 79719 15 16 16 16 ...
-##  $ AssociatedGenes: Factor w/ 4064 levels &quot;&quot;,&quot;A2M&quot;,&quot;A2ML1&quot;,..: 2 2 3 4 5 6 7 8 8 1 ...
-##  $ RelatedGenes   : Factor w/ 1283 levels &quot;&quot;,&quot;AARS&quot;,&quot;ABCA1&quot;,..: 1 1 1 1 1 1 1 1 1 2 ...
-##  $ ConceptID      : Factor w/ 5604 levels &quot;&quot;,&quot;C0000744&quot;,..: 14 3652 1381 984 698 1426 844 3153 4818 40 ...
-##  $ DiseaseName    : Factor w/ 5607 levels &quot;15q13.3 microdeletion syndrome&quot;,..: 198 178 4127 4141 2295 2950 4960 910 1924 863 ...
-##  $ SourceName     : Factor w/ 64 levels &quot;ADAM&quot;,&quot;ARUP Institute,ARUP Laboratories&quot;,..: 61 52 52 61 61 55 61 52 52 32 ...
-##  $ SourceID       : Factor w/ 2992 levels &quot;&quot;,&quot;1&quot;,&quot;10000&quot;,..: 806 1 1 710 1323 934 2203 1 1 2597 ...
-##  $ DiseaseMIM     : int  104300 614036 166760 111400 231550 148600 614163 613287 616339 NA ...
-##  $ LastUpdated    : Factor w/ 295 levels &quot;01 Apr 2018&quot;,..: 140 140 140 140 140 140 140 140 140 140 ...</code></pre>
-<pre class="r"><code>nrow(ourdf)</code></pre>
-<pre><code>## [1] 11124</code></pre>
-<pre class="r"><code>ncol(ourdf)</code></pre>
-<pre><code>## [1] 9</code></pre>
-<pre class="r"><code>write.table(ourdf[,1,drop=F],file=&quot;../Week3/a_column.txt&quot;,
-            sep=&quot;\t&quot;,col.names=T,row.names=F,quote=F)
-shell(&quot;head ../Week3/a_column.txt&quot;)
-shell(&quot;wc -l ../Week3/a_column.txt&quot;)
-write.table(ourdf[,1,drop=F],file=&quot;../Week3/a_column_v2.txt&quot;,
-            sep=&quot;\t&quot;,col.names=T,row.names=F,quote=F)
-shell(&quot;head ../Week3/a_column_v2.txt&quot;)
-shell(&quot;wc -l ../Week3/a_column_v2.txt&quot;)
-write.table(ourdf[,1,drop=F],file=&quot;../Week3/a_column_v3.txt&quot;,
-            sep=&quot;\t&quot;,col.names=NA,row.names=T,quote=F)
-shell(&quot;head ../Week3/a_column_v3.txt&quot;)
-shell(&quot;wc -l ../Week3/a_column_v3.txt&quot;)
-
-
-write.table(ourdf[1,],file=&quot;../Week3/a_row.txt&quot;,
-            sep=&quot;\t&quot;,col.names=T,row.names=F,quote=F)
-shell(&quot;head ../Week3/a_row.txt&quot;)
-# shell(&quot;awk -F &#39;\t&#39; &#39;END {print NF}&#39; ../Week3/a_row.txt&quot;)
-# RStudio&#39;s shell doesn&#39;t have awk installed, sadly.
-# If you&#39;re on OSX/Linux, you can try this instead:
-# system(&quot;awk -F &#39;\t&#39; &#39;END {print NF}&#39; ../Week3/a_row.txt&quot;)</code></pre>
 </div>
 </div>
 <div id="conditional-statements" class="section level1">
@@ -910,7 +854,7 @@ x &amp; y       x AND y e.g. if((x != 3) &amp; (x &gt; 0))</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -949,7 +893,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

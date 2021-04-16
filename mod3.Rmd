@@ -30,7 +30,7 @@ The Book of R: chapter 3.4 (arrays), 5.1 (lists), 5.2 (data frames)
 
 ### Exercise solution (5 minutes)
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 DNA <- "ACGGGAGGACGGGAAAATTACTACGGCATTAGC"
 
 str(strsplit(DNA,"")) # a list
@@ -108,7 +108,7 @@ listVariable$numbers  #easiest access method
 
 ### Exercise solution (5 minutes)
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 ourlist <- list(odds=seq(1,101,2),
                 "evens"=seq(2,100,2),
                 "some dumb words"=c("my","name","is"))
@@ -231,7 +231,7 @@ patientRecords$age
 
 ### Exercise solution (5 minutes)
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 ourdf <- read.table("../data/gene_condition_source_id.txt",
                     sep="\t",header=T,quote="",comment.char="",
                     as.is=T)

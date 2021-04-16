@@ -36,7 +36,7 @@ The Book of R: chapter 4.3 (factors), 8 (files)
 
 ### Exercise solution (5 minutes)
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 ourdf <- read.table("../data/gene_condition_source_id.txt",
                     sep="\t",header=T,quote="",comment.char="",
                     as.is=T)
@@ -112,7 +112,7 @@ MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDPGPDEAPRMPEAAPPVAPAPAAP
 
 ### Exercise solution (5 minutes)
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 #add your exercise code here
 
 aaseq <- strsplit("MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDPGPDEAPRMPEAAPPVAPAPAAPTPAAPAPAPSWPLSSSVPSQKTYQGSYGFRLGFLHSGTAKSVTCTYSPALNKMFCQLAKTCPVQLWVDSTPPPGTRVRAMAIYKQSQHMTEVVRRCPHHERCSDSDGLAPPQHLIRVEGNLRVEYLDDRNTFRHSVVVPYEPPEVGSDCTTIHYNYMCNSSCMGGMNRRPILTIITLEDSSGNLLGRNSFEVRVCACPGRDRRTEEENLRKKGEPHHELPPGSTKRALPNNTSSSPQPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLKSKKGQSTSRHKKLMFKTEGPDSD",
@@ -241,7 +241,7 @@ dataFrame = read.table("gene_condition_source_id.txt", header=TRUE, sep="\t", fi
 
 ### Exercise solution (5 minutes)
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 #Add your solution here
 ourdf <- read.table("../data/gene_condition_source_id.txt",
                     sep="\t",header=T,quote="",comment.char="")

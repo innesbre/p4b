@@ -13,6 +13,7 @@
 
 <title>Module 5</title>
 
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -27,6 +28,15 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -72,6 +82,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 
 
@@ -424,39 +435,6 @@ div.tocify {
 &quot;Hydrophobic&quot; for A, I, L, M, F, V, P, G</code></pre>
 <div id="exercise-solution-5-minutes" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>AAmap &lt;- list(
-  Charged=c(&quot;R&quot;,&quot;K&quot;,&quot;D&quot;,&quot;E&quot;),
-  Polar=c(&quot;Q&quot;,&quot;N&quot;,&quot;H&quot;,&quot;S&quot;,&quot;T&quot;,&quot;Y&quot;,&quot;C&quot;),
-  Amphipathic=c(&quot;W&quot;,&quot;Y&quot;,&quot;M&quot;),
-  Hydrophobic=c(&quot;A&quot;,&quot;I&quot;,&quot;L&quot;,&quot;M&quot;,&quot;F&quot;,&quot;V&quot;,&quot;P&quot;,&quot;G&quot;)
-)
-inputAA &lt;- &quot;Y&quot;
-outputAA &lt;- c()
-if (inputAA %in% c(&quot;R&quot;,&quot;K&quot;,&quot;D&quot;,&quot;E&quot;)) {
-  outputAA &lt;- append(outputAA,&quot;Charged&quot;)
-}
-if (inputAA %in% AAmap[[&quot;Polar&quot;]]) {
-  outputAA &lt;- append(outputAA,&quot;Polar&quot;)
-} 
-if (inputAA %in% AAmap$Amphipathic) {
-  outputAA &lt;- append(outputAA,&quot;Amphiiii&quot;)
-} 
-print(outputAA)</code></pre>
-<pre><code>## [1] &quot;Polar&quot;    &quot;Amphiiii&quot;</code></pre>
-<pre class="r"><code>1 == c(1,2,3)</code></pre>
-<pre><code>## [1]  TRUE FALSE FALSE</code></pre>
-<pre class="r"><code>1 %in% c(1,2,3)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>1 == NA</code></pre>
-<pre><code>## [1] NA</code></pre>
-<pre class="r"><code>1 %in% NA</code></pre>
-<pre><code>## [1] FALSE</code></pre>
-<pre class="r"><code>switch(&quot;Y&quot;,
-       R=&quot;Charged&quot;,
-       K=&quot;Charged&quot;,
-       Y=&quot;Polar&quot;,
-       Y=&quot;Amphi&quot;)</code></pre>
-<pre><code>## [1] &quot;Polar&quot;</code></pre>
 </div>
 </div>
 <div id="loops" class="section level1">
@@ -673,16 +651,6 @@ QPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLKSKKGQSTSRHKKLMFKTEGPDSD</c
 </blockquote>
 <div id="exercise-solution-5-minutes-1" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>inputSeq &lt;- &quot;MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDPGPDEAPRMPEAAPPVAPAPAAPTPAAPAPAPSWPLSSSVPSQKTYQGSYGFRLGFLHSGTAKSVTCTYSPALNKMFCQLAKTCPVQLWVDSTPPPGTRVRAMAIYKQSQHMTEVVRRCPHHERCSDSDGLAPPQHLIRVEGNLRVEYLDDRNTFRHSVVVPYEPPEVGSDCTTIHYNYMCNSSCMGGMNRRPILTIITLEDSSGNLLGRNSFEVRVCACPGRDRRTEEENLRKKGEPHHELPPGSTKRALPNNTSSSPQPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLKSKKGQSTSRHKKLMFKTEGPDSD&quot;
-
-inputSeq &lt;- strsplit(inputSeq,&quot;&quot;)[[1]]
-count_list &lt;- c()
-for (AA in unique(inputSeq)) {
-  count_list[AA] &lt;- sum(inputSeq == AA)
-}
-count_list</code></pre>
-<pre><code>##  M  E  P  Q  S  D  V  L  T  F  W  K  N  A  I  G  R  Y  H  C 
-## 12 30 45 15 38 20 18 32 22 11  4 20 14 24  8 23 26  9 12 10</code></pre>
 </div>
 </div>
 <div id="exercise-loops-2-10-minutes" class="section level1">
@@ -698,31 +666,6 @@ count_list</code></pre>
 </blockquote>
 <div id="exercise-solution-5-minutes-2" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>gcs &lt;- read.table(&quot;../data/gene_condition_source_id.txt&quot;,
-           header=TRUE, sep=&quot;\t&quot;, fill=TRUE,
-           comment.char = &quot;&quot;, quote = &quot;&quot;,
-           as.is=T,stringsAsFactors=F)
-
-# the vectorized way (easier, faster, just plain better)
-unique(gcs$DiseaseName[gcs$AssociatedGenes == &quot;TP53&quot;])</code></pre>
-<pre><code>##  [1] &quot;Osteosarcoma&quot;                               &quot;Choroid plexus papilloma&quot;                   &quot;Carcinoma of pancreas&quot;                     
-##  [4] &quot;Familial cancer of breast&quot;                  &quot;Carcinoma of colon&quot;                         &quot;Li-Fraumeni syndrome 1&quot;                    
-##  [7] &quot;Adrenocortical carcinoma, hereditary&quot;       &quot;Hepatocellular carcinoma&quot;                   &quot;Glioma susceptibility 1&quot;                   
-## [10] &quot;Nasopharyngeal carcinoma&quot;                   &quot;Basal cell carcinoma, susceptibility to, 7&quot;</code></pre>
-<pre class="r"><code>diseases &lt;- c()
-for (ROW in 1:nrow(gcs)) {
-  if (gcs[ROW,&quot;AssociatedGenes&quot;] == &quot;TP53&quot;) {
-    if (!gcs[ROW,&quot;DiseaseName&quot;] %in% diseases) {
-      diseases &lt;- append(diseases,
-                         gcs[ROW,&quot;DiseaseName&quot;])
-    }
-  }
-}
-diseases</code></pre>
-<pre><code>##  [1] &quot;Osteosarcoma&quot;                               &quot;Choroid plexus papilloma&quot;                   &quot;Carcinoma of pancreas&quot;                     
-##  [4] &quot;Familial cancer of breast&quot;                  &quot;Carcinoma of colon&quot;                         &quot;Li-Fraumeni syndrome 1&quot;                    
-##  [7] &quot;Adrenocortical carcinoma, hereditary&quot;       &quot;Hepatocellular carcinoma&quot;                   &quot;Glioma susceptibility 1&quot;                   
-## [10] &quot;Nasopharyngeal carcinoma&quot;                   &quot;Basal cell carcinoma, susceptibility to, 7&quot;</code></pre>
 </div>
 </div>
 <div id="vectorization" class="section level1">
@@ -853,7 +796,8 @@ apply(x, 2, sum)</code></pre>
 </ul>
 <pre class="r"><code>#Compute the mean for all the columns in a data.frame (which is also a list)
 lapply(patientRecords, mean)</code></pre>
-<pre><code>## Warning in mean.default(X[[i]], ...): argument is not numeric or logical: returning NA</code></pre>
+<pre><code>## Warning in mean.default(X[[i]], ...): argument is not numeric or logical:
+## returning NA</code></pre>
 <pre><code>## $name
 ## [1] NA
 ## 
@@ -877,7 +821,7 @@ lapply(patientRecords, mean)</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -916,7 +860,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

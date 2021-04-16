@@ -49,7 +49,7 @@ ggplot(iris, aes(x = Sepal.Length, fill = Species)) + geom_density(alpha = .3)
 
 # Package management
 
-```{r}
+```{r, eval=F}
 #List all installed packages
 installed.packages()
 
@@ -308,7 +308,7 @@ write.table(logFoldChange, file="test.txt", sep="\t")
 
 # Exercise solution (5 minutes)
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 dim(exprs(eset))
 
 plot(exprs(eset))

@@ -13,6 +13,7 @@
 
 <title>Module 6</title>
 
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -27,6 +28,15 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -72,6 +82,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 
 
@@ -426,20 +437,6 @@ div.tocify {
 </blockquote>
 <div id="exercise-solution-5-minutes" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>myvec &lt;- 1:100 #seq(1,100)
-
-sum(myvec)</code></pre>
-<pre><code>## [1] 5050</code></pre>
-<pre class="r"><code>Reduce(&quot;+&quot;,myvec)</code></pre>
-<pre><code>## [1] 5050</code></pre>
-<pre class="r"><code>try(sapply(myvec,&quot;*&quot;))</code></pre>
-<pre><code>## Error in FUN(X[[i]], ...) : invalid unary operator</code></pre>
-<pre class="r"><code>prod(myvec)</code></pre>
-<pre><code>## [1] 9.332622e+157</code></pre>
-<pre class="r"><code>mean(myvec)</code></pre>
-<pre><code>## [1] 50.5</code></pre>
-<pre class="r"><code>sum(myvec[myvec &gt; 50])</code></pre>
-<pre><code>## [1] 3775</code></pre>
 </div>
 </div>
 <div id="functions" class="section level1">
@@ -506,25 +503,25 @@ t.test(runif(50), runif(50))</code></pre>
 ##  Welch Two Sample t-test
 ## 
 ## data:  runif(50) and runif(50)
-## t = -0.33405, df = 91.154, p-value = 0.7391
+## t = 0.24369, df = 97.616, p-value = 0.808
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.13302262  0.09472212
+##  -0.09340194  0.11955079
 ## sample estimates:
 ## mean of x mean of y 
-## 0.4198274 0.4389776</code></pre>
+## 0.4548209 0.4417464</code></pre>
 <pre class="r"><code>cor.test(runif(50), runif(50),method=&quot;pearson&quot;)</code></pre>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  runif(50) and runif(50)
-## t = -0.31583, df = 48, p-value = 0.7535
+## t = -0.30098, df = 48, p-value = 0.7647
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  -0.3198323  0.2357979
+##  -0.3179091  0.2378188
 ## sample estimates:
 ##         cor 
-## -0.04553867</code></pre>
+## -0.04340195</code></pre>
 </div>
 <div id="exercise-functions-10-minutes" class="section level1">
 <h1>Exercise: Functions (10 minutes)</h1>
@@ -539,16 +536,6 @@ t.test(runif(50), runif(50))</code></pre>
 </blockquote>
 <div id="exercise-solution-5-minutes-1" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>mysum &lt;- function(X) {
-  runningsum &lt;- 0
-  for (i in seq_along(X)) {
-    runningsum &lt;- runningsum + X[i]
-  }
-  return(runningsum)
-}
-
-mysum(X=1:100)</code></pre>
-<pre><code>## [1] 5050</code></pre>
 </div>
 </div>
 <div id="regular-expressions" class="section level1">
@@ -611,7 +598,7 @@ sub(&quot;A&quot;, &quot;T&quot;, DNA)</code></pre>
 </tr>
 <tr class="odd">
 <td>[^]</td>
-<td>not character set e.g. [^abc] matches any single character except a, b or c</td>
+<td>not character set e.g. [^abc] matches any single character except a, b or c</td>
 </tr>
 <tr class="even">
 <td>[:digit:] or \d</td>
@@ -761,23 +748,6 @@ gregexpr(&quot;b.d&quot;, a)</code></pre>
 </blockquote>
 <div id="exercise-solution-5-minutes-2" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>DNA &lt;- c(&quot;ACGATGATACTGATGACGGGC&quot;,&quot;asldkfj&quot;)
-foundit &lt;- gregexpr(&quot;G..A&quot;,DNA)
-substr(DNA[[1]],
-       start=foundit[[1]][1],
-       stop=foundit[[1]][1] +
-         attr(foundit[[1]],&quot;match.length&quot;) - 1)</code></pre>
-<pre><code>## [1] &quot;GATA&quot;</code></pre>
-<pre class="r"><code>DNA &lt;- c(&quot;ACGATGATACTGATGACGGGC&quot;)
-gregexpr(&quot;[A-Ga-g].T&quot;,DNA)</code></pre>
-<pre><code>## [[1]]
-## [1]  3  6  9 12
-## attr(,&quot;match.length&quot;)
-## [1] 3 3 3 3
-## attr(,&quot;index.type&quot;)
-## [1] &quot;chars&quot;
-## attr(,&quot;useBytes&quot;)
-## [1] TRUE</code></pre>
 <hr />
 </div>
 </div>
@@ -793,7 +763,7 @@ gregexpr(&quot;[A-Ga-g].T&quot;,DNA)</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -832,7 +802,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

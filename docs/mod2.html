@@ -13,12 +13,22 @@
 
 <title>Module 2</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -28,12 +38,16 @@
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -46,32 +60,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -81,10 +70,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -101,40 +86,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -162,7 +120,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -174,7 +132,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -185,10 +143,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -200,7 +171,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -326,13 +296,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -381,7 +351,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -390,9 +360,12 @@ div.tocify {
 </div>
 
 
+<blockquote>
+<p>Updated 2021/04/16</p>
+</blockquote>
 <p>The Book of R: section 2.3 (vectors), chapter 3 (matrices), 4.1 (logicals), 4.2 (characters/strings)</p>
-<div id="module-1-review" class="section level2">
-<h2>Module 1 review</h2>
+<div id="module-1-review" class="section level1">
+<h1>Module 1 review</h1>
 <ul>
 <li>Introduction to the R statistical programming environment</li>
 <li>Commands/functions e.g. c(1, 2, 3)</li>
@@ -406,9 +379,8 @@ div.tocify {
 </ul></li>
 </ul>
 <hr />
-</div>
-<div id="sample-code-numbers" class="section level1">
-<h1>Sample code: numbers</h1>
+<div id="sample-code-numbers" class="section level2">
+<h2>Sample code: numbers</h2>
 <pre class="r"><code>#Lots of things you can do with numeric variables
 x = 2
 x</code></pre>
@@ -442,8 +414,8 @@ x</code></pre>
 <pre class="r"><code>paste(&quot;exp(1)/2 =&quot;, x)</code></pre>
 <pre><code>## [1] &quot;exp(1)/2 = 1.35914091422952&quot;</code></pre>
 </div>
-<div id="operators" class="section level1">
-<h1>Operators</h1>
+<div id="operators" class="section level2">
+<h2>Operators</h2>
 <ul>
 <li>Operators operate on variables</li>
 <li>= is the assignment operator</li>
@@ -463,8 +435,8 @@ x</code></pre>
 <li>And many more. See e.g. <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Arithmetic.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/base/html/Arithmetic.html</a></li>
 </ul>
 </div>
-<div id="sample-code-strings" class="section level1">
-<h1>Sample code: strings</h1>
+<div id="sample-code-strings" class="section level2">
+<h2>Sample code: strings</h2>
 <pre class="r"><code># this is a string...
 DNA = &quot;ACGGGAGGACGGGAAAATTACTACGGCATTAGC&quot;
 
@@ -472,12 +444,12 @@ DNA = &quot;ACGGGAGGACGGGAAAATTACTACGGCATTAGC&quot;
 s = &quot;string123&quot;
 #s2 = &quot;string&quot;123&quot;  #what&#39;s happening here?  Fix the code. (uncomment the line to see the error)
 s3 = &#39;string123&#39;
-s4 = &#39;string&quot;123&#39;  #what&#39;s happening here?  Fix the code. (uncomment the line to see the error)
+s4 = &#39;string&quot;123&#39;  #what&#39;s happening here?  Fix the code.
 
 # concatenate (join) strings
-s = paste(s, s4)
+s = paste(s, s3)
 s = cat(s, s) # what is s?</code></pre>
-<pre><code>## string123 string&quot;123 string123 string&quot;123</code></pre>
+<pre><code>## string123 string123 string123 string123</code></pre>
 <pre class="r"><code>#Note: cat and paste have different return values. You can see what a command returns in the help page.
 cat(s,s)  #same thing as above cat command, but we don&#39;t need the return value, so we don&#39;t catch it in a variable. This would be the normal way to use the cat command.
 
@@ -505,20 +477,19 @@ chartr(&quot;A&quot;, &quot;T&quot;, DNA)</code></pre>
 <pre class="r"><code>chartr(&quot;ACGT&quot;, &quot;AAAA&quot;, DNA) # how is this different from substitution?</code></pre>
 <pre><code>## [1] &quot;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&quot;</code></pre>
 </div>
-<div id="example-code-reverse_complement.r" class="section level1">
-<h1>Example code: reverse_complement.r</h1>
+<div id="example-code-reverse_complement.r" class="section level2">
+<h2>Example code: reverse_complement.r</h2>
 <pre class="r"><code># Using string operations to answer a biological question
 # What is the reverse complement of a DNA sequence?
 
-DNA = readline(&quot;Please enter a DNA sequence. I will return the reverse complement.\n\n&quot;)
-
-# Print the DNA onto the screen
+DNA = readline(&quot;Please enter a DNA sequence. I will return the reverse complement.\n\n&quot;)</code></pre>
+<pre><code>## Please enter a DNA sequence. I will return the reverse complement.</code></pre>
+<pre class="r"><code># Print the DNA onto the screen
 cat(&quot;\nHere is the starting DNA sequence:\n&quot;)</code></pre>
 <pre><code>## 
 ## Here is the starting DNA sequence:</code></pre>
-<pre class="r"><code>cat(DNA)</code></pre>
-<pre><code>## GATTTCCCGAAACAG</code></pre>
-<pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
+<pre class="r"><code>cat(DNA)
+cat(&quot;\n\n&quot;)</code></pre>
 <pre class="r"><code># Calculate the reverse complement
 #  Warning: this attempt will fail!
 #
@@ -545,9 +516,9 @@ revcom = gsub(&quot;C&quot;,&quot;G&quot;, revcom)
 # Print the reverse complement DNA onto the screen
 cat (&quot;Here is the reverse complement DNA:\n&quot;)</code></pre>
 <pre><code>## Here is the reverse complement DNA:</code></pre>
-<pre class="r"><code>cat(revcom)</code></pre>
-<pre><code>## GAGAAAGGGGAAAAG</code></pre>
-<pre class="r"><code>#
+<pre class="r"><code>cat(revcom)
+
+#
 # Oh-oh, that didn&#39;t work right!
 # Our reverse complement should have all the bases in it, since the
 # original DNA had all the bases-but ours only has A and G!
@@ -560,6 +531,7 @@ cat(&quot;\n\nThat was a bad algorithm, and the reverse complement was wrong!\n&
 ## 
 ## That was a bad algorithm, and the reverse complement was wrong!</code></pre>
 <pre class="r"><code>readline(&quot;Press enter to try again\n\n&quot;)</code></pre>
+<pre><code>## Press enter to try again</code></pre>
 <pre><code>## [1] &quot;&quot;</code></pre>
 <pre class="r"><code># Make a new copy of the DNA (see why we saved the original?)
 revcom = paste(rev(strsplit(DNA, NULL)[[1]]), collapse=&quot;&quot;)
@@ -569,14 +541,13 @@ revcom = chartr(&quot;ACGTacgt&quot;, &quot;TGCAtgca&quot;, revcom)
 #Print the reverse complement DNA onto the screen
 cat (&quot;Here is the reverse complement DNA:\n&quot;)</code></pre>
 <pre><code>## Here is the reverse complement DNA:</code></pre>
-<pre class="r"><code>cat(revcom)</code></pre>
-<pre><code>## CTGTTTCGGGAAATC</code></pre>
-<pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
+<pre class="r"><code>cat(revcom)
+cat(&quot;\n\n&quot;)</code></pre>
 <pre class="r"><code>cat(&quot;This time it worked!\n&quot;)</code></pre>
 <pre><code>## This time it worked!</code></pre>
 </div>
-<div id="exercise-reading-in-data-from-the-console-10-minutes" class="section level1">
-<h1>Exercise: Reading in data from the console (10 minutes)</h1>
+<div id="exercise-reading-in-data-from-the-console-10-minutes" class="section level2">
+<h2>Exercise: Reading in data from the console (10 minutes)</h2>
 <blockquote>
 <p>Write a program that does the following:</p>
 </blockquote>
@@ -595,32 +566,13 @@ cat (&quot;Here is the reverse complement DNA:\n&quot;)</code></pre>
 </blockquote>
 <div id="exercise-solution-5-minutes" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>#Add your exercise code here. You can create your own code chunk by typing the text you see at the start &quot;```{r}&quot; and end &quot;```&quot; of the chunk, or by using the &#39;insert&#39; button at the top of this editor tab
-
-n1 &lt;- readline(&quot;What is the first number?\n&quot;)
-is(n1) #can we do math on this?</code></pre>
-<pre><code>## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;</code></pre>
-<pre class="r"><code>n1 &lt;- as.numeric(n1) #coerce to numeric type
-
-n2 &lt;- as.numeric(readline(&quot;What is the second number?\n&quot;))
-# nesting functions works too.
-
-print(n1 + n2)</code></pre>
-<pre><code>## [1] 49</code></pre>
-<pre class="r"><code>print(n1 * n2)</code></pre>
-<pre><code>## [1] 294</code></pre>
-<pre class="r"><code>print(n1 / n2)</code></pre>
-<pre><code>## [1] 6</code></pre>
 </div>
 </div>
-<div id="more-variable-types" class="section level1">
-<h1>More variable types</h1>
-<div id="vectors-and-matrices" class="section level2">
-<h2>Vectors and Matrices</h2>
 </div>
-</div>
-<div id="vectors-creating" class="section level1">
-<h1>Vectors: creating</h1>
+<div id="more-variable-types-vectors" class="section level1">
+<h1>More variable types: Vectors</h1>
+<div id="vectors-creating" class="section level2">
+<h2>Vectors: creating</h2>
 <ul>
 <li>One of the variable types in R</li>
 <li>A vector is a sequence of data of the same type (e.g. numbers, strings)</li>
@@ -636,8 +588,8 @@ x</code></pre>
 y</code></pre>
 <pre><code>## [1] 10.0 23.4  2.0  3.0</code></pre>
 </div>
-<div id="vectors-math" class="section level1">
-<h1>Vectors: math</h1>
+<div id="vectors-math" class="section level2">
+<h2>Vectors: math</h2>
 <pre class="r"><code># We can multiply two vectors element by element
 print(x*y)</code></pre>
 <pre><code>## [1]  12.0  46.8 108.0  18.0</code></pre>
@@ -647,8 +599,8 @@ x %*% y</code></pre>
 ## [1,] 184.8</code></pre>
 <pre class="r"><code>#Note: In the console, you don&#39;t need to use print()</code></pre>
 </div>
-<div id="vectors-types" class="section level1">
-<h1>Vectors: types</h1>
+<div id="vectors-types" class="section level2">
+<h2>Vectors: types</h2>
 <ul>
 <li>We can also create text or LOGICAL vectors</li>
 </ul>
@@ -664,8 +616,8 @@ logicvec</code></pre>
 c(T,F,T,F)</code></pre>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE</code></pre>
 </div>
-<div id="vectors-indexing" class="section level1">
-<h1>Vectors: indexing</h1>
+<div id="vectors-indexing" class="section level2">
+<h2>Vectors: indexing</h2>
 <ul>
 <li>Indexing is for accessing subsets of vectors</li>
 <li>For indexing, we always use the square brackets [ ]</li>
@@ -683,8 +635,8 @@ textvec[1:2]</code></pre>
 length(textvec)</code></pre>
 <pre><code>## [1] 3</code></pre>
 </div>
-<div id="vectors-names" class="section level1">
-<h1>Vectors: names</h1>
+<div id="vectors-names" class="section level2">
+<h2>Vectors: names</h2>
 <pre class="r"><code>#R allows named elements
 namedvec=c(firstcol=3, B=245, C=1212, lastelement=29.3)
 namedvec</code></pre>
@@ -702,8 +654,8 @@ namedvec[&quot;asdf&quot;]</code></pre>
 names(namedvec)</code></pre>
 <pre><code>## [1] &quot;firstcol&quot;    &quot;B&quot;           &quot;C&quot;           &quot;lastelement&quot;</code></pre>
 </div>
-<div id="exercise-vectors-and-indexing-10-minutes" class="section level1">
-<h1>Exercise: Vectors and indexing (10 minutes)</h1>
+<div id="exercise-vectors-and-indexing-10-minutes" class="section level2">
+<h2>Exercise: Vectors and indexing (10 minutes)</h2>
 <blockquote>
 <p>Create a vector “radii” of length three containing the numbers 5, 10 and 20. Use “*” and the built-in constant “pi” to compute the areas of the three circles. Then subtract 2.1 and recompute the areas</p>
 </blockquote>
@@ -718,52 +670,11 @@ names(namedvec)</code></pre>
 </blockquote>
 <div id="exercise-solution-5-minutes-1" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code># step 1
-radii &lt;- c(5,10,20)
-pi * radii * radii</code></pre>
-<pre><code>## [1]   78.53982  314.15927 1256.63706</code></pre>
-<pre class="r"><code>pi * radii^2</code></pre>
-<pre><code>## [1]   78.53982  314.15927 1256.63706</code></pre>
-<pre class="r"><code># step 2
-counter &lt;- seq(1,100)
-sum(counter)</code></pre>
-<pre><code>## [1] 5050</code></pre>
-<pre class="r"><code>sum(seq(1,100))</code></pre>
-<pre><code>## [1] 5050</code></pre>
-<pre class="r"><code># step 3
-randomstuff &lt;- runif(100,min=1,max=100)
-par(mfrow=c(1,2),mar=c(3,3,2,1),mgp=2:0)
-hist(randomstuff) #runif randomly samples from the uniform distribution
-hist(rnorm(100)) #rnorm randomly samples from the normal distribution
-
-
-# step THE BONUS
-sort(randomstuff,decreasing=F)</code></pre>
-<pre><code>##   [1]  4.208982  4.261342  4.486426  6.866558  7.531771  8.322957 10.588813 10.869420 12.116867 13.029458 13.337354 13.575606 13.590177
-##  [14] 13.829524 15.399310 15.878779 20.085637 20.231322 21.840103 22.328334 23.098423 24.089804 24.730320 25.002313 26.342675 27.824696
-##  [27] 27.845630 29.004171 29.101307 32.092302 32.299648 32.701197 33.076135 33.502922 34.304146 35.265078 35.752594 37.085442 38.399768
-##  [40] 40.521575 40.890602 42.454459 46.762374 47.214718 48.641721 50.473596 51.984054 53.054623 53.083758 53.474944 54.911205 56.640052
-##  [53] 56.786736 56.890711 58.170864 58.838394 59.246654 59.432379 60.075672 60.529744 61.113087 61.300441 63.712827 63.966738 64.977809
-##  [66] 65.172572 65.606588 66.071395 67.052540 69.885080 69.900164 70.046974 70.556205 71.558681 72.215281 73.277520 76.566026 77.044876
-##  [79] 77.536154 77.855560 78.895437 79.209518 79.820031 80.545564 80.677402 85.609175 87.126189 87.236122 87.311079 88.414195 88.853118
-##  [92] 89.345809 90.353583 93.974380 95.454584 95.841391 96.405969 97.941069 98.953704 99.735209</code></pre>
-<pre class="r"><code>randomstuff[order(randomstuff,decreasing=F)]</code></pre>
-<pre><code>##   [1]  4.208982  4.261342  4.486426  6.866558  7.531771  8.322957 10.588813 10.869420 12.116867 13.029458 13.337354 13.575606 13.590177
-##  [14] 13.829524 15.399310 15.878779 20.085637 20.231322 21.840103 22.328334 23.098423 24.089804 24.730320 25.002313 26.342675 27.824696
-##  [27] 27.845630 29.004171 29.101307 32.092302 32.299648 32.701197 33.076135 33.502922 34.304146 35.265078 35.752594 37.085442 38.399768
-##  [40] 40.521575 40.890602 42.454459 46.762374 47.214718 48.641721 50.473596 51.984054 53.054623 53.083758 53.474944 54.911205 56.640052
-##  [53] 56.786736 56.890711 58.170864 58.838394 59.246654 59.432379 60.075672 60.529744 61.113087 61.300441 63.712827 63.966738 64.977809
-##  [66] 65.172572 65.606588 66.071395 67.052540 69.885080 69.900164 70.046974 70.556205 71.558681 72.215281 73.277520 76.566026 77.044876
-##  [79] 77.536154 77.855560 78.895437 79.209518 79.820031 80.545564 80.677402 85.609175 87.126189 87.236122 87.311079 88.414195 88.853118
-##  [92] 89.345809 90.353583 93.974380 95.454584 95.841391 96.405969 97.941069 98.953704 99.735209</code></pre>
-<pre class="r"><code>identical(randomstuff[order(randomstuff,decreasing=F)],
-          sort(randomstuff,decreasing=F))</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<p><img src="mod2_files/figure-html/unnamed-chunk-12-1.png" width="768" /></p>
 </div>
 </div>
-<div id="matrices" class="section level1">
-<h1>Matrices</h1>
+</div>
+<div id="more-variable-types-matrices" class="section level1">
+<h1>More variable types: Matrices</h1>
 <blockquote>
 <p>A matrix is like a 2D vector (i.e. a square or rectangle). Like a spreadsheet table with rows, columns</p>
 </blockquote>
@@ -793,9 +704,8 @@ firstmat[1,2]</code></pre>
 <pre><code>##      col2 col3
 ## row1    3  5.3
 ## row2    4  6.4</code></pre>
-</div>
-<div id="exercise-matrices-10-minutes" class="section level1">
-<h1>Exercise: Matrices (10 minutes)</h1>
+<div id="exercise-matrices-10-minutes" class="section level2">
+<h2>Exercise: Matrices (10 minutes)</h2>
 <blockquote>
 <p>Create a matrix with 3 columns and 10 rows</p>
 </blockquote>
@@ -807,14 +717,7 @@ firstmat[1,2]</code></pre>
 </blockquote>
 <div id="exercise-solution-5-minutes-2" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>ourrandommat &lt;- matrix(runif(30),nrow=10,ncol=3)
-mean(ourrandommat)</code></pre>
-<pre><code>## [1] 0.6018852</code></pre>
-<pre class="r"><code>rowMeans(ourrandommat)</code></pre>
-<pre><code>##  [1] 0.8857723 0.3466632 0.7531474 0.7244916 0.6798954 0.4868138 0.4915735 0.3906298 0.7490782 0.5107870</code></pre>
-<pre class="r"><code>colMeans(ourrandommat)</code></pre>
-<pre><code>## [1] 0.5825216 0.5945584 0.6285756</code></pre>
-<hr />
+</div>
 </div>
 </div>
 
@@ -829,7 +732,7 @@ mean(ourrandommat)</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -847,7 +750,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -868,7 +771,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

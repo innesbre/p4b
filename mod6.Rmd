@@ -35,7 +35,7 @@ for (value in vectorVariable) {
 
 ### Exercise solution (5 minutes)
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 myvec <- 1:100 #seq(1,100)
 
 sum(myvec)
@@ -120,7 +120,7 @@ cor.test(runif(50), runif(50),method="pearson")
 
 ### Exercise solution (5 minutes)
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 mysum <- function(X) {
   runningsum <- 0
   for (i in seq_along(X)) {
@@ -248,7 +248,7 @@ length(gregexpr("g", a)[[1]])
 
 ### Exercise solution (5 minutes)
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 DNA <- c("ACGATGATACTGATGACGGGC","asldkfj")
 foundit <- gregexpr("G..A",DNA)
 substr(DNA[[1]],

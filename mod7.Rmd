@@ -33,7 +33,7 @@ mysum = function(arg1) {
 >Test that the function works in the same way as in the previous exercise (by searching DNA for G..A)
 
 ### Exercise solution (5 minutes)
-```{r}
+```{r eval=FALSE, include=FALSE}
 DNA <- c("ACGATGATACTGATGACGGGC")
 regex <- "G..A"
 
@@ -69,7 +69,7 @@ system2("cmd.exe", input="dir")  #windows
 
 # system2 function
 
-```{r}
+```{r eval=F}
 #returns stdout in variable v
 v = system2("ls", stdout=T)
 v
@@ -97,7 +97,7 @@ v
     * Can also try shell("dir")
 
 ### Exercise solution (5 minutes)
-```{r}
+```{r eval=FALSE, include=FALSE}
 shell("df -h",shell="bash")
 system2(command="cmd.exe",input="dir",stdout=T)
 ```
@@ -157,7 +157,7 @@ demo(graphics)
 >Generate a boxplot of the first and second columns of randomdata
 
 ### Exercise solution (5 minutes)
-```{r}
+```{r eval=FALSE, include=FALSE}
 # step 1 ----
 randomdata1 <- matrix(rnorm(500),nrow=50,ncol=10)
 randomdata2 <- replicate(10,rnorm(50))

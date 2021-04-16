@@ -13,6 +13,7 @@
 
 <title>Module 7</title>
 
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -27,6 +28,15 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -72,6 +82,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 
 
@@ -425,26 +436,6 @@ return (sum(arg1))
 </blockquote>
 <div id="exercise-solution-5-minutes" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>DNA &lt;- c(&quot;ACGATGATACTGATGACGGGC&quot;)
-regex &lt;- &quot;G..A&quot;
-
-regexMatcher &lt;- function(STRING,REGEX) {
-  temp_matches &lt;- gregexpr(REGEX,STRING)
-  return(
-    substring(
-      STRING,
-      temp_matches[[1]][1],
-      temp_matches[[1]][1] +
-        attr(temp_matches[[1]],&quot;match.length&quot;) - 1
-    )
-  )
-}
-
-regexMatcher(STRING=DNA,REGEX=&quot;G.T&quot;)</code></pre>
-<pre><code>## [1] &quot;GAT&quot; &quot;GAT&quot; &quot;GAT&quot;</code></pre>
-<pre class="r"><code>regmatches(DNA,gregexpr(&quot;G.T&quot;,DNA))</code></pre>
-<pre><code>## [[1]]
-## [1] &quot;GAT&quot; &quot;GAT&quot; &quot;GAT&quot;</code></pre>
 </div>
 </div>
 <div id="interfacing-with-external-programs" class="section level1">
@@ -454,39 +445,19 @@ regexMatcher(STRING=DNA,REGEX=&quot;G.T&quot;)</code></pre>
 <li>Helps you automate certain tasks that would be difficult for you to do within R e.g. useful programs that are not available in R</li>
 </ul>
 <pre class="r"><code># system2() #calls an external command
-system2(&quot;ls&quot;)  #unix/mac
-system2(&quot;cmd.exe&quot;, input=&quot;dir&quot;)  #windows</code></pre>
+system2(&quot;ls&quot;)  #unix/mac</code></pre>
+<pre><code>## Warning in system2(&quot;ls&quot;): &#39;&quot;ls&quot;&#39; not found</code></pre>
+<pre class="r"><code>system2(&quot;cmd.exe&quot;, input=&quot;dir&quot;)  #windows</code></pre>
 </div>
 <div id="system2-function" class="section level1">
 <h1>system2 function</h1>
 <pre class="r"><code>#returns stdout in variable v
 v = system2(&quot;ls&quot;, stdout=T)
-v</code></pre>
-<pre><code>##  [1] &quot;ASCII-Table-wide.svg&quot; &quot;README.md&quot;            &quot;_site.yml&quot;            &quot;docs&quot;                 &quot;fileOutput.png&quot;       &quot;index.Rmd&quot;           
-##  [7] &quot;index.html&quot;           &quot;mod2.Rmd&quot;             &quot;mod2.html&quot;            &quot;mod2_files&quot;           &quot;mod3.Rmd&quot;             &quot;mod3.html&quot;           
-## [13] &quot;mod4.Rmd&quot;             &quot;mod4.html&quot;            &quot;mod5.Rmd&quot;             &quot;mod5.html&quot;            &quot;mod6.Rmd&quot;             &quot;mod6.html&quot;           
-## [19] &quot;mod7.Rmd&quot;             &quot;mod8.Rmd&quot;             &quot;mod9.Rmd&quot;             &quot;mydata.txt&quot;           &quot;p4b.Rproj&quot;            &quot;recipebookTOC.png&quot;   
-## [25] &quot;site_libs&quot;            &quot;test.txt&quot;             &quot;yeast_properties.txt&quot;</code></pre>
-<pre class="r"><code>#passes arguments to the command (ls)
+v
+
+#passes arguments to the command (ls)
 v = system2(&quot;ls&quot;, args=&quot;-la&quot;, stdout=T)
 v</code></pre>
-<pre><code>##  [1] &quot;total 2088&quot;                                                        &quot;drwxr-xr-x 1 binne binne      0 May 15 14:09 .&quot;                   
-##  [3] &quot;drwxr-xr-x 1 binne binne      0 May 13 09:03 ..&quot;                   &quot;-rw-r--r-- 1 binne binne  13826 May 13 10:03 .Rhistory&quot;           
-##  [5] &quot;drwxr-xr-x 1 binne binne      0 Apr 23 09:49 .Rproj.user&quot;          &quot;drwxr-xr-x 1 binne binne      0 May 15 14:09 .git&quot;                
-##  [7] &quot;-rw-r--r-- 1 binne binne     44 Apr 23 09:49 .gitignore&quot;           &quot;-rw-r--r-- 1 binne binne 653001 Mar  3  2019 ASCII-Table-wide.svg&quot;
-##  [9] &quot;-rw-r--r-- 1 binne binne    184 Apr 23 10:52 README.md&quot;            &quot;-rw-r--r-- 1 binne binne    567 May 11 12:26 _site.yml&quot;           
-## [11] &quot;drwxr-xr-x 1 binne binne      0 May 11 14:41 docs&quot;                 &quot;-rw-r--r-- 1 binne binne  66773 Mar  3  2019 fileOutput.png&quot;      
-## [13] &quot;-rw-r--r-- 1 binne binne   4819 May  3 12:24 index.Rmd&quot;            &quot;-rw-r--r-- 1 binne binne  18560 May 15 14:07 index.html&quot;          
-## [15] &quot;-rw-r--r-- 1 binne binne   9190 May  3 12:24 mod2.Rmd&quot;             &quot;-rw-r--r-- 1 binne binne  29433 May 15 14:08 mod2.html&quot;           
-## [17] &quot;drwxr-xr-x 1 binne binne      0 May 15 14:08 mod2_files&quot;           &quot;-rw-r--r-- 1 binne binne   5291 May  3 12:46 mod3.Rmd&quot;            
-## [19] &quot;-rw-r--r-- 1 binne binne  31845 May 15 14:08 mod3.html&quot;            &quot;-rw-r--r-- 1 binne binne  11352 May  3 12:46 mod4.Rmd&quot;            
-## [21] &quot;-rw-r--r-- 1 binne binne  36329 May 15 14:08 mod4.html&quot;            &quot;-rw-r--r-- 1 binne binne  11140 May  3 12:47 mod5.Rmd&quot;            
-## [23] &quot;-rw-r--r-- 1 binne binne  30603 May 15 14:08 mod5.html&quot;            &quot;-rw-r--r-- 1 binne binne   7823 May  4 14:15 mod6.Rmd&quot;            
-## [25] &quot;-rw-r--r-- 1 binne binne  22430 May 15 14:09 mod6.html&quot;            &quot;-rw-r--r-- 1 binne binne   4720 May  8 14:04 mod7.Rmd&quot;            
-## [27] &quot;-rw-r--r-- 1 binne binne   9575 May 15 13:06 mod8.Rmd&quot;             &quot;-rw-r--r-- 1 binne binne   6250 May 15 13:53 mod9.Rmd&quot;            
-## [29] &quot;-rw-r--r-- 1 binne binne     96 May 15 14:08 mydata.txt&quot;           &quot;-rw-r--r-- 1 binne binne    240 May 15 12:58 p4b.Rproj&quot;           
-## [31] &quot;-rw-r--r-- 1 binne binne 522169 Mar  3  2019 recipebookTOC.png&quot;    &quot;drwxr-xr-x 1 binne binne      0 May 15 14:09 site_libs&quot;           
-## [33] &quot;-rw-r--r-- 1 binne binne 277911 May 11 14:40 test.txt&quot;             &quot;-rw-r--r-- 1 binne binne 291755 Nov 17  2011 yeast_properties.txt&quot;</code></pre>
 <ul>
 <li>What’s wrong with system()?
 <ul>
@@ -515,30 +486,6 @@ v</code></pre>
 </ul>
 <div id="exercise-solution-5-minutes-1" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>shell(&quot;df -h&quot;,shell=&quot;bash&quot;)
-system2(command=&quot;cmd.exe&quot;,input=&quot;dir&quot;,stdout=T)</code></pre>
-<pre><code>##  [1] &quot;Microsoft Windows [Version 10.0.18362.836]&quot;                  &quot;(c) 2019 Microsoft Corporation. All rights reserved.&quot;       
-##  [3] &quot;&quot;                                                            &quot;D:\\Dropbox\\TA_MMG1002H\\p4b&gt;dir&quot;                          
-##  [5] &quot; Volume in drive D is DATA&quot;                                  &quot; Volume Serial Number is 36E0-89E7&quot;                         
-##  [7] &quot;&quot;                                                            &quot; Directory of D:\\Dropbox\\TA_MMG1002H\\p4b&quot;                
-##  [9] &quot;&quot;                                                            &quot;2020-05-15  02:09 PM    &lt;DIR&gt;          .&quot;                   
-## [11] &quot;2020-05-15  02:09 PM    &lt;DIR&gt;          ..&quot;                   &quot;2020-04-23  09:49 AM                44 .gitignore&quot;          
-## [13] &quot;2020-05-13  10:03 AM            13,826 .Rhistory&quot;            &quot;2019-03-04  12:05 AM           653,001 ASCII-Table-wide.svg&quot;
-## [15] &quot;2020-05-11  02:41 PM    &lt;DIR&gt;          docs&quot;                 &quot;2019-03-03  11:44 PM            66,773 fileOutput.png&quot;      
-## [17] &quot;2020-05-15  02:07 PM            18,560 index.html&quot;           &quot;2020-05-03  12:24 PM             4,819 index.Rmd&quot;           
-## [19] &quot;2020-05-15  02:08 PM            29,433 mod2.html&quot;            &quot;2020-05-03  12:24 PM             9,190 mod2.Rmd&quot;            
-## [21] &quot;2020-05-15  02:08 PM    &lt;DIR&gt;          mod2_files&quot;           &quot;2020-05-15  02:08 PM            31,845 mod3.html&quot;           
-## [23] &quot;2020-05-03  12:46 PM             5,291 mod3.Rmd&quot;             &quot;2020-05-15  02:08 PM            36,329 mod4.html&quot;           
-## [25] &quot;2020-05-03  12:46 PM            11,352 mod4.Rmd&quot;             &quot;2020-05-15  02:08 PM            30,603 mod5.html&quot;           
-## [27] &quot;2020-05-03  12:47 PM            11,140 mod5.Rmd&quot;             &quot;2020-05-15  02:09 PM            22,430 mod6.html&quot;           
-## [29] &quot;2020-05-04  02:15 PM             7,823 mod6.Rmd&quot;             &quot;2020-05-08  02:04 PM             4,720 mod7.Rmd&quot;            
-## [31] &quot;2020-05-15  01:06 PM             9,575 mod8.Rmd&quot;             &quot;2020-05-15  01:53 PM             6,250 mod9.Rmd&quot;            
-## [33] &quot;2020-05-15  02:08 PM                96 mydata.txt&quot;           &quot;2020-05-15  12:58 PM               240 p4b.Rproj&quot;           
-## [35] &quot;2020-04-23  10:52 AM               184 README.md&quot;            &quot;2019-03-03  10:12 PM           522,169 recipebookTOC.png&quot;   
-## [37] &quot;2020-05-15  02:09 PM    &lt;DIR&gt;          site_libs&quot;            &quot;2020-05-11  02:40 PM           277,911 test.txt&quot;            
-## [39] &quot;2011-11-18  12:42 AM           291,755 yeast_properties.txt&quot; &quot;2020-05-11  12:26 PM               567 _site.yml&quot;           
-## [41] &quot;              26 File(s)      2,065,926 bytes&quot;               &quot;               5 Dir(s)  1,077,940,191,232 bytes free&quot;      
-## [43] &quot;&quot;                                                            &quot;D:\\Dropbox\\TA_MMG1002H\\p4b&gt;&quot;</code></pre>
 </div>
 </div>
 <div id="recipes" class="section level1">
@@ -552,7 +499,7 @@ system2(command=&quot;cmd.exe&quot;,input=&quot;dir&quot;,stdout=T)</code></pre>
 </ul></li>
 </ul>
 <div class="figure">
-<img src="recipebookTOC.png" alt="R recipe book" />
+<img src="recipebookTOC.png" alt="" />
 <p class="caption">R recipe book</p>
 </div>
 </div>
@@ -832,45 +779,6 @@ hist(runif(50))</code></pre>
 </blockquote>
 <div id="exercise-solution-5-minutes-2" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code># step 1 ----
-randomdata1 &lt;- matrix(rnorm(500),nrow=50,ncol=10)
-randomdata2 &lt;- replicate(10,rnorm(50))
-
-temp &lt;- list()
-for(i in 1:10) {
-  temp[[i]] &lt;- rnorm(50)
-}
-randomdata3 &lt;- do.call(&quot;rbind&quot;,temp)
-
-dim(randomdata1)</code></pre>
-<pre><code>## [1] 50 10</code></pre>
-<pre class="r"><code>str(randomdata2)</code></pre>
-<pre><code>##  num [1:50, 1:10] 0.503 1.313 -0.398 -1.108 -1.393 ...</code></pre>
-<pre class="r"><code>str(randomdata3)</code></pre>
-<pre><code>##  num [1:10, 1:50] 0.427 0.263 -1.695 -0.939 -0.154 ...</code></pre>
-<pre class="r"><code># step 2 ----
-default_par &lt;- par(no.readonly=T)
-par(mfrow=c(1,3))
-plot(randomdata1[,1:2])
-plot(x=randomdata1[,1],y=randomdata1[,2])
-rd4 &lt;- as.data.frame(randomdata1)
-plot(V2~V1,data=rd4)</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<pre class="r"><code>par(default_par)
-
-
-# step 3 ----
-col_mean &lt;- colMeans(randomdata1)
-col_sd &lt;- apply(randomdata1,2,sd)
-
-# step 4 ----
-boxplot(randomdata1[,1:2])</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
-<pre class="r"><code>boxplot(list(first=randomdata1[,1],
-             second=randomdata1[,2]))</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-7-3.png" width="672" /></p>
-<pre class="r"><code>hist(randomdata1[,1])</code></pre>
-<p><img src="mod7_files/figure-html/unnamed-chunk-7-4.png" width="672" /></p>
 <hr />
 </div>
 </div>
@@ -886,7 +794,7 @@ boxplot(randomdata1[,1:2])</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -925,7 +833,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

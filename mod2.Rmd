@@ -2,10 +2,11 @@
 title: "Module 2"
 ---
 
+> Updated 2021/04/16
 
 The Book of R: section 2.3 (vectors), chapter 3 (matrices), 4.1 (logicals), 4.2 (characters/strings)
 
-## Module 1 review
+# Module 1 review
 
 * Introduction to the R statistical programming environment
 * Commands/functions e.g. c(1, 2, 3)
@@ -16,7 +17,7 @@ The Book of R: section 2.3 (vectors), chapter 3 (matrices), 4.1 (logicals), 4.2 
 
 *** 
 
-# Sample code: numbers
+## Sample code: numbers
 
 ```{r}
 #Lots of things you can do with numeric variables
@@ -52,7 +53,7 @@ x
 paste("exp(1)/2 =", x)
 ```
 
-# Operators
+## Operators
 
 * Operators operate on variables
 * = is the assignment operator
@@ -67,7 +68,7 @@ paste("exp(1)/2 =", x)
     * <=	less than or equal to
 * And many more. See e.g. https://stat.ethz.ch/R-manual/R-devel/library/base/html/Arithmetic.html
 
-# Sample code: strings
+## Sample code: strings
 
 ```{r}
 # this is a string...
@@ -77,10 +78,10 @@ DNA = "ACGGGAGGACGGGAAAATTACTACGGCATTAGC"
 s = "string123"
 #s2 = "string"123"  #what's happening here?  Fix the code. (uncomment the line to see the error)
 s3 = 'string123'
-s4 = 'string"123'  #what's happening here?  Fix the code. (uncomment the line to see the error)
+s4 = 'string"123'  #what's happening here?  Fix the code.
 
 # concatenate (join) strings
-s = paste(s, s4)
+s = paste(s, s3)
 s = cat(s, s) # what is s?
 
 #Note: cat and paste have different return values. You can see what a command returns in the help page.
@@ -108,7 +109,7 @@ chartr("A", "T", DNA)
 chartr("ACGT", "AAAA", DNA) # how is this different from substitution?
 ```
 
-# Example code: reverse_complement.r
+## Example code: reverse_complement.r
 
 ```{r}
 # Using string operations to answer a biological question
@@ -171,7 +172,7 @@ cat("\n\n")
 cat("This time it worked!\n")
 ```
 
-# Exercise: Reading in data from the console (10 minutes)
+## Exercise: Reading in data from the console (10 minutes)
 
 >Write a program that does the following:
 
@@ -184,9 +185,10 @@ cat("This time it worked!\n")
 
 > Remember to use a code chunk in this R notebook to run your code
 
+
 ### Exercise solution (5 minutes)
 
-```{r}
+```{r, eval=FALSE, include=FALSE}
 #Add your exercise code here. You can create your own code chunk by typing the text you see at the start "```{r}" and end "```" of the chunk, or by using the 'insert' button at the top of this editor tab
 
 n1 <- readline("What is the first number?\n")
@@ -203,11 +205,10 @@ print(n1 / n2)
 ```
 
 
-# More variable types
+# More variable types: Vectors
 
-## Vectors and Matrices
 
-# Vectors: creating
+## Vectors: creating
 
 * One of the variable types in R
 * A vector is a sequence of data of the same type (e.g. numbers, strings)
@@ -223,7 +224,7 @@ y = c(10,23.4,2,3)
 y
 ```
 
-# Vectors: math
+## Vectors: math
 
 ```{r}
 # We can multiply two vectors element by element
@@ -235,7 +236,7 @@ x %*% y
 #Note: In the console, you don't need to use print()
 ```
 
-# Vectors: types
+## Vectors: types
 
 * We can also create text or LOGICAL vectors
 
@@ -259,7 +260,7 @@ logicvec
 c(T,F,T,F)
 ```
 
-# Vectors: indexing
+## Vectors: indexing
 
 * Indexing is for accessing subsets of vectors
 * For indexing, we always use the square brackets [ ]
@@ -278,7 +279,7 @@ length(textvec)
 
 ```
 
-# Vectors: names
+## Vectors: names
 
 ```{r}
 #R allows named elements
@@ -295,7 +296,7 @@ namedvec["asdf"]
 names(namedvec)
 ```
 
-# Exercise: Vectors and indexing (10 minutes)
+## Exercise: Vectors and indexing (10 minutes)
 
 >Create a vector “radii” of length three containing the numbers 5, 10 and 20. Use “*” and the built-in constant “pi” to compute the areas of the three circles. Then subtract 2.1 and recompute the areas
 
@@ -307,7 +308,7 @@ names(namedvec)
 
 ### Exercise solution (5 minutes)
 
-```{r,fig.width=8,fig.height=3,fig.show="hold"}
+```{r, eval=FALSE, include=FALSE, fig.width=8,fig.height=3,fig.show="hold"}
 # step 1
 radii <- c(5,10,20)
 pi * radii * radii
@@ -334,7 +335,7 @@ identical(randomstuff[order(randomstuff,decreasing=F)],
 
 ```
 
-# Matrices
+# More variable types: Matrices
 
 >A matrix is like a 2D vector (i.e. a square or rectangle). Like a spreadsheet table with rows, columns
 
@@ -359,7 +360,7 @@ firstmat[1:2,2:3]
 
 ```
 
-# Exercise: Matrices (10 minutes)
+## Exercise: Matrices (10 minutes)
 
 >Create a matrix with 3 columns and 10 rows
 
@@ -369,12 +370,10 @@ firstmat[1:2,2:3]
 
 ### Exercise solution (5 minutes)
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 ourrandommat <- matrix(runif(30),nrow=10,ncol=3)
 mean(ourrandommat)
 rowMeans(ourrandommat)
 colMeans(ourrandommat)
 ```
 
-
-***

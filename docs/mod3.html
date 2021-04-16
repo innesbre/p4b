@@ -13,6 +13,7 @@
 
 <title>Module 3</title>
 
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -27,6 +28,15 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -72,6 +82,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 
 
@@ -425,22 +436,6 @@ div.tocify {
 </blockquote>
 <div id="exercise-solution-5-minutes" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>DNA &lt;- &quot;ACGGGAGGACGGGAAAATTACTACGGCATTAGC&quot;
-
-str(strsplit(DNA,&quot;&quot;)) # a list</code></pre>
-<pre><code>## List of 1
-##  $ : chr [1:33] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; ...</code></pre>
-<pre class="r"><code>str(strsplit(DNA,&quot;&quot;)[1]) # still a list</code></pre>
-<pre><code>## List of 1
-##  $ : chr [1:33] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; ...</code></pre>
-<pre class="r"><code>str(strsplit(DNA,&quot;&quot;)[[1]]) # a character vector (the first element of the list)</code></pre>
-<pre><code>##  chr [1:33] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; ...</code></pre>
-<pre class="r"><code>strsplit(DNA,&quot;&quot;)[[1]]</code></pre>
-<pre><code>##  [1] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;G&quot; &quot;C&quot;</code></pre>
-<pre class="r"><code>rev(strsplit(DNA,&quot;&quot;)[[1]]) #backwards!</code></pre>
-<pre><code>##  [1] &quot;C&quot; &quot;G&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot;</code></pre>
-<pre class="r"><code>paste(rev(strsplit(DNA,&quot;&quot;)[[1]]),collapse=&quot;&quot;) # &quot;collapsed&quot; into a string</code></pre>
-<pre><code>## [1] &quot;CGATTACGGCATCATTAAAAGGGCAGGAGGGCA&quot;</code></pre>
 </div>
 </div>
 <div id="variables-continued" class="section level1">
@@ -555,32 +550,6 @@ listVariable[[1]]</code></pre>
 </ul>
 <div id="exercise-solution-5-minutes-1" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>ourlist &lt;- list(odds=seq(1,101,2),
-                &quot;evens&quot;=seq(2,100,2),
-                &quot;some dumb words&quot;=c(&quot;my&quot;,&quot;name&quot;,&quot;is&quot;))
-str(ourlist)</code></pre>
-<pre><code>## List of 3
-##  $ odds           : num [1:51] 1 3 5 7 9 11 13 15 17 19 ...
-##  $ evens          : num [1:50] 2 4 6 8 10 12 14 16 18 20 ...
-##  $ some dumb words: chr [1:3] &quot;my&quot; &quot;name&quot; &quot;is&quot;</code></pre>
-<pre class="r"><code>str(ourlist[1])</code></pre>
-<pre><code>## List of 1
-##  $ odds: num [1:51] 1 3 5 7 9 11 13 15 17 19 ...</code></pre>
-<pre class="r"><code>str(ourlist[[1]])</code></pre>
-<pre><code>##  num [1:51] 1 3 5 7 9 11 13 15 17 19 ...</code></pre>
-<pre class="r"><code>sum(ourlist[[1]])</code></pre>
-<pre><code>## [1] 2601</code></pre>
-<pre class="r"><code>sum(ourlist$evens)</code></pre>
-<pre><code>## [1] 2550</code></pre>
-<pre class="r"><code>sum(ourlist[[&quot;evens&quot;]])</code></pre>
-<pre><code>## [1] 2550</code></pre>
-<pre class="r"><code>identical(ourlist$evens,ourlist[&quot;evens&quot;])</code></pre>
-<pre><code>## [1] FALSE</code></pre>
-<pre class="r"><code>attributes(ourlist)</code></pre>
-<pre><code>## $names
-## [1] &quot;odds&quot;            &quot;evens&quot;           &quot;some dumb words&quot;</code></pre>
-<pre class="r"><code>names(ourlist)</code></pre>
-<pre><code>## [1] &quot;odds&quot;            &quot;evens&quot;           &quot;some dumb words&quot;</code></pre>
 </div>
 </div>
 <div id="arrays-creating" class="section level1">
@@ -704,7 +673,7 @@ smoker</code></pre>
 patientRecords</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["name"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["smoker"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"patient1","2":"46","3":"TRUE"},{"1":"patient2","2":"49","3":"FALSE"},{"1":"patient3","2":"50","3":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["smoker"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"patient1","2":"46","3":"TRUE"},{"1":"patient2","2":"49","3":"FALSE"},{"1":"patient3","2":"50","3":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -713,19 +682,18 @@ patientRecords</code></pre>
 <pre class="r"><code>patientRecords</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["name"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["smoker"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"patient1","2":"46","3":"TRUE"},{"1":"patient2","2":"49","3":"FALSE"},{"1":"patient3","2":"50","3":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["smoker"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"patient1","2":"46","3":"TRUE"},{"1":"patient2","2":"49","3":"FALSE"},{"1":"patient3","2":"50","3":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>#Just like matrices
 patientRecords[1,] #row 1</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["name"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["smoker"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"patient1","2":"46","3":"TRUE","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["smoker"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"patient1","2":"46","3":"TRUE","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>patientRecords[,1] #column 1</code></pre>
-<pre><code>## [1] patient1 patient2 patient3
-## Levels: patient1 patient2 patient3</code></pre>
+<pre><code>## [1] &quot;patient1&quot; &quot;patient2&quot; &quot;patient3&quot;</code></pre>
 <pre class="r"><code>patientRecords[1,2] #element at row 1, column 2</code></pre>
 <pre><code>## [1] 46</code></pre>
 <pre class="r"><code>patientRecords$age</code></pre>
@@ -747,73 +715,6 @@ patientRecords[1,] #row 1</code></pre>
 </blockquote>
 <div id="exercise-solution-5-minutes-2" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
-<pre class="r"><code>ourdf &lt;- read.table(&quot;../data/gene_condition_source_id.txt&quot;,
-                    sep=&quot;\t&quot;,header=T,quote=&quot;&quot;,comment.char=&quot;&quot;,
-                    as.is=T)
-str(ourdf)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    11124 obs. of  9 variables:
-##  $ X.GeneID       : int  2 2 144568 53947 8086 79719 15 16 16 16 ...
-##  $ AssociatedGenes: chr  &quot;A2M&quot; &quot;A2M&quot; &quot;A2ML1&quot; &quot;A4GALT&quot; ...
-##  $ RelatedGenes   : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
-##  $ ConceptID      : chr  &quot;C0002395&quot; &quot;C3279661&quot; &quot;C1833692&quot; &quot;C0599990&quot; ...
-##  $ DiseaseName    : chr  &quot;Alzheimer&#39;s disease&quot; &quot;Alpha-2-macroglobulin deficiency&quot; &quot;Otitis media, susceptibility to&quot; &quot;p phenotype&quot; ...
-##  $ SourceName     : chr  &quot;SNOMED CT&quot; &quot;NCBI curation&quot; &quot;NCBI curation&quot; &quot;SNOMED CT&quot; ...
-##  $ SourceID       : chr  &quot;26929004&quot; &quot;&quot; &quot;&quot; &quot;24403008&quot; ...
-##  $ DiseaseMIM     : int  104300 614036 166760 111400 231550 148600 614163 613287 616339 NA ...
-##  $ LastUpdated    : chr  &quot;16 Feb 2016&quot; &quot;16 Feb 2016&quot; &quot;16 Feb 2016&quot; &quot;16 Feb 2016&quot; ...</code></pre>
-<pre class="r"><code>head(ourdf)</code></pre>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X.GeneID"],"name":[1],"type":["int"],"align":["right"]},{"label":["AssociatedGenes"],"name":[2],"type":["chr"],"align":["left"]},{"label":["RelatedGenes"],"name":[3],"type":["chr"],"align":["left"]},{"label":["ConceptID"],"name":[4],"type":["chr"],"align":["left"]},{"label":["DiseaseName"],"name":[5],"type":["chr"],"align":["left"]},{"label":["SourceName"],"name":[6],"type":["chr"],"align":["left"]},{"label":["SourceID"],"name":[7],"type":["chr"],"align":["left"]},{"label":["DiseaseMIM"],"name":[8],"type":["int"],"align":["right"]},{"label":["LastUpdated"],"name":[9],"type":["chr"],"align":["left"]}],"data":[{"1":"2","2":"A2M","3":"","4":"C0002395","5":"Alzheimer's disease","6":"SNOMED CT","7":"26929004","8":"104300","9":"16 Feb 2016","_rn_":"1"},{"1":"2","2":"A2M","3":"","4":"C3279661","5":"Alpha-2-macroglobulin deficiency","6":"NCBI curation","7":"","8":"614036","9":"16 Feb 2016","_rn_":"2"},{"1":"144568","2":"A2ML1","3":"","4":"C1833692","5":"Otitis media, susceptibility to","6":"NCBI curation","7":"","8":"166760","9":"16 Feb 2016","_rn_":"3"},{"1":"53947","2":"A4GALT","3":"","4":"C0599990","5":"p phenotype","6":"SNOMED CT","7":"24403008","8":"111400","9":"16 Feb 2016","_rn_":"4"},{"1":"8086","2":"AAAS","3":"","4":"C0271742","5":"Glucocorticoid deficiency with achalasia","6":"SNOMED CT","7":"45414006","8":"231550","9":"16 Feb 2016","_rn_":"5"},{"1":"79719","2":"AAGAB","3":"","4":"C1835662","5":"Keratosis palmoplantaris papulosa","6":"Office of Rare Diseases","7":"3103","8":"148600","9":"16 Feb 2016","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-<pre class="r"><code>nrow(ourdf)</code></pre>
-<pre><code>## [1] 11124</code></pre>
-<pre class="r"><code>ncol(ourdf)</code></pre>
-<pre><code>## [1] 9</code></pre>
-<pre class="r"><code>names(ourdf)</code></pre>
-<pre><code>## [1] &quot;X.GeneID&quot;        &quot;AssociatedGenes&quot; &quot;RelatedGenes&quot;    &quot;ConceptID&quot;       &quot;DiseaseName&quot;     &quot;SourceName&quot;      &quot;SourceID&quot;       
-## [8] &quot;DiseaseMIM&quot;      &quot;LastUpdated&quot;</code></pre>
-<pre class="r"><code>colnames(ourdf)</code></pre>
-<pre><code>## [1] &quot;X.GeneID&quot;        &quot;AssociatedGenes&quot; &quot;RelatedGenes&quot;    &quot;ConceptID&quot;       &quot;DiseaseName&quot;     &quot;SourceName&quot;      &quot;SourceID&quot;       
-## [8] &quot;DiseaseMIM&quot;      &quot;LastUpdated&quot;</code></pre>
-<pre class="r"><code>names(ourlist)</code></pre>
-<pre><code>## [1] &quot;odds&quot;            &quot;evens&quot;           &quot;some dumb words&quot;</code></pre>
-<pre class="r"><code>rownames(ourdf)[1:5]</code></pre>
-<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot;</code></pre>
-<pre class="r"><code>sapply(ourdf,is)</code></pre>
-<pre><code>## $X.GeneID
-## [1] &quot;integer&quot;             &quot;double&quot;              &quot;numeric&quot;             &quot;vector&quot;              &quot;data.frameRowLabels&quot;
-## 
-## $AssociatedGenes
-## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;   
-## 
-## $RelatedGenes
-## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;   
-## 
-## $ConceptID
-## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;   
-## 
-## $DiseaseName
-## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;   
-## 
-## $SourceName
-## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;   
-## 
-## $SourceID
-## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;   
-## 
-## $DiseaseMIM
-## [1] &quot;integer&quot;             &quot;double&quot;              &quot;numeric&quot;             &quot;vector&quot;              &quot;data.frameRowLabels&quot;
-## 
-## $LastUpdated
-## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;</code></pre>
-<pre class="r"><code>ourdf$X.GeneID[1:5]</code></pre>
-<pre><code>## [1]      2      2 144568  53947   8086</code></pre>
-<pre class="r"><code>is(ourdf$AssociatedGenes[1:5])</code></pre>
-<pre><code>## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;</code></pre>
-<pre class="r"><code>seq(1,10)[-(1:5)]</code></pre>
-<pre><code>## [1]  6  7  8  9 10</code></pre>
 <hr />
 </div>
 </div>
@@ -829,7 +730,7 @@ str(ourdf)</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -868,7 +769,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
