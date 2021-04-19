@@ -482,14 +482,17 @@ chartr(&quot;A&quot;, &quot;T&quot;, DNA)</code></pre>
 <pre class="r"><code># Using string operations to answer a biological question
 # What is the reverse complement of a DNA sequence?
 
-DNA = readline(&quot;Please enter a DNA sequence. I will return the reverse complement.\n\n&quot;)</code></pre>
-<pre><code>## Please enter a DNA sequence. I will return the reverse complement.</code></pre>
-<pre class="r"><code># Print the DNA onto the screen
+# DNA = readline(&quot;Please enter a DNA sequence. I will return the reverse complement.\n\n&quot;)
+
+DNA &lt;- &quot;GATTACA&quot; # skipping the readline part to knit the website
+
+# Print the DNA onto the screen
 cat(&quot;\nHere is the starting DNA sequence:\n&quot;)</code></pre>
 <pre><code>## 
 ## Here is the starting DNA sequence:</code></pre>
-<pre class="r"><code>cat(DNA)
-cat(&quot;\n\n&quot;)</code></pre>
+<pre class="r"><code>cat(DNA)</code></pre>
+<pre><code>## GATTACA</code></pre>
+<pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
 <pre class="r"><code># Calculate the reverse complement
 #  Warning: this attempt will fail!
 #
@@ -516,9 +519,9 @@ revcom = gsub(&quot;C&quot;,&quot;G&quot;, revcom)
 # Print the reverse complement DNA onto the screen
 cat (&quot;Here is the reverse complement DNA:\n&quot;)</code></pre>
 <pre><code>## Here is the reverse complement DNA:</code></pre>
-<pre class="r"><code>cat(revcom)
-
-#
+<pre class="r"><code>cat(revcom)</code></pre>
+<pre><code>## AGAAAAG</code></pre>
+<pre class="r"><code>#
 # Oh-oh, that didn&#39;t work right!
 # Our reverse complement should have all the bases in it, since the
 # original DNA had all the bases-but ours only has A and G!
@@ -530,10 +533,9 @@ cat(&quot;\n\nThat was a bad algorithm, and the reverse complement was wrong!\n&
 <pre><code>## 
 ## 
 ## That was a bad algorithm, and the reverse complement was wrong!</code></pre>
-<pre class="r"><code>readline(&quot;Press enter to try again\n\n&quot;)</code></pre>
-<pre><code>## Press enter to try again</code></pre>
-<pre><code>## [1] &quot;&quot;</code></pre>
-<pre class="r"><code># Make a new copy of the DNA (see why we saved the original?)
+<pre class="r"><code># readline(&quot;Press enter to try again\n\n&quot;)
+
+# Make a new copy of the DNA (see why we saved the original?)
 revcom = paste(rev(strsplit(DNA, NULL)[[1]]), collapse=&quot;&quot;)
 
 revcom = chartr(&quot;ACGTacgt&quot;, &quot;TGCAtgca&quot;, revcom)
@@ -541,8 +543,9 @@ revcom = chartr(&quot;ACGTacgt&quot;, &quot;TGCAtgca&quot;, revcom)
 #Print the reverse complement DNA onto the screen
 cat (&quot;Here is the reverse complement DNA:\n&quot;)</code></pre>
 <pre><code>## Here is the reverse complement DNA:</code></pre>
-<pre class="r"><code>cat(revcom)
-cat(&quot;\n\n&quot;)</code></pre>
+<pre class="r"><code>cat(revcom)</code></pre>
+<pre><code>## TGTAATC</code></pre>
+<pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
 <pre class="r"><code>cat(&quot;This time it worked!\n&quot;)</code></pre>
 <pre><code>## This time it worked!</code></pre>
 </div>

@@ -115,7 +115,9 @@ chartr("ACGT", "AAAA", DNA) # how is this different from substitution?
 # Using string operations to answer a biological question
 # What is the reverse complement of a DNA sequence?
 
-DNA = readline("Please enter a DNA sequence. I will return the reverse complement.\n\n")
+# DNA = readline("Please enter a DNA sequence. I will return the reverse complement.\n\n")
+
+DNA <- "GATTACA" # skipping the readline part to knit the website
 
 # Print the DNA onto the screen
 cat("\nHere is the starting DNA sequence:\n")
@@ -158,7 +160,7 @@ cat(revcom)
 
 
 cat("\n\nThat was a bad algorithm, and the reverse complement was wrong!\n")
-readline("Press enter to try again\n\n")
+# readline("Press enter to try again\n\n")
 
 # Make a new copy of the DNA (see why we saved the original?)
 revcom = paste(rev(strsplit(DNA, NULL)[[1]]), collapse="")
