@@ -190,7 +190,7 @@ cat("This time it worked!\n")
 
 ### Exercise solution (5 minutes)
 
-```{r, eval=FALSE, include=FALSE}
+```{r}
 #Add your exercise code here. You can create your own code chunk by typing the text you see at the start "```{r}" and end "```" of the chunk, or by using the 'insert' button at the top of this editor tab
 
 n1 <- readline("What is the first number?\n")
@@ -200,10 +200,29 @@ n1 <- as.numeric(n1) #coerce to numeric type
 n2 <- as.numeric(readline("What is the second number?\n"))
 # nesting functions works too.
 
+# readline("What is the second number?\n") | as.numeric > n2
+
+
 print(n1 + n2)
 print(n1 * n2)
 print(n1 / n2)
 
+print(
+  data.frame(sum = n1 + n2,
+             product = n1 * n2,
+             ratio = n1 / n2)
+)
+
+named_vec <- c(
+  sum = n1 + n2,
+  product = n1 * n2,
+  ratio = n1 / n2
+)
+
+print(named_vec)
+print(named_vec["ratio"])
+named_vec["product"] <- -42
+print(named_vec)
 ```
 
 
@@ -310,31 +329,40 @@ names(namedvec)
 
 ### Exercise solution (5 minutes)
 
-```{r, eval=FALSE, include=FALSE, fig.width=8,fig.height=3,fig.show="hold"}
-# step 1
+```{r, fig.width=8,fig.height=3}
+# 1 ----
 radii <- c(5,10,20)
 pi * radii * radii
 pi * radii^2
 
-# step 2
+pi * (radii - 2.1) ^2
+
+# 2 ----
+str(seq(from=1,to=100))
+str(1:100)
+identical(seq(from=1,to=100),1:100)
 counter <- seq(1,100)
 sum(counter)
-sum(seq(1,100))
+sum(1:100)
 
-# step 3
-randomstuff <- runif(100,min=1,max=100)
-par(mfrow=c(1,2),mar=c(3,3,2,1),mgp=2:0)
-hist(randomstuff) #runif randomly samples from the uniform distribution
-hist(rnorm(100)) #rnorm randomly samples from the normal distribution
+# 3 ----
+par(mar=c(3,3,1,1),mgp=2:0) #formatting the plots, ignore me
 
+randomdata <- runif(100)
+hist(randomdata)
 
-# step THE BONUS
-sort(randomstuff,decreasing=F)
-randomstuff[order(randomstuff,decreasing=F)]
+sortedrandom1 <- sort(randomdata)
+sortedrandom2 <- randomdata[order(randomdata)]
+identical(sortedrandom1,sortedrandom2)
 
-identical(randomstuff[order(randomstuff,decreasing=F)],
-          sort(randomstuff,decreasing=F))
+sortedindex <- order(randomdata)
+sortedrandom3 <- randomdata[sortedindex]
 
+all(sortedrandom1 == sortedrandom3)
+
+par(mfrow=c(1,2)) #more plot formatting, ignore me again
+plot(randomdata)
+plot(sortedrandom1)
 ```
 
 # More variable types: Matrices
@@ -372,9 +400,23 @@ firstmat[1:2,2:3]
 
 ### Exercise solution (5 minutes)
 
-```{r eval=FALSE, include=FALSE}
+```{r}
+# fiddling
+matrix(1:10,nrow=2,ncol=5)
+matrix(1:10,nrow=2,ncol=5,byrow=T)
+
+# 1 ----
 ourrandommat <- matrix(runif(30),nrow=10,ncol=3)
+str(ourrandommat)
+dim(ourrandommat)
+colnames(ourrandommat) <- c("one",2,"the third")
+rownames(ourrandommat) <- paste("row",seq(1,nrow(ourrandommat)))
+dimnames(ourrandommat)
+str(ourrandommat)
+ourrandommat
+
 mean(ourrandommat)
+
 rowMeans(ourrandommat)
 colMeans(ourrandommat)
 ```

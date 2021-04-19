@@ -569,6 +569,51 @@ cat (&quot;Here is the reverse complement DNA:\n&quot;)</code></pre>
 </blockquote>
 <div id="exercise-solution-5-minutes" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>#Add your exercise code here. You can create your own code chunk by typing the text you see at the start &quot;```{r}&quot; and end &quot;```&quot; of the chunk, or by using the &#39;insert&#39; button at the top of this editor tab
+
+n1 &lt;- readline(&quot;What is the first number?\n&quot;)</code></pre>
+<pre><code>## What is the first number?</code></pre>
+<pre class="r"><code>is(n1) #can we do math on this?</code></pre>
+<pre><code>## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot;
+## [4] &quot;SuperClassMethod&quot;</code></pre>
+<pre class="r"><code>n1 &lt;- as.numeric(n1) #coerce to numeric type
+
+n2 &lt;- as.numeric(readline(&quot;What is the second number?\n&quot;))</code></pre>
+<pre><code>## What is the second number?</code></pre>
+<pre class="r"><code># nesting functions works too.
+
+# readline(&quot;What is the second number?\n&quot;) | as.numeric &gt; n2
+
+
+print(n1 + n2)</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code>print(n1 * n2)</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code>print(n1 / n2)</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code>print(
+  data.frame(sum = n1 + n2,
+             product = n1 * n2,
+             ratio = n1 / n2)
+)</code></pre>
+<pre><code>##   sum product ratio
+## 1  NA      NA    NA</code></pre>
+<pre class="r"><code>named_vec &lt;- c(
+  sum = n1 + n2,
+  product = n1 * n2,
+  ratio = n1 / n2
+)
+
+print(named_vec)</code></pre>
+<pre><code>##     sum product   ratio 
+##      NA      NA      NA</code></pre>
+<pre class="r"><code>print(named_vec[&quot;ratio&quot;])</code></pre>
+<pre><code>## ratio 
+##    NA</code></pre>
+<pre class="r"><code>named_vec[&quot;product&quot;] &lt;- -42
+print(named_vec)</code></pre>
+<pre><code>##     sum product   ratio 
+##      NA     -42      NA</code></pre>
 </div>
 </div>
 </div>
@@ -673,6 +718,45 @@ names(namedvec)</code></pre>
 </blockquote>
 <div id="exercise-solution-5-minutes-1" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code># 1 ----
+radii &lt;- c(5,10,20)
+pi * radii * radii</code></pre>
+<pre><code>## [1]   78.53982  314.15927 1256.63706</code></pre>
+<pre class="r"><code>pi * radii^2</code></pre>
+<pre><code>## [1]   78.53982  314.15927 1256.63706</code></pre>
+<pre class="r"><code>pi * (radii - 2.1) ^2</code></pre>
+<pre><code>## [1]   26.42079  196.06680 1006.59770</code></pre>
+<pre class="r"><code># 2 ----
+str(seq(from=1,to=100))</code></pre>
+<pre><code>##  int [1:100] 1 2 3 4 5 6 7 8 9 10 ...</code></pre>
+<pre class="r"><code>str(1:100)</code></pre>
+<pre><code>##  int [1:100] 1 2 3 4 5 6 7 8 9 10 ...</code></pre>
+<pre class="r"><code>identical(seq(from=1,to=100),1:100)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>counter &lt;- seq(1,100)
+sum(counter)</code></pre>
+<pre><code>## [1] 5050</code></pre>
+<pre class="r"><code>sum(1:100)</code></pre>
+<pre><code>## [1] 5050</code></pre>
+<pre class="r"><code># 3 ----
+par(mar=c(3,3,1,1),mgp=2:0) #formatting the plots, ignore me
+
+randomdata &lt;- runif(100)
+hist(randomdata)</code></pre>
+<p><img src="mod2_files/figure-html/unnamed-chunk-12-1.png" width="768" /></p>
+<pre class="r"><code>sortedrandom1 &lt;- sort(randomdata)
+sortedrandom2 &lt;- randomdata[order(randomdata)]
+identical(sortedrandom1,sortedrandom2)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>sortedindex &lt;- order(randomdata)
+sortedrandom3 &lt;- randomdata[sortedindex]
+
+all(sortedrandom1 == sortedrandom3)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>par(mfrow=c(1,2)) #more plot formatting, ignore me again
+plot(randomdata)
+plot(sortedrandom1)</code></pre>
+<p><img src="mod2_files/figure-html/unnamed-chunk-12-2.png" width="768" /></p>
 </div>
 </div>
 </div>
@@ -720,6 +804,57 @@ firstmat[1,2]</code></pre>
 </blockquote>
 <div id="exercise-solution-5-minutes-2" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code># fiddling
+matrix(1:10,nrow=2,ncol=5)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    3    5    7    9
+## [2,]    2    4    6    8   10</code></pre>
+<pre class="r"><code>matrix(1:10,nrow=2,ncol=5,byrow=T)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    2    3    4    5
+## [2,]    6    7    8    9   10</code></pre>
+<pre class="r"><code># 1 ----
+ourrandommat &lt;- matrix(runif(30),nrow=10,ncol=3)
+str(ourrandommat)</code></pre>
+<pre><code>##  num [1:10, 1:3] 0.35913 0.00576 0.15457 0.27607 0.99914 ...</code></pre>
+<pre class="r"><code>dim(ourrandommat)</code></pre>
+<pre><code>## [1] 10  3</code></pre>
+<pre class="r"><code>colnames(ourrandommat) &lt;- c(&quot;one&quot;,2,&quot;the third&quot;)
+rownames(ourrandommat) &lt;- paste(&quot;row&quot;,seq(1,nrow(ourrandommat)))
+dimnames(ourrandommat)</code></pre>
+<pre><code>## [[1]]
+##  [1] &quot;row 1&quot;  &quot;row 2&quot;  &quot;row 3&quot;  &quot;row 4&quot;  &quot;row 5&quot;  &quot;row 6&quot;  &quot;row 7&quot;  &quot;row 8&quot; 
+##  [9] &quot;row 9&quot;  &quot;row 10&quot;
+## 
+## [[2]]
+## [1] &quot;one&quot;       &quot;2&quot;         &quot;the third&quot;</code></pre>
+<pre class="r"><code>str(ourrandommat)</code></pre>
+<pre><code>##  num [1:10, 1:3] 0.35913 0.00576 0.15457 0.27607 0.99914 ...
+##  - attr(*, &quot;dimnames&quot;)=List of 2
+##   ..$ : chr [1:10] &quot;row 1&quot; &quot;row 2&quot; &quot;row 3&quot; &quot;row 4&quot; ...
+##   ..$ : chr [1:3] &quot;one&quot; &quot;2&quot; &quot;the third&quot;</code></pre>
+<pre class="r"><code>ourrandommat</code></pre>
+<pre><code>##                one          2  the third
+## row 1  0.359134736 0.78793566 0.89279743
+## row 2  0.005757295 0.66933762 0.38928571
+## row 3  0.154568976 0.94012494 0.58836918
+## row 4  0.276068802 0.09163467 0.89002717
+## row 5  0.999144637 0.58622492 0.45815453
+## row 6  0.932176732 0.82104315 0.47498542
+## row 7  0.896427682 0.27334326 0.57715225
+## row 8  0.229111649 0.48404760 0.31962100
+## row 9  0.225281627 0.28562873 0.61936386
+## row 10 0.548053976 0.63060351 0.02283788</code></pre>
+<pre class="r"><code>mean(ourrandommat)</code></pre>
+<pre><code>## [1] 0.5142748</code></pre>
+<pre class="r"><code>rowMeans(ourrandommat)</code></pre>
+<pre><code>##     row 1     row 2     row 3     row 4     row 5     row 6     row 7     row 8 
+## 0.6799559 0.3547935 0.5610210 0.4192435 0.6811747 0.7427351 0.5823077 0.3442601 
+##     row 9    row 10 
+## 0.3767581 0.4004985</code></pre>
+<pre class="r"><code>colMeans(ourrandommat)</code></pre>
+<pre><code>##       one         2 the third 
+## 0.4625726 0.5569924 0.5232594</code></pre>
 </div>
 </div>
 </div>
