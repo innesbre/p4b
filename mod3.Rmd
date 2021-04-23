@@ -6,7 +6,7 @@ The Book of R: chapter 3.4 (arrays), 5.1 (lists), 5.2 (data frames)
 
 ***
 
-## Module 2 review
+# Module 2 review
 
 * Variable types: vector, matrix
 * Vector
@@ -18,7 +18,7 @@ The Book of R: chapter 3.4 (arrays), 5.1 (lists), 5.2 (data frames)
     
 ***
 
-# Exercise: String commands (10 minutes)
+## Exercise: String commands (10 minutes)
 
 > We used this code to reverse a string
 
@@ -45,11 +45,9 @@ paste(rev(strsplit(DNA,"")[[1]]),collapse="") # "collapsed" into a string
 ```
 
 
-# Variables (continued)
+# Lists
 
-## Lists, arrays, data frames
-
-# Lists: creating
+## Lists: creating
 
 * Lists are vectors that contain a mix of variable types
 * Create a list using the list() function
@@ -69,7 +67,7 @@ listVariable = list(numericVector, stringVector, logicVector, 77)
 listVariable
 ```
 
-# Lists: accessing
+## Lists: accessing
 
 ```{r}
 listVariable
@@ -82,7 +80,7 @@ listVariable[[2]]
 listVariable[c(2, 4)]
 ```
 
-# Lists: named elements
+## Lists: named elements
 
 ```{r}
 listVariable = list(numbers=numericVector, strings=stringVector, logic=logicVector, myNum=77)
@@ -98,7 +96,7 @@ listVariable$numbers  #easiest access method
 
 ```
 
-# Exercise: Lists (10 minutes)
+## Exercise: Lists (10 minutes)
 
 * Create a list containing a vector of odd numbers from 1 to 100
     * Hint: you can use the seq() command
@@ -127,7 +125,9 @@ names(ourlist)
 
 ```
 
-# Arrays: creating
+# Arrays
+
+## Arrays: creating
 
 * Like matrix, but more than two dimensions
 * Only one data type (like vector, matrix)
@@ -145,7 +145,7 @@ arrayVariable = array(c(vector1,vector2),dim = c(3,3,2))
 arrayVariable
 ```
 
-# Arrays: accessing
+## Arrays: accessing
 
 ```{r}
 arrayVariable
@@ -164,7 +164,7 @@ arrayVariable[,,2]
 
 ```
 
-# Arrays: named elements
+## Arrays: named elements
 
 ```{r}
 #Create the names
@@ -186,7 +186,9 @@ arrayVariable["row2","col1","matrix1"]
 
 ```
 
-# Data frames: creating
+# Data frames
+
+## Data frames: creating
 
 * Used to store data tables
 * List of equal sized vectors
@@ -206,7 +208,7 @@ patientRecords = data.frame(name, age, smoker)
 patientRecords
 ```
 
-# Data frames: accessing
+## Data frames: accessing
 
 ```{r}
 patientRecords
@@ -219,7 +221,7 @@ patientRecords$age
 
 ```
 
-# Exercise: Data frames (10 minutes)
+## Exercise: Data frames (10 minutes)
 
 >Read the "gene_condition_source_id.txt" file used in Assignment 1 into a data frame variable (see assignment 1 for the command)
 

@@ -234,4 +234,15 @@ For assignment 1, I expect two text files (as well as the relevant input and out
 - the second is the R script for the second part.  
 Both can be made in RStudio!  File -> New File -> Shell script to make a new shell script, and Tools -> Terminal -> New Terminal to open a bash terminal to run your shell commands.  Ctrl+Enter will run the current line in the console / terminal.  
 
+
+For loop, just for fun:
+```{bash}
+COLS=$(head -n1 gene_condition_source_id.txt | wc -w)
+for X in `seq $COLS`
+do
+	echo line $X:
+	tail -n+2 gene_condition_source_id.txt | cut -f $X | sort -u | wc -l
+done
+```
+
 ***
