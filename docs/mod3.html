@@ -13,13 +13,22 @@
 
 <title>Module 3</title>
 
-<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -39,11 +48,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -56,32 +60,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
 
@@ -92,10 +70,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -112,40 +86,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -173,7 +120,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -185,7 +132,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -196,10 +143,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -211,7 +171,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -337,13 +296,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -392,7 +351,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -401,10 +360,13 @@ div.tocify {
 </div>
 
 
+<blockquote>
+<p>Updated 2021/04/23</p>
+</blockquote>
 <p>The Book of R: chapter 3.4 (arrays), 5.1 (lists), 5.2 (data frames)</p>
 <hr />
-<div id="module-2-review" class="section level2">
-<h2>Module 2 review</h2>
+<div id="module-2-review" class="section level1">
+<h1>Module 2 review</h1>
 <ul>
 <li>Variable types: vector, matrix</li>
 <li>Vector
@@ -419,9 +381,8 @@ div.tocify {
 </ul></li>
 </ul>
 <hr />
-</div>
-<div id="exercise-string-commands-10-minutes" class="section level1">
-<h1>Exercise: String commands (10 minutes)</h1>
+<div id="exercise-string-commands-10-minutes" class="section level2">
+<h2>Exercise: String commands (10 minutes)</h2>
 <blockquote>
 <p>We used this code to reverse a string</p>
 </blockquote>
@@ -436,16 +397,42 @@ div.tocify {
 </blockquote>
 <div id="exercise-solution-5-minutes" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>DNA &lt;- &quot;GATTACA&quot;
+str(strsplit(DNA,&quot;A&quot;))</code></pre>
+<pre><code>## List of 1
+##  $ : chr [1:3] &quot;G&quot; &quot;TT&quot; &quot;C&quot;</code></pre>
+<pre class="r"><code>str(strsplit(DNA,&quot;A&quot;)[1])</code></pre>
+<pre><code>## List of 1
+##  $ : chr [1:3] &quot;G&quot; &quot;TT&quot; &quot;C&quot;</code></pre>
+<pre class="r"><code>str(strsplit(DNA,&quot;A&quot;)[[1]])</code></pre>
+<pre><code>##  chr [1:3] &quot;G&quot; &quot;TT&quot; &quot;C&quot;</code></pre>
+<pre class="r"><code>str(strsplit(DNA,&quot;A&quot;)[[1]][1])</code></pre>
+<pre><code>##  chr &quot;G&quot;</code></pre>
+<pre class="r"><code>strsplit(DNA,&quot;&quot;)</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;G&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot;</code></pre>
+<pre class="r"><code>identical(strsplit(DNA,NULL),strsplit(DNA,&quot;&quot;))</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>length(NULL)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>rev(strsplit(DNA,&quot;&quot;)) #nope!</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;G&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot;</code></pre>
+<pre class="r"><code>rev(strsplit(DNA,&quot;&quot;)[[1]])</code></pre>
+<pre><code>## [1] &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;G&quot;</code></pre>
+<pre class="r"><code>paste(rev(strsplit(DNA,&quot;&quot;)[[1]]),sep=&quot;&amp;&quot;)</code></pre>
+<pre><code>## [1] &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;G&quot;</code></pre>
+<pre class="r"><code>paste(rev(strsplit(DNA,&quot;&quot;)[[1]]),collapse=&quot;&amp;&quot;)</code></pre>
+<pre><code>## [1] &quot;A&amp;C&amp;A&amp;T&amp;T&amp;A&amp;G&quot;</code></pre>
+<pre class="r"><code>paste(rev(strsplit(DNA,&quot;&quot;)[[1]]),collapse=&quot;&quot;)</code></pre>
+<pre><code>## [1] &quot;ACATTAG&quot;</code></pre>
 </div>
 </div>
-<div id="variables-continued" class="section level1">
-<h1>Variables (continued)</h1>
-<div id="lists-arrays-data-frames" class="section level2">
-<h2>Lists, arrays, data frames</h2>
 </div>
-</div>
-<div id="lists-creating" class="section level1">
-<h1>Lists: creating</h1>
+<div id="lists" class="section level1">
+<h1>Lists</h1>
+<div id="lists-creating" class="section level2">
+<h2>Lists: creating</h2>
 <ul>
 <li>Lists are vectors that contain a mix of variable types</li>
 <li>Create a list using the list() function</li>
@@ -475,8 +462,8 @@ listVariable</code></pre>
 ## [[4]]
 ## [1] 77</code></pre>
 </div>
-<div id="lists-accessing" class="section level1">
-<h1>Lists: accessing</h1>
+<div id="lists-accessing" class="section level2">
+<h2>Lists: accessing</h2>
 <pre class="r"><code>listVariable</code></pre>
 <pre><code>## [[1]]
 ## [1] 1 3 5
@@ -506,8 +493,8 @@ listVariable[[2]]</code></pre>
 ## [[2]]
 ## [1] 77</code></pre>
 </div>
-<div id="lists-named-elements" class="section level1">
-<h1>Lists: named elements</h1>
+<div id="lists-named-elements" class="section level2">
+<h2>Lists: named elements</h2>
 <pre class="r"><code>listVariable = list(numbers=numericVector, strings=stringVector, logic=logicVector, myNum=77)
 listVariable</code></pre>
 <pre><code>## $numbers
@@ -535,8 +522,8 @@ listVariable[[1]]</code></pre>
 <pre class="r"><code>listVariable$numbers  #easiest access method</code></pre>
 <pre><code>## [1] 1 3 5</code></pre>
 </div>
-<div id="exercise-lists-10-minutes" class="section level1">
-<h1>Exercise: Lists (10 minutes)</h1>
+<div id="exercise-lists-10-minutes" class="section level2">
+<h2>Exercise: Lists (10 minutes)</h2>
 <ul>
 <li>Create a list containing a vector of odd numbers from 1 to 100
 <ul>
@@ -550,10 +537,29 @@ listVariable[[1]]</code></pre>
 </ul>
 <div id="exercise-solution-5-minutes-1" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>mylist &lt;- list(seq(1,10))
+myvec &lt;- 1:10
+identical(mylist[[1]],myvec)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>mylist &lt;- list(odds=seq(1,100,by=2),
+               evens=seq(2,100,by=2),
+               someothersilliness=c(&quot;why&quot;,&quot;are&quot;,&quot;we&quot;,&quot;here&quot;,&quot;?&quot;))
+
+sum(mylist[[1]])</code></pre>
+<pre><code>## [1] 2500</code></pre>
+<pre class="r"><code>identical(sum(mylist[[1]]),sum(mylist$odds))</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>sum(mylist[[&quot;odds&quot;]])</code></pre>
+<pre><code>## [1] 2500</code></pre>
+<pre class="r"><code>paste(mylist[[&quot;someothersilliness&quot;]],collapse=&quot; &quot;)</code></pre>
+<pre><code>## [1] &quot;why are we here ?&quot;</code></pre>
 </div>
 </div>
-<div id="arrays-creating" class="section level1">
-<h1>Arrays: creating</h1>
+</div>
+<div id="arrays" class="section level1">
+<h1>Arrays</h1>
+<div id="arrays-creating" class="section level2">
+<h2>Arrays: creating</h2>
 <ul>
 <li>Like matrix, but more than two dimensions</li>
 <li>Only one data type (like vector, matrix)</li>
@@ -582,8 +588,8 @@ arrayVariable</code></pre>
 ## [2,]    3   21   24
 ## [3,]    5   22   25</code></pre>
 </div>
-<div id="arrays-accessing" class="section level1">
-<h1>Arrays: accessing</h1>
+<div id="arrays-accessing" class="section level2">
+<h2>Arrays: accessing</h2>
 <pre class="r"><code>arrayVariable</code></pre>
 <pre><code>## , , 1
 ## 
@@ -617,8 +623,8 @@ arrayVariable[,,2]</code></pre>
 ## [2,]    3   21   24
 ## [3,]    5   22   25</code></pre>
 </div>
-<div id="arrays-named-elements" class="section level1">
-<h1>Arrays: named elements</h1>
+<div id="arrays-named-elements" class="section level2">
+<h2>Arrays: named elements</h2>
 <pre class="r"><code>#Create the names
 rowNames = c(&quot;row1&quot;,&quot;row2&quot;,&quot;row3&quot;)
 rowNames</code></pre>
@@ -652,9 +658,15 @@ arrayVariable[,,&quot;matrix1&quot;]</code></pre>
 ## row3    5   22   25</code></pre>
 <pre class="r"><code>arrayVariable[&quot;row2&quot;,&quot;col1&quot;,&quot;matrix1&quot;]</code></pre>
 <pre><code>## [1] 3</code></pre>
+<p>Does each matrix in an array need to be the same shape?</p>
+<pre class="r"><code>array()</code></pre>
+<pre><code>## [1] NA</code></pre>
 </div>
-<div id="data-frames-creating" class="section level1">
-<h1>Data frames: creating</h1>
+</div>
+<div id="data-frames" class="section level1">
+<h1>Data frames</h1>
+<div id="data-frames-creating" class="section level2">
+<h2>Data frames: creating</h2>
 <ul>
 <li>Used to store data tables</li>
 <li>List of equal sized vectors</li>
@@ -677,8 +689,8 @@ patientRecords</code></pre>
   </script>
 </div>
 </div>
-<div id="data-frames-accessing" class="section level1">
-<h1>Data frames: accessing</h1>
+<div id="data-frames-accessing" class="section level2">
+<h2>Data frames: accessing</h2>
 <pre class="r"><code>patientRecords</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -699,8 +711,8 @@ patientRecords[1,] #row 1</code></pre>
 <pre class="r"><code>patientRecords$age</code></pre>
 <pre><code>## [1] 46 49 50</code></pre>
 </div>
-<div id="exercise-data-frames-10-minutes" class="section level1">
-<h1>Exercise: Data frames (10 minutes)</h1>
+<div id="exercise-data-frames-10-minutes" class="section level2">
+<h2>Exercise: Data frames (10 minutes)</h2>
 <blockquote>
 <p>Read the “gene_condition_source_id.txt” file used in Assignment 1 into a data frame variable (see assignment 1 for the command)</p>
 </blockquote>
@@ -715,8 +727,48 @@ patientRecords[1,] #row 1</code></pre>
 </blockquote>
 <div id="exercise-solution-5-minutes-2" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="bash"><code>wc -l gene_condition_source_id.txt</code></pre>
+<pre><code>## 11062 gene_condition_source_id.txt</code></pre>
+<pre class="r"><code>list.files(path=&quot;.&quot;) # &quot;.&quot; == the current working directory</code></pre>
+<pre><code>##  [1] &quot;_site.yml&quot;                    &quot;ASCII-Table-wide.svg&quot;        
+##  [3] &quot;docs&quot;                         &quot;fileOutput.png&quot;              
+##  [5] &quot;gene_condition_source_id.txt&quot; &quot;index.Rmd&quot;                   
+##  [7] &quot;mod2.Rmd&quot;                     &quot;mod3.Rmd&quot;                    
+##  [9] &quot;mod4.Rmd&quot;                     &quot;mod5.Rmd&quot;                    
+## [11] &quot;mod6.Rmd&quot;                     &quot;mod7.Rmd&quot;                    
+## [13] &quot;mod8.Rmd&quot;                     &quot;mod9.Rmd&quot;                    
+## [15] &quot;mydata.txt&quot;                   &quot;p4b.Rproj&quot;                   
+## [17] &quot;README.md&quot;                    &quot;recipebookTOC.png&quot;           
+## [19] &quot;site_libs&quot;                    &quot;sum.R&quot;                       
+## [21] &quot;test.txt&quot;                     &quot;yeast_properties.txt&quot;</code></pre>
+<pre class="r"><code>db &lt;- read.table(&quot;gene_condition_source_id.txt&quot;,
+                 header=T,sep=&quot;\t&quot;,quote=&quot;&quot;,comment.char=&quot;&quot;,
+                 colClasses=&quot;character&quot;)
+nrow(db)</code></pre>
+<pre><code>## [1] 11061</code></pre>
+<pre class="r"><code>identical(colnames(db),names(db))</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>str(db)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    11061 obs. of  9 variables:
+##  $ X.GeneID       : chr  &quot;2&quot; &quot;2&quot; &quot;144568&quot; &quot;53947&quot; ...
+##  $ AssociatedGenes: chr  &quot;A2M&quot; &quot;A2M&quot; &quot;A2ML1&quot; &quot;A4GALT&quot; ...
+##  $ RelatedGenes   : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
+##  $ ConceptID      : chr  &quot;C0002395&quot; &quot;C0002395&quot; &quot;C1833692&quot; &quot;C0599990&quot; ...
+##  $ DiseaseName    : chr  &quot;Alzheimer disease&quot; &quot;Alzheimer disease&quot; &quot;Otitis media, susceptibility to&quot; &quot;p phenotype&quot; ...
+##  $ SourceName     : chr  &quot;MONDO&quot; &quot;Human Phenotype Ontology&quot; &quot;MONDO&quot; &quot;NCBI curation&quot; ...
+##  $ SourceID       : chr  &quot;MONDO:0004975&quot; &quot;HP:0002511&quot; &quot;MONDO:0008162&quot; &quot;&quot; ...
+##  $ DiseaseMIM     : chr  &quot;104300&quot; &quot;104300&quot; &quot;166760&quot; &quot;111400&quot; ...
+##  $ LastUpdated    : chr  &quot;Feb 19 2020&quot; &quot;Feb 19 2020&quot; &quot;Feb 16 2016&quot; &quot;Feb 16 2016&quot; ...</code></pre>
+<pre class="r"><code>rownames(db)[1:10]</code></pre>
+<pre><code>##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot;</code></pre>
 <hr />
 </div>
+</div>
+</div>
+<div id="assignment-2-hints" class="section level1">
+<h1>Assignment 2 hints:</h1>
+<p>I expect a tarball containing a single folder with any input data required to run your scripts (ie. the FASTA file), any output files generated by your scripts, <strong>and your scripts themselves!</strong> For this week, there is no report needed. Your scripts should answer any questions themselves (ie. ‘stringnumber_practice.R’ should be filled in with all the code needed to generate solutions for each question).</p>
+<hr />
 </div>
 
 
@@ -748,7 +800,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
