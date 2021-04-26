@@ -36,15 +36,24 @@ The Book of R: chapter 4.3 (factors), 8 (files)
 
 ### Exercise solution (5 minutes)
 
-```{r eval=FALSE, include=FALSE}
-ourdf <- read.table("../data/gene_condition_source_id.txt",
-                    sep="\t",header=T,quote="",comment.char="",
-                    as.is=T)
-ourdf[grep("TP53",ourdf$AssociatedGenes),]
-unique(ourdf[ourdf$AssociatedGenes == "TP53","DiseaseName"])
+```{r}
+db <- read.table("gene_condition_source_id.txt",
+                 header=T,sep="\t",quote="",comment.char="",
+                 colClasses="character")
+sum(db$AssociatedGenes == "TP53")
+table(db$AssociatedGenes == "TP53")
+table(db$SourceName)
 
-str(grepl("TP53",ourdf$AssociatedGenes))
-table(ourdf$AssociatedGenes == "TP53")
+db$DiseaseName[db$AssociatedGenes == "TP53"]
+db$DiseaseName[which(db$AssociatedGenes == "TP53")]
+unique(db$DiseaseName[db$AssociatedGenes == "TP53"])
+these_have_tp53 <- db$AssociatedGenes == "TP53"
+unique(db$DiseaseName[these_have_tp53])
+```
+
+```{bash}
+wc -l gene_condition_source_id.txt
+
 ```
 
 # Review: data types vs. data structures
@@ -112,14 +121,27 @@ MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDPGPDEAPRMPEAAPPVAPAPAAP
 
 ### Exercise solution (5 minutes)
 
-```{r eval=FALSE, include=FALSE}
-#add your exercise code here
+```{r}
+prot_string <- "MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDPGPDEAPRMPEAAPPVAPAPAAPTPAAPAPAPSWPLSSSVPSQKTYQGSYGFRLGFLHSGTAKSVTCTYSPALNKMFCQLAKTCPVQLWVDSTPPPGTRVRAMAIYKQSQHMTEVVRRCPHHERCSDSDGLAPPQHLIRVEGNLRVEYLDDRNTFRHSVVVPYEPPEVGSDCTTIHYNYMCNSSCMGGMNRRPILTIITLEDSSGNLLGRNSFEVRVCACPGRDRRTEEENLRKKGEPHHELPPGSTKRALPNNTSSSPQPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLKSKKGQSTSRHKKLMFKTEGPDSD"
+nchar(prot_string)
+# prot_string <- sub("\\n","",prot_string)
+prot <- strsplit(prot_string,split="")
+length(prot)
+str(prot)
+prot <- prot[[1]]
+str(prot)
 
-aaseq <- strsplit("MEEPQSDPSVEPPLSQETFSDLWKLLPENNVLSPLPSQAMDDLMLSPDDIEQWFTEDPGPDEAPRMPEAAPPVAPAPAAPTPAAPAPAPSWPLSSSVPSQKTYQGSYGFRLGFLHSGTAKSVTCTYSPALNKMFCQLAKTCPVQLWVDSTPPPGTRVRAMAIYKQSQHMTEVVRRCPHHERCSDSDGLAPPQHLIRVEGNLRVEYLDDRNTFRHSVVVPYEPPEVGSDCTTIHYNYMCNSSCMGGMNRRPILTIITLEDSSGNLLGRNSFEVRVCACPGRDRRTEEENLRKKGEPHHELPPGSTKRALPNNTSSSPQPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLKSKKGQSTSRHKKLMFKTEGPDSD",
-                  split="")[[1]]
-table(as.factor(aaseq))
-length(levels(as.factor(aaseq)))
-table(aaseq)
+testing <- strsplit(c("this","class","rocks"),"")
+str(testing)
+
+table(prot)
+summary(prot)
+
+prot <- as.factor(prot)
+str(prot)
+table(prot)
+summary(prot)
+
 ```
 
 
@@ -241,35 +263,29 @@ dataFrame = read.table("gene_condition_source_id.txt", header=TRUE, sep="\t", fi
 
 ### Exercise solution (5 minutes)
 
-```{r eval=FALSE, include=FALSE}
-#Add your solution here
-ourdf <- read.table("../data/gene_condition_source_id.txt",
-                    sep="\t",header=T,quote="",comment.char="")
-str(ourdf)
-nrow(ourdf)
-ncol(ourdf)
+```{r}
+db <- read.table("gene_condition_source_id.txt",
+                 header=T,sep="\t",quote="",comment.char="",
+                 colClasses="character")
+nrow(db)
+ncol(db)
+identical(db[,"AssociatedGenes"],db$AssociatedGenes)
+write.table(db[,2],file="column.txt",quote=F,row.names=F,col.names=F)
 
-write.table(ourdf[,1,drop=F],file="../Week3/a_column.txt",
-            sep="\t",col.names=T,row.names=F,quote=F)
-shell("head ../Week3/a_column.txt")
-shell("wc -l ../Week3/a_column.txt")
-write.table(ourdf[,1,drop=F],file="../Week3/a_column_v2.txt",
-            sep="\t",col.names=T,row.names=F,quote=F)
-shell("head ../Week3/a_column_v2.txt")
-shell("wc -l ../Week3/a_column_v2.txt")
-write.table(ourdf[,1,drop=F],file="../Week3/a_column_v3.txt",
-            sep="\t",col.names=NA,row.names=T,quote=F)
-shell("head ../Week3/a_column_v3.txt")
-shell("wc -l ../Week3/a_column_v3.txt")
+write.table(db[1,],file="row.txt",sep="\t",
+            quote=F,row.names=F,col.names=F)
 
+```
 
-write.table(ourdf[1,],file="../Week3/a_row.txt",
-            sep="\t",col.names=T,row.names=F,quote=F)
-shell("head ../Week3/a_row.txt")
-# shell("awk -F '\t' 'END {print NF}' ../Week3/a_row.txt")
-# RStudio's shell doesn't have awk installed, sadly.
-# If you're on OSX/Linux, you can try this instead:
-# system("awk -F '\t' 'END {print NF}' ../Week3/a_row.txt")
+```{bash}
+head column.txt
+wc -l column.txt
+```
+
+```{bash}
+less row.txt
+awk -F '\t' 'END {print NF}' gene_condition_source_id.txt
+awk -F '\t' '{print NF}' row.txt
 ```
 
 
