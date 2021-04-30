@@ -13,13 +13,22 @@
 
 <title>Module 5</title>
 
-<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -39,11 +48,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -56,32 +60,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
 
@@ -92,10 +70,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -112,40 +86,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -173,7 +120,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -185,7 +132,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -196,10 +143,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -211,7 +171,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -337,13 +296,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -392,7 +351,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -401,10 +360,122 @@ div.tocify {
 </div>
 
 
+<blockquote>
+<p>Updated 2021/04/30</p>
+</blockquote>
+<div id="assignment-2-notes" class="section level1">
+<h1>Assignment 2 notes</h1>
+<div id="part-3-substring" class="section level2">
+<h2>Part 3 substring:</h2>
+<p>Hard-coding indices to find the last word in the string is not robust coding practice. Here’s two better ways of doing that:</p>
+<pre class="r"><code>string = &quot;This is a kind of a long string&quot;
+
+substr(string,26,31) # not good</code></pre>
+<pre><code>## [1] &quot;string&quot;</code></pre>
+<pre class="r"><code>substr(string,nchar(string)-5,nchar(string)) # still not good</code></pre>
+<pre><code>## [1] &quot;string&quot;</code></pre>
+<pre class="r"><code>spaces &lt;- gregexpr(&quot; &quot;,string)[[1]]
+substr(string,spaces[length(spaces)] + 1,nchar(string))</code></pre>
+<pre><code>## [1] &quot;string&quot;</code></pre>
+<pre class="r"><code># good, but uses a function we don&#39;t know yet.
+
+strsplit(string,&quot; &quot;)[[1]][length(strsplit(string,&quot; &quot;)[[1]])]</code></pre>
+<pre><code>## [1] &quot;string&quot;</code></pre>
+<pre class="r"><code># easier, doesn&#39;t use substr (but substr is a dumb way to handle this anyway).</code></pre>
+</div>
+<div id="part-4" class="section level2">
+<h2>Part 4:</h2>
+<p>Many ways of doing this. Here are some!</p>
+<pre class="r"><code>sequence &lt;- paste(readLines(&quot;assignment2_sequence.txt&quot;)[1:5],collapse=&quot;&quot;)
+sequence &lt;- substr(sequence,regexpr(&quot;AUG&quot;,sequence)[[1]],nchar(sequence))
+# I really compressed the above, but you all figured out this part pretty well.
+
+aasequence = &quot;&quot;
+index=1
+while(index &lt; nchar(sequence)) {
+  codon &lt;- substr(sequence, index, index + 2)
+  if(codon == &quot;AUG&quot;) {
+        aasequence = c(aasequence, &quot;M&quot;)
+    } else if (codon == &quot;UUC&quot;) {
+        aasequence = c(aasequence, &quot;F&quot;)
+    } else if (codon == &quot;CUU&quot;) {
+        aasequence = c(aasequence, &quot;L&quot;)
+    } else if (codon == &quot;CCA&quot;) {
+        aasequence = c(aasequence, &quot;P&quot;)
+    } else if (codon == &quot;ACC&quot;) {
+        aasequence = c(aasequence, &quot;T&quot;)
+    } else if (codon == &quot;GAU&quot;) {
+        aasequence = c(aasequence, &quot;D&quot;)
+    } else if (codon == &quot;CGA&quot;) {
+        aasequence = c(aasequence, &quot;R&quot;)
+    } else if (codon == &quot;UGA&quot;) {
+        aasequence = c(aasequence, &quot;stop&quot;)
+    }
+  if (codon == &quot;stop&quot;) { break }
+  index = index + 3  #this moves the index forward 3 places in the sequence
+}
+paste(aasequence[-1],collapse=&quot;&quot;) #why -1 here?</code></pre>
+<pre><code>## [1] &quot;MDFRPFDRFPFTLTRFTFPFDLDFTRFDFT&quot;</code></pre>
+<pre class="r"><code># a shorter way, using the sub command!
+aasequence = &quot;&quot;
+index=1
+while(index &lt; nchar(sequence)) {
+  codon &lt;- substr(sequence, index, index + 2)
+  codon &lt;- sub(&quot;AUG&quot;, &quot;M&quot;, codon)
+  codon &lt;- sub(&quot;UUC&quot;, &quot;F&quot;, codon)
+  codon &lt;- sub(&quot;CUU&quot;, &quot;L&quot;, codon)
+  codon &lt;- sub(&quot;CCA&quot;, &quot;P&quot;, codon)
+  codon &lt;- sub(&quot;ACC&quot;, &quot;T&quot;, codon)
+  codon &lt;- sub(&quot;GAU&quot;, &quot;D&quot;, codon)
+  codon &lt;- sub(&quot;CGA&quot;, &quot;R&quot;, codon)
+  codon &lt;- sub(&quot;UGA&quot;, &quot;stop&quot;, codon)
+  if (codon == &quot;stop&quot;) { break }
+  aasequence &lt;- c(aasequence,codon)
+  index = index + 3  #this moves the index forward 3 places in the sequence
+}
+paste(aasequence[-1],collapse=&quot;&quot;) #why -1 here?</code></pre>
+<pre><code>## [1] &quot;MDFRPFDRFPFTLTRFTFPFDLDFTRFDFT&quot;</code></pre>
+<pre class="r"><code># mapping using indices!
+aasequence = &quot;&quot;
+index=1
+while(index &lt; nchar(sequence)) {
+  codon &lt;- substr(sequence, index, index + 2)
+  ref_aa&lt;-c(AUG=&quot;M&quot;, UUC=&quot;F&quot;, CUU=&quot;L&quot;, CCA=&quot;P&quot;, ACC=&quot;T&quot;, GAU=&quot;D&quot;, CGA=&quot;R&quot;, UGA=&quot;stop&quot;)
+  next_aa &lt;- ref_aa[codon]
+  if (next_aa == &quot;stop&quot;) { break }
+  aasequence &lt;- c(aasequence,next_aa)
+  index = index + 3  #this moves the index forward 3 places in the sequence
+}
+paste(aasequence[-1],collapse=&quot;&quot;) #why -1 here?</code></pre>
+<pre><code>## [1] &quot;MDFRPFDRFPFTLTRFTFPFDLDFTRFDFT&quot;</code></pre>
+<pre class="r"><code>aasequence3 &lt;- aasequence[-1]
+
+# finally, using switch (which probably isn&#39;t as effective as using indices, but weirder so it&#39;s last)
+aasequence = &quot;&quot;
+index=1
+while(index &lt; nchar(sequence)) {
+  codon &lt;- substr(sequence, index, index + 2)
+  next_aa &lt;- switch(codon,
+                    AUG=&quot;M&quot;,
+                    UUC=&quot;F&quot;,
+                    CUU=&quot;L&quot;,
+                    CCA=&quot;P&quot;,
+                    ACC=&quot;T&quot;,
+                    GAU=&quot;D&quot;,
+                    CGA=&quot;R&quot;,
+                    UGA=&quot;stop&quot;)
+  if (next_aa == &quot;stop&quot;) { break }
+  aasequence &lt;- c(aasequence,next_aa)
+  index = index + 3  #this moves the index forward 3 places in the sequence
+}
+paste(aasequence[-1],collapse=&quot;&quot;) #why -1 here?</code></pre>
+<pre><code>## [1] &quot;MDFRPFDRFPFTLTRFTFPFDLDFTRFDFT&quot;</code></pre>
 <p>The Book of R: chapter 10.2 and 10.3 (loops), 10.2.3 (apply functions)</p>
 <hr />
-<div id="module-4-review" class="section level2">
-<h2>Module 4 review</h2>
+</div>
+</div>
+<div id="module-4-review" class="section level1">
+<h1>Module 4 review</h1>
 <ul>
 <li>Factors
 <ul>
@@ -423,9 +494,8 @@ div.tocify {
 </ul></li>
 </ul>
 <hr />
-</div>
-<div id="exercise-conditions-10-minutes" class="section level1">
-<h1>Exercise: conditions (10 minutes)</h1>
+<div id="exercise-conditions-10-minutes" class="section level2">
+<h2>Exercise: conditions (10 minutes)</h2>
 <blockquote>
 <p>Write conditional statement code that evaluates an amino acid’s physicochemical property and outputs the following, given a single letter amino acid code:</p>
 </blockquote>
@@ -435,15 +505,49 @@ div.tocify {
 &quot;Hydrophobic&quot; for A, I, L, M, F, V, P, G</code></pre>
 <div id="exercise-solution-5-minutes" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>AAmap &lt;- list(
+  Charged=c(&quot;R&quot;,&quot;K&quot;,&quot;D&quot;,&quot;E&quot;),
+  Polar=c(&quot;Q&quot;,&quot;N&quot;,&quot;H&quot;,&quot;S&quot;,&quot;T&quot;,&quot;Y&quot;,&quot;C&quot;),
+  Amphipathic=c(&quot;W&quot;,&quot;Y&quot;,&quot;M&quot;),
+  Hydrophobic=c(&quot;A&quot;,&quot;I&quot;,&quot;L&quot;,&quot;M&quot;,&quot;F&quot;,&quot;V&quot;,&quot;P&quot;,&quot;G&quot;)
+)
+
+AA &lt;- &quot;G&quot;
+
+
+if (AA %in% c(&quot;R&quot;,&quot;K&quot;,&quot;D&quot;,&quot;E&quot;)) {
+  property &lt;- &quot;Charged&quot;
+} else if (AA %in% AAmap$Polar) {
+  property &lt;- &quot;Polar&quot;
+} else if (AA %in% AAmap[[&quot;Amphipathic&quot;]]) {
+  propery &lt;- &quot;Amphipathic&quot;
+} else if ( AA %in% AAmap$Hydrophobic) {
+  property &lt;- names(AAmap)[4] # this is just a convoluted way of doing the same as above.
+} else {
+  stop(paste(AA,&quot;is not a recognized amino acid.&quot;)) 
+  # always good to have an &quot;else&quot; in case none of the elseifs catch your input.
+}
+property</code></pre>
+<pre><code>## [1] &quot;Hydrophobic&quot;</code></pre>
+<pre class="r"><code># aside 
+1 %in% 1:5</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>any(1 == 1:5)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>{
+  print(&quot;hi&quot;)
+  print(&quot;you&quot;)
+}</code></pre>
+<pre><code>## [1] &quot;hi&quot;
+## [1] &quot;you&quot;</code></pre>
+<pre class="r"><code># A more &quot;R-like&quot; way of doing this:
+property &lt;- names(AAmap)[sapply(AAmap,function(X) AA %in% X)]
+property</code></pre>
+<pre><code>## [1] &quot;Hydrophobic&quot;</code></pre>
+</div>
 </div>
 </div>
 <div id="loops" class="section level1">
-<h1>Loops</h1>
-<div id="key-programming-concept" class="section level2">
-<h2>Key Programming Concept</h2>
-</div>
-</div>
-<div id="loops-1" class="section level1">
 <h1>Loops</h1>
 <pre class="r"><code>vectorVariable = c(1,-2,3,-5)
 
@@ -470,9 +574,8 @@ if(vectorVariable[3]&gt;0) {
 <li>Loops provide a way of efficiently repeating the same code</li>
 <li>Two major kinds of loops: for, while</li>
 </ul>
-</div>
-<div id="for-loop-e.g.-find-positive-numbers" class="section level1">
-<h1>For loop e.g. find positive numbers</h1>
+<div id="for-loop-e.g.-find-positive-numbers" class="section level2">
+<h2>For loop e.g. find positive numbers</h2>
 <pre class="r"><code>#Here is the same problem, but solved using a for loop
 vectorVariable = c(1,-2,3,-5)
 for (value in vectorVariable) {
@@ -516,8 +619,8 @@ print (sum)</code></pre>
 <pre><code>## [1] 5050</code></pre>
 <pre class="r"><code>#this is the same as sum(1:100) - in this case, R has a &#39;high level&#39; command that does the same thing. Internally, sum() uses a loop to do its job.</code></pre>
 </div>
-<div id="while-loop" class="section level1">
-<h1>While loop</h1>
+<div id="while-loop" class="section level2">
+<h2>While loop</h2>
 <ul>
 <li>Example: find positive numbers in a vector</li>
 </ul>
@@ -570,8 +673,8 @@ if (i &lt;= length(vectorVariable)) { #i is no longer smaller than the vector le
 
 #The while and for loops can do the same thing. Sometimes it is more convenient to write a loop one way or another</code></pre>
 </div>
-<div id="reasons-to-write-loops" class="section level1">
-<h1>Reasons to write loops</h1>
+<div id="reasons-to-write-loops" class="section level2">
+<h2>Reasons to write loops</h2>
 <ul>
 <li>You want to loop over all elements of a vector (the most common case in R)</li>
 </ul>
@@ -612,8 +715,8 @@ while (vectorVariable[i] != 3) {
 <pre><code>## [1] 1
 ## [1] -2</code></pre>
 </div>
-<div id="infinite-loops" class="section level1">
-<h1>Infinite loops</h1>
+<div id="infinite-loops" class="section level2">
+<h2>Infinite loops</h2>
 <ul>
 <li>Be careful that the loops don’t go on forever</li>
 <li>If this happens, you need to stop or interrupt the R code. In RStudio, you interrupt the code from the Session menu</li>
@@ -629,8 +732,8 @@ while (i &lt;= length(vectorVariable)) {
 
 # Not actually going to run this one, or the code would never knit!</code></pre>
 </div>
-<div id="exercise-loops-1-10-minutes" class="section level1">
-<h1>Exercise: Loops 1 (10 minutes)</h1>
+<div id="exercise-loops-1-10-minutes" class="section level2">
+<h2>Exercise: Loops 1 (10 minutes)</h2>
 <blockquote>
 <p>Remember to count the amino acids in a protein sequence? Let’s do it in a different way here, using loops and named vectors (could also use names in lists)</p>
 </blockquote>
@@ -651,10 +754,39 @@ QPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLKSKKGQSTSRHKKLMFKTEGPDSD</c
 </blockquote>
 <div id="exercise-solution-5-minutes-1" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code># This exercise isn&#39;t in your version of the notebook, but whatever...
+# First I copied that FASTA-formatted sequence into a text file, so we could load it easily.
+
+inputFA &lt;- readLines(&quot;mod5exercise.fa&quot;)
+
+
+# Now we do it the very un-R-like loop way: 
+AAcounts &lt;- integer(length=length(LETTERS))
+names(AAcounts) &lt;- LETTERS
+
+for (LINE in inputFA) {
+  lineAAs &lt;- strsplit(LINE,&quot;&quot;)[[1]] #the [[1]] is to quickly grab the first (and only) list element
+  if (lineAAs[1] == &quot;&gt;&quot;) { next } # skip the header line
+  for (AA in lineAAs) {
+    AAcounts[AA] &lt;- AAcounts[AA] + 1
+  }
+}
+AAcounts</code></pre>
+<pre><code>##  A  B  C  D  E  F  G  H  I  J  K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y  Z 
+## 24  0 10 20 30 11 23 12  8  0 20 32 12 14  0 45 15 26 38 22  0 18  4  0  9  0</code></pre>
+<pre class="r"><code># of course, vectorization is way more R-appropriate:
+AllTheAAs &lt;- strsplit(inputFA[!grepl(&quot;^&gt;&quot;,inputFA)],&quot;&quot;)
+table(unlist(AllTheAAs))</code></pre>
+<pre><code>## 
+##  A  C  D  E  F  G  H  I  K  L  M  N  P  Q  R  S  T  V  W  Y 
+## 24 10 20 30 11 23 12  8 20 32 12 14 45 15 26 38 22 18  4  9</code></pre>
+<pre class="r"><code># Are they the same?
+all(AAcounts[AAcounts &gt; 0] == table(unlist(AllTheAAs)))</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 </div>
 </div>
-<div id="exercise-loops-2-10-minutes" class="section level1">
-<h1>Exercise: Loops 2 (10 minutes)</h1>
+<div id="exercise-loops-2-10-minutes" class="section level2">
+<h2>Exercise: Loops 2 (10 minutes)</h2>
 <blockquote>
 <p>Read the “gene_condition_source_id.txt” file dataFrame = read.table(“gene_condition_source_id.txt”, header=TRUE, sep=“, fill=TRUE, comment.char =”“, quote =”")</p>
 </blockquote>
@@ -666,19 +798,33 @@ QPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLKSKKGQSTSRHKKLMFKTEGPDSD</c
 </blockquote>
 <div id="exercise-solution-5-minutes-2" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>db &lt;- read.table(&quot;D:/Dropbox/TA_MMG1002H_2021/Week1/gene_condition_source_id.txt&quot;,
+                 header=T,sep=&quot;\t&quot;,quote=&quot;&quot;,comment.char=&quot;&quot;)
+
+system.time({
+    disease_list1 &lt;- db$DiseaseName[db$AssociatedGenes == &quot;TP53&quot;]
+})</code></pre>
+<pre><code>##    user  system elapsed 
+##       0       0       0</code></pre>
+<pre class="r"><code>system.time({
+    disease_list &lt;- c()
+    for (X in 1:nrow(db)) {
+        if (db[X,&quot;AssociatedGenes&quot;] == &quot;TP53&quot;) {
+            # disease_list &lt;- append(disease_list,db[X,&quot;DiseaseName&quot;])
+            disease_list &lt;- c(disease_list,db[X,&quot;DiseaseName&quot;])
+        }
+    }
+})</code></pre>
+<pre><code>##    user  system elapsed 
+##    0.08    0.01    0.09</code></pre>
+<pre class="r"><code>all(disease_list1 == disease_list)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+</div>
 </div>
 </div>
 <div id="vectorization" class="section level1">
 <h1>Vectorization</h1>
-<div id="key-programming-concept-in-r" class="section level2">
-<h2>Key Programming Concept in R</h2>
-<div id="but-not-in-many-other-programming-languages" class="section level3">
-<h3>(but not in many other programming languages)</h3>
-</div>
-</div>
-</div>
-<div id="vectorization-1" class="section level1">
-<h1>Vectorization</h1>
+<p>Key Programming Concept in R (but not in many other programming languages)</p>
 <ul>
 <li>Key feature of R that helps do powerful things with a small amount of code (high level)</li>
 <li>Try to to avoid loops and use vectors because loops tend to be slower than vectors in R</li>
@@ -701,9 +847,8 @@ stringVariable</code></pre>
 <pre><code>## [1] &quot;first name&quot; &quot;last name&quot;</code></pre>
 <pre class="r"><code>paste(stringVariable, c(&quot;name1&quot;, &quot;name2&quot;))  #note how vectorization applies the transformation to all strings in the string vector</code></pre>
 <pre><code>## [1] &quot;first name1&quot; &quot;last name2&quot;</code></pre>
-</div>
-<div id="logical-selection-from-a-vector" class="section level1">
-<h1>Logical selection from a vector</h1>
+<div id="logical-selection-from-a-vector" class="section level2">
+<h2>Logical selection from a vector</h2>
 <pre class="r"><code>vectorVariable&gt;0</code></pre>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE</code></pre>
 <pre class="r"><code>vectorVariable==0</code></pre>
@@ -730,8 +875,8 @@ vectorVariable[vectorVariable&gt;0]</code></pre>
 <pre><code>## [1] 1 3</code></pre>
 <pre class="r"><code>#much easier!</code></pre>
 </div>
-<div id="vectorization-with-data-frames" class="section level1">
-<h1>Vectorization with data frames</h1>
+<div id="vectorization-with-data-frames" class="section level2">
+<h2>Vectorization with data frames</h2>
 <pre class="r"><code>name = c(&quot;patient1&quot;, &quot;patient2&quot;, &quot;patient3&quot;)
 name</code></pre>
 <pre><code>## [1] &quot;patient1&quot; &quot;patient2&quot; &quot;patient3&quot;</code></pre>
@@ -765,8 +910,8 @@ patientRecords$age&gt;48</code></pre>
   </script>
 </div>
 </div>
-<div id="apply-function" class="section level1">
-<h1>“apply” function</h1>
+<div id="apply-function" class="section level2">
+<h2>“apply” function</h2>
 <ul>
 <li>applies a function to a matrix</li>
 </ul>
@@ -789,8 +934,8 @@ apply(x, 1, sum)</code></pre>
 apply(x, 2, sum)</code></pre>
 <pre><code>## [1]  15  40  65  90 115 140</code></pre>
 </div>
-<div id="lapply" class="section level1">
-<h1>lapply()</h1>
+<div id="lapply" class="section level2">
+<h2>lapply()</h2>
 <ul>
 <li>Similar to apply, but for lists</li>
 </ul>
@@ -808,6 +953,21 @@ lapply(patientRecords, mean)</code></pre>
 ## [1] 0.6666667</code></pre>
 <pre class="r"><code>#You may see lots of other apply functions in R code e.g. mapply, sapply, tapply, vapply</code></pre>
 <hr />
+</div>
+</div>
+<div id="assignment-3-notes" class="section level1">
+<h1>Assignment 3 notes</h1>
+<p>As I said in class, I expect to unzip the submission and see a directory (folder) with your name or some identifying feature in the name, containing all the input data needed to run your R scripts, individual R scripts for each part of the assignments, and for safety’s sake any output files your R scripts are supposed to generate. If they aren’t supposed to generate an output file, no need to include one. Please don’t paste the R console output into a text file and submit that, I need an R script that I can just open and run without errors. Please do run your scripts in a fresh R session to ensure they run without errors. Hint: see below for how to set up RStudio such that when you open a new session, you don’t keep all the junk from your last session (which is dangerous when trying to write reproducible code):<br />
+<img src="RStudioOptions.png" alt="Set up RStudio like this!" /><br />
+Finally, you should now be skilled enough in R that you know how to write code that will work on data with the same format but different values. In other words, don’t hard-code things in your script. If you’re asked to find the name of the smallest gene, don’t <code>print("the_gene_name")</code>, do something like <code>print(gene_names[which.min(gene_lengths)])</code>, so that if I run the code on data with an even smaller gene, it will still give the correct answer.</p>
+<div id="specific-hints-and-clarifications" class="section level2">
+<h2>Specific hints and clarifications</h2>
+<p>Part 1b: “For exercise, do it both using a for-loop, as well as using an R built-in function.” In other words, we want you to answer this question two ways - once slowly and painfully by writing your own for loop, then check that you got it right by doing it the easy way using existing R functions.<br />
+Part 1c: Be careful how you find the W and C strandedness. Part 1d: The “length” column of the database is the ORF length.<br />
+Part 2b: The data is reporting phenotypes of gene deletion experiments, and “inviable” is a specific word used to describe a phenotype where the yeast does not survive if the gene is deleted - the gene is essential for viability.<br />
+Part 2c: Counting interactions is hard. Don’t just count A of an A-B interaction, but also be careful not to double count situations where A-B and B-A are recorded.<br />
+Part 2d: A classic challenge in bioinformatics is when one database contains genes that are missing in another database. If you treat these as zeroes, you’ll skew your calculations (such as mean). Best to either filter them out, or record missing data as <code>NA</code> (see <code>?mean(...,na.rm=T)</code>).</p>
+</div>
 </div>
 
 
@@ -839,7 +999,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

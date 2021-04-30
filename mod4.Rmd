@@ -2,6 +2,8 @@
 title: "Module 4"
 ---
 
+> Updated 2021/04/26
+
 The Book of R: chapter 4.3 (factors), 8 (files)
 
 ***
