@@ -320,7 +320,7 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Module 1</a>
+  <a href="mod1.html">Module 1</a>
 </li>
 <li>
   <a href="mod2.html">Module 2</a>
@@ -342,6 +342,9 @@ div.tocify {
 </li>
 <li>
   <a href="mod8.html">Module 8</a>
+</li>
+<li>
+  <a href="mod9.html">Module 9</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -730,17 +733,21 @@ patientRecords[1,] #row 1</code></pre>
 <pre class="bash"><code>wc -l gene_condition_source_id.txt</code></pre>
 <pre><code>## 11062 gene_condition_source_id.txt</code></pre>
 <pre class="r"><code>list.files(path=&quot;.&quot;) # &quot;.&quot; == the current working directory</code></pre>
-<pre><code>##  [1] &quot;_site.yml&quot;                    &quot;ASCII-Table-wide.svg&quot;        
-##  [3] &quot;docs&quot;                         &quot;fileOutput.png&quot;              
-##  [5] &quot;gene_condition_source_id.txt&quot; &quot;index.Rmd&quot;                   
-##  [7] &quot;mod2.Rmd&quot;                     &quot;mod3.Rmd&quot;                    
-##  [9] &quot;mod4.Rmd&quot;                     &quot;mod5.Rmd&quot;                    
-## [11] &quot;mod6.Rmd&quot;                     &quot;mod7.Rmd&quot;                    
-## [13] &quot;mod8.Rmd&quot;                     &quot;mod9.Rmd&quot;                    
-## [15] &quot;mydata.txt&quot;                   &quot;p4b.Rproj&quot;                   
-## [17] &quot;README.md&quot;                    &quot;recipebookTOC.png&quot;           
-## [19] &quot;site_libs&quot;                    &quot;sum.R&quot;                       
-## [21] &quot;test.txt&quot;                     &quot;yeast_properties.txt&quot;</code></pre>
+<pre><code>##  [1] &quot;_site.yml&quot;                    &quot;aaoutput.txt&quot;                
+##  [3] &quot;ASCII-Table-wide.svg&quot;         &quot;assignment2_sequence.txt&quot;    
+##  [5] &quot;column.txt&quot;                   &quot;docs&quot;                        
+##  [7] &quot;fileOutput.png&quot;               &quot;gene_condition_source_id.txt&quot;
+##  [9] &quot;index.md&quot;                     &quot;mod1.Rmd&quot;                    
+## [11] &quot;mod2.Rmd&quot;                     &quot;mod3.Rmd&quot;                    
+## [13] &quot;mod4.Rmd&quot;                     &quot;mod5.Rmd&quot;                    
+## [15] &quot;mod5exercise.fa&quot;              &quot;mod6.Rmd&quot;                    
+## [17] &quot;mod7.Rmd&quot;                     &quot;mod8.Rmd&quot;                    
+## [19] &quot;mod9.Rmd&quot;                     &quot;mydata.txt&quot;                  
+## [21] &quot;p4b.Rproj&quot;                    &quot;README.md&quot;                   
+## [23] &quot;recipebookTOC.png&quot;            &quot;row.txt&quot;                     
+## [25] &quot;RStudioOptions.png&quot;           &quot;site_libs&quot;                   
+## [27] &quot;sum.R&quot;                        &quot;test.txt&quot;                    
+## [29] &quot;yeast_properties.txt&quot;</code></pre>
 <pre class="r"><code>db &lt;- read.table(&quot;gene_condition_source_id.txt&quot;,
                  header=T,sep=&quot;\t&quot;,quote=&quot;&quot;,comment.char=&quot;&quot;,
                  colClasses=&quot;character&quot;)

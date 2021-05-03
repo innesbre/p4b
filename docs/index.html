@@ -11,7 +11,7 @@
 
 
 
-<title>Module 1</title>
+<title>index.utf8</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -320,7 +320,7 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Module 1</a>
+  <a href="mod1.html">Module 1</a>
 </li>
 <li>
   <a href="mod2.html">Module 2</a>
@@ -343,6 +343,9 @@ div.tocify {
 <li>
   <a href="mod8.html">Module 8</a>
 </li>
+<li>
+  <a href="mod9.html">Module 9</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -355,275 +358,14 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Module 1</h1>
 
 </div>
 
 
-<blockquote>
-<p>Updated 2021/04/16</p>
-</blockquote>
-<p>The Book of R: Chapter 1, Appendix B, chapter 2.1, 2.2</p>
-<hr />
-<div id="commands" class="section level1">
-<h1>Commands</h1>
-<blockquote>
-<p>print(“hello”)</p>
-</blockquote>
-<ul>
-<li><strong>print</strong> is the command</li>
-<li><strong>()</strong> tells R that <strong>print</strong> is a command</li>
-<li><strong>“hello”</strong> is the <strong>argument</strong> to the command</li>
-<li>These are also called <strong>“functions”</strong></li>
-</ul>
-<pre class="r"><code>print(&quot;Hello&quot;)</code></pre>
-<pre><code>## [1] &quot;Hello&quot;</code></pre>
-<pre class="r"><code>cat(&quot;hello&quot;, &quot;world&quot;)</code></pre>
-<pre><code>## hello world</code></pre>
-<hr />
-<div id="commands-in-r" class="section level2">
-<h2>Commands in R</h2>
-<ul>
-<li><strong>Arguments</strong> can be passed flexibly</li>
-</ul>
-<pre class="r"><code>help(seq)</code></pre>
-<ul>
-<li>Either follow the prescribed order (ok to omit ones at the end)</li>
-</ul>
-<pre class="r"><code>seq(1,3,0.2)</code></pre>
-<pre><code>##  [1] 1.0 1.2 1.4 1.6 1.8 2.0 2.2 2.4 2.6 2.8 3.0</code></pre>
-<ul>
-<li>Specify arguments with “=”</li>
-</ul>
-<pre class="r"><code>seq(1,4,length.out=3)</code></pre>
-<pre><code>## [1] 1.0 2.5 4.0</code></pre>
-<ul>
-<li>The order is not important if you specify with =</li>
-<li><code>seq(to=5, from=10)</code> is the same as <code>seq(from=10, to=5)</code></li>
-</ul>
-<pre class="r"><code>seq(to=5, from=10)</code></pre>
-<pre><code>## [1] 10  9  8  7  6  5</code></pre>
-<pre class="r"><code>seq(from=10, to=5)</code></pre>
-<pre><code>## [1] 10  9  8  7  6  5</code></pre>
-<hr />
-</div>
-</div>
-<div id="variables" class="section level1">
-<h1>Variables</h1>
-<ul>
-<li>Variables are named places to store values</li>
-</ul>
-<pre class="r"><code>x = 5
-x</code></pre>
-<pre><code>## [1] 5</code></pre>
-<ul>
-<li>Variable names
-<ul>
-<li>Syntax is key (as in most programming languages)</li>
-<li>Letters, numbers, and the dot and underscore characters, and starts with either a letter or a dot not followed by a number.</li>
-<li>Reserved words (e.g. TRUE, FALSE, NA, Inf, NaN) are not syntactic names</li>
-<li>Some constants are already defined variables e.g. pi</li>
-</ul></li>
-<li>We <strong>declare</strong> variables in R by creating a new variable name</li>
-<li>You can use any name you want, as long as you follow the syntax rules</li>
-<li>Best practice is to use human readable names to help document your code e.g. use a variable name ‘patients’ instead of ‘x’</li>
-</ul>
-<blockquote>
-<p>Which of these are valid R variable names?<br />
-name= “Tom”<br />
-myname# = “Alice”<br />
-_str=“test”<br />
-DNA=“ATTTCA”<br />
-sequence1=“ATTTCA”<br />
-.seq = “ATTTCA”<br />
-1seq=“ATTTCA”<br />
-<a href="mailto:year@2008" class="email">year@2008</a> = 2008<br />
-gen2str = 1</p>
-</blockquote>
-<div id="variable-assignment-and-types" class="section level2">
-<h2>Variable assignment and types</h2>
-<ul>
-<li>We assign a value to a variable using the assignment operator</li>
-</ul>
-<pre class="r"><code>number = 5
-number</code></pre>
-<pre><code>## [1] 5</code></pre>
-<pre class="r"><code>#note: the variable value specifies its type, not its name, &#39;x&#39; can also be a number
-x = 5
-x</code></pre>
-<pre><code>## [1] 5</code></pre>
-<pre class="r"><code>number &lt;- 5  #&lt;- is the same as =
-number</code></pre>
-<pre><code>## [1] 5</code></pre>
-<pre class="r"><code>string = &quot;five&quot;
-string</code></pre>
-<pre><code>## [1] &quot;five&quot;</code></pre>
-<pre class="r"><code>number = number +1
-number</code></pre>
-<pre><code>## [1] 6</code></pre>
-<pre class="r"><code>logical = TRUE
-logical</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>logical2 = T  #note: T and TRUE are equivalent (they are both TRUE)
-logical2</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>logical3 = FALSE
-logical3</code></pre>
-<pre><code>## [1] FALSE</code></pre>
-<pre class="r"><code>logical4 = F  #same with F and FALSE
-logical4</code></pre>
-<pre><code>## [1] FALSE</code></pre>
-<pre class="r"><code>#Reminder: the variable names do not tell you anything about the variable type
-
-number = &quot;string&quot;
-number</code></pre>
-<pre><code>## [1] &quot;string&quot;</code></pre>
-<pre class="r"><code>string = string + 1</code></pre>
-<p>why is there an error when you try to run this code?<br />
-Note: R only figures this out when you try to run the code, not when you’re writing it, so you need to be aware of the variable types you’re using when you’re writing code</p>
-<pre class="r"><code>string</code></pre>
-<pre><code>## [1] &quot;five&quot;</code></pre>
-<ul>
-<li>All programming languages distinguish different variable types.
-<ul>
-<li>Numbers (integers, various non-integers)</li>
-<li>Strings (=text, zero or more text characters)</li>
-<li>Various others (e.g. vectors, matrices – later)</li>
-</ul></li>
-</ul>
-</div>
-<div id="variable-types" class="section level2">
-<h2>Variable types</h2>
-<ul>
-<li>Strictly speaking
-<ul>
-<li>Arithmetic operations are only defined for numbers</li>
-<li>String operations are only defined for strings</li>
-</ul></li>
-<li>In practice, R is lenient and converts variables if possible</li>
-</ul>
-</div>
-</div>
-<div id="special-characters" class="section level1">
-<h1>Special characters</h1>
-<ul>
-<li>Special characters have special meaning in the language
-<ul>
-<li><code>~!@#$%^&amp;*(){}_+:"&lt;&gt;?,./;'[]-=</code></li>
-</ul></li>
-<li>" <strong>starts</strong> and <strong>ends</strong> a string</li>
-<li>\ <strong>escapes</strong> a special character e.g. \"</li>
-<li>Within a string:
-<ul>
-<li>\n = newline</li>
-<li>\t = tab</li>
-</ul></li>
-<li># - starts a <strong>comment</strong> line and is ignored by R
-<ul>
-<li><code>#my comment</code></li>
-<li>Best practice: Use these a lot to document your code</li>
-</ul></li>
-</ul>
-</div>
-<div id="printing-to-the-consolescreen" class="section level1">
-<h1>Printing to the console/screen</h1>
-<pre class="r"><code>x = 5
-x</code></pre>
-<pre><code>## [1] 5</code></pre>
-<pre class="r"><code>print(x) #equivalent to above</code></pre>
-<pre><code>## [1] 5</code></pre>
-<pre class="r"><code>cat(x)   #similar to print, but less autoconversion</code></pre>
-<pre><code>## 5</code></pre>
-<pre class="r"><code>#Mixing variables within strings:
-number = 5
-string = &quot;hello&quot;
-paste(&quot;Number&quot;, number, &quot;String&quot;, string)</code></pre>
-<pre><code>## [1] &quot;Number 5 String hello&quot;</code></pre>
-<pre class="r"><code>#Here is another way to do the same thing
-sprintf(&quot;Number %s String %s&quot;, number, string)</code></pre>
-<pre><code>## [1] &quot;Number 5 String hello&quot;</code></pre>
-<pre class="r"><code>#How do you print a quote?
-string = &quot;gene \&quot;ABC\&quot;&quot;
-
-#Note:
-print(string) #outputs `&quot;gene \&quot;ABC\&quot;&quot;</code></pre>
-<pre><code>## [1] &quot;gene \&quot;ABC\&quot;&quot;</code></pre>
-<pre class="r"><code>cat(string)  #outputs gene &quot;ABC&quot;</code></pre>
-<pre><code>## gene &quot;ABC&quot;</code></pre>
-<pre class="r"><code>#Here is a way to use print to get a similar result to cat in this case
-print(string, quote=FALSE)</code></pre>
-<pre><code>## [1] gene &quot;ABC&quot;</code></pre>
-<pre class="r"><code>#You can use the \t string to denote a tab
-cat(&quot;Separated\tby\ttabs&quot;)</code></pre>
-<pre><code>## Separated    by  tabs</code></pre>
-</div>
-<div id="exercise-using-variables-10-minutes" class="section level1">
-<h1>Exercise: Using variables (10 minutes)</h1>
-<ul>
-<li>Use the R text editor to write a program that does the following:
-<ul>
-<li>Create a variable number1 and set it to a value</li>
-<li>Do the same for number2</li>
-<li>Compute the sum, product and ratio of these numbers</li>
-<li>Print these to the screen</li>
-</ul></li>
-<li>Save your work as sum.r</li>
-<li>Run it in the R console</li>
-</ul>
-<div id="exercise-solution-5-minutes" class="section level2">
-<h2>Exercise solution (5 minutes)</h2>
-<blockquote>
-<p>File -&gt; New File -&gt; R script</p>
-</blockquote>
-<pre><code>number1 &lt;- 5
-number2 &lt;- 15
-print(number1 + number2)
-print(number1 * number2)
-print(number1 / number2)</code></pre>
-<blockquote>
-<p>File -&gt; Save As -&gt; Sum.R<br />
-(save in the same directory as the R notebook so that the ‘relative filepath’ below works)</p>
-</blockquote>
-<pre class="r"><code>source(&quot;sum.R&quot;)</code></pre>
-<pre><code>## [1] 20
-## [1] 75
-## [1] 0.3333333</code></pre>
-<hr />
-</div>
-</div>
-<div id="assignment-1-hints" class="section level1">
-<h1>Assignment 1 hints:</h1>
-<p>Please <strong>do not</strong> submit Word documents or any rich text files as part of your assignment submission.<br />
-Each assignment should be done in its own directory, and <em>everything</em> needed for the assignment, including input data files, should be in that directory. You will zip up the whole directory as a tarball (see the end of assignment 1 for detailed instructions) and submit that.<br />
-Test your code! I will be unzipping your directory, and running your submitted script in the directory you submitted. You should try the same (in a new R session) prior to submitting to make sure everything works. For assignment 1, I expect two text files (as well as the relevant input and output files):<br />
-- one for the first part that includes shell commands and some <em>commented out</em> <strong>short</strong> answers.<br />
-- the second is the R script for the second part.<br />
-Both can be made in RStudio! File -&gt; New File -&gt; Shell script to make a new shell script, and Tools -&gt; Terminal -&gt; New Terminal to open a bash terminal to run your shell commands. Ctrl+Enter will run the current line in the console / terminal.</p>
-<p>For loop, just for fun:</p>
-<pre class="bash"><code>COLS=$(head -n1 gene_condition_source_id.txt | wc -w)
-for X in `seq $COLS`
-do
-    echo line $X:
-    tail -n+2 gene_condition_source_id.txt | cut -f $X | sort -u | wc -l
-done</code></pre>
-<pre><code>## line 1:
-## 4503
-## line 2:
-## 4504
-## line 3:
-## 1407
-## line 4:
-## 6403
-## line 5:
-## 6404
-## line 6:
-## 8
-## line 7:
-## 3760
-## line 8:
-## 5890
-## line 9:
-## 537</code></pre>
+<div id="welcome-to-mmg1002h" class="section level2">
+<h2>Welcome to MMG1002H!</h2>
+<p>See the navigation bar above for each module from the class R notebook, knitted to HTML for your convenience.<br />
+As we proceed through tutorial sessions, Brendan will add his section’s notes to each module.</p>
 <hr />
 </div>
 

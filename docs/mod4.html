@@ -320,7 +320,7 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Module 1</a>
+  <a href="mod1.html">Module 1</a>
 </li>
 <li>
   <a href="mod2.html">Module 2</a>
@@ -342,6 +342,9 @@ div.tocify {
 </li>
 <li>
   <a href="mod8.html">Module 8</a>
+</li>
+<li>
+  <a href="mod9.html">Module 9</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -767,31 +770,37 @@ getwd()</code></pre>
 #setwd(&quot;C:/MyDoc&quot;)
 
 list.files()</code></pre>
-<pre><code>##  [1] &quot;_site.yml&quot;                    &quot;ASCII-Table-wide.svg&quot;        
-##  [3] &quot;column.txt&quot;                   &quot;docs&quot;                        
-##  [5] &quot;fileOutput.png&quot;               &quot;gene_condition_source_id.txt&quot;
-##  [7] &quot;index.Rmd&quot;                    &quot;mod2.Rmd&quot;                    
-##  [9] &quot;mod3.Rmd&quot;                     &quot;mod4.Rmd&quot;                    
-## [11] &quot;mod5.Rmd&quot;                     &quot;mod6.Rmd&quot;                    
-## [13] &quot;mod7.Rmd&quot;                     &quot;mod8.Rmd&quot;                    
-## [15] &quot;mod9.Rmd&quot;                     &quot;mydata.txt&quot;                  
-## [17] &quot;p4b.Rproj&quot;                    &quot;README.md&quot;                   
-## [19] &quot;recipebookTOC.png&quot;            &quot;row.txt&quot;                     
-## [21] &quot;sum.R&quot;                        &quot;test.txt&quot;                    
-## [23] &quot;yeast_properties.txt&quot;</code></pre>
+<pre><code>##  [1] &quot;_site.yml&quot;                    &quot;aaoutput.txt&quot;                
+##  [3] &quot;ASCII-Table-wide.svg&quot;         &quot;assignment2_sequence.txt&quot;    
+##  [5] &quot;column.txt&quot;                   &quot;docs&quot;                        
+##  [7] &quot;fileOutput.png&quot;               &quot;gene_condition_source_id.txt&quot;
+##  [9] &quot;index.md&quot;                     &quot;mod1.Rmd&quot;                    
+## [11] &quot;mod2.Rmd&quot;                     &quot;mod3.Rmd&quot;                    
+## [13] &quot;mod3.utf8.md&quot;                 &quot;mod4.Rmd&quot;                    
+## [15] &quot;mod5.Rmd&quot;                     &quot;mod5exercise.fa&quot;             
+## [17] &quot;mod6.Rmd&quot;                     &quot;mod7.Rmd&quot;                    
+## [19] &quot;mod8.Rmd&quot;                     &quot;mod9.Rmd&quot;                    
+## [21] &quot;mydata.txt&quot;                   &quot;p4b.Rproj&quot;                   
+## [23] &quot;README.md&quot;                    &quot;recipebookTOC.png&quot;           
+## [25] &quot;row.txt&quot;                      &quot;RStudioOptions.png&quot;          
+## [27] &quot;site_libs&quot;                    &quot;sum.R&quot;                       
+## [29] &quot;test.txt&quot;                     &quot;yeast_properties.txt&quot;</code></pre>
 <pre class="r"><code>dir()  #this does the same thing</code></pre>
-<pre><code>##  [1] &quot;_site.yml&quot;                    &quot;ASCII-Table-wide.svg&quot;        
-##  [3] &quot;column.txt&quot;                   &quot;docs&quot;                        
-##  [5] &quot;fileOutput.png&quot;               &quot;gene_condition_source_id.txt&quot;
-##  [7] &quot;index.Rmd&quot;                    &quot;mod2.Rmd&quot;                    
-##  [9] &quot;mod3.Rmd&quot;                     &quot;mod4.Rmd&quot;                    
-## [11] &quot;mod5.Rmd&quot;                     &quot;mod6.Rmd&quot;                    
-## [13] &quot;mod7.Rmd&quot;                     &quot;mod8.Rmd&quot;                    
-## [15] &quot;mod9.Rmd&quot;                     &quot;mydata.txt&quot;                  
-## [17] &quot;p4b.Rproj&quot;                    &quot;README.md&quot;                   
-## [19] &quot;recipebookTOC.png&quot;            &quot;row.txt&quot;                     
-## [21] &quot;sum.R&quot;                        &quot;test.txt&quot;                    
-## [23] &quot;yeast_properties.txt&quot;</code></pre>
+<pre><code>##  [1] &quot;_site.yml&quot;                    &quot;aaoutput.txt&quot;                
+##  [3] &quot;ASCII-Table-wide.svg&quot;         &quot;assignment2_sequence.txt&quot;    
+##  [5] &quot;column.txt&quot;                   &quot;docs&quot;                        
+##  [7] &quot;fileOutput.png&quot;               &quot;gene_condition_source_id.txt&quot;
+##  [9] &quot;index.md&quot;                     &quot;mod1.Rmd&quot;                    
+## [11] &quot;mod2.Rmd&quot;                     &quot;mod3.Rmd&quot;                    
+## [13] &quot;mod3.utf8.md&quot;                 &quot;mod4.Rmd&quot;                    
+## [15] &quot;mod5.Rmd&quot;                     &quot;mod5exercise.fa&quot;             
+## [17] &quot;mod6.Rmd&quot;                     &quot;mod7.Rmd&quot;                    
+## [19] &quot;mod8.Rmd&quot;                     &quot;mod9.Rmd&quot;                    
+## [21] &quot;mydata.txt&quot;                   &quot;p4b.Rproj&quot;                   
+## [23] &quot;README.md&quot;                    &quot;recipebookTOC.png&quot;           
+## [25] &quot;row.txt&quot;                      &quot;RStudioOptions.png&quot;          
+## [27] &quot;site_libs&quot;                    &quot;sum.R&quot;                       
+## [29] &quot;test.txt&quot;                     &quot;yeast_properties.txt&quot;</code></pre>
 <pre class="r"><code>#file.create(), file.rename() and many more</code></pre>
 </div>
 <div id="data-import-and-export" class="section level1">
