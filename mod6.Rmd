@@ -2,6 +2,8 @@
 title: "Module 6"
 ---
 
+> Updated 2021/05/03 (before class)
+
 The Book of R: chapter 11.1, 11.2 (functions), Glance at ?base::regex
 
 ***
@@ -28,10 +30,10 @@ vectorVariable[vectorVariable>0]
 
 ## Exercise: Vectorization (10 minutes)
 
->Create a vector of consecutive numbers from 1 to 100.  
->Note: from:to is the same as seq(from, to)  
->Compute the sum, product and mean  
->Sum just the numbers greater than 50  
+> Create a vector of consecutive numbers from 1 to 100.  
+> Note: from:to is the same as seq(from, to)  
+> Compute the sum, product and mean  
+> Sum just the numbers greater than 50  
 
 ### Exercise solution (5 minutes)
 
@@ -100,9 +102,9 @@ cor.test(runif(50), runif(50),method="pearson")
 
 ## Exercise: Functions (10 minutes)
 
->Practice creating a function  
->Create a function called mysum that sums up all the elements of a vector  
->Check that it gives the same results at the sum() function  
+> Practice creating a function  
+> Create a function called mysum that sums up all the elements of a vector  
+> Check that it gives the same results at the sum() function  
 
 ### Exercise solution (5 minutes)
 
@@ -200,7 +202,7 @@ gregexpr("b.d", a)
 
 * string = "Kevin Bacon"
 * (K|k)evin (B|b)acon
-* Start (^) and end ($) of a string
+* Start (^) and end (\$) of a string
     * ^(Kevin|Bacon|Portman|Roberts)
     * (Kevin|Bacon|Portman|Roberts)$
     * ^(Bacon|Portman|Roberts)
@@ -215,11 +217,11 @@ length(gregexpr("g", a)[[1]])
 
 ## Exercise: regular expressions (10 minutes)
 
->DNA = "ACGATGATACTGATGACGGGC"  
->Match the regular expression "G..A" and use the results to identify the actual match in the original string  
->Use gregexpr  
->attr(x, "match.length") can be used to find the match length in the vector returned from gregexpr  
->?substr  
+> DNA = "ACGATGATACTGATGACGGGC"  
+> Match the regular expression "G..A" and use the results to identify the actual match in the original string  
+> Use gregexpr  
+> attr(x, "match.length") can be used to find the match length in the vector returned from gregexpr  
+> ?substr  
 
 ### Exercise solution (5 minutes)
 

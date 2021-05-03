@@ -360,6 +360,9 @@ div.tocify {
 </div>
 
 
+<blockquote>
+<p>Updated 2021/05/03 (before class)</p>
+</blockquote>
 <p>The Book of R: chapter 11.1, 11.2 (functions), Glance at ?base::regex</p>
 <hr />
 <div id="module-5-review" class="section level1">
@@ -450,25 +453,25 @@ t.test(runif(50), runif(50))</code></pre>
 ##  Welch Two Sample t-test
 ## 
 ## data:  runif(50) and runif(50)
-## t = -1.0424, df = 97.833, p-value = 0.2998
+## t = -0.2187, df = 97.755, p-value = 0.8273
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.17606181  0.05479846
+##  -0.12404522  0.09941916
 ## sample estimates:
 ## mean of x mean of y 
-## 0.4883113 0.5489430</code></pre>
+##  0.549293  0.561606</code></pre>
 <pre class="r"><code>cor.test(runif(50), runif(50),method=&quot;pearson&quot;)</code></pre>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  runif(50) and runif(50)
-## t = -0.43727, df = 48, p-value = 0.6639
+## t = -0.68392, df = 48, p-value = 0.4973
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  -0.3354551  0.2192021
+##  -0.3665625  0.1851729
 ## sample estimates:
 ##         cor 
-## -0.06298882</code></pre>
+## -0.09823822</code></pre>
 </div>
 <div id="exercise-functions-10-minutes" class="section level2">
 <h2>Exercise: Functions (10 minutes)</h2>
@@ -656,8 +659,10 @@ gregexpr(&quot;b.d&quot;, a)</code></pre>
 <ul>
 <li>string = “Kevin Bacon”</li>
 <li>(K|k)evin (B|b)acon</li>
-<li>Start (^) and end (<span class="math inline">\() of a string  * ^(Kevin|Bacon|Portman|Roberts)  * (Kevin|Bacon|Portman|Roberts)\)</span>
+<li>Start (^) and end ($) of a string
 <ul>
+<li>^(Kevin|Bacon|Portman|Roberts)</li>
+<li>(Kevin|Bacon|Portman|Roberts)$</li>
 <li>^(Bacon|Portman|Roberts)</li>
 </ul></li>
 <li>Find all vowels
