@@ -2,7 +2,7 @@
 title: "Module 6"
 ---
 
-> Updated 2021/05/03 (before class)
+> Updated 2021/05/03
 
 The Book of R: chapter 11.1, 11.2 (functions), Glance at ?base::regex
 
@@ -34,10 +34,27 @@ vectorVariable[vectorVariable>0]
 > Note: from:to is the same as seq(from, to)  
 > Compute the sum, product and mean  
 > Sum just the numbers greater than 50  
+> Do this again using `sapply` (which is just fancier lapply).  
 
 ### Exercise solution (5 minutes)
 
 ```{r}
+myvec <- 1:100
+
+system.time({
+  vec_sum <- 0
+  vec_prod <- 1
+  for (X in myvec) {
+    vec_sum <- vec_sum + X
+    vec_prod <- vec_prod * X
+  }
+  vec_mean <- vec_sum / length(myvec)
+})
+
+vec_sum == sum(myvec)
+vec_prod == prod(myvec) #damn you, floating point notation
+all.equal(vec_prod,prod(myvec))
+vec_mean == mean(myvec)
 
 ```
 
@@ -60,10 +77,12 @@ myfunction = function(arg1, arg2, ... ) {
 ## Function example
 
 ```{r}
-patientRecords = data.frame(name=c("patient1", "patient2", "patient3"),
-                            age=c(46, 49, 50), 
-                            smoker=c(T, F, T),
-                            stringsAsFactors=F)
+patientRecords = data.frame(
+  name=c("patient1", "patient2", "patient3"),
+  age=c(46, 49, 50), 
+  smoker=c(T, F, T),
+  stringsAsFactors=F
+)
 
 
 printRecordRow = function(patientDatabase) {
@@ -109,8 +128,27 @@ cor.test(runif(50), runif(50),method="pearson")
 ### Exercise solution (5 minutes)
 
 ```{r}
+mysum <- function(X) {
+  OUTPUT <- 0
+  for (Y in X) {
+    OUTPUT <- OUTPUT + Y
+  }
+  return(OUTPUT)
+}
 
+mysum(X=1:100)
+```
+```{r}
+abunchofrandomnumbers <- sapply(LETTERS,function(X) runif(50))
 
+apply(abunchofrandomnumbers,1,mean) == rowMeans(abunchofrandomnumbers)
+apply(abunchofrandomnumbers,2,mean) == colMeans(abunchofrandomnumbers)
+
+str(apply(abunchofrandomnumbers,c(1,2),mean))
+
+abunchofrandomnumbers <- sapply(LETTERS,function(X) runif(50),simplify=F)
+
+sapply(abunchofrandomnumbers,mean)
 ```
 
 
@@ -217,7 +255,7 @@ length(gregexpr("g", a)[[1]])
 
 ## Exercise: regular expressions (10 minutes)
 
-> DNA = "ACGATGATACTGATGACGGGC"  
+> DNA = "ACGATGATACTGATGACGGGCGCCA"  
 > Match the regular expression "G..A" and use the results to identify the actual match in the original string  
 > Use gregexpr  
 > attr(x, "match.length") can be used to find the match length in the vector returned from gregexpr  
@@ -226,6 +264,28 @@ length(gregexpr("g", a)[[1]])
 ### Exercise solution (5 minutes)
 
 ```{r}
+DNA = "ACGATGATACTGATGACGGGCGCCA"  
+matches <- gregexpr("G..A",DNA)[[1]]
+
+matches
+
+substr(
+  DNA,
+  start=matches[1],
+  stop=matches[1] + attr(matches,"match.length")[1] - 1
+)
+
+sapply(X=seq_along(matches),
+       FUN=function(X) {
+         return(
+           substr(
+             DNA,
+             start=matches[X],
+             stop=matches[X] + attr(matches,"match.length")[X] - 1
+           )
+         )
+       })
+
 
 ```
 

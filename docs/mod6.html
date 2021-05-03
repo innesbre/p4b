@@ -364,7 +364,7 @@ div.tocify {
 
 
 <blockquote>
-<p>Updated 2021/05/03 (before class)</p>
+<p>Updated 2021/05/03</p>
 </blockquote>
 <p>The Book of R: chapter 11.1, 11.2 (functions), Glance at ?base::regex</p>
 <hr />
@@ -389,10 +389,32 @@ div.tocify {
 <p>Create a vector of consecutive numbers from 1 to 100.<br />
 Note: from:to is the same as seq(from, to)<br />
 Compute the sum, product and mean<br />
-Sum just the numbers greater than 50</p>
+Sum just the numbers greater than 50<br />
+Do this again using <code>sapply</code> (which is just fancier lapply).</p>
 </blockquote>
 <div id="exercise-solution-5-minutes" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>myvec &lt;- 1:100
+
+system.time({
+  vec_sum &lt;- 0
+  vec_prod &lt;- 1
+  for (X in myvec) {
+    vec_sum &lt;- vec_sum + X
+    vec_prod &lt;- vec_prod * X
+  }
+  vec_mean &lt;- vec_sum / length(myvec)
+})</code></pre>
+<pre><code>##    user  system elapsed 
+##    0.02    0.00    0.01</code></pre>
+<pre class="r"><code>vec_sum == sum(myvec)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>vec_prod == prod(myvec) #damn you, floating point notation</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>all.equal(vec_prod,prod(myvec))</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>vec_mean == mean(myvec)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 </div>
 </div>
 </div>
@@ -412,10 +434,12 @@ myfunction = function(arg1, arg2, ... ) {
 </div>
 <div id="function-example" class="section level2">
 <h2>Function example</h2>
-<pre class="r"><code>patientRecords = data.frame(name=c(&quot;patient1&quot;, &quot;patient2&quot;, &quot;patient3&quot;),
-                            age=c(46, 49, 50), 
-                            smoker=c(T, F, T),
-                            stringsAsFactors=F)
+<pre class="r"><code>patientRecords = data.frame(
+  name=c(&quot;patient1&quot;, &quot;patient2&quot;, &quot;patient3&quot;),
+  age=c(46, 49, 50), 
+  smoker=c(T, F, T),
+  stringsAsFactors=F
+)
 
 
 printRecordRow = function(patientDatabase) {
@@ -456,25 +480,25 @@ t.test(runif(50), runif(50))</code></pre>
 ##  Welch Two Sample t-test
 ## 
 ## data:  runif(50) and runif(50)
-## t = 0.7781, df = 97.242, p-value = 0.4384
+## t = 0.44677, df = 97.634, p-value = 0.656
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.06967987  0.15955229
+##  -0.09472205  0.14976116
 ## sample estimates:
 ## mean of x mean of y 
-## 0.5510811 0.5061449</code></pre>
+## 0.5580580 0.5305384</code></pre>
 <pre class="r"><code>cor.test(runif(50), runif(50),method=&quot;pearson&quot;)</code></pre>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  runif(50) and runif(50)
-## t = -0.94304, df = 48, p-value = 0.3504
+## t = 0.20603, df = 48, p-value = 0.8376
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  -0.3982684  0.1490718
+##  -0.2506969  0.3055447
 ## sample estimates:
 ##        cor 
-## -0.1348723</code></pre>
+## 0.02972505</code></pre>
 </div>
 <div id="exercise-functions-10-minutes" class="section level2">
 <h2>Exercise: Functions (10 minutes)</h2>
@@ -485,6 +509,44 @@ Check that it gives the same results at the sum() function</p>
 </blockquote>
 <div id="exercise-solution-5-minutes-1" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>mysum &lt;- function(X) {
+  OUTPUT &lt;- 0
+  for (Y in X) {
+    OUTPUT &lt;- OUTPUT + Y
+  }
+  return(OUTPUT)
+}
+
+mysum(X=1:100)</code></pre>
+<pre><code>## [1] 5050</code></pre>
+<pre class="r"><code>abunchofrandomnumbers &lt;- sapply(LETTERS,function(X) runif(50))
+
+apply(abunchofrandomnumbers,1,mean) == rowMeans(abunchofrandomnumbers)</code></pre>
+<pre><code>##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [31] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [46] TRUE TRUE TRUE TRUE TRUE</code></pre>
+<pre class="r"><code>apply(abunchofrandomnumbers,2,mean) == colMeans(abunchofrandomnumbers)</code></pre>
+<pre><code>##    A    B    C    D    E    F    G    H    I    J    K    L    M    N    O    P 
+## TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE 
+##    Q    R    S    T    U    V    W    X    Y    Z 
+## TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
+<pre class="r"><code>str(apply(abunchofrandomnumbers,c(1,2),mean))</code></pre>
+<pre><code>##  num [1:50, 1:26] 0.518 0.333 0.909 0.116 0.259 ...
+##  - attr(*, &quot;dimnames&quot;)=List of 2
+##   ..$ : NULL
+##   ..$ : chr [1:26] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; ...</code></pre>
+<pre class="r"><code>abunchofrandomnumbers &lt;- sapply(LETTERS,function(X) runif(50),simplify=F)
+
+sapply(abunchofrandomnumbers,mean)</code></pre>
+<pre><code>##         A         B         C         D         E         F         G         H 
+## 0.5490468 0.4938793 0.4867109 0.4736067 0.4430013 0.4657728 0.4680287 0.5426686 
+##         I         J         K         L         M         N         O         P 
+## 0.5081848 0.5266388 0.4625190 0.5475251 0.4952853 0.5417455 0.5190292 0.5304280 
+##         Q         R         S         T         U         V         W         X 
+## 0.4603432 0.4202499 0.5083908 0.4635659 0.5588425 0.4537204 0.4592160 0.5427217 
+##         Y         Z 
+## 0.5169956 0.4883475</code></pre>
 </div>
 </div>
 </div>
@@ -681,7 +743,7 @@ gregexpr(&quot;b.d&quot;, a)</code></pre>
 <div id="exercise-regular-expressions-10-minutes" class="section level2">
 <h2>Exercise: regular expressions (10 minutes)</h2>
 <blockquote>
-<p>DNA = “ACGATGATACTGATGACGGGC”<br />
+<p>DNA = “ACGATGATACTGATGACGGGCGCCA”<br />
 Match the regular expression “G..A” and use the results to identify the actual match in the original string<br />
 Use gregexpr<br />
 attr(x, “match.length”) can be used to find the match length in the vector returned from gregexpr<br />
@@ -689,6 +751,34 @@ attr(x, “match.length”) can be used to find the match length in the vector r
 </blockquote>
 <div id="exercise-solution-5-minutes-2" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>DNA = &quot;ACGATGATACTGATGACGGGCGCCA&quot;  
+matches &lt;- gregexpr(&quot;G..A&quot;,DNA)[[1]]
+
+matches</code></pre>
+<pre><code>## [1]  6 22
+## attr(,&quot;match.length&quot;)
+## [1] 4 4
+## attr(,&quot;index.type&quot;)
+## [1] &quot;chars&quot;
+## attr(,&quot;useBytes&quot;)
+## [1] TRUE</code></pre>
+<pre class="r"><code>substr(
+  DNA,
+  start=matches[1],
+  stop=matches[1] + attr(matches,&quot;match.length&quot;)[1] - 1
+)</code></pre>
+<pre><code>## [1] &quot;GATA&quot;</code></pre>
+<pre class="r"><code>sapply(X=seq_along(matches),
+       FUN=function(X) {
+         return(
+           substr(
+             DNA,
+             start=matches[X],
+             stop=matches[X] + attr(matches,&quot;match.length&quot;)[X] - 1
+           )
+         )
+       })</code></pre>
+<pre><code>## [1] &quot;GATA&quot; &quot;GCCA&quot;</code></pre>
 <hr />
 </div>
 </div>
