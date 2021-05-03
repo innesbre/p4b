@@ -13,13 +13,22 @@
 
 <title>Module 6</title>
 
-<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -39,11 +48,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -56,32 +60,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
 
@@ -92,10 +70,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -112,40 +86,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -173,7 +120,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -185,7 +132,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -196,10 +143,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -211,7 +171,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -337,13 +296,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -392,7 +351,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -403,50 +362,38 @@ div.tocify {
 
 <p>The Book of R: chapter 11.1, 11.2 (functions), Glance at ?base::regex</p>
 <hr />
-<div id="module-5-review" class="section level2">
-<h2>Module 5 review</h2>
-<ul>
-<li>Loops</li>
-</ul>
+<div id="module-5-review" class="section level1">
+<h1>Module 5 review</h1>
+<div id="loops" class="section level2">
+<h2>Loops</h2>
 <pre><code>for (value in vectorVariable) {
   if (value &gt; 0) {
     print(value)
   }
 }</code></pre>
-<ul>
-<li>Vectorization
-<ul>
-<li>e.g. vectorVariable[vectorVariable&gt;0]</li>
-</ul></li>
-</ul>
+</div>
+<div id="vectorization" class="section level2">
+<h2>Vectorization</h2>
+<pre><code>vectorVariable[vectorVariable&gt;0]</code></pre>
 <hr />
 </div>
-<div id="exercise-vectorization-10-minutes" class="section level1">
-<h1>Exercise: Vectorization (10 minutes)</h1>
+<div id="exercise-vectorization-10-minutes" class="section level2">
+<h2>Exercise: Vectorization (10 minutes)</h2>
 <blockquote>
-<p>Create a vector of consecutive numbers from 1 to 100.</p>
-</blockquote>
-<blockquote>
-<p>Note: from:to is the same as seq(from, to)</p>
-</blockquote>
-<blockquote>
-<p>Compute the sum, product and mean</p>
-</blockquote>
-<blockquote>
-<p>Sum just the numbers greater than 50</p>
+<p>Create a vector of consecutive numbers from 1 to 100.<br />
+Note: from:to is the same as seq(from, to)<br />
+Compute the sum, product and mean<br />
+Sum just the numbers greater than 50</p>
 </blockquote>
 <div id="exercise-solution-5-minutes" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
 </div>
 </div>
+</div>
 <div id="functions" class="section level1">
 <h1>Functions</h1>
-<div id="key-programming-concept" class="section level2">
-<h2>Key Programming Concept</h2>
-</div>
-</div>
-<div id="writing-your-own-functions" class="section level1">
-<h1>Writing your own functions</h1>
+<div id="writing-your-own-functions" class="section level2">
+<h2>Writing your own functions</h2>
 <pre class="r"><code>#syntax
 #Note: myfunction can be any name
 myfunction = function(arg1, arg2, ... ) {
@@ -457,8 +404,8 @@ myfunction = function(arg1, arg2, ... ) {
 #Note: objects inside the function are local to the function i.e. not defined outside. This is called variable scope
 #The concept of scope is very important in other languages, but in R, you just need to understand it with functions</code></pre>
 </div>
-<div id="function-example" class="section level1">
-<h1>Function example</h1>
+<div id="function-example" class="section level2">
+<h2>Function example</h2>
 <pre class="r"><code>patientRecords = data.frame(name=c(&quot;patient1&quot;, &quot;patient2&quot;, &quot;patient3&quot;),
                             age=c(46, 49, 50), 
                             smoker=c(T, F, T),
@@ -479,8 +426,8 @@ printRecordRow(patientRecords[1,])</code></pre>
 apply(patientRecords, 1, printRecordRow)</code></pre>
 <pre><code>## [1] &quot;patient1 46 TRUE&quot;  &quot;patient2 49 FALSE&quot; &quot;patient3 50 TRUE&quot;</code></pre>
 </div>
-<div id="why-create-functions" class="section level1">
-<h1>Why create functions?</h1>
+<div id="why-create-functions" class="section level2">
+<h2>Why create functions?</h2>
 <ul>
 <li>Organize your code – useful for larger scripts</li>
 <li>Easy to reuse code because it is more modular
@@ -492,8 +439,8 @@ apply(patientRecords, 1, printRecordRow)</code></pre>
 <li>Easily repeat code from different places in a single script</li>
 </ul>
 </div>
-<div id="built-in-functions" class="section level1">
-<h1>Built in functions</h1>
+<div id="built-in-functions" class="section level2">
+<h2>Built in functions</h2>
 <ul>
 <li>R has hundreds of built in functions</li>
 </ul>
@@ -503,47 +450,43 @@ t.test(runif(50), runif(50))</code></pre>
 ##  Welch Two Sample t-test
 ## 
 ## data:  runif(50) and runif(50)
-## t = 0.24369, df = 97.616, p-value = 0.808
+## t = -1.0424, df = 97.833, p-value = 0.2998
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.09340194  0.11955079
+##  -0.17606181  0.05479846
 ## sample estimates:
 ## mean of x mean of y 
-## 0.4548209 0.4417464</code></pre>
+## 0.4883113 0.5489430</code></pre>
 <pre class="r"><code>cor.test(runif(50), runif(50),method=&quot;pearson&quot;)</code></pre>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  runif(50) and runif(50)
-## t = -0.30098, df = 48, p-value = 0.7647
+## t = -0.43727, df = 48, p-value = 0.6639
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  -0.3179091  0.2378188
+##  -0.3354551  0.2192021
 ## sample estimates:
 ##         cor 
-## -0.04340195</code></pre>
+## -0.06298882</code></pre>
 </div>
-<div id="exercise-functions-10-minutes" class="section level1">
-<h1>Exercise: Functions (10 minutes)</h1>
+<div id="exercise-functions-10-minutes" class="section level2">
+<h2>Exercise: Functions (10 minutes)</h2>
 <blockquote>
-<p>Practice creating a function</p>
-</blockquote>
-<blockquote>
-<p>Create a function called mysum that sums up all the elements of a vector</p>
-</blockquote>
-<blockquote>
-<p>Check that it gives the same results at the sum() function</p>
+<p>Practice creating a function<br />
+Create a function called mysum that sums up all the elements of a vector<br />
+Check that it gives the same results at the sum() function</p>
 </blockquote>
 <div id="exercise-solution-5-minutes-1" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
 </div>
 </div>
+</div>
 <div id="regular-expressions" class="section level1">
 <h1>Regular expressions</h1>
-<div id="useful-tool-to-find-patterns-in-strings" class="section level2">
-<h2>Useful tool to find patterns in strings</h2>
 <ul>
-<li>Regular expressions (regex) = very powerful pattern matching in strings</li>
+<li><p>Useful tool to find patterns in strings</p></li>
+<li><p>Regular expressions (regex) = very powerful pattern matching in strings</p></li>
 </ul>
 <pre class="r"><code>string = &quot;aaabbbccc&quot;
 #&quot;aaa&quot; matches
@@ -564,10 +507,8 @@ sub(&quot;A&quot;, &quot;T&quot;, DNA)</code></pre>
 <p>string = “aaabbbccc” “a.a” matches “aaa” . means any one character</p>
 <p>"a<em>b" matches </em> means zero or more of the previous character</p>
 <p>Example: [+-]?[0-9]+.[0-9]+ matches a number like -43.221</p>
-</div>
-</div>
-<div id="regular-expression-quick-reference" class="section level1">
-<h1>Regular expression quick reference</h1>
+<div id="regular-expression-quick-reference" class="section level2">
+<h2>Regular expression quick reference</h2>
 <table>
 <colgroup>
 <col width="17%" />
@@ -663,8 +604,8 @@ sub(&quot;A&quot;, &quot;T&quot;, DNA)</code></pre>
 </tbody>
 </table>
 </div>
-<div id="regular-expression-examples" class="section level1">
-<h1>Regular expression examples</h1>
+<div id="regular-expression-examples" class="section level2">
+<h2>Regular expression examples</h2>
 <pre class="r"><code>a = &quot;sdfsabcdefghba0dsgggfe0haaabbbccc&quot;
 #grep returns the vector index of the match
 #grepl returns TRUE if there is a match
@@ -729,26 +670,19 @@ gregexpr(&quot;b.d&quot;, a)</code></pre>
 <pre class="r"><code>length(gregexpr(&quot;g&quot;, a)[[1]])</code></pre>
 <pre><code>## [1] 4</code></pre>
 </div>
-<div id="exercise-regular-expressions-10-minutes" class="section level1">
-<h1>Exercise: regular expressions (10 minutes)</h1>
+<div id="exercise-regular-expressions-10-minutes" class="section level2">
+<h2>Exercise: regular expressions (10 minutes)</h2>
 <blockquote>
-<p>DNA = “ACGATGATACTGATGACGGGC”</p>
-</blockquote>
-<blockquote>
-<p>Match the regular expression “G..A” and use the results to identify the actual match in the original string</p>
-</blockquote>
-<blockquote>
-<p>Use gregexpr</p>
-</blockquote>
-<blockquote>
-<p>attr(x, “match.length”) can be used to find the match length in the vector returned from gregexpr</p>
-</blockquote>
-<blockquote>
-<p>?substr</p>
+<p>DNA = “ACGATGATACTGATGACGGGC”<br />
+Match the regular expression “G..A” and use the results to identify the actual match in the original string<br />
+Use gregexpr<br />
+attr(x, “match.length”) can be used to find the match length in the vector returned from gregexpr<br />
+?substr</p>
 </blockquote>
 <div id="exercise-solution-5-minutes-2" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
 <hr />
+</div>
 </div>
 </div>
 
@@ -781,7 +715,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

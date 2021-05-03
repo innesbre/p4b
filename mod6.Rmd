@@ -6,9 +6,9 @@ The Book of R: chapter 11.1, 11.2 (functions), Glance at ?base::regex
 
 ***
 
-## Module 5 review
+# Module 5 review
 
-* Loops
+## Loops
 
 ```
 for (value in vectorVariable) {
@@ -18,42 +18,30 @@ for (value in vectorVariable) {
 }
 ```
 
-* Vectorization
-    * e.g. vectorVariable[vectorVariable>0]
+## Vectorization
+
+```
+vectorVariable[vectorVariable>0]
+```   
     
 ***
 
-# Exercise: Vectorization (10 minutes)
+## Exercise: Vectorization (10 minutes)
 
->Create a vector of consecutive numbers from 1 to 100.
-
->Note: from:to is the same as seq(from, to)
-
->Compute the sum, product and mean
-
->Sum just the numbers greater than 50
+>Create a vector of consecutive numbers from 1 to 100.  
+>Note: from:to is the same as seq(from, to)  
+>Compute the sum, product and mean  
+>Sum just the numbers greater than 50  
 
 ### Exercise solution (5 minutes)
 
-```{r eval=FALSE, include=FALSE}
-myvec <- 1:100 #seq(1,100)
+```{r}
 
-sum(myvec)
-Reduce("+",myvec)
-
-try(sapply(myvec,"*"))
-prod(myvec)
-
-mean(myvec)
-
-sum(myvec[myvec > 50])
 ```
 
 # Functions
 
-## Key Programming Concept
-
-# Writing your own functions
+## Writing your own functions
 
 ```{r}
 #syntax
@@ -67,7 +55,7 @@ myfunction = function(arg1, arg2, ... ) {
 #The concept of scope is very important in other languages, but in R, you just need to understand it with functions
 ```
 
-# Function example
+## Function example
 
 ```{r}
 patientRecords = data.frame(name=c("patient1", "patient2", "patient3"),
@@ -91,7 +79,7 @@ apply(patientRecords, 1, printRecordRow)
 
 ```
 
-# Why create functions?
+## Why create functions?
 
 * Organize your code – useful for larger scripts
 * Easy to reuse code because it is more modular
@@ -100,7 +88,7 @@ apply(patientRecords, 1, printRecordRow)
 * Maintain a central place to keep code in case you need to modify/fix something
 * Easily repeat code from different places in a single script
 
-# Built in functions
+## Built in functions
 
 * R has hundreds of built in functions
 
@@ -110,32 +98,23 @@ t.test(runif(50), runif(50))
 cor.test(runif(50), runif(50),method="pearson")
 ```
 
-# Exercise: Functions (10 minutes)
+## Exercise: Functions (10 minutes)
 
->Practice creating a function
-
->Create a function called mysum that sums up all the elements of a vector
-
->Check that it gives the same results at the sum() function
+>Practice creating a function  
+>Create a function called mysum that sums up all the elements of a vector  
+>Check that it gives the same results at the sum() function  
 
 ### Exercise solution (5 minutes)
 
-```{r eval=FALSE, include=FALSE}
-mysum <- function(X) {
-  runningsum <- 0
-  for (i in seq_along(X)) {
-    runningsum <- runningsum + X[i]
-  }
-  return(runningsum)
-}
+```{r}
 
-mysum(X=1:100)
+
 ```
 
 
 # Regular expressions
 
-## Useful tool to find patterns in strings
+* Useful tool to find patterns in strings
 
 * Regular expressions (regex) = very powerful pattern matching in strings
 
@@ -166,7 +145,7 @@ Example: [+-]?[0-9]+\.[0-9]+
 matches a number like -43.221
 
 
-# Regular expression quick reference
+## Regular expression quick reference
 
 | aaa             | exact pattern                                                                  |
 |-----------------|--------------------------------------------------------------------------------|
@@ -191,7 +170,7 @@ matches a number like -43.221
 | ignore.case=T   | case insensitive match                                                         |
 | \\\\+ \\\\^ \\\\      | ‘escape’ a metacharacter – use a special character like + or ^ in your pattern |
 
-# Regular expression examples
+## Regular expression examples
 
 ```{r}
 a = "sdfsabcdefghba0dsgggfe0haaabbbccc"
@@ -234,32 +213,17 @@ gregexpr("b.d", a)
 length(gregexpr("g", a)[[1]])
 ```
 
-# Exercise: regular expressions (10 minutes)
+## Exercise: regular expressions (10 minutes)
 
->DNA = "ACGATGATACTGATGACGGGC"
-
->Match the regular expression "G..A" and use the results to identify the actual match in the original string
-
->Use gregexpr
-
->attr(x, "match.length") can be used to find the match length in the vector returned from gregexpr
-
->?substr
+>DNA = "ACGATGATACTGATGACGGGC"  
+>Match the regular expression "G..A" and use the results to identify the actual match in the original string  
+>Use gregexpr  
+>attr(x, "match.length") can be used to find the match length in the vector returned from gregexpr  
+>?substr  
 
 ### Exercise solution (5 minutes)
 
-```{r eval=FALSE, include=FALSE}
-DNA <- c("ACGATGATACTGATGACGGGC","asldkfj")
-foundit <- gregexpr("G..A",DNA)
-substr(DNA[[1]],
-       start=foundit[[1]][1],
-       stop=foundit[[1]][1] +
-         attr(foundit[[1]],"match.length") - 1)
-
-
-DNA <- c("ACGATGATACTGATGACGGGC")
-gregexpr("[A-Ga-g].T",DNA)
-
+```{r}
 
 ```
 
