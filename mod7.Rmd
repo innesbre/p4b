@@ -2,11 +2,13 @@
 title: "Module 7"
 ---
 
+> Updated 2021/05/07
+
 The Book of R: chapter 7.1, 7.2 (plots), ?system2
 
 ***
 
-## Module 6 review
+# Module 6 review
 
 * Built in functions
 
@@ -22,37 +24,43 @@ mysum = function(arg1) {
     
 ***
 
-# Exercise: A useful function (10 minutes)
+## Exercise: A useful function (10 minutes)
 
->Following on from the previous exercise where you found a string matching a regular expression...
-
->Write a function that returns all the matches of a regular expression in a string
-
->Hint: use substring (not substr) – why?
-
->Test that the function works in the same way as in the previous exercise (by searching DNA for G..A)
+>Following on from the previous exercise where you found a string matching a regular expression...  
+>Write a function that returns all the matches of a regular expression in a string  
+>Hint: use substring (not substr) – why?  
+>Test that the function works in the same way as in the previous exercise (by searching DNA for G..A)  
 
 ### Exercise solution (5 minutes)
-```{r eval=FALSE, include=FALSE}
-DNA <- c("ACGATGATACTGATGACGGGC")
-regex <- "G..A"
+```{r}
+DNA <- "ACGATGATACTGATGACGGGCGCCA"  
+REGEX <- "G..A"
 
-regexMatcher <- function(STRING,REGEX) {
-  temp_matches <- gregexpr(REGEX,STRING)
-  return(
-    substring(
-      STRING,
-      temp_matches[[1]][1],
-      temp_matches[[1]][1] +
-        attr(temp_matches[[1]],"match.length") - 1
-    )
-  )
+# figuring things out ----
+matches <- gregexpr(REGEX,DNA)[[1]]
+substr(
+  DNA,
+  matches,
+  matches + attr(matches,"match.length") - 1
+)
+substring(
+  DNA,
+  matches,
+  matches + attr(matches,"match.length") - 1
+)
+
+# the function ----
+
+MATCHER <- function(STRING,REGEX) {
+  matches <- gregexpr(REGEX,DNA)[[1]]
+  return(substring(
+    DNA,
+    matches,
+    matches + attr(matches,"match.length") - 1
+  ))
 }
 
-regexMatcher(STRING=DNA,REGEX="G.T")
-
-
-regmatches(DNA,gregexpr("G.T",DNA))
+MATCHER(DNA,REGEX)
 ```
 
 # Interfacing with external programs
@@ -67,7 +75,7 @@ system2("cmd.exe", input="dir")  #windows
 
 ```
 
-# system2 function
+## system2 function
 
 ```{r eval=F}
 #returns stdout in variable v
@@ -83,7 +91,7 @@ v
 * What's wrong with system()?
     * It works, but is older and not recommended
 
-# Exercise: external programs (10 minutes)
+## Exercise: external programs (10 minutes)
 
 >Write a script to call a system command
 
@@ -97,10 +105,19 @@ v
     * Can also try shell("dir")
 
 ### Exercise solution (5 minutes)
-```{r eval=FALSE, include=FALSE}
-shell("df -h",shell="bash")
+```{r}
+# This was knit on a Windows OS:
+try({
+  system2("ls",stdout=T)
+},silent=F)
+
 system2(command="cmd.exe",input="dir",stdout=T)
+
+shell("ls",shell="bash")
+
+shell("df -h",shell="bash")
 ```
+
 
 # Recipes
 ## Code examples and templates
@@ -110,7 +127,7 @@ system2(command="cmd.exe",input="dir",stdout=T)
 
 ![R recipe book](recipebookTOC.png)
 
-# Example recipes
+## Example recipes
 
 ```{r,eval=FALSE,include=TRUE}
 #Sorting a data frame
@@ -126,16 +143,17 @@ data_frame = data_frame[order(data_frame$key1,data_frame$key2) , ]
 #Set the value to be NULL
 ```
 
-# Stack Overflow
+## Stack Overflow
 * User-contributed question and answer website – good free source of recipes
 * e.g. How to delete multiple values from a vector?
     * https://stackoverflow.com/questions/9665984/how-to-delete-multiple-values-from-a-vector
     * https://stackoverflow.com/
 
 # Plots
-## Graphically plotting/charting data
 
-# Introduction to plots
+Graphically plotting/charting data
+
+## Introduction to plots
 
 ```{r}
 #R has powerful data plotting abilities
@@ -146,27 +164,25 @@ boxplot(runif(50))
 demo(graphics)
 ```
 
-# Exercise: plots (10 minutes)
+## Exercise: plots (10 minutes)
 
->Create a matrix “randomdata” with 50 rows and 10 columns using "replicate(10,rnorm(50))"
-
->Plot the first and second columns of the matrix in a scatter plot
-
->Generate a vector “randommeans” with the means of all columns of randomdata. Also generate a vector “randomsds” with the standard deviations of all columns of randomdata
-
+>Create a matrix “randomdata” with 50 rows and 10 columns using "replicate(10,rnorm(50))"  
+>Plot the first and second columns of the matrix in a scatter plot  
+>Generate a vector “randommeans” with the means of all columns of randomdata. Also generate a vector “randomsds” with the standard deviations of all columns of randomdata  
 >Generate a boxplot of the first and second columns of randomdata
 
 ### Exercise solution (5 minutes)
-```{r eval=FALSE, include=FALSE}
-# step 1 ----
+```{r, fig.height=3,fig.width=9}
+# Make random (normal!) data ----
 randomdata1 <- matrix(rnorm(500),nrow=50,ncol=10)
-randomdata2 <- replicate(10,rnorm(50))
+randomdata2 <- replicate(10,rnorm(50)) 
+#^ is a wrapper for sapply(1:10,function(X) rnorm(50))
 
 temp <- list()
 for(i in 1:10) {
   temp[[i]] <- rnorm(50)
 }
-randomdata3 <- do.call("rbind",temp)
+randomdata3 <- do.call("cbind",temp)
 
 dim(randomdata1)
 str(randomdata2)
@@ -175,7 +191,7 @@ str(randomdata3)
 
 # step 2 ----
 default_par <- par(no.readonly=T)
-par(mfrow=c(1,3))
+par(mfrow=c(1,3),mar=c(3,3,1,1),mgp=c(2,1,0))
 plot(randomdata1[,1:2])
 plot(x=randomdata1[,1],y=randomdata1[,2])
 rd4 <- as.data.frame(randomdata1)
@@ -183,17 +199,33 @@ plot(V2~V1,data=rd4)
 
 par(default_par)
 
-
 # step 3 ----
-col_mean <- colMeans(randomdata1)
-col_sd <- apply(randomdata1,2,sd)
+rmeans <- colMeans(randomdata1)
+rmeans
+rsd <- apply(randomdata1,MARGIN=2,FUN=sd)
+rsd 
 
+```
+
+
+```{r}
 # step 4 ----
 boxplot(randomdata1[,1:2])
-boxplot(list(first=randomdata1[,1],
-             second=randomdata1[,2]))
+boxplot(list("First column"=randomdata1[,1],
+             "Le Deux"=randomdata1[,2]))
+boxplot(randomdata1)
+
+
 hist(randomdata1[,1])
+hist(randomdata1)
 
 ```
 
 ***
+
+# Assignment 4 notes
+* Do yourself and I a favour by submitted part 1 as an R script.  I know it says you don't need to, but if you accidentally submit a rich-text file, I'll be very sad, and you're writing R commands to text all your RegEx anyway, so just submit those so I can quickly run it and give you full marks.  
+* For part 2, remember that a FASTA file is a text file where each sequence is preceded by a header line that starts with `>`.  You can use `readLines` to read in the file as a character vector, then loop over it to find each sequence by looking for each string that starts with `>`.  
+* To clarify what part of each sequence you should be using: Each sequence in the FASTA file includes the preceding and following 1k base pairs.  All we want you to store in the dataframe is the first 1000 base pairs of the sequence, and the last 1000 base pairs of the sequence.  Don't worry about finding the ORF start codon or anything like that, just paste the whole sequence together, then grab the substrings containing the first and last 1000 bp and paste them together in that dataframe.  **Note that when looking for the transcription factor binding sites, you should only look in the first 1000 bp, so you'll have to substring the sequence again.**  
+
+****

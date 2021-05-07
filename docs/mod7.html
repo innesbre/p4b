@@ -13,13 +13,22 @@
 
 <title>Module 7</title>
 
-<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -39,11 +48,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -56,32 +60,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
 
@@ -92,10 +70,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -112,40 +86,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -173,7 +120,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -185,7 +132,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -196,10 +143,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -211,7 +171,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -337,13 +296,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -361,7 +320,7 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Module 1</a>
+  <a href="mod1.html">Module 1</a>
 </li>
 <li>
   <a href="mod2.html">Module 2</a>
@@ -384,6 +343,9 @@ div.tocify {
 <li>
   <a href="mod8.html">Module 8</a>
 </li>
+<li>
+  <a href="mod9.html">Module 9</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -392,7 +354,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -401,10 +363,13 @@ div.tocify {
 </div>
 
 
+<blockquote>
+<p>Updated 2021/05/07</p>
+</blockquote>
 <p>The Book of R: chapter 7.1, 7.2 (plots), ?system2</p>
 <hr />
-<div id="module-6-review" class="section level2">
-<h2>Module 6 review</h2>
+<div id="module-6-review" class="section level1">
+<h1>Module 6 review</h1>
 <ul>
 <li><p>Built in functions</p>
 <ul>
@@ -419,23 +384,47 @@ return (sum(arg1))
 </ul></li>
 </ul>
 <hr />
-</div>
-<div id="exercise-a-useful-function-10-minutes" class="section level1">
-<h1>Exercise: A useful function (10 minutes)</h1>
+<div id="exercise-a-useful-function-10-minutes" class="section level2">
+<h2>Exercise: A useful function (10 minutes)</h2>
 <blockquote>
-<p>Following on from the previous exercise where you found a string matching a regular expression…</p>
-</blockquote>
-<blockquote>
-<p>Write a function that returns all the matches of a regular expression in a string</p>
-</blockquote>
-<blockquote>
-<p>Hint: use substring (not substr) – why?</p>
-</blockquote>
-<blockquote>
-<p>Test that the function works in the same way as in the previous exercise (by searching DNA for G..A)</p>
+<p>Following on from the previous exercise where you found a string matching a regular expression…<br />
+Write a function that returns all the matches of a regular expression in a string<br />
+Hint: use substring (not substr) – why?<br />
+Test that the function works in the same way as in the previous exercise (by searching DNA for G..A)</p>
 </blockquote>
 <div id="exercise-solution-5-minutes" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code>DNA &lt;- &quot;ACGATGATACTGATGACGGGCGCCA&quot;  
+REGEX &lt;- &quot;G..A&quot;
+
+# figuring things out ----
+matches &lt;- gregexpr(REGEX,DNA)[[1]]
+substr(
+  DNA,
+  matches,
+  matches + attr(matches,&quot;match.length&quot;) - 1
+)</code></pre>
+<pre><code>## [1] &quot;GATA&quot;</code></pre>
+<pre class="r"><code>substring(
+  DNA,
+  matches,
+  matches + attr(matches,&quot;match.length&quot;) - 1
+)</code></pre>
+<pre><code>## [1] &quot;GATA&quot; &quot;GCCA&quot;</code></pre>
+<pre class="r"><code># the function ----
+
+MATCHER &lt;- function(STRING,REGEX) {
+  matches &lt;- gregexpr(REGEX,DNA)[[1]]
+  return(substring(
+    DNA,
+    matches,
+    matches + attr(matches,&quot;match.length&quot;) - 1
+  ))
+}
+
+MATCHER(DNA,REGEX)</code></pre>
+<pre><code>## [1] &quot;GATA&quot; &quot;GCCA&quot;</code></pre>
+</div>
 </div>
 </div>
 <div id="interfacing-with-external-programs" class="section level1">
@@ -448,9 +437,8 @@ return (sum(arg1))
 system2(&quot;ls&quot;)  #unix/mac</code></pre>
 <pre><code>## Warning in system2(&quot;ls&quot;): &#39;&quot;ls&quot;&#39; not found</code></pre>
 <pre class="r"><code>system2(&quot;cmd.exe&quot;, input=&quot;dir&quot;)  #windows</code></pre>
-</div>
-<div id="system2-function" class="section level1">
-<h1>system2 function</h1>
+<div id="system2-function" class="section level2">
+<h2>system2 function</h2>
 <pre class="r"><code>#returns stdout in variable v
 v = system2(&quot;ls&quot;, stdout=T)
 v
@@ -465,8 +453,8 @@ v</code></pre>
 </ul></li>
 </ul>
 </div>
-<div id="exercise-external-programs-10-minutes" class="section level1">
-<h1>Exercise: external programs (10 minutes)</h1>
+<div id="exercise-external-programs-10-minutes" class="section level2">
+<h2>Exercise: external programs (10 minutes)</h2>
 <blockquote>
 <p>Write a script to call a system command</p>
 </blockquote>
@@ -486,6 +474,63 @@ v</code></pre>
 </ul>
 <div id="exercise-solution-5-minutes-1" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code># This was knit on a Windows OS:
+try({
+  system2(&quot;ls&quot;,stdout=T)
+},silent=F)</code></pre>
+<pre><code>## Error in system2(&quot;ls&quot;, stdout = T) : &#39;&quot;ls&quot;&#39; not found</code></pre>
+<pre class="r"><code>system2(command=&quot;cmd.exe&quot;,input=&quot;dir&quot;,stdout=T)</code></pre>
+<pre><code>##  [1] &quot;Microsoft Windows [Version 10.0.19042.928]&quot;                         
+##  [2] &quot;(c) Microsoft Corporation. All rights reserved.&quot;                    
+##  [3] &quot;&quot;                                                                   
+##  [4] &quot;D:\\Dropbox\\TA_MMG1002H_2020\\p4b&gt;dir&quot;                             
+##  [5] &quot; Volume in drive D is DATA&quot;                                         
+##  [6] &quot; Volume Serial Number is 36E0-89E7&quot;                                 
+##  [7] &quot;&quot;                                                                   
+##  [8] &quot; Directory of D:\\Dropbox\\TA_MMG1002H_2020\\p4b&quot;                   
+##  [9] &quot;&quot;                                                                   
+## [10] &quot;2021-05-07  03:30 PM    &lt;DIR&gt;          .&quot;                           
+## [11] &quot;2021-05-07  03:30 PM    &lt;DIR&gt;          ..&quot;                          
+## [12] &quot;2020-04-23  09:49 AM                44 .gitignore&quot;                  
+## [13] &quot;2021-05-07  10:40 AM            14,424 .Rhistory&quot;                   
+## [14] &quot;2021-04-30  01:41 PM                30 aaoutput.txt&quot;                
+## [15] &quot;2019-03-04  12:05 AM           653,001 ASCII-Table-wide.svg&quot;        
+## [16] &quot;2021-04-30  01:30 PM               218 assignment2_sequence.txt&quot;    
+## [17] &quot;2021-05-03  08:45 AM            58,595 column.txt&quot;                  
+## [18] &quot;2021-05-07  03:30 PM    &lt;DIR&gt;          docs&quot;                        
+## [19] &quot;2019-03-03  11:44 PM            66,773 fileOutput.png&quot;              
+## [20] &quot;2021-04-23  12:58 PM         1,010,056 gene_condition_source_id.txt&quot;
+## [21] &quot;2021-05-03  08:43 AM               241 index.md&quot;                    
+## [22] &quot;2021-04-23  12:58 PM             6,249 mod1.Rmd&quot;                    
+## [23] &quot;2021-04-19  02:31 PM            10,003 mod2.Rmd&quot;                    
+## [24] &quot;2021-04-23  02:45 PM             5,908 mod3.Rmd&quot;                    
+## [25] &quot;2021-04-30  01:13 PM            11,181 mod4.Rmd&quot;                    
+## [26] &quot;2021-04-30  04:14 PM            17,749 mod5.Rmd&quot;                    
+## [27] &quot;2021-04-30  04:02 PM               469 mod5exercise.fa&quot;             
+## [28] &quot;2021-05-03  03:19 PM             8,566 mod6.Rmd&quot;                    
+## [29] &quot;2021-05-07  03:30 PM            18,885 mod7.knit.md&quot;                
+## [30] &quot;2021-05-07  03:31 PM             6,494 mod7.Rmd&quot;                    
+## [31] &quot;2021-04-16  03:07 PM             9,609 mod8.Rmd&quot;                    
+## [32] &quot;2021-04-16  03:20 PM             6,302 mod9.Rmd&quot;                    
+## [33] &quot;2021-05-03  08:45 AM                96 mydata.txt&quot;                  
+## [34] &quot;2021-05-07  01:02 PM               240 p4b.Rproj&quot;                   
+## [35] &quot;2020-04-23  10:52 AM               184 README.md&quot;                   
+## [36] &quot;2019-03-03  10:12 PM           522,169 recipebookTOC.png&quot;           
+## [37] &quot;2021-05-03  08:45 AM                74 row.txt&quot;                     
+## [38] &quot;2021-04-30  03:19 PM            57,680 RStudioOptions.png&quot;          
+## [39] &quot;2021-05-07  03:30 PM    &lt;DIR&gt;          site_libs&quot;                   
+## [40] &quot;2021-04-16  02:41 PM               218 sum.R&quot;                       
+## [41] &quot;2021-04-16  03:17 PM           277,911 test.txt&quot;                    
+## [42] &quot;2011-11-18  12:42 AM           291,755 yeast_properties.txt&quot;        
+## [43] &quot;2021-05-03  08:41 AM               609 _site.yml&quot;                   
+## [44] &quot;              30 File(s)      3,055,733 bytes&quot;                      
+## [45] &quot;               4 Dir(s)  260,920,537,088 bytes free&quot;                
+## [46] &quot;&quot;                                                                   
+## [47] &quot;D:\\Dropbox\\TA_MMG1002H_2020\\p4b&gt;&quot;</code></pre>
+<pre class="r"><code>shell(&quot;ls&quot;,shell=&quot;bash&quot;)
+
+shell(&quot;df -h&quot;,shell=&quot;bash&quot;)</code></pre>
+</div>
 </div>
 </div>
 <div id="recipes" class="section level1">
@@ -503,9 +548,8 @@ v</code></pre>
 <p class="caption">R recipe book</p>
 </div>
 </div>
-</div>
-<div id="example-recipes" class="section level1">
-<h1>Example recipes</h1>
+<div id="example-recipes" class="section level2">
+<h2>Example recipes</h2>
 <pre class="r"><code>#Sorting a data frame
 data_frame = data_frame[order(data_frame$key) , ]
 #data_frame$key is the column to sort by
@@ -518,8 +562,8 @@ data_frame = data_frame[order(data_frame$key1,data_frame$key2) , ]
 #Removing elements from a list
 #Set the value to be NULL</code></pre>
 </div>
-<div id="stack-overflow" class="section level1">
-<h1>Stack Overflow</h1>
+<div id="stack-overflow" class="section level2">
+<h2>Stack Overflow</h2>
 <ul>
 <li>User-contributed question and answer website – good free source of recipes</li>
 <li>e.g. How to delete multiple values from a vector?
@@ -529,14 +573,12 @@ data_frame = data_frame[order(data_frame$key1,data_frame$key2) , ]
 </ul></li>
 </ul>
 </div>
+</div>
 <div id="plots" class="section level1">
 <h1>Plots</h1>
-<div id="graphically-plottingcharting-data" class="section level2">
-<h2>Graphically plotting/charting data</h2>
-</div>
-</div>
-<div id="introduction-to-plots" class="section level1">
-<h1>Introduction to plots</h1>
+<p>Graphically plotting/charting data</p>
+<div id="introduction-to-plots" class="section level2">
+<h2>Introduction to plots</h2>
 <pre class="r"><code>#R has powerful data plotting abilities
 hist(runif(50))</code></pre>
 <p><img src="mod7_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
@@ -763,24 +805,78 @@ hist(runif(50))</code></pre>
 <pre><code>## 
 ## &gt; par(opar)</code></pre>
 </div>
-<div id="exercise-plots-10-minutes" class="section level1">
-<h1>Exercise: plots (10 minutes)</h1>
+<div id="exercise-plots-10-minutes" class="section level2">
+<h2>Exercise: plots (10 minutes)</h2>
 <blockquote>
-<p>Create a matrix “randomdata” with 50 rows and 10 columns using “replicate(10,rnorm(50))”</p>
-</blockquote>
-<blockquote>
-<p>Plot the first and second columns of the matrix in a scatter plot</p>
-</blockquote>
-<blockquote>
-<p>Generate a vector “randommeans” with the means of all columns of randomdata. Also generate a vector “randomsds” with the standard deviations of all columns of randomdata</p>
-</blockquote>
-<blockquote>
-<p>Generate a boxplot of the first and second columns of randomdata</p>
+<p>Create a matrix “randomdata” with 50 rows and 10 columns using “replicate(10,rnorm(50))”<br />
+Plot the first and second columns of the matrix in a scatter plot<br />
+Generate a vector “randommeans” with the means of all columns of randomdata. Also generate a vector “randomsds” with the standard deviations of all columns of randomdata<br />
+Generate a boxplot of the first and second columns of randomdata</p>
 </blockquote>
 <div id="exercise-solution-5-minutes-2" class="section level3">
 <h3>Exercise solution (5 minutes)</h3>
+<pre class="r"><code># Make random (normal!) data ----
+randomdata1 &lt;- matrix(rnorm(500),nrow=50,ncol=10)
+randomdata2 &lt;- replicate(10,rnorm(50)) 
+#^ is a wrapper for sapply(1:10,function(X) rnorm(50))
+
+temp &lt;- list()
+for(i in 1:10) {
+  temp[[i]] &lt;- rnorm(50)
+}
+randomdata3 &lt;- do.call(&quot;cbind&quot;,temp)
+
+dim(randomdata1)</code></pre>
+<pre><code>## [1] 50 10</code></pre>
+<pre class="r"><code>str(randomdata2)</code></pre>
+<pre><code>##  num [1:50, 1:10] -0.14131 -0.76623 -2.75896 -0.00147 1.08734 ...</code></pre>
+<pre class="r"><code>str(randomdata3)</code></pre>
+<pre><code>##  num [1:50, 1:10] 0.428 -1.424 0.932 -0.391 -1.573 ...</code></pre>
+<pre class="r"><code># step 2 ----
+default_par &lt;- par(no.readonly=T)
+par(mfrow=c(1,3),mar=c(3,3,1,1),mgp=c(2,1,0))
+plot(randomdata1[,1:2])
+plot(x=randomdata1[,1],y=randomdata1[,2])
+rd4 &lt;- as.data.frame(randomdata1)
+plot(V2~V1,data=rd4)</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-7-1.png" width="864" /></p>
+<pre class="r"><code>par(default_par)
+
+# step 3 ----
+rmeans &lt;- colMeans(randomdata1)
+rmeans</code></pre>
+<pre><code>##  [1] -0.24015477 -0.02386925  0.25754236  0.02514164  0.36944076 -0.08140902
+##  [7] -0.06865555  0.22418023  0.20748339 -0.14526355</code></pre>
+<pre class="r"><code>rsd &lt;- apply(randomdata1,MARGIN=2,FUN=sd)
+rsd </code></pre>
+<pre><code>##  [1] 0.9876844 0.9973583 0.9702860 0.8884464 1.0871837 1.1934208 0.6897749
+##  [8] 0.9163699 1.1433131 0.8886096</code></pre>
+<pre class="r"><code># step 4 ----
+boxplot(randomdata1[,1:2])</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>boxplot(list(&quot;First column&quot;=randomdata1[,1],
+             &quot;Le Deux&quot;=randomdata1[,2]))</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<pre class="r"><code>boxplot(randomdata1)</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-8-3.png" width="672" /></p>
+<pre class="r"><code>hist(randomdata1[,1])</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-8-4.png" width="672" /></p>
+<pre class="r"><code>hist(randomdata1)</code></pre>
+<p><img src="mod7_files/figure-html/unnamed-chunk-8-5.png" width="672" /></p>
 <hr />
 </div>
+</div>
+</div>
+<div id="assignment-4-notes" class="section level1">
+<h1>Assignment 4 notes</h1>
+<ul>
+<li>Do yourself and I a favour by submitted part 1 as an R script. I know it says you don’t need to, but if you accidentally submit a rich-text file, I’ll be very sad, and you’re writing R commands to text all your RegEx anyway, so just submit those so I can quickly run it and give you full marks.<br />
+</li>
+<li>For part 2, remember that a FASTA file is a text file where each sequence is preceded by a header line that starts with <code>&gt;</code>. You can use <code>readLines</code> to read in the file as a character vector, then loop over it to find each sequence by looking for each string that starts with <code>&gt;</code>.<br />
+</li>
+<li>To clarify what part of each sequence you should be using: Each sequence in the FASTA file includes the preceding and following 1k base pairs. All we want you to store in the dataframe is the first 1000 base pairs of the sequence, and the last 1000 base pairs of the sequence. Don’t worry about finding the ORF start codon or anything like that, just paste the whole sequence together, then grab the substrings containing the first and last 1000 bp and paste them together in that dataframe. <strong>Note that when looking for the transcription factor binding sites, you should only look in the first 1000 bp, so you’ll have to substring the sequence again.</strong></li>
+</ul>
+<hr />
 </div>
 
 
@@ -812,7 +908,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
