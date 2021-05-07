@@ -224,8 +224,9 @@ hist(randomdata1)
 ***
 
 # Assignment 4 notes
-* Do yourself and I a favour by submitted part 1 as an R script.  I know it says you don't need to, but if you accidentally submit a rich-text file, I'll be very sad, and you're writing R commands to text all your RegEx anyway, so just submit those so I can quickly run it and give you full marks.  
-* For part 2, remember that a FASTA file is a text file where each sequence is preceded by a header line that starts with `>`.  You can use `readLines` to read in the file as a character vector, then loop over it to find each sequence by looking for each string that starts with `>`.  
+* ~~Do yourself and I a favour by submitted part 1 as an R script.~~  I've read the assignment more closely, and it would be easier for me (and probably you) if you just submitted a text file with each answer (the RegEx or sentence response) on a line, so that I can easily copy and paste into my test code.  Still best for you to write the text file in RStudio so that you know it won't be converted to rich text, and you can easily test your RegEx.  
+* For part 2, remember that a FASTA file is a text file where each sequence is preceded by a header line that starts with `>`.  You can use `readLines` to read in the file as a character vector, then loop over it to either start a new sequence if you find `>` else append the line to the current sequence string.  
 * To clarify what part of each sequence you should be using: Each sequence in the FASTA file includes the preceding and following 1k base pairs.  All we want you to store in the dataframe is the first 1000 base pairs of the sequence, and the last 1000 base pairs of the sequence.  Don't worry about finding the ORF start codon or anything like that, just paste the whole sequence together, then grab the substrings containing the first and last 1000 bp and paste them together in that dataframe.  **Note that when looking for the transcription factor binding sites, you should only look in the first 1000 bp, so you'll have to substring the sequence again.**  
+* Note that the final question wants a percentage *per motif* rather than per transcription factor in the `yeast_tf_motifs.txt` file.  While some of the motifs in that file are ascribed to the same transcription factor, we expect a value per motif.  
 
 ****
