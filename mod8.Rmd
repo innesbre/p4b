@@ -2,11 +2,13 @@
 title: "Module 8"
 ---
 
+> Updated 2021/05/10
+
 The Book of R: Appendix A (packages)
 
 ***
 
-## Module 7 review
+# Module 7 review
 
 * External programs
     * system2
@@ -17,7 +19,6 @@ The Book of R: Appendix A (packages)
 ***
 
 # Packages
-## Key R concept
 
 * A place to store a set of functions
 * Can create a library of functions
@@ -26,7 +27,7 @@ The Book of R: Appendix A (packages)
     * The Comprehensive R Archive Network (CRAN) - https://cran.r-project.org/
     * Bioconductor - https://www.bioconductor.org/
 
-# Installing packages
+## Installing packages
 
 ```{r,eval=F}
 
@@ -47,7 +48,7 @@ ggplot(iris, aes(x = Sepal.Length, fill = Species)) + geom_density(alpha = .3)
 
 ```
 
-# Package management
+## Package management
 
 ```{r, eval=F}
 #List all installed packages
@@ -76,7 +77,7 @@ update.packages()
     * PDF file taking you through an example of the package functionality that you can follow
     * The first documentation you should review for any package
 
-# Example: kinship2 package
+## Example: kinship2 package
 
 ```{r,eval=F}
 install.packages("kinship2")
@@ -108,6 +109,9 @@ plot(ped2basic, col=ifelse(df2$avail, 2, 1), id=id2)
     * Use microarray probe, gene, pathway, gene ontology, homology and other annotations. Access GO, KEGG, NCBI, Biomart, UCSC, vendor, and other sources.
 
 # Creating your own package
+
+All you need to know about creating your own R package is in this book:  
+https://r-pkgs.org/  
 
 ```{r,eval=F}
 #Install needed packages
@@ -182,21 +186,15 @@ str_length(DNA)
 
 ```
 
-# Exercise: Bioconductor package (10 minutes)
+## Exercise: Bioconductor package (10 minutes)
 
-> Gene expression analysis example
-
-> Go to: http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE13924
-
->Download cel files (2.2MB)  (2 arrays)
-
->cel files are gene expression microarray scanned image files
-
->From "Global transcriptional response of Saccharomyces cerevisiae following the deletion of succinate dehydrogenase" (selected because it is small)
-
->Identified using the following search of GEO: http://www.ncbi.nlm.nih.gov/gds with “GPL90[ACCN] AND gse[ETYP] AND cel[suppFile]” – sort from smallest to largest, download the smallest experiment (2 arrays)
-
->Install the affy package
+> Gene expression analysis example  
+> Go to: http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE13924  
+>Download cel files (2.2MB)  (2 arrays)  
+>cel files are gene expression microarray scanned image files  
+>From "Global transcriptional response of Saccharomyces cerevisiae following the deletion of succinate dehydrogenase" (selected because it is small)  
+>Identified using the following search of GEO: http://www.ncbi.nlm.nih.gov/gds with “GPL90[ACCN] AND gse[ETYP] AND cel[suppFile]” – sort from smallest to largest, download the smallest experiment (2 arrays)  
+>Install the affy package  
 
 ```{r,eval=F}
 #Review the following code and run it, command by command
@@ -210,13 +208,25 @@ BiocManager::install("affy")
 ```
 
 ```{r}
+.libPaths()
+```
+
+```{bash, eval=F}
+tar -xvf GSE13924_RAW.tar
+```
+
+
+```{r}
 #The package contains functions for exploratory oligonucleotide array analysis
 library(affy)
 
 #loads all .cel files in a directory
-Data <- ReadAffy("../data/GSE13924_RAW/GSM350771.CEL.gz",
-                 "../data/GSE13924_RAW/GSM350772.CEL.gz")
+Data <- ReadAffy()
 Data
+str(Data)
+
+Data@cdfName
+cdfName(Data)
 ```
 
 ````{r}
@@ -224,6 +234,7 @@ Data
 boxplot(Data)
 
 hist(Data[,1:2])
+
 ```
 
 ```{r}
@@ -292,25 +303,41 @@ write.table(logFoldChange, file="test.txt", sep="\t")
 
 ```
 
-# Exercise solution (5 minutes)
+### Exercise solution (5 minutes)
 
-# Exercise: Gene expression and R practice (10 minutes)
 
->Based on the gene expression array data explored in the previous exercise:
+## Exercise: Gene expression and R practice (10 minutes)
 
->Plot normalized expression values from both arrays against each other
+>Based on the gene expression array data explored in the previous exercise:  
+>Plot normalized expression values from both arrays against each other  
+>Compare the boxplots of both arrays  
+>Compare the histograms of both arrays  
+>What percentage of probe sets are under-expressed in the fold change table?  
 
->Compare the boxplots of both arrays
+### Exercise solution (5 minutes)
 
->Compare the histograms of both arrays
-
->What percentage of probe sets are under-expressed in the fold change table?
-
-# Exercise solution (5 minutes)
-
-```{r eval=FALSE, include=FALSE}
+```{r}
 dim(exprs(eset))
 
+plot(exprs(eset),pch=20,cex=0.5,col=scales::alpha(1,0.5))
+abline(0,1,col="red")
+# see ?par for snazzy plotting arguments
+
+boxplot(exprs(eset))
+
+range(exprs(eset))
+par(mfrow=c(2,1),mar=c(3,3,1,1),mgp=2:0)
+hist(exprs(eset)[,1],xlim=c(0,14))
+hist(exprs(eset)[,2],xlim=c(0,14))
+
+
+
+sum(logFoldChange < 0) / nrow(logFoldChange)
+
+```
+
+
+```{r}
 plot(exprs(eset))
 par(mar=c(3,3,2,1),mgp=2:0)
 plot(exprs(eset)[,1],exprs(eset)[,2],
