@@ -26,7 +26,7 @@ https://repro.elifesciences.org/example.html#
 
 * Plotting in R is very powerful, but takes some getting used to
 
-# The built in R plot() command
+## The built in R plot() command
 
 ```{r}
 
@@ -84,7 +84,7 @@ plot(c(1,2,3), c(2,3,4), xlim = c(0,5))
 
 ```
 
-# Combining parameters to create an advanced plot
+## Combining parameters to create an advanced plot
 
 ```{r}
 { #note: in notebooks, the regular plot window is not used, thus is not active. When legend is called, it will not know where the plot is, so surround code with {} to group all the commands together into one command
@@ -104,7 +104,7 @@ legend('topleft', legend=c('I. setosa', 'I. versicolor', 'I. virginica'), col=c(
 }
 ```
 
-# Building a plot in stages
+## Building a plot in stages
 
 ```{r}
 #R creates a new plot with each call to plot(). Other functions allow you to add plot components to an existing plot
@@ -126,22 +126,50 @@ points(x[y<=5],y[y<=5], col = "blue")
 lines(x,y)
 }
 
+
 #you can add a legend using legend() as in the previous example
 
 ```
 
 
-# Exercise: Create a simple plot (10 minutes)
+## Exercise: Create a simple plot (10 minutes)
 
 * Plot a quadratic curve including numbers from -50 to 50. Make the negative numbers red and the positive numbers blue, with zero a purple, filled in point. Build the plot in stages.
 
-# Exercise solution (5 minutes)
+### Exercise solution (5 minutes)
 
-```{r eval=FALSE, include=FALSE}
-plot(NA,NA,xlim=c(-50,50),ylim=c(0,50^2))
+```{r}
+# From https://stackoverflow.com/a/30835971
+line2user <- function(line, side) {
+  lh <- par('cin')[2] * par('cex') * par('lheight')
+  x_off <- diff(grconvertX(c(0, lh), 'inches', 'npc'))
+  y_off <- diff(grconvertY(c(0, lh), 'inches', 'npc'))
+  switch(side,
+         `1` = grconvertY(-line * y_off, 'npc', 'user'),
+         `2` = grconvertX(-line * x_off, 'npc', 'user'),
+         `3` = grconvertY(1 + line * y_off, 'npc', 'user'),
+         `4` = grconvertX(1 + line * x_off, 'npc', 'user'),
+         stop("Side must be 1, 2, 3, or 4", call.=FALSE))
+}
+
+# pdf("thisisapdf.pdf",width=5,height=5)
+# png("thisisnotapdf.png",width=5,height=5,units="in",res=300)
+par(mar=c(6,6,3,1),mgp=c(2,1,0))
+plot(NA,NA,xlim=range(-50:50),ylim=c(0,50^2))
 points(1:50,(1:50)^2,type="l",col="blue")
 lines(-50:-1,(-50:-1)^2,col="red")
 points(0,0,col="purple",pch=16,cex=2)
+
+# now I'm just being silly
+
+mtext("Farts!",side=3,line=1)
+mtext("Farts!",side=3,line=0,las=2)
+text(0,2500/2,"Middle!")
+text(0,0,"I'm over here",srt=45,xpd=NA)
+# par("usr")
+text(line2user(0.1,2),line2user(0.1,1),xpd=NA,
+     label="I'm over here now!",srt=45,adj=c(1,0.5))
+# dev.off()
 ```
 
 
@@ -163,7 +191,7 @@ par(mfrow=c(1,1))  #back to 1 plot in 1 row (more useful in the R console)
 }
 ```
 
-# Example: lattice plot package
+## Example: lattice plot package
 
 ```{r}
 # http://cran.r-project.org/web/packages/lattice/index.html
@@ -175,7 +203,7 @@ library(lattice)
 xyplot(yeastdata[,"dnds"] ~ log(yeastdata[,"Degree"]) | Age, data=yeastdata )
 ```
 
-# ggplot2 package - the grammar of graphics
+## ggplot2 package - the grammar of graphics
 
 ```{r}
 # http://ggplot2.org/
@@ -205,7 +233,7 @@ ylab("Degree")
 
 ```
 
-# Circos plots
+## Circos plots
 
 ```{r}
 #http://cran.r-project.org/web/packages/RCircos/RCircos.pdf
@@ -231,23 +259,38 @@ RCircos.Chromosome.Ideogram.Plot()
 
 ```
 
-# Exercise: Fun with plotting in R (10 minutes)
+## Exercise: Fun with plotting in R (10 minutes)
 
->Create a 3D scatter plot of dnds, log(degree) and cai from the yeast data table
-Try using the “highlight.3d” parameter
+> Create a 3D scatter plot of dnds, log(degree) and cai from the yeast data table  
+> Try using the “highlight.3d” parameter  
+> Hint:  
+> `install.packages("scatterplot3d")`  
+> `library(scatterplot3d)`  
 
->Hint:
-install.packages("scatterplot3d")
-library(scatterplot3d)
 
+### Exercise solution (5 minutes)
 
-# Exercise solution (5 minutes)
-
-```{r eval=FALSE, include=FALSE}
+```{r}
 yeastdata<-read.table("yeast_properties.txt", header=TRUE)
 scatterplot3d::scatterplot3d(yeastdata$dnds,
                              log(yeastdata$Degree),
                              yeastdata$cai,
                              highlight.3d=T)
+
+```
+
+
+
+# Assignment 5 hint!
+```{r, eval=F}
+primer_input <- list()
+for (J in 1:length(SEQUENCES)) {
+    primer_input[[J]] <- c(paste0("PRIMER_SEQUENCE_ID=",SEQNAME),
+                           paste0("SEQUENCE=",toupper(SEQUENCE)),
+                           "PRIMER_FILE_FLAG=0",
+                           "PRIMER_EXPLAIN_FLAG=1",
+                           "=")
+}
+proper_primer3_input <- unlist(primer_input)
 ```
 
