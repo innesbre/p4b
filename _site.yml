@@ -21,6 +21,8 @@ navbar:
     href: mod8.html
   - text: "Module 9"
     href: mod9.html
+  - text: "Brendan's shenanigans"
+    href: mod_me.html
 output:
   html_document:
     theme: cosmo

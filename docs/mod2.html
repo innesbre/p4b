@@ -346,6 +346,9 @@ div.tocify {
 <li>
   <a href="mod9.html">Module 9</a>
 </li>
+<li>
+  <a href="mod_me.html">Brendan's shenanigans</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -819,7 +822,7 @@ matrix(1:10,nrow=2,ncol=5)</code></pre>
 <pre class="r"><code># 1 ----
 ourrandommat &lt;- matrix(runif(30),nrow=10,ncol=3)
 str(ourrandommat)</code></pre>
-<pre><code>##  num [1:10, 1:3] 0.466 0.2345 0.0597 0.115 0.9903 ...</code></pre>
+<pre><code>##  num [1:10, 1:3] 0.209 0.049 0.225 0.639 0.213 ...</code></pre>
 <pre class="r"><code>dim(ourrandommat)</code></pre>
 <pre><code>## [1] 10  3</code></pre>
 <pre class="r"><code>colnames(ourrandommat) &lt;- c(&quot;one&quot;,2,&quot;the third&quot;)
@@ -832,32 +835,32 @@ dimnames(ourrandommat)</code></pre>
 ## [[2]]
 ## [1] &quot;one&quot;       &quot;2&quot;         &quot;the third&quot;</code></pre>
 <pre class="r"><code>str(ourrandommat)</code></pre>
-<pre><code>##  num [1:10, 1:3] 0.466 0.2345 0.0597 0.115 0.9903 ...
+<pre><code>##  num [1:10, 1:3] 0.209 0.049 0.225 0.639 0.213 ...
 ##  - attr(*, &quot;dimnames&quot;)=List of 2
 ##   ..$ : chr [1:10] &quot;row 1&quot; &quot;row 2&quot; &quot;row 3&quot; &quot;row 4&quot; ...
 ##   ..$ : chr [1:3] &quot;one&quot; &quot;2&quot; &quot;the third&quot;</code></pre>
 <pre class="r"><code>ourrandommat</code></pre>
-<pre><code>##               one         2  the third
-## row 1  0.46604491 0.4192482 0.09228740
-## row 2  0.23454562 0.4294870 0.63521904
-## row 3  0.05974211 0.5272653 0.15556364
-## row 4  0.11498576 0.6819351 0.97976923
-## row 5  0.99027660 0.1029307 0.97881742
-## row 6  0.91806328 0.3474925 0.62294997
-## row 7  0.11918286 0.1708245 0.49071557
-## row 8  0.84865478 0.2028086 0.51649102
-## row 9  0.33355455 0.3590777 0.64042535
-## row 10 0.78739706 0.2143636 0.02980921</code></pre>
+<pre><code>##               one          2 the third
+## row 1  0.20885754 0.08128078 0.6307460
+## row 2  0.04901239 0.33800276 0.5569489
+## row 3  0.22483184 0.35499743 0.4403711
+## row 4  0.63932337 0.72119006 0.9101958
+## row 5  0.21335214 0.37943844 0.8256567
+## row 6  0.44143892 0.83242731 0.7753981
+## row 7  0.03716975 0.16958063 0.1975654
+## row 8  0.58904557 0.93173390 0.1479901
+## row 9  0.16951195 0.11190553 0.9092462
+## row 10 0.91359830 0.12217425 0.3634315</code></pre>
 <pre class="r"><code>mean(ourrandommat)</code></pre>
-<pre><code>## [1] 0.4489976</code></pre>
+<pre><code>## [1] 0.4428808</code></pre>
 <pre class="r"><code>rowMeans(ourrandommat)</code></pre>
 <pre><code>##     row 1     row 2     row 3     row 4     row 5     row 6     row 7     row 8 
-## 0.3258602 0.4330839 0.2475237 0.5922300 0.6906749 0.6295019 0.2602410 0.5226515 
+## 0.3069614 0.3146547 0.3400668 0.7569031 0.4728157 0.6830881 0.1347719 0.5562565 
 ##     row 9    row 10 
-## 0.4443525 0.3438566</code></pre>
+## 0.3968879 0.4664013</code></pre>
 <pre class="r"><code>colMeans(ourrandommat)</code></pre>
 <pre><code>##       one         2 the third 
-## 0.4872448 0.3455433 0.5142048</code></pre>
+## 0.3486142 0.4042731 0.5757550</code></pre>
 </div>
 </div>
 </div>

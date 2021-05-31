@@ -11,7 +11,7 @@
 
 
 
-<title>index.utf8</title>
+<title>Module - Brendan’s shenanigans</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -361,14 +361,152 @@ div.tocify {
 
 
 
+<h1 class="title toc-ignore">Module - Brendan’s shenanigans</h1>
 
 </div>
 
 
-<div id="welcome-to-mmg1002h" class="section level2">
-<h2>Welcome to MMG1002H!</h2>
-<p>See the navigation bar above for each module from the class R notebook, knitted to HTML for your convenience.<br />
-As we proceed through tutorial sessions, Brendan will add his section’s notes to each module.</p>
+<p>Its the last class! Let’s do some silly exercises that I’m making up off the top of my head, then see if there are any gotchas to cover for the course project.</p>
+<div id="exercise-hypothesis-testing-on-clustered-data" class="section level1">
+<h1>Exercise: Hypothesis testing on clustered data</h1>
+<p>Demonstrate to me why its a terrible idea to cluster data on a set of features then use traditional hypothesis testing to show that the features are different between clusters.</p>
+<p>Remember <code>rnorm</code> to randomly sample from a normal distribution, or <code>runif</code> to sample from the uniform distribution.</p>
+<p>Check out <code>?kmeans</code> for a simple clustering method.</p>
+<p>The function <code>t.test</code> will do the classic Student’s T-test, but you can also use <code>wilcox.test</code> for the popular non-parametric Wilcoxon rank-sum test.</p>
+<div id="generate-the-random-data" class="section level2">
+<h2>Generate the random data</h2>
+<pre class="r"><code>DM &lt;- data.frame(Feature1=runif(100),
+                 Feature2=rnorm(100))
+
+layout(matrix(c(2,1,0,3),nrow=2),widths=c(4,1),heights=c(1,4))
+par(mar=c(3,3,0,0),mgp=2:0)
+plot(DM,pch=20)
+par(mar=c(0,3,1,1),bty=&quot;n&quot;)
+boxplot(DM$Feature1,horizontal=T,xaxt=&quot;n&quot;,pch=20)
+par(mar=c(3,0,1,1),bty=&quot;n&quot;)
+boxplot(DM$Feature2,horizontal=F,yaxt=&quot;n&quot;,pch=20)</code></pre>
+<p><img src="mod_me_files/figure-html/unnamed-chunk-1-1.png" width="480" /></p>
+</div>
+<div id="cluster-the-data" class="section level2">
+<h2>Cluster the data</h2>
+<pre class="r"><code>temp_CL &lt;- kmeans(DM,centers=2)
+DM$Clusters &lt;- temp_CL$cluster
+
+layout(matrix(c(2,1,4,3),nrow=2),widths=c(4,1),heights=c(1,4))
+par(mar=c(3,3,0,0),mgp=2:0)
+plot(Feature2~Feature1,data=DM,
+     pch=20,col=c(&quot;red&quot;,&quot;dodgerblue&quot;)[DM$Clusters])
+points(temp_CL$centers,pch=3,cex=2,col=c(&quot;red&quot;,&quot;dodgerblue&quot;))
+
+par(mar=c(0,3,1,1),bty=&quot;n&quot;)
+boxplot(Feature1~Clusters,data=DM,
+        horizontal=T,xaxt=&quot;n&quot;,pch=20,
+        col=c(&quot;red&quot;,&quot;dodgerblue&quot;))
+
+par(mar=c(3,0,1,1),bty=&quot;n&quot;)
+boxplot(Feature2~Clusters,data=DM,
+        horizontal=F,yaxt=&quot;n&quot;,pch=20,
+        col=c(&quot;red&quot;,&quot;dodgerblue&quot;))
+
+par(mar=c(0,0,0,0),bty=&quot;n&quot;)
+plot(NA,NA,xlim=0:1,ylim=0:1,xaxt=&quot;n&quot;,yaxt=&quot;n&quot;,xlab=NA,ylab=NA)
+legend(&quot;center&quot;,pch=3,pt.cex=2,bty=&quot;n&quot;,
+       legend=paste(&quot;K-means&quot;,&quot;center&quot;,sep=&quot;\n&quot;))</code></pre>
+<p><img src="mod_me_files/figure-html/unnamed-chunk-2-1.png" width="480" /></p>
+</div>
+<div id="test-difference-in-clusters" class="section level2">
+<h2>Test difference in clusters</h2>
+<p>Test the null hypothesis that the two clusters have been sampled from the same distribution.</p>
+<pre class="r"><code>t.test(Feature1~Clusters,data=DM)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  Feature1 by Clusters
+## t = -0.78805, df = 76.199, p-value = 0.4331
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.15420890  0.06676971
+## sample estimates:
+## mean in group 1 mean in group 2 
+##       0.4947226       0.5384422</code></pre>
+<pre class="r"><code>wilcox.test(Feature1~Clusters,data=DM)</code></pre>
+<pre><code>## 
+##  Wilcoxon rank sum test with continuity correction
+## 
+## data:  Feature1 by Clusters
+## W = 1050, p-value = 0.4116
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code>t.test(DM$Feature2[DM$Clusters == 1],
+       DM$Feature2[DM$Clusters == 2])</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  DM$Feature2[DM$Clusters == 1] and DM$Feature2[DM$Clusters == 2]
+## t = -12.285, df = 74.797, p-value &lt; 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.884114 -1.358319
+## sample estimates:
+##  mean of x  mean of y 
+## -0.4554402  1.1657760</code></pre>
+<pre class="r"><code>wilcox.test(DM$Feature2[DM$Clusters == 1],
+            DM$Feature2[DM$Clusters == 2])</code></pre>
+<pre><code>## 
+##  Wilcoxon rank sum test with continuity correction
+## 
+## data:  DM$Feature2[DM$Clusters == 1] and DM$Feature2[DM$Clusters == 2]
+## W = 0, p-value &lt; 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<p>Wow, Feature2 is significantly different (p = 8.9955496^{-17} by Wilcoxon rank-sum test) between the two clusters. What does that actually mean?</p>
+</div>
+<div id="frequentist-hypothesis-testing-from-first-principles" class="section level2">
+<h2>Frequentist hypothesis testing from first principles</h2>
+<p>“Parametric” testing has assumptions because it uses mathematically-defined distributions to define “chance of finding as extreme a result by chance”. If in doubt, you can always make your own background distribution by permutation testing. Here we’re essentially replicating the Student’s T-test (how likely is it that these means are the same?) using permutation testing:</p>
+<pre class="r"><code># Permute cluster labels 1000 times:
+BKGD &lt;- replicate(n=1e3,{ sample(DM$Clusters) })
+
+# Calculate differences in mean for 1000 randomly assigned clusters 
+# to generate null distributions for each feature:
+F1bkgd_diffMean &lt;- apply(BKGD,2,function(X)
+  mean(DM$Feature1[X==1]) - mean(DM$Feature1[X==2]))
+F2bkgd_diffMean &lt;- apply(BKGD,2,function(X)
+  mean(DM$Feature2[X==1]) - mean(DM$Feature2[X==2]))
+
+# Calculate actual differences in means between clusters for each feature:
+F1_diffMean &lt;- mean(DM$Feature1[DM$Clusters == 1]) - mean(DM$Feature1[DM$Clusters==2])
+F2_diffMean &lt;- mean(DM$Feature2[DM$Clusters == 1]) - mean(DM$Feature2[DM$Clusters==2])
+
+# Calculate p-values - proportion of random data at least as extreme as empirical data:
+F1_pval &lt;- mean(abs(F1bkgd_diffMean) &gt;= abs(F1_diffMean))
+F2_pval &lt;- mean(abs(F2bkgd_diffMean) &gt;= abs(F2_diffMean))
+
+
+par(mfrow=c(2,1),mar=c(3,3,2,1),mgp=2:0)
+hist(F1bkgd_diffMean,main=NA,
+     xlab=&quot;Null distribution of differences in means for Feature1&quot;,
+     xlim=c(min(F1bkgd_diffMean,F2bkgd_diffMean,F1_diffMean,F2_diffMean),
+            max(F1bkgd_diffMean,F2bkgd_diffMean,F1_diffMean,F2_diffMean)))
+abline(v=F1_diffMean,lwd=2,col=&quot;Purple&quot;)
+text(F1_diffMean,par(&quot;usr&quot;)[4],xpd=NA,pos=3,
+     labels=switch(as.character(F1_pval &lt;= 0),
+                   &quot;FALSE&quot;=paste(&quot;p =&quot;,signif(F1_pval,2)),
+                   &quot;TRUE&quot;=paste(&quot;p &lt;&quot;,1 / ncol(BKGD))))
+
+hist(F2bkgd_diffMean,main=NA,
+     xlab=&quot;Null distribution of differences in means for Feature2&quot;,
+     xlim=c(min(F1bkgd_diffMean,F2bkgd_diffMean,F1_diffMean,F2_diffMean),
+            max(F1bkgd_diffMean,F2bkgd_diffMean,F1_diffMean,F2_diffMean)))
+abline(v=F2_diffMean,lwd=2,col=&quot;Purple&quot;)
+text(F2_diffMean,par(&quot;usr&quot;)[4],xpd=NA,pos=3,
+     labels=switch(as.character(F2_pval &lt;= 0),
+                   &quot;FALSE&quot;=paste(&quot;p =&quot;,signif(F2_pval,2)),
+                   &quot;TRUE&quot;=paste(&quot;p &lt;&quot;,1 / ncol(BKGD))))</code></pre>
+<p><img src="mod_me_files/figure-html/unnamed-chunk-4-1.png" width="480" /></p>
+<p>Purple line is empirical difference in mean. Note that the calculated p-value for Feature 2 was zero, but technically that’s not correct - all we can say is that the probability of seeing a value that extreme by chance is less than the number of random permutations we tested (1000).</p>
+</div>
+</div>
+<div id="reminder-office-hours-fri-330pm" class="section level1">
+<h1>Reminder: Office hours Fri 3:30pm</h1>
 <hr />
 </div>
 

@@ -346,6 +346,9 @@ div.tocify {
 <li>
   <a href="mod9.html">Module 9</a>
 </li>
+<li>
+  <a href="mod_me.html">Brendan's shenanigans</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -406,7 +409,7 @@ system.time({
   vec_mean &lt;- vec_sum / length(myvec)
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##    0.02    0.00    0.01</code></pre>
+##    0.01    0.00    0.01</code></pre>
 <pre class="r"><code>vec_sum == sum(myvec)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>vec_prod == prod(myvec) #damn you, floating point notation</code></pre>
@@ -480,25 +483,25 @@ t.test(runif(50), runif(50))</code></pre>
 ##  Welch Two Sample t-test
 ## 
 ## data:  runif(50) and runif(50)
-## t = 0.44677, df = 97.634, p-value = 0.656
+## t = 1.1319, df = 97.342, p-value = 0.2604
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.09472205  0.14976116
+##  -0.05289424  0.19332191
 ## sample estimates:
 ## mean of x mean of y 
-## 0.5580580 0.5305384</code></pre>
+## 0.5484590 0.4782452</code></pre>
 <pre class="r"><code>cor.test(runif(50), runif(50),method=&quot;pearson&quot;)</code></pre>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  runif(50) and runif(50)
-## t = 0.20603, df = 48, p-value = 0.8376
+## t = -0.17853, df = 48, p-value = 0.8591
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  -0.2506969  0.3055447
+##  -0.3019422  0.2544125
 ## sample estimates:
-##        cor 
-## 0.02972505</code></pre>
+##         cor 
+## -0.02575941</code></pre>
 </div>
 <div id="exercise-functions-10-minutes" class="section level2">
 <h2>Exercise: Functions (10 minutes)</h2>
@@ -532,7 +535,7 @@ apply(abunchofrandomnumbers,1,mean) == rowMeans(abunchofrandomnumbers)</code></p
 ##    Q    R    S    T    U    V    W    X    Y    Z 
 ## TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
 <pre class="r"><code>str(apply(abunchofrandomnumbers,c(1,2),mean))</code></pre>
-<pre><code>##  num [1:50, 1:26] 0.518 0.333 0.909 0.116 0.259 ...
+<pre><code>##  num [1:50, 1:26] 0.899 0.88 0.547 0.119 0.468 ...
 ##  - attr(*, &quot;dimnames&quot;)=List of 2
 ##   ..$ : NULL
 ##   ..$ : chr [1:26] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; ...</code></pre>
@@ -540,13 +543,13 @@ apply(abunchofrandomnumbers,1,mean) == rowMeans(abunchofrandomnumbers)</code></p
 
 sapply(abunchofrandomnumbers,mean)</code></pre>
 <pre><code>##         A         B         C         D         E         F         G         H 
-## 0.5490468 0.4938793 0.4867109 0.4736067 0.4430013 0.4657728 0.4680287 0.5426686 
+## 0.4993679 0.4460410 0.5310570 0.5152304 0.5326633 0.5672856 0.5038940 0.5305225 
 ##         I         J         K         L         M         N         O         P 
-## 0.5081848 0.5266388 0.4625190 0.5475251 0.4952853 0.5417455 0.5190292 0.5304280 
+## 0.5400734 0.5443648 0.5345693 0.5134127 0.4618431 0.4065028 0.4866052 0.5905945 
 ##         Q         R         S         T         U         V         W         X 
-## 0.4603432 0.4202499 0.5083908 0.4635659 0.5588425 0.4537204 0.4592160 0.5427217 
+## 0.4697848 0.4637667 0.4913529 0.5231346 0.4791998 0.4070239 0.4504411 0.5439804 
 ##         Y         Z 
-## 0.5169956 0.4883475</code></pre>
+## 0.5163089 0.5833473</code></pre>
 </div>
 </div>
 </div>
